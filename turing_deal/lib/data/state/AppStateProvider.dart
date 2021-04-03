@@ -21,8 +21,10 @@ class AppStateProvider with ChangeNotifier {
     await initConnectivity();
 
     if(hasInternetConnection()){
-      this._bigPictureData = await YahooFinance.getDailyData("^GSPC");
-      this.notifyListeners();
+      if(_bigPictureData.isEmpty) {
+        this._bigPictureData = await YahooFinance.getAllDailyData("^GSPC");
+        this.notifyListeners();
+      }
     }else{
       //TODO snackbar
       print('Check internet connection');
