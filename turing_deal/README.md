@@ -4,13 +4,15 @@ Turing deal app
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+This project can be executed like any flutter application just by importing in android studio, flutter pub get and running in a device
 
-A few resources to get you started if this is your first Flutter project:
+Ideas about the arquitecture of the app:
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+> lib -> All the flutter code
+    > data
+        > api -> external API calls definition
+        > core -> algorithms and computation stuff
+            > strategy -> Stuff related with the evaluation of a trading strategy
+        > state -> state machine
+        > screen -> Widgets to define entire screens of the app
+            . bigPictureScreen ->  Screen to have a snapshot of how multiple assets are performing in the market  
