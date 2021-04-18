@@ -18,10 +18,7 @@ class Loading extends StatelessWidget{
             Text(this.bigPictureState.getLoadingState().toString())
           ],
         ),
-        LinearProgressIndicator(),
-        ElevatedButton(
-            onPressed: ()=> this.bigPictureState.loadData(),
-            child: Text('reload'))
+        LinearProgressIndicator()
       ],
     );
   }

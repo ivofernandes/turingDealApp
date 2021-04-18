@@ -4,10 +4,12 @@ class Strategy{
 
   DateTime startDate;
   DateTime endDate;
+  double tradingYears;
 
   double CAGR = 0;
   double drawdown = 0;
   double MAR = 0;
+
 
 
 }
