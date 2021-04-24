@@ -5,15 +5,14 @@ import 'dart:math';
 class BuyAndHoldStrategy{
 
   /// Simulate a buy and hold strategy
-  static Strategy buyAndHoldAnalysis(Map<String,dynamic> historicalPrices, BigPictureStateProvider bigPictureStateProvider){
+  static StrategyResult buyAndHoldAnalysis(Map<String,dynamic> historicalPrices, BigPictureStateProvider bigPictureStateProvider){
 
-    List prices = historicalPrices['prices'];
+    List<dynamic> prices = historicalPrices['prices'];
 
-    Strategy strategy = Strategy();
-    strategy.valid = false;
+    StrategyResult strategy = StrategyResult();
 
     if(prices.isNotEmpty) {
-      addTimetToStrategy(prices, strategy);
+      addTimeToStrategy(prices, strategy);
 
       double buyPrice = prices.last['adjclose'];
       double sellPrice = prices.first['adjclose'];
@@ -26,7 +25,7 @@ class BuyAndHoldStrategy{
       // https://www.investopedia.com/terms/m/mar-ratio.asp
       strategy.MAR = strategy.CAGR / strategy.drawdown * -1;
 
-      strategy.valid = true;
+      strategy.loading = 100;
     }
 
     return strategy;
@@ -34,7 +33,7 @@ class BuyAndHoldStrategy{
 
   /// Add start, end date and trading years to a strategy,
   /// note that the time comes in seconds since 1970
-  static void addTimetToStrategy(List prices, Strategy strategy) {
+  static void addTimeToStrategy(List<dynamic> prices, StrategyResult strategy) {
 
     // Get the start and end date, and the total trading years
     DateTime endDate = DateTime.fromMillisecondsSinceEpoch(prices.first['date']*1000);
@@ -48,19 +47,31 @@ class BuyAndHoldStrategy{
   }
 
   /// Calculate the drawdown of the buy and hold strategy
-  static double calculateDrawdown(List prices) {
+  static double calculateDrawdown(List<dynamic> prices) {
     double maxDrawdown = 0;
     double currentDrawdown = 0;
     double allTimeHigh = 0;
 
     for(int i=prices.length-1 ; i>0 ; i--){
+
+      if(prices[i].keys.contains('type')
+          && (prices[i]['type'] == 'DIVIDEND' || prices[i]['type'] == 'SPLIT')){
+        // Ignore dividends in the middle, all the juice is on adjclose
+        continue;
+      }
+
+      if(prices[i]['adjclose'] == null){
+        continue;
+      }
+
+
       // Get date values
       double proportion = prices[i]['adjclose'] / prices[i]['close'];
       double adjustedHigh = prices[i]['high'] * proportion;
       double adjustedLow = prices[i]['low'] * proportion;
 
       // Update drawdown
-      if(adjustedHigh > allTimeHigh) {
+      if (adjustedHigh > allTimeHigh) {
         allTimeHigh = adjustedHigh;
       }
       else {
@@ -68,6 +79,7 @@ class BuyAndHoldStrategy{
       }
 
       maxDrawdown = min(maxDrawdown, currentDrawdown);
+
     }
 
     return maxDrawdown;

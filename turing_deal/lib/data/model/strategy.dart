@@ -1,6 +1,7 @@
-class Strategy{
+class StrategyResult{
 
-  bool valid;
+  // Percentage of strategy executed
+  int loading = 0;
 
   DateTime startDate;
   DateTime endDate;
@@ -10,6 +11,6 @@ class Strategy{
   double drawdown = 0;
   double MAR = 0;
 
-
-
+  @override
+  String toString() => 'CAGR: $CAGR , drawdown: $drawdown, MAR: $MAR';
 }

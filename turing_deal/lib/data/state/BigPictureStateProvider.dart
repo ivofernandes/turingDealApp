@@ -5,13 +5,13 @@ import 'package:flutter/material.dart';
 import 'package:turing_deal/data/api/yahooFinance.dart';
 import 'package:turing_deal/data/core/strategy/buyAndHoldStrategy.dart';
 import 'package:turing_deal/data/model/strategy.dart';
-import 'package:turing_deal/data/state/aux/loadingState.dart';
+import 'package:turing_deal/data/model/ticker.dart';
+import 'package:turing_deal/data/state/shared/connectivityState.dart';
+import 'package:turing_deal/data/static/TickersList.dart';
 
-import 'aux/connectivityState.dart';
+class BigPictureStateProvider with ChangeNotifier, ConnectivityState {
 
-class BigPictureStateProvider with ChangeNotifier, ConnectivityState, LoadingState {
-
-  Map<String, Strategy> _bigPictureData = {};
+  Map<Ticker, StrategyResult> _bigPictureData = {};
 
   BigPictureStateProvider(BuildContext context){
     //TODO the context is here to get cached data in the future
@@ -23,19 +23,8 @@ class BigPictureStateProvider with ChangeNotifier, ConnectivityState, LoadingSta
 
     if(hasInternetConnection()){
       if(_bigPictureData.isEmpty || true) {
-        String ticker = '^GSPC';
-        this.setLoadingState(LoadingState.STATE_DOWNLOADING);
-        this.notifyListeners();
-
-        Map<String,dynamic> historicalData = await YahooFinance.getAllDailyData(ticker);
-        this.setLoadingState(LoadingState.STATE_PROCESSING);
-        this.notifyListeners();
-
-        Strategy strategy = BuyAndHoldStrategy.buyAndHoldAnalysis(historicalData, this);
-
-        this.setLoadingState(LoadingState.STATE_DONE);
-        _bigPictureData[ticker] = strategy;
-        this.notifyListeners();
+        Ticker ticker = Ticker('^GSPC', TickersList.main['^GSPC']);
+        addTicker(ticker);
       }
     }else{
       //TODO snackbar
@@ -43,13 +32,29 @@ class BigPictureStateProvider with ChangeNotifier, ConnectivityState, LoadingSta
     }
   }
 
-  Map<String, dynamic> getBigPictureData() {
+  void addTicker(Ticker ticker) async{
+
+    _bigPictureData[ticker] = StrategyResult();
+
+    Map<String,dynamic> historicalData = await YahooFinance.getAllDailyData(ticker.symbol);
+
+    _bigPictureData[ticker].loading = 10;
+    this.refresh();
+
+    StrategyResult strategy = BuyAndHoldStrategy.buyAndHoldAnalysis(historicalData, this);
+
+    _bigPictureData[ticker] = strategy;
+    this.refresh();
+  }
+
+  Map<Ticker, dynamic> getBigPictureData() {
     return this._bigPictureData;
   }
 
   void refresh() {
     notifyListeners();
   }
+
 
 
 }

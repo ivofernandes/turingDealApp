@@ -1,15 +1,12 @@
-import 'dart:async';
-
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:turing_deal/data/api/yahooFinance.dart';
-import 'package:turing_deal/data/core/strategy/buyAndHoldStrategy.dart';
-import 'package:turing_deal/data/model/strategy.dart';
-
-import 'aux/connectivityState.dart';
-import 'aux/navigationState.dart';
+import 'package:turing_deal/data/model/ticker.dart';
+import 'shared/connectivityState.dart';
+import 'shared/navigationState.dart';
 
 class AppStateProvider with ChangeNotifier, ConnectivityState, NavigationState {
+
+  Ticker searching;
 
   AppStateProvider(BuildContext context){
     //TODO the context is here to get user preferences in the future
@@ -19,6 +16,18 @@ class AppStateProvider with ChangeNotifier, ConnectivityState, NavigationState {
     await initConnectivity();
   }
 
+  void resetSearch(){
+    this.searching = null;
+  }
+
+  void search(Ticker search){
+    this.searching = search;
+    refresh();
+  }
+
+  Ticker getSearching(){
+    return this.searching;
+  }
 
   void refresh() {
     notifyListeners();
