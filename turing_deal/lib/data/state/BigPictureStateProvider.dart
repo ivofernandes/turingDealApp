@@ -55,6 +55,10 @@ class BigPictureStateProvider with ChangeNotifier, ConnectivityState {
     notifyListeners();
   }
 
+  removeTicker(Ticker ticker) {
+    this._bigPictureData.remove(ticker);
+  }
+
 
 
 }

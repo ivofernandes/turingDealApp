@@ -42,3 +42,14 @@ Ideas about the arquitecture of the app:
    shade 3 = #81003B = rgb(129,  0, 59) = rgba(129,  0, 59,1) = rgb0(0.506,0,0.231)
    shade 4 = #5E002B = rgb( 94,  0, 43) = rgba( 94,  0, 43,1) = rgb0(0.369,0,0.169)
     
+# Running project as flutter web
+As we will access yahoo finance data from our browser we need to avoid the CORS error,
+ avoiding the error by going to chrome.dart in your flutter path, example:
+        /flutter/packages/flutter_tools/lib/src/web/chrome.dart
+
+Search for:
+      '--disable-extensions',
+And add:
+      '--disable-web-security',
+      
+

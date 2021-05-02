@@ -35,7 +35,7 @@ class BigPictureScreen extends StatelessWidget{
         itemBuilder: (BuildContext context, int index) {
           Ticker ticker = tickers[index];
           StrategyResult strategy = data[ticker];
-          return StrategyResume(ticker, strategy);
+          return StrategyResume(ticker, strategy, bigPictureState);
         }
         );
   }
