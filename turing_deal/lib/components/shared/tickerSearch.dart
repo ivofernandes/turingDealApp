@@ -41,25 +41,34 @@ class TickerSearch extends SearchDelegate<Ticker>{
   @override
   Widget buildSuggestions(BuildContext context) {
 
-    return Column(
-      children: [
+    return SingleChildScrollView(
+      child: Column(
+        children: [
 
-        suggestionTitle(Icon(Icons.view_headline), 'Main'),
-        suggestion(TickersList.main),
+          suggestionTitle(Icon(Icons.view_headline), 'Main'),
+          suggestion(TickersList.main),
 
-        suggestionTitle(Icon(Icons.language), 'Countries'),
-        suggestion(TickersList.countries),
+          suggestionTitle(Icon(Icons.precision_manufacturing_outlined), 'Sectors'),
+          suggestion(TickersList.sectors),
 
-        suggestionTitle(Icon(Icons.precision_manufacturing_outlined), 'Sectors'),
-        suggestion(TickersList.sectors),
+          suggestionTitle(Icon(Icons.language), 'Countries'),
+          suggestion(TickersList.countries),
 
-        // suggestionTitle(Icon(Icons.account_balance_outlined), 'Bonds'),
-        //suggestion(TickersList.bonds),
 
-        //suggestionTitle(Icon(Icons.workspaces_outline), 'Commodities'),
-        //suggestion(TickersList.commodities)
+          suggestionTitle(Icon(Icons.account_balance_outlined), 'Bonds'),
+          suggestion(TickersList.bonds),
 
-      ],
+          suggestionTitle(Icon(Icons.workspaces_outline), 'Commodities'),
+          suggestion(TickersList.commodities),
+
+
+          suggestionTitle(Icon(Icons.architecture_sharp), 'Sizes'),
+          suggestion(TickersList.sizes),
+
+          suggestionTitle(Icon(Icons.business_sharp), 'Companies'),
+          suggestion(TickersList.companies)
+        ],
+      ),
     );
 
   }
@@ -76,14 +85,14 @@ class TickerSearch extends SearchDelegate<Ticker>{
 
     int size = filteredKeys.length;
     
-    return Expanded(
-      child: ListView.builder(
-          itemCount: size,
-          itemBuilder: (BuildContext context, int index){
-            final String symbol = filteredKeys[index];
-            return tickerWidget(context, symbol, tickers[symbol] );
-          }),
-    );
+    return ListView.builder(
+        physics: NeverScrollableScrollPhysics(),
+        shrinkWrap: true,
+        itemCount: size,
+        itemBuilder: (BuildContext context, int index){
+          final String symbol = filteredKeys[index];
+          return tickerWidget(context, symbol, tickers[symbol] );
+        });
   }
 
   Widget tickerWidget(BuildContext context, String symbol, String description) {
