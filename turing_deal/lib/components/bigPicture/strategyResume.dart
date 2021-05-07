@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:intl/intl.dart';
+import 'package:turing_deal/components/bigPicture/strategyResumeHeader.dart';
 import 'package:turing_deal/data/model/strategy.dart';
 import 'package:turing_deal/data/model/ticker.dart';
 import 'package:turing_deal/data/state/BigPictureStateProvider.dart';
@@ -29,20 +31,7 @@ class StrategyResume extends StatelessWidget {
           padding: const EdgeInsets.all(10.0),
           child: strategy.loading == 100 ? Column(
             children: [
-              Text(
-                  ticker.symbol + ' > ' + ticker.description,
-                  style: Theme.of(context).textTheme.headline6
-              ),
-              SizedBox(height:10),
-              Align(
-                  alignment: Alignment.topRight,
-                  child: Text(
-                      'Backtested from ' +
-                      DateFormat.yMd().format(strategy.startDate) +
-                      ' to ' + DateFormat.yMd().format(strategy.endDate)
-                  )
-              ),
-              SizedBox(height:10),
+              StrategyResumeHeader(this.ticker,this.strategy,this.bigPictureState),
 
               Align(
                   alignment: Alignment.topLeft,

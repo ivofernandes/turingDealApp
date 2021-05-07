@@ -90,6 +90,13 @@ class TickersList{
   'VUG':'Growth large'
   };
 
+  static Map<String, String> cryptoCurrencies = {
+    'BTC-USD': 'Bitcoin',
+    'ETH-USD': 'Ethereum',
+    'XRP-USD': 'XRP',
+    'DOGE-USD': 'Dogecoin'
+  };
+
   static Map<String, String> companies = {
   'FTCH': 'Farfetch',
   'PYPL': 'Paypal',

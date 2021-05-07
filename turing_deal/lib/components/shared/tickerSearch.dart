@@ -51,6 +51,9 @@ class TickerSearch extends SearchDelegate<Ticker>{
           suggestionTitle(Icon(Icons.precision_manufacturing_outlined), 'Sectors'),
           suggestion(TickersList.sectors),
 
+          suggestionTitle(Icon(Icons.computer), 'Cryptos'),
+          suggestion(TickersList.cryptoCurrencies),
+
           suggestionTitle(Icon(Icons.language), 'Countries'),
           suggestion(TickersList.countries),
 
@@ -76,12 +79,15 @@ class TickerSearch extends SearchDelegate<Ticker>{
   Widget suggestion(Map<String, String> tickers) {
     List<String> keys = tickers.keys.toList();
 
+    // Filter keys by text added
     List<String> filteredKeys = keys.where((element) {
       String lowerCaseQuery = query.toString().toLowerCase();
 
       return element.toString().toLowerCase().contains(lowerCaseQuery)
           || tickers[element].toString().toLowerCase().contains(lowerCaseQuery);
     }).toList();
+
+    // TODO Drop any already select ticker
 
     int size = filteredKeys.length;
     
