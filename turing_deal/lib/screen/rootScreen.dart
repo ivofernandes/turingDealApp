@@ -18,12 +18,15 @@ class RootScreen extends StatelessWidget {
             IconButton(
                 icon: Icon(Icons.search),
                 onPressed: () async {
-                  Ticker ticker = await showSearch(
+                  List<Ticker> tickers = await showSearch(
                       context: context,
                       delegate: TickerSearch()
                   );
 
-                  this._appState.search(ticker);
+                  for(int i=0 ; i<tickers.length ; i++){
+                    this._appState.search(tickers[i]);
+                  }
+
                 })
           ],
         ),

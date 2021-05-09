@@ -93,10 +93,12 @@ class TickersList{
   static Map<String, String> cryptoCurrencies = {
     'BTC-USD': 'Bitcoin',
     'ETH-USD': 'Ethereum',
+    'DOGE-USD': 'Dogecoin',
     'XRP-USD': 'XRP',
-    'DOGE-USD': 'Dogecoin'
+    'LTC-USD': ' Litecoin'
   };
 
+  //TODO fill with data from https://datahub.io/core/s-and-p-500-companies
   static Map<String, String> companies = {
   'FTCH': 'Farfetch',
   'PYPL': 'Paypal',

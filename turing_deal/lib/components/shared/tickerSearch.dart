@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:provider/provider.dart';
 import 'package:turing_deal/data/model/ticker.dart';
+import 'package:turing_deal/data/state/AppStateProvider.dart';
+import 'package:turing_deal/data/state/BigPictureStateProvider.dart';
 import 'package:turing_deal/data/static/TickersList.dart';
 
-class TickerSearch extends SearchDelegate<Ticker>{
+class TickerSearch extends SearchDelegate<List<Ticker>>{
 
   @override
   List<Widget> buildActions(BuildContext context) {
@@ -30,7 +33,7 @@ class TickerSearch extends SearchDelegate<Ticker>{
   @override
   Widget buildResults(BuildContext context) {
     return GestureDetector(
-        onTap: () => close(context, Ticker(query, query)),
+        onTap: () => close(context, [Ticker(query, query)]),
         child: Text(
             query,
             style: Theme.of(context).textTheme.headline6
@@ -40,70 +43,65 @@ class TickerSearch extends SearchDelegate<Ticker>{
 
   @override
   Widget buildSuggestions(BuildContext context) {
-
     return SingleChildScrollView(
       child: Column(
         children: [
+          tickerWidget(context, query, ''),
 
-          suggestionTitle(Icon(Icons.view_headline), 'Main'),
-          suggestion(TickersList.main),
+          suggestion(Icon(Icons.view_headline), 'Main', TickersList.main),
 
-          suggestionTitle(Icon(Icons.precision_manufacturing_outlined), 'Sectors'),
-          suggestion(TickersList.sectors),
+          suggestion(Icon(Icons.precision_manufacturing_outlined), 'Sectors', TickersList.sectors),
 
-          suggestionTitle(Icon(Icons.computer), 'Cryptos'),
-          suggestion(TickersList.cryptoCurrencies),
+          suggestion(Icon(Icons.computer), 'Cryptos', TickersList.cryptoCurrencies),
 
-          suggestionTitle(Icon(Icons.language), 'Countries'),
-          suggestion(TickersList.countries),
+          suggestion(Icon(Icons.language), 'Countries', TickersList.countries),
 
+          suggestion(Icon(Icons.account_balance_outlined), 'Bonds', TickersList.bonds),
 
-          suggestionTitle(Icon(Icons.account_balance_outlined), 'Bonds'),
-          suggestion(TickersList.bonds),
+          suggestion(Icon(Icons.workspaces_outline), 'Commodities', TickersList.commodities),
 
-          suggestionTitle(Icon(Icons.workspaces_outline), 'Commodities'),
-          suggestion(TickersList.commodities),
+          suggestion(Icon(Icons.architecture_sharp), 'Sizes',TickersList.sizes),
 
-
-          suggestionTitle(Icon(Icons.architecture_sharp), 'Sizes'),
-          suggestion(TickersList.sizes),
-
-          suggestionTitle(Icon(Icons.business_sharp), 'Companies'),
-          suggestion(TickersList.companies)
+          suggestion(Icon(Icons.business_sharp), 'Companies', TickersList.companies)
         ],
       ),
     );
 
   }
 
-  Widget suggestion(Map<String, String> tickers) {
+  Widget suggestion(Icon icon, String title, Map<String, String> tickers) {
     List<String> keys = tickers.keys.toList();
 
     // Filter keys by text added
     List<String> filteredKeys = keys.where((element) {
       String lowerCaseQuery = query.toString().toLowerCase();
 
-      return element.toString().toLowerCase().contains(lowerCaseQuery)
+      bool containsQuery = element.toString().toLowerCase().contains(lowerCaseQuery)
           || tickers[element].toString().toLowerCase().contains(lowerCaseQuery);
+
+      return containsQuery;
     }).toList();
 
-    // TODO Drop any already select ticker
-
     int size = filteredKeys.length;
-    
-    return ListView.builder(
-        physics: NeverScrollableScrollPhysics(),
-        shrinkWrap: true,
-        itemCount: size,
-        itemBuilder: (BuildContext context, int index){
-          final String symbol = filteredKeys[index];
-          return tickerWidget(context, symbol, tickers[symbol] );
-        });
+
+    return size > 0 ? Column(
+      children: [
+        suggestionTitle(icon,title),
+        ListView.builder(
+            physics: NeverScrollableScrollPhysics(),
+            shrinkWrap: true,
+            itemCount: size,
+            itemBuilder: (BuildContext context, int index){
+              final String symbol = filteredKeys[index];
+              return tickerWidget(context, symbol, tickers[symbol]);
+            }),
+      ],
+    ) : SizedBox();
   }
 
   Widget tickerWidget(BuildContext context, String symbol, String description) {
     return GestureDetector(
-      onTap: () => close(context, Ticker(symbol, description)),
+      onTap: () => close(context, [Ticker(symbol, description)]),
       child: Padding(
         padding: const EdgeInsets.all(3.0),
         child: Card(

@@ -14,11 +14,10 @@ class BigPictureStateProvider with ChangeNotifier, ConnectivityState {
   Map<Ticker, StrategyResult> _bigPictureData = {};
 
   BigPictureStateProvider(BuildContext context){
-    //TODO the context is here to get cached data in the future
-    this.loadData();
+    this.loadData(context);
   }
 
-  void loadData() async{
+  void loadData(BuildContext context) async{
     await initConnectivity();
 
     if(hasInternetConnection()){
@@ -27,8 +26,13 @@ class BigPictureStateProvider with ChangeNotifier, ConnectivityState {
         addTicker(ticker);
       }
     }else{
-      //TODO snackbar
-      print('Check internet connection');
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+          content: Text( 'Check your internet connection',
+            style: Theme.of(context).textTheme.headline6.copyWith(
+                color: Theme.of(context).errorColor
+            ),
+          )
+      ));
     }
   }
 
@@ -58,7 +62,4 @@ class BigPictureStateProvider with ChangeNotifier, ConnectivityState {
   removeTicker(Ticker ticker) {
     this._bigPictureData.remove(ticker);
   }
-
-
-
 }
