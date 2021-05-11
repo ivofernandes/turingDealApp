@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:provider/provider.dart';
 import 'package:turing_deal/data/model/ticker.dart';
-import 'package:turing_deal/data/state/AppStateProvider.dart';
-import 'package:turing_deal/data/state/BigPictureStateProvider.dart';
 import 'package:turing_deal/data/static/TickersList.dart';
 
 class TickerSearch extends SearchDelegate<List<Ticker>>{
@@ -48,28 +45,27 @@ class TickerSearch extends SearchDelegate<List<Ticker>>{
         children: [
           tickerWidget(context, query, ''),
 
-          suggestion(Icon(Icons.view_headline), 'Main', TickersList.main),
+          suggestion(Icon(Icons.view_headline), 'Main', TickersList.main, context),
 
-          suggestion(Icon(Icons.precision_manufacturing_outlined), 'Sectors', TickersList.sectors),
+          suggestion(Icon(Icons.precision_manufacturing_outlined), 'Sectors', TickersList.sectors, context),
 
-          suggestion(Icon(Icons.computer), 'Cryptos', TickersList.cryptoCurrencies),
+          suggestion(Icon(Icons.computer), 'Cryptos', TickersList.cryptoCurrencies, context),
 
-          suggestion(Icon(Icons.language), 'Countries', TickersList.countries),
+          suggestion(Icon(Icons.language), 'Countries', TickersList.countries, context),
 
-          suggestion(Icon(Icons.account_balance_outlined), 'Bonds', TickersList.bonds),
+          suggestion(Icon(Icons.account_balance_outlined), 'Bonds', TickersList.bonds, context),
 
-          suggestion(Icon(Icons.workspaces_outline), 'Commodities', TickersList.commodities),
+          suggestion(Icon(Icons.workspaces_outline), 'Commodities', TickersList.commodities, context),
 
-          suggestion(Icon(Icons.architecture_sharp), 'Sizes',TickersList.sizes),
+          suggestion(Icon(Icons.architecture_sharp), 'Sizes',TickersList.sizes, context),
 
-          suggestion(Icon(Icons.business_sharp), 'Companies', TickersList.companies)
+          suggestion(Icon(Icons.business_sharp), 'Companies', TickersList.companies, context)
         ],
       ),
     );
-
   }
 
-  Widget suggestion(Icon icon, String title, Map<String, String> tickers) {
+  Widget suggestion(Icon icon, String title, Map<String, String> tickers, BuildContext context) {
     List<String> keys = tickers.keys.toList();
 
     // Filter keys by text added
@@ -86,7 +82,7 @@ class TickerSearch extends SearchDelegate<List<Ticker>>{
 
     return size > 0 ? Column(
       children: [
-        suggestionTitle(icon,title),
+        suggestionTitle(icon,title, filteredKeys, tickers, context),
         ListView.builder(
             physics: NeverScrollableScrollPhysics(),
             shrinkWrap: true,
@@ -129,10 +125,28 @@ class TickerSearch extends SearchDelegate<List<Ticker>>{
     );
   }
 
-  Widget suggestionTitle( icon, String s) {
+  /// Create a suggestion title that divide sectors from country etf etc
+  /// @returns a widget ready
+  Widget suggestionTitle(Icon icon, String s, List<String> filteredKeys,
+      Map<String, String> tickers, BuildContext context) {
+
     return ListTile(
       leading: icon,
-      title: Text(s)
+      title: Text(s),
+      trailing: MaterialButton(
+        shape: RoundedRectangleBorder(borderRadius:BorderRadius.circular(10.0) ),
+        color: Theme.of(context).accentColor,
+        child: Text('Add all'),
+        onPressed: () {
+          List<Ticker> result = [];
+          filteredKeys.forEach((element) {
+            String symbol = element.toString();
+            result.add(Ticker(symbol, tickers[symbol]));
+          });
+          // Finish the search passing a result
+          close(context, result);
+        },
+      )
     );
   }
 }

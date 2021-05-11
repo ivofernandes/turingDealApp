@@ -14,8 +14,8 @@ class BuyAndHoldStrategy{
     if(prices.isNotEmpty) {
       addTimeToStrategy(prices, strategy);
 
-      double buyPrice = prices.last['adjclose'];
-      double sellPrice = prices.first['adjclose'];
+      double buyPrice = double.parse(prices.last['adjclose'].toString());
+      double sellPrice = double.parse(prices.first['adjclose'].toString());
 
       // https://www.investopedia.com/terms/c/cagr.asp
       strategy.CAGR = (pow(sellPrice / buyPrice, 1 / strategy.tradingYears) - 1) * 100;

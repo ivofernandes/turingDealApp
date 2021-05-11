@@ -42,12 +42,11 @@ class BigPictureScreen extends StatelessWidget{
 
   /// Manage the transition of a search from the app state to a big picture screen state
   void manageSearch(BigPictureStateProvider bigPictureState) {
-    Ticker searchingTicker = this.appState.getSearching();
+    List<Ticker> searchingTickers = this.appState.getSearching();
 
-    if(searchingTicker != null){
-      appState.resetSearch();
-
-      bigPictureState.addTicker(searchingTicker);
+    if(searchingTickers.isNotEmpty){
+      Ticker ticker = searchingTickers.removeAt(0);
+      bigPictureState.addTicker(ticker);
     }
   }
 

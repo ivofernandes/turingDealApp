@@ -23,10 +23,7 @@ class RootScreen extends StatelessWidget {
                       delegate: TickerSearch()
                   );
 
-                  for(int i=0 ; i<tickers.length ; i++){
-                    this._appState.search(tickers[i]);
-                  }
-
+                  this._appState.search(tickers);
                 })
           ],
         ),
