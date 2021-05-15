@@ -64,7 +64,6 @@ class BuyAndHoldStrategy{
         continue;
       }
 
-
       // Get date values
       double proportion = prices[i]['adjclose'] / prices[i]['close'];
       double adjustedHigh = prices[i]['high'] * proportion;

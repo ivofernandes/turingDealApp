@@ -29,13 +29,24 @@ class BigPictureScreen extends StatelessWidget{
     Map<Ticker,StrategyResult> data = bigPictureState.getBigPictureData();
     List<Ticker> tickers = data.keys.toList();
 
+    double width = MediaQuery.of(context).size.width;
+    int columns = (width / StrategyResume.RESUME_WIDTH).floor();
+    int lines = (tickers.length / columns).ceil();
+
     return data.length == 0 ? Text('No strategies') :
         ListView.builder(
-        itemCount: tickers.length,
+        itemCount: lines,
         itemBuilder: (BuildContext context, int index) {
-          Ticker ticker = tickers[index];
-          StrategyResult strategy = data[ticker];
-          return StrategyResume(ticker, strategy, bigPictureState);
+          List<Widget> resumes = [];
+
+          for(int i=index*columns ; i<(index+1) * columns && i<tickers.length ; i++) {
+            Ticker ticker = tickers[i];
+            StrategyResult strategy = data[ticker];
+            resumes.add(StrategyResume(ticker, strategy, bigPictureState));
+          }
+          return Wrap(
+            children: resumes,
+          );
         }
         );
   }
@@ -44,7 +55,7 @@ class BigPictureScreen extends StatelessWidget{
   void manageSearch(BigPictureStateProvider bigPictureState) {
     List<Ticker> searchingTickers = this.appState.getSearching();
 
-    if(searchingTickers.isNotEmpty){
+    if(searchingTickers != null && searchingTickers.isNotEmpty){
       Ticker ticker = searchingTickers.removeAt(0);
       bigPictureState.addTicker(ticker);
     }

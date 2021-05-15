@@ -1,6 +1,9 @@
 # turing_deal
-
 Turing deal app
+
+## Screenshots
+
+![price dataframe](https://github.com/ivofernandes/turingDealApp/blob/main/turing_deal/screenshots/bigPicture.jpeg?raw=true)
 
 ## Getting Started
 
@@ -47,9 +50,11 @@ As we will access yahoo finance data from our browser we need to avoid the CORS 
  avoiding the error by going to chrome.dart in your flutter path, example:
         /flutter/packages/flutter_tools/lib/src/web/chrome.dart
 
-Search for:
-      '--disable-extensions',
-And add:
-      '--disable-web-security',
-      
+1- Go to flutter\bin\cache and remove a file named: flutter_tools.stamp
+
+2- Go to flutter\packages\flutter_tools\lib\src\web and open the file chrome.dart.
+
+3- Find '--disable-extensions'
+
+4- Add '--disable-web-security'
 

@@ -86,6 +86,9 @@ class AppTheme{
         ),
         bodyText2: TextStyle(
           color: foregroundDracula,
+        ),
+        headline6: TextStyle(
+          color: foregroundDracula,
         )
     ),
   );

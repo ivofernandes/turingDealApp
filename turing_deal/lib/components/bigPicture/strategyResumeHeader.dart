@@ -21,9 +21,11 @@ class StrategyResumeHeader extends StatelessWidget {
       ListTile(
         leading: ConstrainedBox(
           constraints: BoxConstraints(minWidth: 150),
-          child: Text(ticker.symbol, style: theme.textTheme.headline6),
+          child: Text(ticker.symbol,
+              style: theme.textTheme.headline6),
         ),
-        title: Text(ticker.description),
+        title: Text(ticker.description,
+            style: theme.textTheme.bodyText1),
       ),
       Divider(height: 5, color: theme.textTheme.bodyText1.color),
       SizedBox(height: 10),
