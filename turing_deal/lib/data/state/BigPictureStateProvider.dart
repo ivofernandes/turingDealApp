@@ -1,4 +1,3 @@
-import 'dart:async';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -23,7 +22,7 @@ class BigPictureStateProvider with ChangeNotifier, ConnectivityState {
     if(hasInternetConnection()){
       if(_bigPictureData.isEmpty || true) {
         Ticker ticker = Ticker('^GSPC', TickersList.main['^GSPC']);
-        addTicker(ticker);
+        addTicker(ticker, context);
       }
     }else{
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
@@ -36,16 +35,17 @@ class BigPictureStateProvider with ChangeNotifier, ConnectivityState {
     }
   }
 
-  void addTicker(Ticker ticker) async{
-
+  void addTicker(Ticker ticker, BuildContext context) async {
     _bigPictureData[ticker] = StrategyResult();
 
-    Map<String,dynamic> historicalData = await YahooFinance.getAllDailyData(ticker.symbol);
+    Map<String, dynamic> historicalData =
+        await YahooFinance.getAllDailyData(ticker.symbol);
 
-    _bigPictureData[ticker].loading = 10;
+    _bigPictureData[ticker].progress = 10;
     this.refresh();
 
-    StrategyResult strategy = BuyAndHoldStrategy.buyAndHoldAnalysis(historicalData, this);
+    StrategyResult strategy =
+        BuyAndHoldStrategy.buyAndHoldAnalysis(historicalData, this);
 
     _bigPictureData[ticker] = strategy;
     this.refresh();
@@ -61,5 +61,6 @@ class BigPictureStateProvider with ChangeNotifier, ConnectivityState {
 
   removeTicker(Ticker ticker) {
     this._bigPictureData.remove(ticker);
+    this.refresh();
   }
 }

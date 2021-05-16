@@ -1,12 +1,13 @@
-import 'package:turing_deal/data/model/strategy.dart';
-import 'package:turing_deal/data/state/BigPictureStateProvider.dart';
 import 'dart:math';
 
-class BuyAndHoldStrategy{
+import 'package:turing_deal/data/model/strategy.dart';
+import 'package:turing_deal/data/state/BigPictureStateProvider.dart';
 
+class BuyAndHoldStrategy {
   /// Simulate a buy and hold strategy
-  static StrategyResult buyAndHoldAnalysis(Map<String,dynamic> historicalPrices, BigPictureStateProvider bigPictureStateProvider){
-
+  static StrategyResult buyAndHoldAnalysis(
+      Map<String, dynamic> historicalPrices,
+      BigPictureStateProvider bigPictureStateProvider) {
     List<dynamic> prices = historicalPrices['prices'];
 
     StrategyResult strategy = StrategyResult();
@@ -18,14 +19,15 @@ class BuyAndHoldStrategy{
       double sellPrice = double.parse(prices.first['adjclose'].toString());
 
       // https://www.investopedia.com/terms/c/cagr.asp
-      strategy.CAGR = (pow(sellPrice / buyPrice, 1 / strategy.tradingYears) - 1) * 100;
+      strategy.CAGR =
+          (pow(sellPrice / buyPrice, 1 / strategy.tradingYears) - 1) * 100;
 
       strategy.drawdown = calculateDrawdown(prices);
 
       // https://www.investopedia.com/terms/m/mar-ratio.asp
       strategy.MAR = strategy.CAGR / strategy.drawdown * -1;
 
-      strategy.loading = 100;
+      strategy.progress = 100;
     }
 
     return strategy;
@@ -34,7 +36,6 @@ class BuyAndHoldStrategy{
   /// Add start, end date and trading years to a strategy,
   /// note that the time comes in seconds since 1970
   static void addTimeToStrategy(List<dynamic> prices, StrategyResult strategy) {
-
     // Get the start and end date, and the total trading years
     DateTime endDate = DateTime.fromMillisecondsSinceEpoch(prices.first['date']*1000);
     DateTime startDate = DateTime.fromMillisecondsSinceEpoch(prices.last['date']*1000);
@@ -53,7 +54,6 @@ class BuyAndHoldStrategy{
     double allTimeHigh = 0;
 
     for(int i=prices.length-1 ; i>0 ; i--){
-
       if(prices[i].keys.contains('type')
           && (prices[i]['type'] == 'DIVIDEND' || prices[i]['type'] == 'SPLIT')){
         // Ignore dividends in the middle, all the juice is on adjclose
@@ -78,7 +78,6 @@ class BuyAndHoldStrategy{
       }
 
       maxDrawdown = min(maxDrawdown, currentDrawdown);
-
     }
 
     return maxDrawdown;

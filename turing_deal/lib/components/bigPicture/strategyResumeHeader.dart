@@ -14,8 +14,6 @@ class StrategyResumeHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     ThemeData theme = Theme.of(context);
-    int years = strategy.tradingYears.ceil();
-    int months = (strategy.tradingYears % 1 * 12).ceil();
 
     return Column(children: [
       ListTile(
@@ -32,13 +30,18 @@ class StrategyResumeHeader extends StatelessWidget {
       Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(years.toString() +
-              'y' +
-              months.toString() + 'm' ),
-          Text('Backtested from ' +
-              DateFormat.yMd().format(strategy.startDate) +
-              ' to ' +
-              DateFormat.yMd().format(strategy.endDate))
+          strategy.tradingYears != null
+              ? Text(strategy.tradingYears.ceil().toString() +
+                  'y' +
+                  (strategy.tradingYears % 1 * 12).ceil().toString() +
+                  'm')
+              : Container(),
+          strategy.startDate != null && strategy.endDate != null
+              ? Text('Backtested from ' +
+                  DateFormat.yMd().format(strategy.startDate) +
+                  ' to ' +
+                  DateFormat.yMd().format(strategy.endDate))
+              : Container()
         ],
       ),
       SizedBox(height: 10)

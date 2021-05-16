@@ -18,10 +18,10 @@ class BigPictureScreen extends StatelessWidget{
         create: (_) => BigPictureStateProvider(context),
         child: Consumer<BigPictureStateProvider>(
             builder: (context, bigPictureState, child) {
-              manageSearch(bigPictureState);
+              manageSearch(bigPictureState, context);
 
-              return bigPictureScreen(context, bigPictureState);
-            })
+          return bigPictureScreen(context, bigPictureState);
+        })
     );
   }
 
@@ -52,13 +52,13 @@ class BigPictureScreen extends StatelessWidget{
   }
 
   /// Manage the transition of a search from the app state to a big picture screen state
-  void manageSearch(BigPictureStateProvider bigPictureState) {
+  void manageSearch(
+      BigPictureStateProvider bigPictureState, BuildContext context) {
     List<Ticker> searchingTickers = this.appState.getSearching();
 
-    if(searchingTickers != null && searchingTickers.isNotEmpty){
+    if (searchingTickers != null && searchingTickers.isNotEmpty) {
       Ticker ticker = searchingTickers.removeAt(0);
-      bigPictureState.addTicker(ticker);
+      bigPictureState.addTicker(ticker, context);
     }
   }
-
 }

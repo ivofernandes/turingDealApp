@@ -1,7 +1,7 @@
 class StrategyResult{
 
   // Percentage of strategy executed
-  int loading = 0;
+  int progress = 0;
 
   DateTime startDate;
   DateTime endDate;

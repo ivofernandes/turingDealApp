@@ -37,6 +37,8 @@ dependencies:
   path_provider: ^1.6.27
   connectivity: ^2.0.2
   intl: ^0.17.0
+  webview_flutter: ^1.0.0
+  url_launcher: ^5.7.0
 dev_dependencies:
   flutter_test:
     sdk: flutter
