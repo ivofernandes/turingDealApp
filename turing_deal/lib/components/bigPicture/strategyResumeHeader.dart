@@ -37,7 +37,7 @@ class StrategyResumeHeader extends StatelessWidget {
                   'm')
               : Container(),
           strategy.startDate != null && strategy.endDate != null
-              ? Text('Backtested from ' +
+              ? Text('' +
                   DateFormat.yMd().format(strategy.startDate) +
                   ' to ' +
                   DateFormat.yMd().format(strategy.endDate))

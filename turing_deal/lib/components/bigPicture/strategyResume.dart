@@ -9,7 +9,7 @@ import 'package:turing_deal/data/model/ticker.dart';
 import 'package:turing_deal/data/state/BigPictureStateProvider.dart';
 
 class StrategyResume extends StatelessWidget {
-  static final int RESUME_WIDTH = 400;
+  static final int RESUME_WIDTH = 350;
 
   final Ticker ticker;
   final StrategyResult strategy;

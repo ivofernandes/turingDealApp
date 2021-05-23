@@ -26,22 +26,26 @@ class BigPictureScreen extends StatelessWidget{
   }
 
   Widget bigPictureScreen(BuildContext context, BigPictureStateProvider bigPictureState) {
-    Map<Ticker,StrategyResult> data = bigPictureState.getBigPictureData();
+    Map<Ticker, StrategyResult> data = bigPictureState.getBigPictureData();
     List<Ticker> tickers = data.keys.toList();
 
     double width = MediaQuery.of(context).size.width;
     int columns = (width / StrategyResume.RESUME_WIDTH).floor();
+    columns = columns <= 0 ? 1 : columns;
     int lines = (tickers.length / columns).ceil();
 
-    return data.length == 0 ? Text('No strategies') :
-        ListView.builder(
-        itemCount: lines,
-        itemBuilder: (BuildContext context, int index) {
-          List<Widget> resumes = [];
+    return data.length == 0
+        ? Text('No strategies')
+        : ListView.builder(
+            itemCount: lines,
+            itemBuilder: (BuildContext context, int index) {
+              List<Widget> resumes = [];
 
-          for(int i=index*columns ; i<(index+1) * columns && i<tickers.length ; i++) {
-            Ticker ticker = tickers[i];
-            StrategyResult strategy = data[ticker];
+              for (int i = index * columns;
+                  i < (index + 1) * columns && i < tickers.length;
+                  i++) {
+                Ticker ticker = tickers[i];
+                StrategyResult strategy = data[ticker];
             resumes.add(StrategyResume(ticker, strategy, bigPictureState));
           }
           return Wrap(

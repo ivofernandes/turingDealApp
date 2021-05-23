@@ -40,21 +40,22 @@ class TickerSearch extends SearchDelegate<List<Ticker>>{
 
   @override
   Widget buildSuggestions(BuildContext context) {
+    Widget searchingWidget =
+        query != '' ? tickerWidget(context, query, '') : Container();
     return SingleChildScrollView(
       child: Column(
         children: [
-          tickerWidget(context, query, ''),
-
-          suggestion(Icon(Icons.view_headline), 'Main', TickersList.main, context),
-
-          suggestion(Icon(Icons.precision_manufacturing_outlined), 'Sectors', TickersList.sectors, context),
-
-          suggestion(Icon(Icons.computer), 'Cryptos', TickersList.cryptoCurrencies, context),
-
-          suggestion(Icon(Icons.language), 'Countries', TickersList.countries, context),
-
-          suggestion(Icon(Icons.account_balance_outlined), 'Bonds', TickersList.bonds, context),
-
+          searchingWidget,
+          suggestion(
+              Icon(Icons.view_headline), 'Main', TickersList.main, context),
+          suggestion(Icon(Icons.precision_manufacturing_outlined), 'Sectors',
+              TickersList.sectors, context),
+          suggestion(Icon(Icons.computer), 'Cryptos',
+              TickersList.cryptoCurrencies, context),
+          suggestion(Icon(Icons.language), 'Countries', TickersList.countries,
+              context),
+          suggestion(Icon(Icons.account_balance_outlined), 'Bonds',
+              TickersList.bonds, context),
           suggestion(Icon(Icons.workspaces_outline), 'Commodities', TickersList.commodities, context),
 
           suggestion(Icon(Icons.architecture_sharp), 'Sizes',TickersList.sizes, context),
@@ -112,9 +113,8 @@ class TickerSearch extends SearchDelegate<List<Ticker>>{
                     color: Theme.of(context).backgroundColor.withOpacity(0.3),
                     child: Center(child:
                     Text(
-                        symbol,
-                        style: Theme.of(context).textTheme.headline6
-                    )),
+                        symbol.toUpperCase(),
+                            style: Theme.of(context).textTheme.headline6)),
                   )),
               SizedBox(width:10),
               Text(description),
