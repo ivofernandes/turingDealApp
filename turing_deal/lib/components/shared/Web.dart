@@ -10,22 +10,33 @@ import 'package:webview_flutter/webview_flutter.dart';
 class Web extends StatefulWidget {
   String url;
 
-  Web(this.url);
+  Web._(this.url);
 
   @override
   _WebState createState() => _WebState();
 
   static openView(BuildContext context, String url) {
     if (kIsWeb) {
-      launchLink(url);
+      launchLink(context, url);
     } else {
-      Navigator.of(context).push(
-          MaterialPageRoute<void>(builder: (BuildContext context) => Web(url)));
+      Navigator.of(context).push(MaterialPageRoute<void>(
+          builder: (BuildContext context) => Web._(url)));
     }
   }
 
-  static void launchLink(String url) async {
-    await canLaunch(url) ? launch(url) : print('Error opening ' + url);
+  static void launchLink(BuildContext context, String url) async {
+    if (await canLaunch(url)) {
+      launch(url);
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+          content: Text(
+        'Error on trying to open url',
+        style: Theme.of(context)
+            .textTheme
+            .headline6
+            .copyWith(color: Theme.of(context).errorColor),
+      )));
+    }
   }
 }
 

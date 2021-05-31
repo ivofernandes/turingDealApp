@@ -39,9 +39,13 @@ dependencies:
   intl: ^0.17.0
   webview_flutter: ^1.0.0
   url_launcher: ^5.7.0
+  sembast: ^2.4.10+4
+  sembast_web: '>=1.0.0'
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  flutter_launcher_icons: ^0.7.4
+  flutter_native_splash: ^0.3.2
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
@@ -84,3 +88,10 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
+
+# For information on the generic Dart part of this file, see the
+# following page: https://dart.dev/tools/pub/pubspec
+flutter_icons:
+  image_path: 'assets/images/logo.png'
+  android: true
+  ios: true

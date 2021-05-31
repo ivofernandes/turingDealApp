@@ -58,3 +58,6 @@ As we will access yahoo finance data from our browser we need to avoid the CORS 
 
 4- Add '--disable-web-security'
 
+
+# Generate icons
+flutter pub run flutter_launcher_icons:main
