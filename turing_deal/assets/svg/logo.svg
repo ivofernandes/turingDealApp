@@ -4,8 +4,8 @@
     xmlns:xlink="http://www.w3.org/1999/xlink"
     xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
     xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" width="210mm" height="297mm"
-    viewBox="0 0 210 297" version="1.1" id="svg14488"
-    inkscape:version="1.0.1 (c497b03c, 2020-09-10)" sodipodi:docname="logo.svg">
+    viewBox="0 0 210 297" version="1.1" id="svg14488" sodipodi:docname="logo.svg"
+    inkscape:version="1.0.1 (c497b03c, 2020-09-10)">
   <defs id="defs14482">
     <path
         d="M514.73 -337.2C542.33 -337.12 564.67 -314.65 564.59 -287.06C564.51 -259.46 542.04 -237.12 514.44 -237.21C486.84 -237.29 464.51 -259.76 464.59 -287.35C464.67 -314.95 487.14 -337.29 514.73 -337.2Z"
@@ -199,19 +199,23 @@
     <path
         d="M189.06 261.44C192.72 257.8 198.63 257.82 202.27 261.47C203.58 262.8 200.95 260.15 202.27 261.47C205.9 265.13 205.89 271.05 202.23 274.68C197.08 279.8 188.25 288.58 183.1 293.7C179.44 297.34 173.52 297.32 169.89 293.67C168.57 292.34 171.2 294.99 169.89 293.67C166.25 290.01 166.27 284.09 169.93 280.46C175.08 275.34 183.91 266.56 189.06 261.44Z"
         id="e3mNcgX5D" />
+    <filter inkscape:collect="always" style="color-interpolation-filters:sRGB" id="filter17701"
+        x="-1.1999898e-06" width="1.0000024" y="-1.2000102e-06" height="1.0000024">
+      <feGaussianBlur inkscape:collect="always" stdDeviation="0.00011019828"
+          id="feGaussianBlur17703" />
+    </filter>
   </defs>
   <sodipodi:namedview id="base" pagecolor="#ffffff" bordercolor="#666666" borderopacity="1.0"
-      inkscape:pageopacity="0.0" inkscape:pageshadow="2" inkscape:zoom="0.24748737"
-      inkscape:cx="266.74819" inkscape:cy="1556.876" inkscape:document-units="mm"
+      inkscape:pageopacity="0.0" inkscape:pageshadow="2" inkscape:zoom="0.175"
+      inkscape:cx="161.30587" inkscape:cy="781.12684" inkscape:document-units="mm"
       inkscape:current-layer="layer1" inkscape:document-rotation="0" showgrid="false"
-      inkscape:window-width="1074" inkscape:window-height="749" inkscape:window-x="288"
+      inkscape:window-width="1074" inkscape:window-height="777" inkscape:window-x="288"
       inkscape:window-y="25" inkscape:window-maximized="0" />
   <metadata id="metadata14485">
     <rdf:RDF>
       <cc:Work rdf:about="">
         <dc:format>image/svg+xml</dc:format>
         <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -409,76 +413,129 @@
           y="0" width="100%" height="100%" />
     </g>
     <rect
-        style="clip-rule:evenodd;opacity:0.999;fill:#344a53;fill-opacity:1;fill-rule:evenodd;stroke-width:0.279686;stroke-linecap:round;stroke-linejoin:round"
+        style="clip-rule:evenodd;opacity:0.999;fill:#474747;fill-opacity:1;fill-rule:evenodd;stroke-width:0.279686;stroke-linecap:round;stroke-linejoin:round"
         id="rect16567" width="270.93332" height="270.93332" x="-13.002377" y="286.35477"
         ry="64.684013"
-        inkscape:export-filename="/Users/ivofernandes/Documents/projects/RhymitGit/rhymit_flutter_app/rhymit_flutter_app/assets/images/logo.png"
+        inkscape:export-filename="/Users/ivofernandes/Documents/projects/turingDealApp/turing_deal/assets/logo.png"
         inkscape:export-xdpi="95.900002" inkscape:export-ydpi="95.900002" />
-    <g id="g16744" transform="matrix(1.5325186,0,0,1.5325186,-81.02586,-212.76534)"
-        style="opacity:0.999">
-      <g id="g15311" transform="matrix(0.26458333,0,0,0.26458333,47.332349,332.37053)">
-        <use xlink:href="#a1IvWkxwaT" opacity="1" fill="#008dd9" fill-opacity="1" id="use15309"
+    <g id="g17842" transform="translate(162.52336,-276.14224)"
+        inkscape:export-filename="/Users/ivofernandes/Documents/projects/RhymitGit/rhymit_flutter_app/rhymit_flutter_app/assets/images/spalsh.png"
+        inkscape:export-xdpi="95" inkscape:export-ydpi="95">
+      <g id="g17797" transform="translate(1.0690781,1.9356802)">
+        <g id="g17745" transform="translate(-12.85119,7.1815503)">
+          <g id="g15327" transform="matrix(0.42816368,0,0,0.42816368,-4.1793274,281.55422)"
+              style="opacity:0.999">
+            <use xlink:href="#lEgpEBdBu" opacity="1" fill="#bc51b1" fill-opacity="1" id="use15325"
+                x="0" y="0" width="100%" height="100%" />
+          </g>
+          <g id="g15331" transform="matrix(0.40547887,0,0,0.40547887,6.9815546,288.57738)"
+              style="opacity:0.999">
+            <use xlink:href="#fu3GSRJEW" opacity="1" fill="#474747" fill-opacity="1" id="use15329"
+                x="0" y="0" width="100%" height="100%" />
+          </g>
+          <g id="g15335" transform="matrix(0.40547887,0,0,0.40547887,6.982309,288.57561)"
+              style="opacity:0.999">
+            <use xlink:href="#b3GQekXkkK" opacity="1" fill="#747474" fill-opacity="1" id="use15333"
+                x="0" y="0" width="100%" height="100%" />
+          </g>
+          <g id="g15339" transform="matrix(0.40547887,0,0,0.40547887,8.4919226,287.14203)"
+              style="opacity:0.999">
+            <use xlink:href="#b1UAkXH3Q6" opacity="1" fill="#747474" fill-opacity="1" id="use15337"
+                x="0" y="0" width="100%" height="100%" />
+          </g>
+        </g>
+        <g id="g17756" transform="translate(-12.85119,4.9136877)">
+          <g id="g17725" transform="translate(131.53571,151.94643)">
+            <g id="g17670" transform="matrix(-0.42816368,0,0,-0.42816368,138.95128,396.95394)"
+                style="opacity:0.999;fill:#008f42;fill-opacity:1">
+              <use xlink:href="#lEgpEBdBu" opacity="1" fill="#bc51b1" fill-opacity="1" id="use17668"
+                  x="0" y="0" width="100%" height="100%" style="fill:#008f42;fill-opacity:1" />
+            </g>
+            <g id="g17674" transform="matrix(-0.40547887,0,0,-0.40547887,127.79039,389.93078)"
+                style="opacity:0.999">
+              <use xlink:href="#fu3GSRJEW" opacity="1" fill="#474747" fill-opacity="1" id="use17672"
+                  x="0" y="0" width="100%" height="100%" />
+            </g>
+            <g id="g17678" transform="matrix(-0.40547887,0,0,-0.40547887,127.78964,389.93255)"
+                style="opacity:0.999">
+              <use xlink:href="#b3GQekXkkK" opacity="1" fill="#747474" fill-opacity="1"
+                  id="use17676" x="0" y="0" width="100%" height="100%" />
+            </g>
+            <g id="g17682" transform="matrix(-0.40547887,0,0,-0.40547887,126.28003,391.36613)"
+                style="opacity:0.999">
+              <use xlink:href="#b1UAkXH3Q6" opacity="1" fill="#747474" fill-opacity="1"
+                  id="use17680" x="0" y="0" width="100%" height="100%" />
+            </g>
+          </g>
+        </g>
+      </g>
+      <g id="g17776" transform="translate(1.069022,0.80180858)">
+        <g id="g17735" transform="translate(-7.559468,114.14881)">
+          <g id="g17654" transform="matrix(0,-0.42816368,0.42816368,0,-4.6769776,446.34915)"
+              style="opacity:0.995;fill:#bc6313;fill-opacity:1;filter:url(#filter17701)">
+            <use xlink:href="#lEgpEBdBu" opacity="1" fill="#bc51b1" fill-opacity="1" id="use17652"
+                x="0" y="0" width="100%" height="100%" style="fill:#bc6313;fill-opacity:1" />
+          </g>
+          <g id="g17658" transform="matrix(0,-0.40547887,0.40547887,0,2.3461824,435.18826)"
+              style="opacity:0.999">
+            <use xlink:href="#fu3GSRJEW" opacity="1" fill="#474747" fill-opacity="1" id="use17656"
+                x="0" y="0" width="100%" height="100%" />
+          </g>
+          <g id="g17662" transform="matrix(0,-0.40547887,0.40547887,0,2.3444124,435.18751)"
+              style="opacity:0.999">
+            <use xlink:href="#b3GQekXkkK" opacity="1" fill="#747474" fill-opacity="1" id="use17660"
+                x="0" y="0" width="100%" height="100%" />
+          </g>
+          <g id="g17666" transform="matrix(0,-0.40547887,0.40547887,0,0.91083238,433.6779)"
+              style="opacity:0.999">
+            <use xlink:href="#b1UAkXH3Q6" opacity="1" fill="#747474" fill-opacity="1" id="use17664"
+                x="0" y="0" width="100%" height="100%" />
+          </g>
+        </g>
+        <g id="g17715" transform="translate(193.52386,92.982143)">
+          <g id="g17686" transform="matrix(0,0.42816368,-0.42816368,0,59.317982,191.33758)"
+              style="opacity:0.999;fill:#008dd9;fill-opacity:1">
+            <use xlink:href="#lEgpEBdBu" opacity="1" fill="#bc51b1" fill-opacity="1" id="use17684"
+                x="0" y="0" width="100%" height="100%" style="fill:#008dd9;fill-opacity:1" />
+          </g>
+          <g id="g17690" transform="matrix(0,0.40547887,-0.40547887,0,52.294822,202.49847)"
+              style="opacity:0.999">
+            <use xlink:href="#fu3GSRJEW" opacity="1" fill="#474747" fill-opacity="1" id="use17688"
+                x="0" y="0" width="100%" height="100%" />
+          </g>
+          <g id="g17694" transform="matrix(0,0.40547887,-0.40547887,0,52.296592,202.49922)"
+              style="opacity:0.999">
+            <use xlink:href="#b3GQekXkkK" opacity="1" fill="#747474" fill-opacity="1" id="use17692"
+                x="0" y="0" width="100%" height="100%" />
+          </g>
+          <g id="g17698" transform="matrix(0,0.40547887,-0.40547887,0,53.730172,204.00883)"
+              style="opacity:0.999">
+            <use xlink:href="#b1UAkXH3Q6" opacity="1" fill="#747474" fill-opacity="1" id="use17696"
+                x="0" y="0" width="100%" height="100%" />
+          </g>
+        </g>
+      </g>
+    </g>
+    <g id="g18007" transform="translate(3.837306,-2.1381562)"
+        inkscape:export-filename="/Users/ivofernandes/Documents/projects/turingDealApp/turing_deal/assets/logo.png"
+        inkscape:export-xdpi="95" inkscape:export-ydpi="95">
+      <g id="g17864" transform="matrix(-0.85632736,0,0,-0.85632736,539.94806,689.03787)"
+          style="opacity:0.999;fill:#008f42;fill-opacity:1">
+        <use xlink:href="#lEgpEBdBu" opacity="1" fill="#bc51b1" fill-opacity="1" id="use17862" x="0"
+            y="0" width="100%" height="100%" style="fill:#008f42;fill-opacity:1" />
+      </g>
+      <use xlink:href="#fu3GSRJEW" opacity="0.999" fill="#474747" fill-opacity="1" id="use17866"
+          x="0" y="0" width="100%" height="100%"
+          transform="matrix(-0.81095774,0,0,-0.81095774,517.62628,674.99155)" />
+      <g id="g17872" transform="matrix(-0.81095774,0,0,-0.81095774,517.62478,674.99509)"
+          style="opacity:0.999">
+        <use xlink:href="#b3GQekXkkK" opacity="1" fill="#747474" fill-opacity="1" id="use17870"
             x="0" y="0" width="100%" height="100%" />
       </g>
-      <g id="g15315" transform="matrix(0.26458333,0,0,0.26458333,47.332349,332.37053)">
-        <use xlink:href="#aKZMCxcdz" opacity="1" fill="#474747" fill-opacity="1" id="use15313" x="0"
-            y="0" width="100%" height="100%" />
-      </g>
-      <g id="g15319" transform="matrix(0.26458333,0,0,0.26458333,47.332349,332.37053)">
-        <use xlink:href="#dRXu2r3Ak" opacity="1" fill="#747474" fill-opacity="1" id="use15317" x="0"
-            y="0" width="100%" height="100%" />
-      </g>
-      <g id="g15323" transform="matrix(0.26458333,0,0,0.26458333,47.332349,332.37053)">
-        <use xlink:href="#a1qEnqRuCA" opacity="1" fill="#747474" fill-opacity="1" id="use15321"
+      <g id="g17876" transform="matrix(-0.81095774,0,0,-0.81095774,514.60556,677.86225)"
+          style="opacity:0.999">
+        <use xlink:href="#b1UAkXH3Q6" opacity="1" fill="#747474" fill-opacity="1" id="use17874"
             x="0" y="0" width="100%" height="100%" />
-      </g>
-      <g id="g15327" transform="matrix(0.26458333,0,0,0.26458333,47.332349,332.37053)">
-        <use xlink:href="#lEgpEBdBu" opacity="1" fill="#bc51b1" fill-opacity="1" id="use15325" x="0"
-            y="0" width="100%" height="100%" />
-      </g>
-      <g id="g15331" transform="matrix(0.26458333,0,0,0.26458333,47.332349,332.37053)">
-        <use xlink:href="#fu3GSRJEW" opacity="1" fill="#474747" fill-opacity="1" id="use15329" x="0"
-            y="0" width="100%" height="100%" />
-      </g>
-      <g id="g15335" transform="matrix(0.26458333,0,0,0.26458333,47.332349,332.37053)">
-        <use xlink:href="#b3GQekXkkK" opacity="1" fill="#747474" fill-opacity="1" id="use15333"
-            x="0" y="0" width="100%" height="100%" />
-      </g>
-      <g id="g15339" transform="matrix(0.26458333,0,0,0.26458333,47.332349,332.37053)">
-        <use xlink:href="#b1UAkXH3Q6" opacity="1" fill="#747474" fill-opacity="1" id="use15337"
-            x="0" y="0" width="100%" height="100%" />
-      </g>
-      <g id="g15343" transform="matrix(0.26458333,0,0,0.26458333,47.332349,332.37053)">
-        <use xlink:href="#ceFkvthWr" opacity="1" fill="#bc6313" fill-opacity="1" id="use15341" x="0"
-            y="0" width="100%" height="100%" />
-      </g>
-      <g id="g15347" transform="matrix(0.26458333,0,0,0.26458333,47.332349,332.37053)">
-        <use xlink:href="#bxpcH0N40" opacity="1" fill="#474747" fill-opacity="1" id="use15345" x="0"
-            y="0" width="100%" height="100%" />
-      </g>
-      <g id="g15351" transform="matrix(0.26458333,0,0,0.26458333,47.332349,332.37053)">
-        <use xlink:href="#b2rAhphNSX" opacity="1" fill="#747474" fill-opacity="1" id="use15349"
-            x="0" y="0" width="100%" height="100%" />
-      </g>
-      <g id="g15355" transform="matrix(0.26458333,0,0,0.26458333,47.332349,332.37053)">
-        <use xlink:href="#bXlHnhiyO" opacity="1" fill="#747474" fill-opacity="1" id="use15353" x="0"
-            y="0" width="100%" height="100%" />
-      </g>
-      <g id="g15359" transform="matrix(0.26458333,0,0,0.26458333,47.332349,332.37053)">
-        <use xlink:href="#bo6vAKp1D" opacity="1" fill="#008f42" fill-opacity="1" id="use15357" x="0"
-            y="0" width="100%" height="100%" />
-      </g>
-      <g id="g15363" transform="matrix(0.26458333,0,0,0.26458333,47.332349,332.37053)">
-        <use xlink:href="#cCsB289Ux" opacity="1" fill="#474747" fill-opacity="1" id="use15361" x="0"
-            y="0" width="100%" height="100%" />
-      </g>
-      <g id="g15367" transform="matrix(0.26458333,0,0,0.26458333,47.332349,332.37053)">
-        <use xlink:href="#a1Fe3bvDU1" opacity="1" fill="#747474" fill-opacity="1" id="use15365"
-            x="0" y="0" width="100%" height="100%" />
-      </g>
-      <g id="g15371" transform="matrix(0.26458333,0,0,0.26458333,47.332349,332.37053)">
-        <use xlink:href="#e3mNcgX5D" opacity="1" fill="#747474" fill-opacity="1" id="use15369" x="0"
-            y="0" width="100%" height="100%" />
       </g>
     </g>
   </g>
