@@ -11,9 +11,11 @@ class TickersList{
   };
 
   static Map<String, String> bonds = {
-  '^IRX': 'USA 13 Week Bond yield',
-  '^TNX': '10 Years Bond yield',
-  'ZB=F': 'Treasury Bond Futures'
+    '^IRX': 'USA 13 Week Bond yield',
+    '^FVX': 'Treasury Yield 5 Years ',
+    '^TNX': 'Treasury Yield 10 Years ',
+    '^TYX': 'Treasury Yield 30 Years',
+    'ZB=F': 'Treasury Bond Futures'
   };
 
   static Map<String, String>  sectors = {
