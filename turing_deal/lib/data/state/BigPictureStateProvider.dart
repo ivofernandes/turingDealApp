@@ -7,6 +7,7 @@ import 'package:turing_deal/data/model/strategy.dart';
 import 'package:turing_deal/data/model/ticker.dart';
 import 'package:turing_deal/data/state/shared/connectivityState.dart';
 import 'package:turing_deal/data/static/TickersList.dart';
+import 'package:turing_deal/data/storage/yahooFinanceDao.dart';
 
 class BigPictureStateProvider with ChangeNotifier, ConnectivityState {
 
@@ -19,9 +20,13 @@ class BigPictureStateProvider with ChangeNotifier, ConnectivityState {
   void loadData(BuildContext context) async{
     await initConnectivity();
 
+    await YahooFinanceDAO().initDatabase();
+
+    String symbol = '^GSPC';
+
     if(hasInternetConnection()){
       if(_bigPictureData.isEmpty || true) {
-        Ticker ticker = Ticker('^GSPC', TickersList.main['^GSPC']);
+        Ticker ticker = Ticker(symbol, TickersList.main[symbol]);
         addTicker(ticker, context);
       }
     }else{
@@ -38,14 +43,24 @@ class BigPictureStateProvider with ChangeNotifier, ConnectivityState {
   void addTicker(Ticker ticker, BuildContext context) async {
     _bigPictureData[ticker] = StrategyResult();
 
-    Map<String, dynamic> historicalData =
+    List<dynamic> prices = await YahooFinanceDAO().getAllDailyData(ticker.symbol);
+
+    // If have no cached historical data
+    if(prices.isEmpty || BuyAndHoldStrategy.isUpToDate(prices)) {
+      // Get data from yahoo finance
+      Map<String, dynamic> historicalData =
         await YahooFinance.getAllDailyData(ticker.symbol);
+      prices = historicalData['prices'];
+
+      // Cache data locally
+      YahooFinanceDAO().saveDailyData(ticker.symbol, prices);
+    }
 
     _bigPictureData[ticker].progress = 10;
     this.refresh();
 
     StrategyResult strategy =
-        BuyAndHoldStrategy.buyAndHoldAnalysis(historicalData, this);
+        BuyAndHoldStrategy.buyAndHoldAnalysis(prices, this);
 
     _bigPictureData[ticker] = strategy;
     this.refresh();

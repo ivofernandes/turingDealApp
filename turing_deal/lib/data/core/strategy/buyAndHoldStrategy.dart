@@ -6,9 +6,8 @@ import 'package:turing_deal/data/state/BigPictureStateProvider.dart';
 class BuyAndHoldStrategy {
   /// Simulate a buy and hold strategy
   static StrategyResult buyAndHoldAnalysis(
-      Map<String, dynamic> historicalPrices,
+      List<dynamic> prices,
       BigPictureStateProvider bigPictureStateProvider) {
-    List<dynamic> prices = historicalPrices['prices'];
 
     StrategyResult strategy = StrategyResult();
 
@@ -81,6 +80,19 @@ class BuyAndHoldStrategy {
     }
 
     return maxDrawdown;
+  }
+
+  /// Check if a prices data stills valid
+  static bool isUpToDate(List prices) {
+    DateTime now = DateTime.now();
+    // TODO instead of a now should use a last working day to be able to use cache during the weekend
+
+    DateTime lastPrice = DateTime.fromMillisecondsSinceEpoch(prices.first['date'] * 1000);
+    // TODO should also control when was the last request for data? To avoid too many request during the weekend
+    Duration difference = now.difference(lastPrice);
+    bool isUpToDate = difference.inMinutes < 60;
+
+    return isUpToDate;
   }
 
 }
