@@ -29,7 +29,7 @@ class ListPricesText extends StatelessWidget {
                 children: [
                   TickerDetailsCell(DateFormat.yMd().format(
                       DateTime.fromMillisecondsSinceEpoch(
-                          this.data[index]['date']))),
+                          this.data[index]['date'] * 1000))),
                   TickerDetailsCell(this.data[index]['open'].toStringAsFixed(2)),
                   TickerDetailsCell(this.data[index]['high'].toStringAsFixed(2)),
                   TickerDetailsCell(this.data[index]['low'].toStringAsFixed(2)),

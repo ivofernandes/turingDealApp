@@ -7,28 +7,6 @@ class YahooFinance{
 
   static int TIMEOUT = 30;
 
-  /// Get daily data for ticker using API
-  /// Url example:
-  /// https://query1.finance.yahoo.com/v7/finance/chart/%5EGSPC?range=100y&interval=1d&indicators=quote&includeTimestamps=true
-  static Future<Map<String, dynamic>> getDailyData(String ticker) async{
-
-    String baseUrl = "https://query1.finance.yahoo.com/v7/finance/chart/";
-    String options = "range=max&interval=1d&indicators=quote&includeTimestamps=true";
-    String url = baseUrl + ticker + "?" +options;
-
-    http.Response response = await http.get(url).timeout(Duration(seconds: TIMEOUT),
-        onTimeout: () {
-      throw TimeoutException('Timeout');
-    });
-
-    if (response.statusCode == 200) {
-      Map<String, dynamic> json = jsonDecode(response.body);
-      return json;
-    }else {
-      return null;
-    }
-  }
-
   /// Python like get allDailyData, inspired on pandas_datareader/yahoo/daily
   /// Steps:
   /// 1 - // Get https://finance.yahoo.com/quote/%5EGSPC/history?period1=-1577908800&period2=1617505199&interval=1d&indicators=quote&includeTimestamps=true
@@ -37,10 +15,15 @@ class YahooFinance{
   static Future<Map<String,dynamic>> getAllDailyData(String ticker) async{
 
     String now = DateTime.now().millisecondsSinceEpoch.toString();
-    String url = 'https://finance.yahoo.com/quote/' + ticker + '/history'
-        '?period1=-1577908800&period2=' + now + '&interval=1d&indicators=quote&includeTimestamps=true';
 
-    http.Response response = await http.get(url).timeout(Duration(seconds: TIMEOUT),
+    Uri uri = Uri.https('finance.yahoo.com', 'history', {
+      'period1': '-1577908800',
+      'period2': now,
+      'interval': '1d',
+      'indicators': 'quote',
+      'includeTimestamps': 'true'
+    });
+    http.Response response = await http.get(uri).timeout(Duration(seconds: TIMEOUT),
         onTimeout: () {
           throw TimeoutException('Timeout');
         });
