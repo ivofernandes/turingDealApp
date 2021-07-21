@@ -6,7 +6,7 @@ import 'shared/navigationState.dart';
 
 class AppStateProvider with ChangeNotifier, ConnectivityState, NavigationState {
 
-  List<Ticker> searching = [];
+  List<Ticker>? searching = [];
 
   AppStateProvider(BuildContext context){
     //TODO the context is here to get user preferences in the future
@@ -20,12 +20,12 @@ class AppStateProvider with ChangeNotifier, ConnectivityState, NavigationState {
     this.searching = [];
   }
 
-  void search(List<Ticker> search){
+  void search(List<Ticker>? search){
     this.searching = search;
     refresh();
   }
 
-  List<Ticker> getSearching(){
+  List<Ticker>? getSearching(){
     return this.searching;
   }
 

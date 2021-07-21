@@ -32,7 +32,7 @@ class BigPictureStateProvider with ChangeNotifier, ConnectivityState {
     }else{
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
           content: Text( 'Check your internet connection',
-            style: Theme.of(context).textTheme.headline6.copyWith(
+            style: Theme.of(context).textTheme.headline6!.copyWith(
                 color: Theme.of(context).errorColor
             ),
           )
@@ -40,18 +40,19 @@ class BigPictureStateProvider with ChangeNotifier, ConnectivityState {
     }
   }
 
-  Future<List<dynamic>> getTickerData(ticker) async{
-    List<dynamic> prices = await YahooFinanceDAO().getAllDailyData(ticker.symbol);
+  Future<List<dynamic>?> getTickerData(ticker) async{
+    List<dynamic>? prices = await YahooFinanceDAO().getAllDailyData(ticker.symbol);
 
     // If have no cached historical data
-    if(prices.isEmpty || BuyAndHoldStrategy.isUpToDate(prices)) {
+    if(prices == null || prices.isEmpty || BuyAndHoldStrategy.isUpToDate(prices)) {
       // Get data from yahoo finance
-      Map<String, dynamic> historicalData =
-          await YahooFinance.getAllDailyData(ticker.symbol);
-      prices = historicalData['prices'];
+      Map<String, dynamic>? historicalData =
+          await (YahooFinance.getAllDailyData(ticker.symbol));
 
-      // Cache data locally
-      YahooFinanceDAO().saveDailyData(ticker.symbol, prices);
+      if(historicalData != null && historicalData['prices'] != null){
+        // Cache data locally
+        YahooFinanceDAO().saveDailyData(ticker.symbol, historicalData['prices']);
+      }
     }
     return prices;
   }
@@ -59,13 +60,13 @@ class BigPictureStateProvider with ChangeNotifier, ConnectivityState {
   void addTicker(Ticker ticker, BuildContext context) async {
     _bigPictureData[ticker] = StrategyResult();
 
-    List<dynamic> prices = await getTickerData(ticker);
+    List<dynamic>? prices = await getTickerData(ticker);
 
-    _bigPictureData[ticker].progress = 10;
+    _bigPictureData[ticker]!.progress = 10;
     this.refresh();
 
     StrategyResult strategy =
-        BuyAndHoldStrategy.buyAndHoldAnalysis(prices, this);
+        BuyAndHoldStrategy.buyAndHoldAnalysis(prices!, this);
 
     _bigPictureData[ticker] = strategy;
     this.refresh();

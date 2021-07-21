@@ -8,7 +8,7 @@ import 'package:path/path.dart';
 class SembastDatabase{
   static final String DB_NAME = 'sembast';
 
-  Database _db;
+  Database? _db;
 
   _initWebDatabase() async {
     var factory = databaseFactoryWeb;
@@ -33,7 +33,7 @@ class SembastDatabase{
     }
   }
 
-  DatabaseClient getDatabase() {
+  DatabaseClient? getDatabase() {
     return this._db;
   }
 }

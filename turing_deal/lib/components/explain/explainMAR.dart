@@ -32,11 +32,11 @@ class ExplainMAR extends StatelessWidget {
               height: 20,
             ),
             MaterialButton(
-                color: Theme.of(context).textTheme.bodyText1.color,
+                color: Theme.of(context).textTheme.bodyText1!.color,
                 child: Text('More about MAR',
                     style: Theme.of(context)
                         .textTheme
-                        .bodyText1
+                        .bodyText1!
                         .copyWith(color: Theme.of(context).backgroundColor)),
                 onPressed: () {
                   Web.openView(context,

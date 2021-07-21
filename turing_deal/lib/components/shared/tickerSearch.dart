@@ -22,7 +22,7 @@ class TickerSearch extends SearchDelegate<List<Ticker>>{
     return IconButton(
         icon: Icon(Icons.arrow_back),
         onPressed: (){
-          close(context, null);
+          close(context, []);
         }
     );
   }
@@ -90,7 +90,7 @@ class TickerSearch extends SearchDelegate<List<Ticker>>{
             itemCount: size,
             itemBuilder: (BuildContext context, int index){
               final String symbol = filteredKeys[index];
-              return tickerWidget(context, symbol, tickers[symbol]);
+              return tickerWidget(context, symbol, tickers[symbol]!);
             }),
       ],
     ) : SizedBox();

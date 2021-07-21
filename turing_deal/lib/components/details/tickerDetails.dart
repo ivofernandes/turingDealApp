@@ -16,11 +16,11 @@ class TickerDetails extends StatelessWidget {
         builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
           return Scaffold(
               appBar: AppBar(
-                title: Text(this.ticker.description),
+                title: Text(this.ticker.description!),
               ),
               body: snapshot.data == null
                   ? CircularProgressIndicator()
-                  : ListPricesText(snapshot.data as List<dynamic>));
+                  : ListPricesText(snapshot.data as List<dynamic>?));
         });
   }
 }

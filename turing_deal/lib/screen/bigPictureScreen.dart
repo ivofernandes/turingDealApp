@@ -45,7 +45,7 @@ class BigPictureScreen extends StatelessWidget{
                   i < (index + 1) * columns && i < tickers.length;
                   i++) {
                 Ticker ticker = tickers[i];
-                StrategyResult strategy = data[ticker];
+                StrategyResult? strategy = data[ticker];
             resumes.add(StrategyResume(ticker, strategy, bigPictureState));
           }
           return Wrap(
@@ -58,7 +58,7 @@ class BigPictureScreen extends StatelessWidget{
   /// Manage the transition of a search from the app state to a big picture screen state
   void manageSearch(
       BigPictureStateProvider bigPictureState, BuildContext context) {
-    List<Ticker> searchingTickers = this.appState.getSearching();
+    List<Ticker>? searchingTickers = this.appState.getSearching();
 
     if (searchingTickers != null && searchingTickers.isNotEmpty) {
       Ticker ticker = searchingTickers.removeAt(0);

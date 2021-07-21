@@ -19,7 +19,7 @@ class BuyAndHoldStrategy {
 
       // https://www.investopedia.com/terms/c/cagr.asp
       strategy.CAGR =
-          (pow(sellPrice / buyPrice, 1 / strategy.tradingYears) - 1) * 100;
+          (pow(sellPrice / buyPrice, 1 / strategy.tradingYears!) - 1) * 100;
 
       strategy.drawdown = calculateDrawdown(prices);
 
@@ -64,16 +64,16 @@ class BuyAndHoldStrategy {
       }
 
       // Get date values
-      double proportion = prices[i]['adjclose'] / prices[i]['close'];
+      double? proportion = prices[i]['adjclose'] / prices[i]['close'];
       double adjustedHigh = prices[i]['high'] * proportion;
-      double adjustedLow = prices[i]['low'] * proportion;
+      double? adjustedLow = prices[i]['low'] * proportion;
 
       // Update drawdown
       if (adjustedHigh > allTimeHigh) {
         allTimeHigh = adjustedHigh;
       }
       else {
-        currentDrawdown = (adjustedLow / allTimeHigh - 1) * 100;
+        currentDrawdown = (adjustedLow! / allTimeHigh - 1) * 100;
       }
 
       maxDrawdown = min(maxDrawdown, currentDrawdown);

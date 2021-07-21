@@ -12,7 +12,7 @@ class YahooFinance{
   /// 1 - // Get https://finance.yahoo.com/quote/%5EGSPC/history?period1=-1577908800&period2=1617505199&interval=1d&indicators=quote&includeTimestamps=true
   /// 2 - Find the delimiters of the begging and end of the json
   /// 3 - Get item ["context"]["dispatcher"]["stores"]["HistoricalPriceStore"]
-  static Future<Map<String,dynamic>> getAllDailyData(String ticker) async{
+  static Future<Map<String,dynamic>?> getAllDailyData(String? ticker) async{
 
     String now = DateTime.now().millisecondsSinceEpoch.toString();
 
@@ -43,7 +43,7 @@ class YahooFinance{
       Map<String, dynamic> json = jsonDecode(jsonString);
 
       // Get item ["context"]["dispatcher"]["stores"]["HistoricalPriceStore"]
-      Map<String, dynamic> historicalPrice = json["context"]["dispatcher"]["stores"]["HistoricalPriceStore"];
+      Map<String, dynamic>? historicalPrice = json["context"]["dispatcher"]["stores"]["HistoricalPriceStore"];
 
       return historicalPrice;
     }else {

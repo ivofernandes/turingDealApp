@@ -18,7 +18,7 @@ class RootScreen extends StatelessWidget {
             IconButton(
                 icon: Icon(Icons.search),
                 onPressed: () async {
-                  List<Ticker> tickers = await showSearch(
+                  List<Ticker>? tickers = await showSearch(
                       context: context,
                       delegate: TickerSearch()
                   );

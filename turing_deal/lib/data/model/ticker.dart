@@ -2,7 +2,7 @@
 class Ticker{
 
   String symbol;
-  String description;
+  String? description;
 
   Ticker(this.symbol,this.description);
 

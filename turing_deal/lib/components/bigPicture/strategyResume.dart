@@ -13,7 +13,7 @@ class StrategyResume extends StatelessWidget {
   static final int RESUME_WIDTH = 350;
 
   final Ticker ticker;
-  final StrategyResult strategy;
+  final StrategyResult? strategy;
   final BigPictureStateProvider bigPictureState;
 
   StrategyResume(this.ticker, this.strategy, this.bigPictureState);
@@ -43,7 +43,7 @@ class StrategyResume extends StatelessWidget {
           child: Card(
             child: Padding(
               padding: const EdgeInsets.all(10.0),
-              child: strategy.progress > 0
+              child: strategy!.progress > 0
                   ? Column(
                       children: [
                         StrategyResumeHeader(
@@ -57,7 +57,7 @@ class StrategyResume extends StatelessWidget {
                                       return ExplainCagr();
                                     }),
                                 child: Text('CAGR: ' +
-                                    strategy.CAGR.toStringAsFixed(2) +
+                                    strategy!.CAGR.toStringAsFixed(2) +
                                     '%'))),
                         Align(
                             alignment: Alignment.topLeft,
@@ -68,7 +68,7 @@ class StrategyResume extends StatelessWidget {
                                       return ExplainDrawdown();
                                     }),
                                 child: Text('Drawdown: ' +
-                                    strategy.drawdown.toStringAsFixed(2) +
+                                    strategy!.drawdown.toStringAsFixed(2) +
                                     '%'))),
                         Align(
                             alignment: Alignment.topLeft,
@@ -79,8 +79,8 @@ class StrategyResume extends StatelessWidget {
                                       return ExplainMAR();
                                     }),
                                 child: Text(
-                                    'MAR: ' + strategy.MAR.toStringAsFixed(2)))),
-                        strategy.progress < 100
+                                    'MAR: ' + strategy!.MAR.toStringAsFixed(2)))),
+                        strategy!.progress < 100
                             ? CircularProgressIndicator()
                             : Container()
                       ],

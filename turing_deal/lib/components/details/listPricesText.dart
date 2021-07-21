@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 class ListPricesText extends StatelessWidget {
-  final List<dynamic> data;
+  final List<dynamic>? data;
 
   const ListPricesText(this.data);
 
@@ -12,7 +12,7 @@ class ListPricesText extends StatelessWidget {
       padding: const EdgeInsets.all(8.0),
       child: ListView.builder(
           shrinkWrap: true,
-          itemCount: this.data.length +1 ,
+          itemCount: this.data!.length +1 ,
           itemBuilder: (BuildContext context, int index) {
             if (index == 0) {
               return Row(
@@ -29,11 +29,11 @@ class ListPricesText extends StatelessWidget {
                 children: [
                   TickerDetailsCell(DateFormat.yMd().format(
                       DateTime.fromMillisecondsSinceEpoch(
-                          this.data[index]['date'] * 1000))),
-                  TickerDetailsCell(this.data[index]['open'].toStringAsFixed(2)),
-                  TickerDetailsCell(this.data[index]['high'].toStringAsFixed(2)),
-                  TickerDetailsCell(this.data[index]['low'].toStringAsFixed(2)),
-                  TickerDetailsCell(this.data[index]['close'].toStringAsFixed(2)),
+                          this.data![index]['date'] * 1000))),
+                  TickerDetailsCell(this.data![index]['open'].toStringAsFixed(2)),
+                  TickerDetailsCell(this.data![index]['high'].toStringAsFixed(2)),
+                  TickerDetailsCell(this.data![index]['low'].toStringAsFixed(2)),
+                  TickerDetailsCell(this.data![index]['close'].toStringAsFixed(2)),
 
                 ],
               );
@@ -44,7 +44,7 @@ class ListPricesText extends StatelessWidget {
 }
 
 class TickerDetailsCell extends StatelessWidget {
-  final String text;
+  final String? text;
 
   const TickerDetailsCell(this.text);
 
@@ -53,9 +53,9 @@ class TickerDetailsCell extends StatelessWidget {
     return Expanded(
         child: Padding(
           padding: const EdgeInsets.all(8.0),
-          child: Text(text,
+          child: Text(text!,
               style:
-              Theme.of(context).textTheme.bodyText1.copyWith(fontSize: 9)),
+              Theme.of(context).textTheme.bodyText1!.copyWith(fontSize: 9)),
         ));
   }
 }
