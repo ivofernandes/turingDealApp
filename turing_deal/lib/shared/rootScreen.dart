@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:turing_deal/components/shared/tickerSearch.dart';
-import 'package:turing_deal/data/model/ticker.dart';
-import 'package:turing_deal/data/state/AppStateProvider.dart';
-import 'package:turing_deal/screen/bigPictureScreen.dart';
+import 'package:turing_deal/marketData/model/ticker.dart';
+import 'package:turing_deal/shared/components/tickerSearch.dart';
+import 'package:turing_deal/shared/state/AppStateProvider.dart';
+import '../bigPicture/bigPictureScreen.dart';
 
 class RootScreen extends StatelessWidget {
   final AppStateProvider _appState;

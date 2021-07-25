@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:turing_deal/components/shared/Web.dart';
+import 'package:turing_deal/shared/components/Web.dart';
 
 class ExplainCagr extends StatelessWidget {
   @override

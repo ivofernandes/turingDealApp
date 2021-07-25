@@ -1,11 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:turing_deal/components/bigPicture/strategyResume.dart';
-import 'package:turing_deal/data/model/strategy.dart';
-import 'package:turing_deal/data/model/ticker.dart';
-import 'package:turing_deal/data/state/AppStateProvider.dart';
-import 'package:turing_deal/data/state/BigPictureStateProvider.dart';
+import 'package:turing_deal/marketData/model/strategy.dart';
+import 'package:turing_deal/marketData/model/ticker.dart';
+import './components/strategyResume.dart';
+import 'package:turing_deal/shared/state/AppStateProvider.dart';
+import './state/BigPictureStateProvider.dart';
 
 class BigPictureScreen extends StatelessWidget{
   AppStateProvider appState;

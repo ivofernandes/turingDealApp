@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:turing_deal/data/model/ticker.dart';
-import 'package:turing_deal/data/static/TickersList.dart';
+import 'package:turing_deal/marketData/model/ticker.dart';
+import 'package:turing_deal/marketData/static/TickersList.dart';
 
 class TickerSearch extends SearchDelegate<List<Ticker>>{
 

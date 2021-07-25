@@ -1,13 +1,12 @@
-
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:turing_deal/data/api/yahooFinance.dart';
-import 'package:turing_deal/data/core/strategy/buyAndHoldStrategy.dart';
-import 'package:turing_deal/data/model/strategy.dart';
-import 'package:turing_deal/data/model/ticker.dart';
-import 'package:turing_deal/data/state/shared/connectivityState.dart';
-import 'package:turing_deal/data/static/TickersList.dart';
-import 'package:turing_deal/data/storage/yahooFinanceDao.dart';
+import 'package:turing_deal/marketData/core/strategy/buyAndHoldStrategy.dart';
+import 'package:turing_deal/marketData/model/strategy.dart';
+import 'package:turing_deal/marketData/model/ticker.dart';
+import 'package:turing_deal/marketData/static/TickersList.dart';
+import 'package:turing_deal/marketData/yahooFinance/api/yahooFinance.dart';
+import 'package:turing_deal/marketData/yahooFinance/storage/yahooFinanceDao.dart';
+import 'package:turing_deal/shared/state/mixins/connectivityState.dart';
 
 class BigPictureStateProvider with ChangeNotifier, ConnectivityState {
 

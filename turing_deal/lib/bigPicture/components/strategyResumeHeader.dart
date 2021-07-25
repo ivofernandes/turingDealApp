@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:turing_deal/data/model/strategy.dart';
-import 'package:turing_deal/data/model/ticker.dart';
-import 'package:turing_deal/data/state/BigPictureStateProvider.dart';
+import 'package:turing_deal/marketData/model/strategy.dart';
+import 'package:turing_deal/marketData/model/ticker.dart';
+import '../state/BigPictureStateProvider.dart';
 
 class StrategyResumeHeader extends StatelessWidget {
   final Ticker ticker;

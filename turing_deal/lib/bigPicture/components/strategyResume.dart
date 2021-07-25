@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:turing_deal/components/bigPicture/strategyResumeHeader.dart';
-import 'package:turing_deal/components/details/tickerDetails.dart';
-import 'package:turing_deal/components/explain/explainCagr.dart';
-import 'package:turing_deal/components/explain/explainDrawdown.dart';
-import 'package:turing_deal/components/explain/explainMAR.dart';
-import 'package:turing_deal/data/model/strategy.dart';
-import 'package:turing_deal/data/model/ticker.dart';
-import 'package:turing_deal/data/state/BigPictureStateProvider.dart';
+import 'package:turing_deal/marketData/model/strategy.dart';
+import 'package:turing_deal/marketData/model/ticker.dart';
+import './strategyResumeHeader.dart';
+import './details/tickerDetails.dart';
+import '../explain/explainCagr.dart';
+import '../explain/explainDrawdown.dart';
+import '../explain/explainMAR.dart';
+import '../state/BigPictureStateProvider.dart';
 
 class StrategyResume extends StatelessWidget {
   static final int RESUME_WIDTH = 350;

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:turing_deal/components/shared/appTheme.dart';
-import 'package:turing_deal/data/state/AppStateProvider.dart';
-import 'package:turing_deal/screen/rootScreen.dart';
+import 'package:turing_deal/shared/components/appTheme.dart';
+import 'package:turing_deal/shared/state/AppStateProvider.dart';
+import 'package:turing_deal/shared/rootScreen.dart';
 
 void main() {
   runApp(TuringDealApp());

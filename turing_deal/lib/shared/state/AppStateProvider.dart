@@ -1,8 +1,8 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:turing_deal/data/model/ticker.dart';
-import 'shared/connectivityState.dart';
-import 'shared/navigationState.dart';
+import 'package:turing_deal/marketData/model/ticker.dart';
+import 'mixins/connectivityState.dart';
+import 'mixins/navigationState.dart';
 
 class AppStateProvider with ChangeNotifier, ConnectivityState, NavigationState {
 

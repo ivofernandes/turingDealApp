@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:turing_deal/components/shared/Web.dart';
+import 'package:turing_deal/shared/components/Web.dart';
 
-class ExplainMAR extends StatelessWidget {
+class ExplainDrawdown extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -13,7 +13,7 @@ class ExplainMAR extends StatelessWidget {
               height: 20,
             ),
             Text(
-              'MAR ratio',
+              'Maximum Drawdown',
               style: Theme.of(context).textTheme.headline6,
               textAlign: TextAlign.center,
             ),
@@ -21,26 +21,21 @@ class ExplainMAR extends StatelessWidget {
               height: 20,
             ),
             Text(
-              'A MAR ratio is a measurement of returns adjusted for risk that can be used to compare the performance of different assets or strategies',
+              'The Max Drawdown is the biggest fall in the value of a portfolio following a strategy',
             ),
-            SizedBox(
-              height: 20,
-            ),
-            Text('The MAR forumla is: MAR ='),
-            Text('CAGR / Max drawdown'),
             SizedBox(
               height: 20,
             ),
             MaterialButton(
                 color: Theme.of(context).textTheme.bodyText1!.color,
-                child: Text('More about MAR',
+                child: Text('More about Drawdown',
                     style: Theme.of(context)
                         .textTheme
                         .bodyText1!
                         .copyWith(color: Theme.of(context).backgroundColor)),
                 onPressed: () {
                   Web.openView(context,
-                      'https://www.investopedia.com/terms/m/mar-ratio.asp');
+                      'https://www.investopedia.com/terms/m/maximum-drawdown-mdd.asp');
                 })
           ],
         ),

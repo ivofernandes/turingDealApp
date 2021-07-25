@@ -1,5 +1,3 @@
-import 'package:turing_deal/data/model/ticker.dart';
-
 /// Kind of stable static tickers list
 class TickersList{
 

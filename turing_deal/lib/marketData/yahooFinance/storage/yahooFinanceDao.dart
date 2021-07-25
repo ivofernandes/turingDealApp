@@ -1,5 +1,6 @@
 import 'package:sembast/sembast.dart';
-import 'package:turing_deal/data/storage/sembastDatabase.dart';
+
+import 'sembastDatabase.dart';
 
 class YahooFinanceDAO with SembastDatabase{
   // Singleton

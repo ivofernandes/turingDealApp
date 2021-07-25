@@ -1,7 +1,9 @@
 import 'dart:math';
 
-import 'package:turing_deal/data/model/strategy.dart';
-import 'package:turing_deal/data/state/BigPictureStateProvider.dart';
+import 'package:turing_deal/bigPicture/state/BigPictureStateProvider.dart';
+import 'package:turing_deal/marketData/model/strategy.dart';
+
+
 
 class BuyAndHoldStrategy {
   /// Simulate a buy and hold strategy
