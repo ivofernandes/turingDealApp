@@ -18,14 +18,19 @@ This project can be executed like any flutter application just by importing in a
 Ideas about the arquitecture of the app:
 
 - lib -> All the flutter code
-    - data
-        - api -> external API calls definition
-        - core -> algorithms and computation stuff
-            - strategy -> Stuff related with the evaluation of a trading strategy
-        - state -> state machine
-        - screen -> Widgets to define entire screens of the app
-            - bigPictureScreen ->  Screen to have a snapshot of how multiple assets are performing in the market  
-
+    - bigPicture, module that manages the big picture screens
+    - marketData, module to get the market data and presist it in local device
+        - core, business logic
+            - strategy, Stuff related with the evaluation of a trading strategy
+        - model, entities used to deal with the market data
+        - static, reference data that would tend to not change much
+        - yahooFinance, 
+            - api, getters of the data from internet
+            - storage, persist and retrive data from local storage
+   - shared, module with stuff that can potentially be used by multiple other modules
+    - state, app global state with stuff like navigation and connectivity management
+    - components, shared components
+   
 #####  Palette URL: http://paletton.com/#uid=32V0u0ksHn-iOuBomrKwbjjHje4
 *** Primary color:
 
