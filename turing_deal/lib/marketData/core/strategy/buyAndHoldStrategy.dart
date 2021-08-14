@@ -92,7 +92,7 @@ class BuyAndHoldStrategy {
     DateTime lastPrice = DateTime.fromMillisecondsSinceEpoch(prices.first['date'] * 1000);
     // TODO should also control when was the last request for data? To avoid too many request during the weekend
     Duration difference = now.difference(lastPrice);
-    bool isUpToDate = difference.inMinutes < 60;
+    bool isUpToDate = difference.inHours < 12;
 
     return isUpToDate;
   }

@@ -43,7 +43,7 @@ class BigPictureStateProvider with ChangeNotifier, ConnectivityState {
     List<dynamic>? prices = await YahooFinanceDAO().getAllDailyData(ticker.symbol);
 
     // If have no cached historical data
-    if(prices == null || prices.isEmpty || BuyAndHoldStrategy.isUpToDate(prices)) {
+    if(prices == null || prices.isEmpty || !BuyAndHoldStrategy.isUpToDate(prices)) {
       // Get data from yahoo finance
       Map<String, dynamic>? historicalData =
           await (YahooFinance.getAllDailyData(ticker.symbol));

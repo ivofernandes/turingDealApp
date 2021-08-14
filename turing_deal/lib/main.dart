@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:turing_deal/shared/components/appTheme.dart';
 import 'package:turing_deal/shared/state/AppStateProvider.dart';
-import 'package:turing_deal/shared/rootScreen.dart';
+import 'package:turing_deal/home/homeScreen.dart';
 
 void main() {
   runApp(TuringDealApp());
@@ -21,7 +21,7 @@ class TuringDealApp extends StatelessWidget {
                   theme: AppTheme.darkTheme(),
                   debugShowCheckedModeBanner: false,
                   title: "TuringDeal",
-                  home: RootScreen(appState)
+                  home: HomeScreen()
               );
             })
     );
