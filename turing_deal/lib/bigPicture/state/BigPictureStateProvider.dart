@@ -6,7 +6,7 @@ import 'package:turing_deal/marketData/model/ticker.dart';
 import 'package:turing_deal/marketData/static/TickersList.dart';
 import 'package:turing_deal/marketData/yahooFinance/api/yahooFinance.dart';
 import 'package:turing_deal/marketData/yahooFinance/storage/yahooFinanceDao.dart';
-import 'package:turing_deal/shared/state/mixins/connectivityState.dart';
+import 'package:turing_deal/home/state/mixins/connectivityState.dart';
 
 class BigPictureStateProvider with ChangeNotifier, ConnectivityState {
 
@@ -49,6 +49,7 @@ class BigPictureStateProvider with ChangeNotifier, ConnectivityState {
           await (YahooFinance.getAllDailyData(ticker.symbol));
 
       if(historicalData != null && historicalData['prices'] != null){
+        prices = historicalData['prices'];
         // Cache data locally
         YahooFinanceDAO().saveDailyData(ticker.symbol, historicalData['prices']);
       }
@@ -56,19 +57,24 @@ class BigPictureStateProvider with ChangeNotifier, ConnectivityState {
     return prices;
   }
 
-  void addTicker(Ticker ticker, BuildContext context) async {
+  Future<void> addTicker(Ticker ticker, BuildContext context) async {
     _bigPictureData[ticker] = StrategyResult();
 
-    List<dynamic>? prices = await getTickerData(ticker);
+    try {
+      List<dynamic>? prices = await getTickerData(ticker);
 
-    _bigPictureData[ticker]!.progress = 10;
-    this.refresh();
+      _bigPictureData[ticker]!.progress = 10;
+      this.refresh();
 
-    StrategyResult strategy =
-        BuyAndHoldStrategy.buyAndHoldAnalysis(prices!, this);
+      StrategyResult strategy = BuyAndHoldStrategy.buyAndHoldAnalysis(prices!, this);
 
-    _bigPictureData[ticker] = strategy;
-    this.refresh();
+      _bigPictureData[ticker] = strategy;
+      this.refresh();
+    }catch (e){
+      _bigPictureData.remove(ticker);
+      this.refresh();
+      throw e;
+    }
   }
 
   Map<Ticker, StrategyResult> getBigPictureData() {

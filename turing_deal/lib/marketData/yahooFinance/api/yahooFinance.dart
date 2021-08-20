@@ -37,7 +37,7 @@ class YahooFinance{
       String endDelimiter = ';\n}(this));';
 
       int startIndex = body.indexOf(startDelimiter) + startDelimiter.length;
-      int endIndex = body.indexOf(endDelimiter);
+      int endIndex = body.indexOf(endDelimiter, startIndex);
       String jsonString = body.substring(startIndex, endIndex);
 
       // Parse all json

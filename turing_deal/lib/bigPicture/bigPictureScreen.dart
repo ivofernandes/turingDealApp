@@ -3,8 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:turing_deal/marketData/model/strategy.dart';
 import 'package:turing_deal/marketData/model/ticker.dart';
+import 'package:turing_deal/shared/components/checkError.dart';
 import './components/strategyResume.dart';
-import 'package:turing_deal/shared/state/AppStateProvider.dart';
+import 'package:turing_deal/home/state/AppStateProvider.dart';
 import './state/BigPictureStateProvider.dart';
 
 class BigPictureScreen extends StatelessWidget{
@@ -24,7 +25,10 @@ class BigPictureScreen extends StatelessWidget{
 
               if (searchingTickers != null && searchingTickers.isNotEmpty) {
                 Ticker ticker = searchingTickers.removeAt(0);
-                bigPictureState.addTicker(ticker, context);
+                bigPictureState.addTicker(ticker, context).onError(
+                        (error, stackTrace) {
+                      CheckError.checkErrorState('Can\'t and the ticker ' + ticker.symbol, context);
+                    });
               }
 
               // Return the big picture screen
@@ -58,4 +62,6 @@ class BigPictureScreen extends StatelessWidget{
         })
     );
   }
+
+
 }
