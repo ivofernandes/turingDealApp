@@ -1,3 +1,5 @@
+import 'package:backdrop/backdrop.dart';
+import 'package:backdrop/scaffold.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
@@ -5,6 +7,7 @@ import 'package:turing_deal/marketData/model/ticker.dart';
 import 'package:turing_deal/home/components/tickerSearch.dart';
 import 'package:turing_deal/home/state/AppStateProvider.dart';
 import '../bigPicture/bigPictureScreen.dart';
+import 'menu/menuComponent.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen();
@@ -16,21 +19,27 @@ class HomeScreen extends StatelessWidget {
 
     forcePortraitModeInPhones(context);
 
-    return Scaffold(
-        appBar: AppBar(
-          title: Text('Turing deal'),
-          actions: [
-            IconButton(
-                icon: Icon(Icons.search),
-                onPressed: () async {
-                  List<Ticker>? tickers = await showSearch(
-                      context: context, delegate: TickerSearch());
 
-                  appState.search(tickers);
-                })
-          ],
-        ),
-        body: Center(child: BigPictureScreen()));
+    return BackdropScaffold(
+      appBar: BackdropAppBar(
+        title: Text('Turing deal'),
+        actions: <Widget>[
+          IconButton(
+              icon: Icon(Icons.search),
+              onPressed: () async {
+                List<Ticker>? tickers = await showSearch(
+                    context: context, delegate: TickerSearch());
+
+                appState.search(tickers);
+              })
+        ],
+      ),
+      backLayer: MenuComponent(),
+      frontLayer: Center(
+        child: BigPictureScreen(),
+      ),
+    );
+
   }
 
   void forcePortraitModeInPhones(BuildContext context) {
