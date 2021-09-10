@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
@@ -19,8 +20,7 @@ class Web extends StatefulWidget {
     if (kIsWeb) {
       launchLink(context, url);
     } else {
-      Navigator.of(context).push(MaterialPageRoute<void>(
-          builder: (BuildContext context) => Web._(url)));
+      Get.to(Web._(url));
     }
   }
 
@@ -28,14 +28,8 @@ class Web extends StatefulWidget {
     if (await canLaunch(url)) {
       launch(url);
     } else {
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-          content: Text(
-        'Error on trying to open url',
-        style: Theme.of(context)
-            .textTheme
-            .headline6!
-            .copyWith(color: Theme.of(context).errorColor),
-      )));
+      Get.snackbar('Error on trying to open url', '',
+      colorText: Theme.of(context).errorColor);
     }
   }
 }
@@ -96,10 +90,8 @@ class _WebState extends State<Web> {
     return JavascriptChannel(
         name: 'Toaster',
         onMessageReceived: (JavascriptMessage message) {
-          // ignore: deprecated_member_use
-          Scaffold.of(context).showSnackBar(
-            SnackBar(content: Text(message.message)),
-          );
+          Get.snackbar(message.message, '',
+              colorText: Theme.of(context).errorColor);
         });
   }
 }
@@ -139,10 +131,8 @@ class NavigationControls extends StatelessWidget {
                       if (await controller!.canGoBack()) {
                         await controller.goBack();
                       } else {
-                        // ignore: deprecated_member_use
-                        Scaffold.of(context).showSnackBar(
-                          const SnackBar(content: Text("No back history item")),
-                        );
+                        Get.snackbar('No back history item', '',
+                            colorText: Theme.of(context).errorColor);
                         return;
                       }
                     },
@@ -155,11 +145,8 @@ class NavigationControls extends StatelessWidget {
                       if (await controller!.canGoForward()) {
                         await controller.goForward();
                       } else {
-                        // ignore: deprecated_member_use
-                        Scaffold.of(context).showSnackBar(
-                          const SnackBar(
-                              content: Text("No forward history item")),
-                        );
+                        Get.snackbar('No forward history item', '',
+                            colorText: Theme.of(context).errorColor,);
                         return;
                       }
                     },

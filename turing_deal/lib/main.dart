@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 import 'package:turing_deal/shared/components/appTheme.dart';
 import 'package:turing_deal/home/state/AppStateProvider.dart';
@@ -17,7 +18,7 @@ class TuringDealApp extends StatelessWidget {
         child: Consumer<AppStateProvider>(
             builder: (context, appState, child) {
               appState.loadData();
-              return MaterialApp(
+              return GetMaterialApp(
                   theme: AppTheme.darkTheme(),
                   debugShowCheckedModeBanner: false,
                   title: "TuringDeal",
