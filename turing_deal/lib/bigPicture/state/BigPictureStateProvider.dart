@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:turing_deal/marketData/core/strategy/buyAndHoldStrategy.dart';
+import 'package:turing_deal/marketData/core/strategy/utils/strategyTime.dart';
 import 'package:turing_deal/marketData/model/strategy.dart';
 import 'package:turing_deal/marketData/model/ticker.dart';
 import 'package:turing_deal/marketData/static/TickersList.dart';
@@ -21,12 +22,17 @@ class BigPictureStateProvider with ChangeNotifier, ConnectivityState {
 
     await YahooFinanceDAO().initDatabase();
 
-    String symbol = '^GSPC';
+    List<String> symbols = ['^GSPC','^NDX',
+      'XLE','XLF','XLU','XLI','XLV','XLY','XLP','XLB','REET','XLC','FCOM'
+    ];
 
     if(hasInternetConnection()){
       if(_bigPictureData.isEmpty || true) {
-        Ticker ticker = Ticker(symbol, TickersList.main[symbol]);
-        addTicker(ticker, context);
+        symbols.forEach((symbol) {
+          print('adding ticker $symbol');
+          Ticker ticker = Ticker(symbol, TickersList.main[symbol]);
+          addTicker(ticker, context);
+        });
       }
     }else{
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
@@ -43,7 +49,7 @@ class BigPictureStateProvider with ChangeNotifier, ConnectivityState {
     List<dynamic>? prices = await YahooFinanceDAO().getAllDailyData(ticker.symbol);
 
     // If have no cached historical data
-    if(prices == null || prices.isEmpty || !BuyAndHoldStrategy.isUpToDate(prices)) {
+    if(prices == null || prices.isEmpty || !StrategyTime.isUpToDate(prices)) {
       // Get data from yahoo finance
       Map<String, dynamic>? historicalData =
           await (YahooFinance.getAllDailyData(ticker.symbol));

@@ -52,7 +52,7 @@ class BigPictureScreen extends StatelessWidget{
                     i++) {
                       Ticker ticker = tickers[i];
                       StrategyResult? strategy = data[ticker];
-                      resumes.add(StrategyResume(ticker, strategy, bigPictureState));
+                      resumes.add(StrategyResume(ticker, strategy!, bigPictureState));
                     }
                     return Wrap(
                       children: resumes,

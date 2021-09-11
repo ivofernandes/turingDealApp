@@ -3,19 +3,16 @@ import 'package:flutter/rendering.dart';
 import 'package:get/get.dart';
 import 'package:turing_deal/marketData/model/strategy.dart';
 import 'package:turing_deal/marketData/model/ticker.dart';
-import 'package:turing_deal/shared/components/UIUtils.dart';
 import './strategyResumeHeader.dart';
 import './details/tickerDetails.dart';
-import '../explain/explainCagr.dart';
-import '../explain/explainDrawdown.dart';
-import '../explain/explainMAR.dart';
 import '../state/BigPictureStateProvider.dart';
+import 'strategyResumeDetails.dart';
 
 class StrategyResume extends StatelessWidget {
   static final int RESUME_WIDTH = 350;
 
   final Ticker ticker;
-  final StrategyResult? strategy;
+  final StrategyResult strategy;
   final BigPictureStateProvider bigPictureState;
 
   StrategyResume(this.ticker, this.strategy, this.bigPictureState);
@@ -44,32 +41,13 @@ class StrategyResume extends StatelessWidget {
           child: Card(
             child: Padding(
               padding: const EdgeInsets.all(10.0),
-              child: strategy!.progress > 0
+              child: strategy.progress > 0
                   ? Column(
                       children: [
                         StrategyResumeHeader(
                             this.ticker, this.strategy, this.bigPictureState),
-                        Align(
-                            alignment: Alignment.topLeft,
-                            child: GestureDetector(
-                                onTap: () => UIUtils.bottomSheet(ExplainCagr()),
-                                child: Text('CAGR: ' +
-                                    strategy!.CAGR.toStringAsFixed(2) +
-                                    '%'))),
-                        Align(
-                            alignment: Alignment.topLeft,
-                            child: GestureDetector(
-                                onTap: () => UIUtils.bottomSheet(ExplainDrawdown()),
-                                child: Text('Drawdown: ' +
-                                    strategy!.drawdown.toStringAsFixed(2) +
-                                    '%'))),
-                        Align(
-                            alignment: Alignment.topLeft,
-                            child: GestureDetector(
-                                onTap: () => UIUtils.bottomSheet(ExplainMAR()),
-                                child: Text('MAR: ' +
-                                    strategy!.MAR.toStringAsFixed(2)))),
-                        strategy!.progress < 100
+                        StrategyResumeDetails(this.strategy),
+                        strategy.progress < 100
                             ? CircularProgressIndicator()
                             : Container()
                       ],

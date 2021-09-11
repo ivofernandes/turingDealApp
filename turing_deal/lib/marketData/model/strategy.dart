@@ -11,6 +11,8 @@ class StrategyResult{
   double drawdown = 0;
   double MAR = 0;
 
+  Map<int, double> movingAverages = {};
+
   @override
   String toString() => 'CAGR: $CAGR , drawdown: $drawdown, MAR: $MAR';
 }

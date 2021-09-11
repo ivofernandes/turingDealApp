@@ -15,6 +15,8 @@ class StrategyResumeHeader extends StatelessWidget {
   Widget build(BuildContext context) {
     ThemeData theme = Theme.of(context);
 
+    String ticketDescription = getTickerDescription(ticker);
+
     return Column(children: [
       ListTile(
         leading: ConstrainedBox(
@@ -22,7 +24,7 @@ class StrategyResumeHeader extends StatelessWidget {
           child: Text(ticker.symbol,
               style: theme.textTheme.headline6),
         ),
-        title: Text(ticker.description!,
+        title: Text(ticketDescription,
             style: theme.textTheme.bodyText1),
       ),
       Divider(height: 5, color: theme.textTheme.bodyText1!.color),
@@ -46,5 +48,15 @@ class StrategyResumeHeader extends StatelessWidget {
       ),
       SizedBox(height: 10)
     ]);
+  }
+
+  String getTickerDescription(Ticker ticker) {
+    if(ticker.description != null){
+      return ticker.description!;
+    }
+    else{
+      //TODO get from TickersList
+      return '';
+    }
   }
 }
