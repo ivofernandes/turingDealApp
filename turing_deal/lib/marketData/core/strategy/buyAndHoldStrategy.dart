@@ -23,10 +23,10 @@ class BuyAndHoldStrategy {
 
       double buyPrice = double.parse(prices.first['adjclose'].toString());
       double sellPrice = double.parse(prices.last['adjclose'].toString());
-
+      strategy.endPrice = sellPrice;
       // https://www.investopedia.com/terms/c/cagr.asp
       strategy.CAGR =
-          (pow(sellPrice / buyPrice, 1 / strategy.tradingYears!) - 1) * 100;
+          (pow(sellPrice / buyPrice, 1 / strategy.tradingYears) - 1) * 100;
 
       strategy.drawdown = CalculateDrawdown.maxDrawdown(prices);
 

@@ -36,7 +36,7 @@ class StrategyResume extends StatelessWidget {
       ),
       child: Container(
         width: cardWidth,
-        child: GestureDetector(
+        child: InkWell(
           onTap: () => Get.to(TickerDetails(ticker, this.bigPictureState)),
           child: Card(
             child: Padding(

@@ -5,12 +5,13 @@ class StrategyResult{
 
   DateTime? startDate;
   DateTime? endDate;
-  double? tradingYears;
+  double tradingYears = 0;
 
   double CAGR = 0;
   double drawdown = 0;
   double MAR = 0;
 
+  double endPrice = 0;
   Map<int, double> movingAverages = {};
 
   @override

@@ -30,7 +30,7 @@ class TickerSearch extends SearchDelegate<List<Ticker>>{
 
   @override
   Widget buildResults(BuildContext context) {
-    return GestureDetector(
+    return InkWell(
         onTap: () => close(context, [Ticker(query, query)]),
         child: Text(
             query,
@@ -117,7 +117,7 @@ class TickerSearch extends SearchDelegate<List<Ticker>>{
       title: Text(s),
       trailing: MaterialButton(
         shape: RoundedRectangleBorder(borderRadius:BorderRadius.circular(10.0) ),
-        color: Theme.of(context).accentColor,
+        color: Theme.of(context).colorScheme.primary,
         child: Text('Add all'),
         onPressed: () {
           List<Ticker> result = [];

@@ -62,7 +62,6 @@ class AppTheme{
 
   static ThemeData darkTheme() => ThemeData.dark().copyWith(
     cardTheme: cardTheme,
-    accentColor: brand,
     primaryIconTheme: IconThemeData(
         color:brand
     ),
@@ -96,7 +95,6 @@ class AppTheme{
   static ThemeData lightTheme() => ThemeData.light().copyWith(
       cardTheme: cardTheme,
       primaryColor: Colors.white,
-      accentColor: brand,
       primaryIconTheme: IconThemeData(
           color:brand
       ),

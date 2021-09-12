@@ -16,7 +16,7 @@ class MenuComponent extends StatelessWidget {
           SizedBox(height: 10,),
 
           MaterialButton(
-            color: Theme.of(context).accentColor,
+            color: Theme.of(context).colorScheme.primary,
             shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(10.0)),
             elevation: 10,
