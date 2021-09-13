@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:get/get.dart';
 import 'package:turing_deal/marketData/model/strategy.dart';
-import 'package:turing_deal/marketData/model/ticker.dart';
+import 'package:turing_deal/marketData/model/stockTicker.dart';
 import './strategyResumeHeader.dart';
 import './details/tickerDetails.dart';
 import '../state/BigPictureStateProvider.dart';
@@ -11,7 +11,7 @@ import 'strategyResumeDetails.dart';
 class StrategyResume extends StatelessWidget {
   static final int RESUME_WIDTH = 350;
 
-  final Ticker ticker;
+  final StockTicker ticker;
   final StrategyResult strategy;
   final BigPictureStateProvider bigPictureState;
 

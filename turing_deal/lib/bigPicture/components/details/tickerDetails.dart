@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:turing_deal/marketData/model/ticker.dart';
+import 'package:turing_deal/marketData/model/stockTicker.dart';
+import 'package:turing_deal/marketData/static/TickerResolve.dart';
 import 'listPricesText.dart';
 import '../../state/BigPictureStateProvider.dart';
 
 class TickerDetails extends StatelessWidget {
-  Ticker ticker;
+  StockTicker ticker;
   BigPictureStateProvider bigPictureState;
 
   TickerDetails(this.ticker, this.bigPictureState);
@@ -16,11 +17,13 @@ class TickerDetails extends StatelessWidget {
         builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
           return Scaffold(
               appBar: AppBar(
-                title: Text(this.ticker.description!),
+                title: Text(TickerResolve.getTickerDescription(this.ticker))
               ),
               body: snapshot.data == null
-                  ? CircularProgressIndicator()
-                  : ListPricesText(snapshot.data as List<dynamic>?));
-        });
+                  ? Center(child: CircularProgressIndicator())
+                  : ListPricesText(snapshot.data as List<dynamic>?)
+        );
+      }
+    );
   }
 }

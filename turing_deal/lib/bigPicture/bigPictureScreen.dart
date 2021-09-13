@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:turing_deal/marketData/model/strategy.dart';
-import 'package:turing_deal/marketData/model/ticker.dart';
+import 'package:turing_deal/marketData/model/stockTicker.dart';
 import 'package:turing_deal/shared/components/checkError.dart';
 import './components/strategyResume.dart';
 import 'package:turing_deal/home/state/AppStateProvider.dart';
@@ -21,10 +21,10 @@ class BigPictureScreen extends StatelessWidget{
         child: Consumer<BigPictureStateProvider>(
             builder: (context, bigPictureState, child) {
               // Manage the transition of a search from the app state to a big picture screen state
-              List<Ticker>? searchingTickers = appState.getSearching();
+              List<StockTicker>? searchingTickers = appState.getSearching();
 
               if (searchingTickers != null && searchingTickers.isNotEmpty) {
-                Ticker ticker = searchingTickers.removeAt(0);
+                StockTicker ticker = searchingTickers.removeAt(0);
                 bigPictureState.addTicker(ticker, context).onError(
                         (error, stackTrace) {
                       CheckError.checkErrorState('Can\'t and the ticker ' + ticker.symbol, context);
@@ -32,8 +32,8 @@ class BigPictureScreen extends StatelessWidget{
               }
 
               // Return the big picture screen
-              Map<Ticker, StrategyResult> data = bigPictureState.getBigPictureData();
-              List<Ticker> tickers = data.keys.toList();
+              Map<StockTicker, StrategyResult> data = bigPictureState.getBigPictureData();
+              List<StockTicker> tickers = data.keys.toList();
 
               double width = MediaQuery.of(context).size.width;
               int columns = (width / StrategyResume.RESUME_WIDTH).floor();
@@ -50,7 +50,7 @@ class BigPictureScreen extends StatelessWidget{
                     for (int i = index * columns;
                     i < (index + 1) * columns && i < tickers.length;
                     i++) {
-                      Ticker ticker = tickers[i];
+                      StockTicker ticker = tickers[i];
                       StrategyResult? strategy = data[ticker];
                       resumes.add(StrategyResume(ticker, strategy!, bigPictureState));
                     }

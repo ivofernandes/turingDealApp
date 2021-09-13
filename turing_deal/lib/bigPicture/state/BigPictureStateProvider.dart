@@ -3,14 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:turing_deal/marketData/core/strategy/buyAndHoldStrategy.dart';
 import 'package:turing_deal/marketData/core/strategy/utils/strategyTime.dart';
 import 'package:turing_deal/marketData/model/strategy.dart';
-import 'package:turing_deal/marketData/model/ticker.dart';
+import 'package:turing_deal/marketData/model/stockTicker.dart';
 import 'package:turing_deal/marketData/static/TickersList.dart';
 import 'package:turing_deal/marketData/yahooFinance/api/yahooFinance.dart';
 import 'package:turing_deal/marketData/yahooFinance/storage/yahooFinanceDao.dart';
 import 'package:turing_deal/home/state/mixins/connectivityState.dart';
 
 class BigPictureStateProvider with ChangeNotifier, ConnectivityState {
-  Map<Ticker, StrategyResult> _bigPictureData = {};
+  Map<StockTicker, StrategyResult> _bigPictureData = {};
 
   BigPictureStateProvider(BuildContext context) {
     this.loadData(context);
@@ -41,7 +41,7 @@ class BigPictureStateProvider with ChangeNotifier, ConnectivityState {
       if (_bigPictureData.isEmpty || true) {
         symbols.forEach((symbol) async {
           print('adding ticker $symbol');
-          Ticker ticker = Ticker(symbol, TickersList.main[symbol]);
+          StockTicker ticker = StockTicker(symbol, TickersList.main[symbol]);
           await addTicker(ticker, context);
         });
         globalAnalysis();
@@ -78,7 +78,7 @@ class BigPictureStateProvider with ChangeNotifier, ConnectivityState {
     return prices;
   }
 
-  Future<void> addTicker(Ticker ticker, BuildContext context) async {
+  Future<void> addTicker(StockTicker ticker, BuildContext context) async {
     _bigPictureData[ticker] = StrategyResult();
 
     try {
@@ -99,7 +99,7 @@ class BigPictureStateProvider with ChangeNotifier, ConnectivityState {
     }
   }
 
-  Map<Ticker, StrategyResult> getBigPictureData() {
+  Map<StockTicker, StrategyResult> getBigPictureData() {
     return this._bigPictureData;
   }
 
@@ -107,7 +107,7 @@ class BigPictureStateProvider with ChangeNotifier, ConnectivityState {
     notifyListeners();
   }
 
-  removeTicker(Ticker ticker) {
+  removeTicker(StockTicker ticker) {
     this._bigPictureData.remove(ticker);
     this.refresh();
   }

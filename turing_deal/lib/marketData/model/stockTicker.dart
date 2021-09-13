@@ -1,12 +1,12 @@
 /// Represent an investment instrument
-class Ticker{
+class StockTicker{
 
   String symbol;
   String? description;
 
-  Ticker(this.symbol,this.description);
+  StockTicker(this.symbol,this.description);
 
-  bool operator ==(Object other) => other is Ticker && other.symbol == symbol;
+  bool operator ==(Object other) => other is StockTicker && other.symbol == symbol;
 
   @override
   int get hashCode => super.hashCode;

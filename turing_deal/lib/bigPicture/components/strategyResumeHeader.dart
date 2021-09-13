@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:turing_deal/marketData/model/strategy.dart';
-import 'package:turing_deal/marketData/model/ticker.dart';
+import 'package:turing_deal/marketData/model/stockTicker.dart';
+import 'package:turing_deal/marketData/static/TickerResolve.dart';
 import 'package:turing_deal/marketData/static/TickersList.dart';
 import '../state/BigPictureStateProvider.dart';
 
 class StrategyResumeHeader extends StatelessWidget {
-  final Ticker ticker;
+  final StockTicker ticker;
   final StrategyResult? strategy;
   final BigPictureStateProvider bigPictureState;
 
@@ -16,7 +17,7 @@ class StrategyResumeHeader extends StatelessWidget {
   Widget build(BuildContext context) {
     ThemeData theme = Theme.of(context);
 
-    String ticketDescription = getTickerDescription(ticker);
+    String ticketDescription = TickerResolve.getTickerDescription(ticker);
 
     return Column(children: [
       ListTile(
@@ -49,23 +50,5 @@ class StrategyResumeHeader extends StatelessWidget {
       ),
       SizedBox(height: 10)
     ]);
-  }
-
-  String getTickerDescription(Ticker ticker) {
-    if(ticker.description != null){
-      return ticker.description!;
-    }
-    else{
-      String symbol = ticker.symbol;
-
-      if(TickersList.sectors[symbol] != null){
-        return TickersList.sectors[symbol]!;
-      }
-      else if(TickersList.main[symbol] != null){
-        return TickersList.main[symbol]!;
-      }
-      //TODO get from TickersList
-      return '';
-    }
   }
 }

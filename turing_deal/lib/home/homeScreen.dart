@@ -3,7 +3,7 @@ import 'package:backdrop/scaffold.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
-import 'package:turing_deal/marketData/model/ticker.dart';
+import 'package:turing_deal/marketData/model/stockTicker.dart';
 import 'package:turing_deal/home/components/tickerSearch.dart';
 import 'package:turing_deal/home/state/AppStateProvider.dart';
 import '../bigPicture/bigPictureScreen.dart';
@@ -27,7 +27,7 @@ class HomeScreen extends StatelessWidget {
           IconButton(
               icon: Icon(Icons.search),
               onPressed: () async {
-                List<Ticker>? tickers = await showSearch(
+                List<StockTicker>? tickers = await showSearch(
                     context: context, delegate: TickerSearch());
 
                 appState.search(tickers);

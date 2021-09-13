@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:turing_deal/home/components/tickerWidget.dart';
-import 'package:turing_deal/marketData/model/ticker.dart';
+import 'package:turing_deal/marketData/model/stockTicker.dart';
 import 'package:turing_deal/marketData/static/TickersList.dart';
 
-class TickerSearch extends SearchDelegate<List<Ticker>>{
+class TickerSearch extends SearchDelegate<List<StockTicker>>{
 
   @override
   List<Widget> buildActions(BuildContext context) {
@@ -31,7 +31,7 @@ class TickerSearch extends SearchDelegate<List<Ticker>>{
   @override
   Widget buildResults(BuildContext context) {
     return InkWell(
-        onTap: () => close(context, [Ticker(query, query)]),
+        onTap: () => close(context, [StockTicker(query, query)]),
         child: Text(
             query,
             style: Theme.of(context).textTheme.headline6
@@ -120,10 +120,10 @@ class TickerSearch extends SearchDelegate<List<Ticker>>{
         color: Theme.of(context).colorScheme.primary,
         child: Text('Add all'),
         onPressed: () {
-          List<Ticker> result = [];
+          List<StockTicker> result = [];
           filteredKeys.forEach((element) {
             String symbol = element.toString();
-            result.add(Ticker(symbol, tickers[symbol]));
+            result.add(StockTicker(symbol, tickers[symbol]));
           });
           // Finish the search passing a result
           close(context, result);
