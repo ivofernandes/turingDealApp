@@ -1,6 +1,9 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:get/get.dart';
+import 'package:provider/provider.dart';
 import 'package:turing_deal/marketData/model/strategy.dart';
 import 'package:turing_deal/marketData/model/stockTicker.dart';
 import './strategyResumeHeader.dart';
@@ -13,23 +16,27 @@ class StrategyResume extends StatelessWidget {
 
   final StockTicker ticker;
   final StrategyResult strategy;
-  final BigPictureStateProvider bigPictureState;
 
-  StrategyResume(this.ticker, this.strategy, this.bigPictureState);
+  StrategyResume(this.ticker, this.strategy);
 
   @override
   Widget build(BuildContext context) {
-    double width = MediaQuery.of(context).size.width;
+    BigPictureStateProvider bigPictureState =
+      Provider.of<BigPictureStateProvider>(context, listen: false);
+
+    double width = window.physicalSize.width / window.devicePixelRatio;
     int columns = (width / RESUME_WIDTH).floor();
     double cardWidth = RESUME_WIDTH + (width % RESUME_WIDTH / columns);
+
+    if(bigPictureState.isCompactView()){
+      cardWidth /= 3;
+    }
 
     return Dismissible(
       key: GlobalKey(),
       // Provide a function that tells the app
       // what to do after an item has been swiped away.
-      onDismissed: (direction) {
-        this.bigPictureState.removeTicker(this.ticker);
-      },
+      onDismissed: (direction) => bigPictureState.removeTicker(this.ticker),
       background: Container(
         color: Colors.red,
         child: Icon(Icons.close),
@@ -37,7 +44,7 @@ class StrategyResume extends StatelessWidget {
       child: Container(
         width: cardWidth,
         child: InkWell(
-          onTap: () => Get.to(TickerDetails(ticker, this.bigPictureState)),
+          onTap: () => Get.to(TickerDetails(ticker)),
           child: Card(
             child: Padding(
               padding: const EdgeInsets.all(10.0),
@@ -45,7 +52,7 @@ class StrategyResume extends StatelessWidget {
                   ? Column(
                       children: [
                         StrategyResumeHeader(
-                            this.ticker, this.strategy, this.bigPictureState),
+                            this.ticker, this.strategy),
                         StrategyResumeDetails(this.strategy),
                         strategy.progress < 100
                             ? CircularProgressIndicator()

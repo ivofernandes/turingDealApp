@@ -25,9 +25,7 @@ class YahooFinance{
       'indicators': 'quote',
       'includeTimestamps': 'true'
     });
-    http.Response response = await http.get(uri,headers: {
-      'Access-Control-Allow-Origin': '*',
-    },).timeout(Duration(seconds: TIMEOUT),
+    http.Response response = await http.get(uri).timeout(Duration(seconds: TIMEOUT),
         onTimeout: () {
           throw TimeoutException('Timeout');
         });

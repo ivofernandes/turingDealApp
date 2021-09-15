@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:turing_deal/shared/core/colorForValue.dart';
 
 class PriceVariationChip extends StatelessWidget{
-  String prefix;
+  String? prefix;
   double value;
 
   PriceVariationChip(this.prefix, this.value);
@@ -12,8 +12,9 @@ class PriceVariationChip extends StatelessWidget{
   Widget build(BuildContext context) {
     String text = value.toStringAsFixed(2) + '%';
     return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Text(prefix + ': ' ),
+        prefix != null ? Text(prefix! + ': ' ) : Container(),
         Container(
           margin: EdgeInsets.all(2),
           padding: EdgeInsets.all(5),

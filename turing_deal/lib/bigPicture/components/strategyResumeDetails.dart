@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:turing_deal/bigPicture/explain/explainCagr.dart';
 import 'package:turing_deal/bigPicture/explain/explainDrawdown.dart';
 import 'package:turing_deal/bigPicture/explain/explainMAR.dart';
+import 'package:turing_deal/bigPicture/state/BigPictureStateProvider.dart';
 import 'package:turing_deal/marketData/model/strategy.dart';
 import 'package:turing_deal/shared/components/UIUtils.dart';
 
@@ -13,16 +15,25 @@ class StrategyResumeDetails extends StatelessWidget{
 
   @override
   Widget build(BuildContext context) {
+    BigPictureStateProvider bigPictureState =
+      Provider.of<BigPictureStateProvider>(context, listen: false);
+
     String cagrText = 'CAGR: ' + strategy.CAGR.toStringAsFixed(2) + '%';
     String drawdownText = 'Drawdown: ' + strategy.drawdown.toStringAsFixed(2) + '%';
     String marText = 'MAR: ' + strategy.MAR.toStringAsFixed(2) ;
-
 
     double price_sma20 = (strategy.endPrice / strategy.movingAverages[20]! - 1) *100;
     double sma20sma50 = (strategy.movingAverages[20]! / strategy.movingAverages[50]! - 1) *100;
     double sma50sma200 = (strategy.movingAverages[50]! / strategy.movingAverages[200]! - 1) *100;
 
-    return Row(
+    return bigPictureState.isCompactView() ? Column(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        PriceVariationChip(null, price_sma20),
+        PriceVariationChip(null, sma20sma50),
+        PriceVariationChip(null, sma50sma200)
+      ],
+    ) : Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Column(

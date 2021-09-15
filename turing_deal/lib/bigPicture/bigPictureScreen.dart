@@ -38,27 +38,39 @@ class BigPictureScreen extends StatelessWidget{
               double width = MediaQuery.of(context).size.width;
               int columns = (width / StrategyResume.RESUME_WIDTH).floor();
               columns = columns <= 0 ? 1 : columns;
+
+              if(bigPictureState.isCompactView()){
+                columns *= 3;
+              }
               int lines = (tickers.length / columns).ceil();
 
               return data.length == 0
                   ? Text('No strategies')
-                  : ListView.builder(
-                  itemCount: lines,
-                  itemBuilder: (BuildContext context, int index) {
-                    List<Widget> resumes = [];
+                  : Scaffold(
+                    body: ListView.builder(
+                    itemCount: lines,
+                    itemBuilder: (BuildContext context, int index) {
+                      List<Widget> resumes = [];
 
-                    for (int i = index * columns;
-                    i < (index + 1) * columns && i < tickers.length;
-                    i++) {
-                      StockTicker ticker = tickers[i];
-                      StrategyResult? strategy = data[ticker];
-                      resumes.add(StrategyResume(ticker, strategy!, bigPictureState));
+                      for (int i = index * columns;
+                      i < (index + 1) * columns && i < tickers.length;
+                      i++) {
+                        StockTicker ticker = tickers[i];
+                        StrategyResult? strategy = data[ticker];
+                        resumes.add(StrategyResume(ticker, strategy!));
+                      }
+                      return Wrap(
+                        children: resumes,
+                      );
                     }
-                    return Wrap(
-                      children: resumes,
-                    );
-                  }
-              );
+              ),
+                floatingActionButton: FloatingActionButton(
+                  onPressed: () => bigPictureState.toogleCompactView(),
+                  child: Icon(
+                      bigPictureState.isCompactView() ? Icons.view_agenda_rounded : Icons.view_comfortable_sharp
+                  )
+                ),
+            );
         })
     );
   }

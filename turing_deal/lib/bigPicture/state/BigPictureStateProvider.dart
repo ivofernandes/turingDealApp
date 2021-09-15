@@ -10,10 +10,20 @@ import 'package:turing_deal/marketData/yahooFinance/storage/yahooFinanceDao.dart
 import 'package:turing_deal/home/state/mixins/connectivityState.dart';
 
 class BigPictureStateProvider with ChangeNotifier, ConnectivityState {
+  bool _compactView = false;
   Map<StockTicker, StrategyResult> _bigPictureData = {};
 
   BigPictureStateProvider(BuildContext context) {
     this.loadData(context);
+  }
+
+  bool isCompactView(){
+    return _compactView;
+  }
+
+  void toogleCompactView(){
+    this._compactView = !this._compactView;
+    refresh();
   }
 
   void loadData(BuildContext context) async {
