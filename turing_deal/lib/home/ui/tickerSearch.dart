@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:turing_deal/home/components/tickerWidget.dart';
+import 'package:turing_deal/home/ui/tickerWidgetUI.dart';
 import 'package:turing_deal/marketData/model/stockTicker.dart';
 import 'package:turing_deal/marketData/static/TickersList.dart';
 

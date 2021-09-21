@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:turing_deal/shared/components/Web.dart';
+import 'package:turing_deal/shared/ui/Web.dart';
 import 'package:turing_deal/shared/environment.dart';
 
 class MenuComponent extends StatelessWidget {

@@ -1,15 +1,15 @@
+import 'package:turing_deal/marketData/model/candlePrices.dart';
 import 'package:turing_deal/marketData/model/strategy.dart';
 
 class StrategyTime{
 
   /// Add start, end date and trading years to a strategy,
   /// note that the time comes in seconds since 1970
-  static void addTimeToStrategy(List<dynamic> prices, StrategyResult strategy) {
+  static void addTimeToStrategy(List<CandlePrices> prices, StrategyResult strategy) {
     // Get the start and end date, and the total trading years
-    DateTime endDate = DateTime.fromMillisecondsSinceEpoch(prices.last['date']*1000);
-    DateTime startDate = DateTime.fromMillisecondsSinceEpoch(prices.first['date']*1000);
-    double tradingDays = (prices.last['date'] - prices.first['date']) / 60 / 60 / 24;
-
+    DateTime endDate = prices.last.date;
+    DateTime startDate = prices.first.date;
+    double tradingDays = endDate.difference(startDate).inDays.toDouble();
     double tradingYears = tradingDays / 365;
     strategy.startDate = startDate;
     strategy.endDate = endDate;
@@ -17,7 +17,8 @@ class StrategyTime{
   }
 
   /// Check if a prices data stills valid
-  static bool isUpToDate(List prices) {
+  /// This is done in json data
+  static bool isUpToDate(List<dynamic> prices) {
     DateTime now = DateTime.now();
 
     // Go to the last working day
@@ -26,7 +27,7 @@ class StrategyTime{
     }
 
     DateTime lastPrice = DateTime.fromMillisecondsSinceEpoch(prices.first['date'] * 1000);
-    
+
     Duration difference = now.difference(lastPrice);
     bool isUpToDate = difference.inHours < 12;
 

@@ -8,8 +8,8 @@ class CalculateDrawdown{
     double allTimeHigh = 0;
 
     for(int i=0 ; i<prices.length ; i++){
-      double adjhigh = prices[i]['adjhigh'];
-      double? adjlow = prices[i]['adjlow'];
+      double adjhigh = prices[i].high;
+      double? adjlow = prices[i].low;
 
       // Update drawdown
       if (adjhigh > allTimeHigh) {

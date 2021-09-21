@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:turing_deal/bigPicture/state/BigPictureStateProvider.dart';
+import 'package:turing_deal/marketData/model/candlePrices.dart';
 import 'package:turing_deal/marketData/model/stockTicker.dart';
 import 'package:turing_deal/marketData/static/TickerResolve.dart';
-import 'listPricesText.dart';
+import 'listPricesTextUI.dart';
 
 class TickerDetails extends StatelessWidget {
   StockTicker ticker;
@@ -25,7 +26,7 @@ class TickerDetails extends StatelessWidget {
               ),
               body: snapshot.data == null
                   ? Center(child: CircularProgressIndicator())
-                  : ListPricesText(snapshot.data as List<dynamic>?)
+                  : ListPricesText(snapshot.data as List<CandlePrices>)
         );
       }
     );

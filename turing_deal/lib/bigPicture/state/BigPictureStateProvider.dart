@@ -1,7 +1,9 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:turing_deal/marketData/core/strategy/buyAndHoldStrategy.dart';
-import 'package:turing_deal/marketData/core/strategy/utils/strategyTime.dart';
+import 'package:turing_deal/marketData/core/utils/cleanPrices.dart';
+import 'package:turing_deal/marketData/model/candlePrices.dart';
+import 'package:turing_deal/strategyRunner/core/buyAndHoldStrategy.dart';
+import 'package:turing_deal/strategyRunner/core/utils/strategyTime.dart';
 import 'package:turing_deal/marketData/model/strategy.dart';
 import 'package:turing_deal/marketData/model/stockTicker.dart';
 import 'package:turing_deal/marketData/static/TickersList.dart';
@@ -68,9 +70,10 @@ class BigPictureStateProvider with ChangeNotifier, ConnectivityState {
     }
   }
 
-  Future<List<dynamic>?> getTickerData(ticker) async {
+  Future<List<CandlePrices>> getTickerData(ticker) async {
     List<dynamic>? prices =
         await YahooFinanceDAO().getAllDailyData(ticker.symbol);
+    List<CandlePrices> candlePrices = [];
 
     // If have no cached historical data
     if (prices == null || prices.isEmpty || !StrategyTime.isUpToDate(prices)) {
@@ -85,20 +88,25 @@ class BigPictureStateProvider with ChangeNotifier, ConnectivityState {
             .saveDailyData(ticker.symbol, historicalData['prices']);
       }
     }
-    return prices;
+    // Clean and format the data
+    if(prices != null){
+      candlePrices = CleanPrices.clean(prices);
+    }
+
+    return candlePrices;
   }
 
   Future<void> addTicker(StockTicker ticker, BuildContext context) async {
     _bigPictureData[ticker] = StrategyResult();
 
     try {
-      List<dynamic>? prices = await getTickerData(ticker);
+      List<CandlePrices> prices = await getTickerData(ticker);
 
       _bigPictureData[ticker]!.progress = 10;
       this.refresh();
 
       StrategyResult strategy =
-          BuyAndHoldStrategy.buyAndHoldAnalysis(prices!, this);
+          BuyAndHoldStrategy.buyAndHoldAnalysis(prices);
 
       _bigPictureData[ticker] = strategy;
       this.refresh();

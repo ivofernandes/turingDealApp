@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:turing_deal/bigPicture/explain/explainCagr.dart';
-import 'package:turing_deal/bigPicture/explain/explainDrawdown.dart';
-import 'package:turing_deal/bigPicture/explain/explainMAR.dart';
+import 'package:turing_deal/bigPicture/ui/explain/explainCagrUI.dart';
+import 'package:turing_deal/bigPicture/ui/explain/explainDrawdownUI.dart';
+import 'package:turing_deal/bigPicture/ui/explain/explainMarUI.dart';
 import 'package:turing_deal/bigPicture/state/BigPictureStateProvider.dart';
 import 'package:turing_deal/marketData/model/strategy.dart';
-import 'package:turing_deal/shared/components/UIUtils.dart';
+import 'package:turing_deal/shared/ui/UIUtils.dart';
 
-import 'details/priveVariationChip.dart';
+import 'details/priveVariationChipUI.dart';
 
 class StrategyResumeDetails extends StatelessWidget{
   final StrategyResult strategy;

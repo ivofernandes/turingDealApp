@@ -1,3 +1,5 @@
+import 'dart:collection';
+
 class StrategyResult{
 
   // Percentage of strategy executed
@@ -14,6 +16,7 @@ class StrategyResult{
   double endPrice = 0;
   Map<int, double> movingAverages = {};
 
+  LinkedHashMap<String, DateTime> logs = LinkedHashMap();
   @override
   String toString() => 'CAGR: $CAGR , drawdown: $drawdown, MAR: $MAR';
 }

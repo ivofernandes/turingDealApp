@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:turing_deal/marketData/model/strategy.dart';
 import 'package:turing_deal/marketData/model/stockTicker.dart';
-import 'package:turing_deal/shared/components/checkError.dart';
-import './components/strategyResume.dart';
+import 'package:turing_deal/shared/ui/checkError.dart';
+import './ui/strategyResumeUI.dart';
 import 'package:turing_deal/home/state/AppStateProvider.dart';
 import './state/BigPictureStateProvider.dart';
 

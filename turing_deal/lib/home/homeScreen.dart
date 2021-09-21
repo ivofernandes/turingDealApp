@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:turing_deal/marketData/model/stockTicker.dart';
-import 'package:turing_deal/home/components/tickerSearch.dart';
+import 'package:turing_deal/home/ui/tickerSearch.dart';
 import 'package:turing_deal/home/state/AppStateProvider.dart';
 import '../bigPicture/bigPictureScreen.dart';
 import 'menu/menuComponent.dart';

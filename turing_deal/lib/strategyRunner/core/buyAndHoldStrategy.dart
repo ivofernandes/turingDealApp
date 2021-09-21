@@ -1,28 +1,27 @@
 import 'dart:math';
 
 import 'package:turing_deal/bigPicture/state/BigPictureStateProvider.dart';
-import 'package:turing_deal/marketData/core/strategy/calculations/calculateMovingAverages.dart';
+import 'package:turing_deal/marketData/core/utils/cleanPrices.dart';
+import 'package:turing_deal/marketData/model/candlePrices.dart';
+import 'package:turing_deal/strategyRunner/core/indicators/movingAverage.dart';
 import 'package:turing_deal/marketData/model/strategy.dart';
 
-import 'calculations/calculateDrawdown.dart';
-import 'utils/cleanPrices.dart';
+import 'utils/calculateDrawdown.dart';
 import 'utils/strategyTime.dart';
 
 class BuyAndHoldStrategy {
-  /// Simulate a buy and hold strategy
-  static StrategyResult buyAndHoldAnalysis(
-      List<dynamic> prices,
-      BigPictureStateProvider bigPictureStateProvider) {
+
+  /// Simulate a buy and hold strategy in the entire dataframe
+  static StrategyResult buyAndHoldAnalysis(List<CandlePrices> prices) {
 
     StrategyResult strategy = StrategyResult();
-
-    prices = CleanPrices.clean(prices);
+    strategy.logs['start'] = DateTime.now();
 
     if(prices.isNotEmpty) {
       StrategyTime.addTimeToStrategy(prices, strategy);
 
-      double buyPrice = double.parse(prices.first['adjclose'].toString());
-      double sellPrice = double.parse(prices.last['adjclose'].toString());
+      double buyPrice = prices.first.open; // Buy in the open of the first day
+      double sellPrice = prices.last.close; // Sell on close of the last day
       strategy.endPrice = sellPrice;
       // https://www.investopedia.com/terms/c/cagr.asp
       strategy.CAGR =
@@ -42,6 +41,7 @@ class BuyAndHoldStrategy {
       strategy.movingAverages[period] = movingAverage;
     });
 
+    strategy.logs['buyAndHoldEnded'] = DateTime.now();
     return strategy;
   }
 

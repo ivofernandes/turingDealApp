@@ -6,10 +6,10 @@ import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 import 'package:turing_deal/marketData/model/strategy.dart';
 import 'package:turing_deal/marketData/model/stockTicker.dart';
-import './strategyResumeHeader.dart';
-import './details/tickerDetails.dart';
+import './strategyResumeHeaderUI.dart';
+import './details/tickerDetailsUI.dart';
 import '../state/BigPictureStateProvider.dart';
-import 'strategyResumeDetails.dart';
+import 'strategyResumeDetailsUI.dart';
 
 class StrategyResume extends StatelessWidget {
   static final int RESUME_WIDTH = 350;

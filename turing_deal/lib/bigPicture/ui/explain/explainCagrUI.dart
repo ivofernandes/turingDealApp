@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:turing_deal/shared/components/Web.dart';
+import 'package:turing_deal/shared/ui/Web.dart';
 
-class ExplainMAR extends StatelessWidget {
+class ExplainCagr extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -13,7 +13,7 @@ class ExplainMAR extends StatelessWidget {
               height: 20,
             ),
             Text(
-              'MAR ratio',
+              'Compound Annual Growth Rate – CAGR',
               style: Theme.of(context).textTheme.headline6,
               textAlign: TextAlign.center,
             ),
@@ -21,26 +21,26 @@ class ExplainMAR extends StatelessWidget {
               height: 20,
             ),
             Text(
-              'A MAR ratio is a measurement of returns adjusted for risk that can be used to compare the performance of different assets or strategies',
+              'CAGR is the annualized percentage of return of an investment',
             ),
             SizedBox(
               height: 20,
             ),
-            Text('The MAR forumla is: MAR ='),
-            Text('CAGR / Max drawdown'),
+            Text('The CAGR forumla is: CAGR ='),
+            Text('(Starting value / Ending value) ^ (1 / number of years) - 1'),
             SizedBox(
               height: 20,
             ),
             MaterialButton(
                 color: Theme.of(context).textTheme.bodyText1!.color,
-                child: Text('More about MAR',
+                child: Text('More about CAGR',
                     style: Theme.of(context)
                         .textTheme
                         .bodyText1!
                         .copyWith(color: Theme.of(context).backgroundColor)),
                 onPressed: () {
-                  Web.openView(context,
-                      'https://www.investopedia.com/terms/m/mar-ratio.asp');
+                  Web.openView(
+                      context, 'https://www.investopedia.com/terms/c/cagr.asp');
                 })
           ],
         ),

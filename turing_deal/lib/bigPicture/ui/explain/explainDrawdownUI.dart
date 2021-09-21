@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:turing_deal/shared/components/Web.dart';
+import 'package:turing_deal/shared/ui/Web.dart';
 
-class ExplainCagr extends StatelessWidget {
+class ExplainDrawdown extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -13,7 +13,7 @@ class ExplainCagr extends StatelessWidget {
               height: 20,
             ),
             Text(
-              'Compound Annual Growth Rate – CAGR',
+              'Maximum Drawdown',
               style: Theme.of(context).textTheme.headline6,
               textAlign: TextAlign.center,
             ),
@@ -21,26 +21,21 @@ class ExplainCagr extends StatelessWidget {
               height: 20,
             ),
             Text(
-              'CAGR is the annualized percentage of return of an investment',
+              'The Max Drawdown is the biggest fall in the value of a portfolio following a strategy',
             ),
-            SizedBox(
-              height: 20,
-            ),
-            Text('The CAGR forumla is: CAGR ='),
-            Text('(Starting value / Ending value) ^ (1 / number of years) - 1'),
             SizedBox(
               height: 20,
             ),
             MaterialButton(
                 color: Theme.of(context).textTheme.bodyText1!.color,
-                child: Text('More about CAGR',
+                child: Text('More about Drawdown',
                     style: Theme.of(context)
                         .textTheme
                         .bodyText1!
                         .copyWith(color: Theme.of(context).backgroundColor)),
                 onPressed: () {
-                  Web.openView(
-                      context, 'https://www.investopedia.com/terms/c/cagr.asp');
+                  Web.openView(context,
+                      'https://www.investopedia.com/terms/m/maximum-drawdown-mdd.asp');
                 })
           ],
         ),
