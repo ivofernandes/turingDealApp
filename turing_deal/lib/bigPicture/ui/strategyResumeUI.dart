@@ -7,7 +7,7 @@ import 'package:provider/provider.dart';
 import 'package:turing_deal/marketData/model/strategy.dart';
 import 'package:turing_deal/marketData/model/stockTicker.dart';
 import './strategyResumeHeaderUI.dart';
-import './details/tickerDetailsUI.dart';
+import '../../ticker/tickerScreen.dart';
 import '../state/BigPictureStateProvider.dart';
 import 'strategyResumeDetailsUI.dart';
 
@@ -44,7 +44,7 @@ class StrategyResume extends StatelessWidget {
       child: Container(
         width: cardWidth,
         child: InkWell(
-          onTap: () => Get.to(TickerDetails(ticker)),
+          onTap: () => Get.to(TickerScreen(ticker)),
           child: Card(
             child: Padding(
               padding: const EdgeInsets.all(10.0),

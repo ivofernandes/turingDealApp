@@ -16,6 +16,5 @@ void main() {
     await tester.pumpWidget(TuringDealApp());
 
     await tester.pump();
-
   });
 }

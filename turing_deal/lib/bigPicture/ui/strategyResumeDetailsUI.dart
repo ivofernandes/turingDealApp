@@ -6,8 +6,8 @@ import 'package:turing_deal/bigPicture/ui/explain/explainMarUI.dart';
 import 'package:turing_deal/bigPicture/state/BigPictureStateProvider.dart';
 import 'package:turing_deal/marketData/model/strategy.dart';
 import 'package:turing_deal/shared/ui/UIUtils.dart';
+import 'package:turing_deal/ticker/details/priveVariationChipUI.dart';
 
-import 'details/priveVariationChipUI.dart';
 
 class StrategyResumeDetails extends StatelessWidget{
   final StrategyResult strategy;

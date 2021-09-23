@@ -41,6 +41,7 @@ dependencies:
   url_launcher: ^6.0.9
   get: ^4.3.8
   connectivity_plus: ^1.1.0
+  interactive_chart: ^0.2.1
 dev_dependencies:
   flutter_test:
     sdk: flutter

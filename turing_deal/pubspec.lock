@@ -212,6 +212,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "3.0.2"
+  interactive_chart:
+    dependency: "direct main"
+    description:
+      name: interactive_chart
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.2.1"
   intl:
     dependency: "direct main"
     description:
