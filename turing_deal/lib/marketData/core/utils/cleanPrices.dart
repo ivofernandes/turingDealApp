@@ -1,12 +1,12 @@
-import 'package:turing_deal/marketData/model/candlePrices.dart';
+import 'package:turing_deal/marketData/model/candlePrice.dart';
 
 class CleanPrices{
 
   /// Reverse the list from the first date to the end
   /// and calculate ajusted prices
-  static List<CandlePrices> clean(List<dynamic> prices) {
+  static List<CandlePrice> clean(List<dynamic> prices) {
 
-    List<CandlePrices> cleanedPrices = [];
+    List<CandlePrice> cleanedPrices = [];
 
     for(int i=prices.length-1 ; i>0 ; i--){
       if(prices[i].keys.contains('type')
@@ -22,7 +22,7 @@ class CleanPrices{
       // Get date values
       double proportion = prices[i]['adjclose'] / prices[i]['close'];
       cleanedPrices.add(
-        CandlePrices(
+        CandlePrice(
           date: DateTime.fromMillisecondsSinceEpoch(prices[i]['date']*1000),
           volume: prices[i]['volume'].toDouble(),
           open: prices[i]['open'].toDouble() * proportion,

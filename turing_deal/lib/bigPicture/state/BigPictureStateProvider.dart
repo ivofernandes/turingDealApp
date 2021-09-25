@@ -1,10 +1,10 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:turing_deal/marketData/core/utils/cleanPrices.dart';
-import 'package:turing_deal/marketData/model/candlePrices.dart';
-import 'package:turing_deal/strategyRunner/core/buyAndHoldStrategy.dart';
-import 'package:turing_deal/strategyRunner/core/utils/strategyTime.dart';
-import 'package:turing_deal/marketData/model/strategy.dart';
+import 'package:turing_deal/marketData/model/candlePrice.dart';
+import 'package:turing_deal/strategyEngine/core/buyAndHoldStrategy.dart';
+import 'package:turing_deal/strategyEngine/core/utils/strategyTime.dart';
+import 'package:turing_deal/strategyEngine/model/strategy/buyAndHoldStrategyResult.dart';
 import 'package:turing_deal/marketData/model/stockTicker.dart';
 import 'package:turing_deal/marketData/static/TickersList.dart';
 import 'package:turing_deal/marketData/yahooFinance/api/yahooFinance.dart';
@@ -13,7 +13,7 @@ import 'package:turing_deal/home/state/mixins/connectivityState.dart';
 
 class BigPictureStateProvider with ChangeNotifier, ConnectivityState {
   bool _compactView = false;
-  Map<StockTicker, StrategyResult> _bigPictureData = {};
+  Map<StockTicker, BuyAndHoldStrategyResult> _bigPictureData = {};
 
   BigPictureStateProvider(BuildContext context) {
     this.loadData(context);
@@ -70,10 +70,10 @@ class BigPictureStateProvider with ChangeNotifier, ConnectivityState {
     }
   }
 
-  Future<List<CandlePrices>> getTickerData(ticker) async {
+  Future<List<CandlePrice>> getTickerData(ticker) async {
     List<dynamic>? prices =
         await YahooFinanceDAO().getAllDailyData(ticker.symbol);
-    List<CandlePrices> candlePrices = [];
+    List<CandlePrice> candlePrices = [];
 
     // If have no cached historical data
     if (prices == null || prices.isEmpty || !StrategyTime.isUpToDate(prices)) {
@@ -97,15 +97,15 @@ class BigPictureStateProvider with ChangeNotifier, ConnectivityState {
   }
 
   Future<void> addTicker(StockTicker ticker, BuildContext context) async {
-    _bigPictureData[ticker] = StrategyResult();
+    _bigPictureData[ticker] = BuyAndHoldStrategyResult();
 
     try {
-      List<CandlePrices> prices = await getTickerData(ticker);
+      List<CandlePrice> prices = await getTickerData(ticker);
 
       _bigPictureData[ticker]!.progress = 10;
       this.refresh();
 
-      StrategyResult strategy =
+      BuyAndHoldStrategyResult strategy =
           BuyAndHoldStrategy.buyAndHoldAnalysis(prices);
 
       _bigPictureData[ticker] = strategy;
@@ -117,7 +117,7 @@ class BigPictureStateProvider with ChangeNotifier, ConnectivityState {
     }
   }
 
-  Map<StockTicker, StrategyResult> getBigPictureData() {
+  Map<StockTicker, BuyAndHoldStrategyResult> getBigPictureData() {
     return this._bigPictureData;
   }
 

@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
-import 'package:turing_deal/marketData/model/strategy.dart';
+import 'package:turing_deal/strategyEngine/model/strategy/buyAndHoldStrategyResult.dart';
 import 'package:turing_deal/marketData/model/stockTicker.dart';
 import './strategyResumeHeaderUI.dart';
 import '../../ticker/tickerScreen.dart';
@@ -15,7 +15,7 @@ class StrategyResume extends StatelessWidget {
   static final int RESUME_WIDTH = 350;
 
   final StockTicker ticker;
-  final StrategyResult strategy;
+  final BuyAndHoldStrategyResult strategy;
 
   StrategyResume(this.ticker, this.strategy);
 

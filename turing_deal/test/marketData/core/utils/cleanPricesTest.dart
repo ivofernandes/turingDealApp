@@ -9,7 +9,7 @@ import 'dart:convert';
 import 'dart:io';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:turing_deal/marketData/core/utils/cleanPrices.dart';
-import 'package:turing_deal/marketData/model/candlePrices.dart';
+import 'package:turing_deal/marketData/model/candlePrice.dart';
 
 void main() {
   test('Test clean prices', () async {
@@ -18,8 +18,16 @@ void main() {
     String content = await File(path).readAsString();
     List<dynamic> jsonObject = json.decode(content);
 
-    List<CandlePrices> candlePrices = CleanPrices.clean(jsonObject);
+    List<CandlePrice> candlePrices = CleanPrices.clean(jsonObject);
 
     assert(candlePrices.isNotEmpty);
+
+    CandlePrice lastCandle = candlePrices.last;
+    assert(lastCandle.volume > 0);
+    assert(lastCandle.close > 0);
+    assert(lastCandle.high > 0);
+    assert(lastCandle.low > 0);
+    assert(lastCandle.open > 0);
+    assert(lastCandle.high >= lastCandle.low);
   });
 }

@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:turing_deal/marketData/model/candlePrices.dart';
+import 'package:turing_deal/marketData/model/candlePrice.dart';
 
 class ListPricesText extends StatelessWidget {
-  final List<CandlePrices> data;
+  final List<CandlePrice> data;
 
   const ListPricesText(this.data);
 
   @override
   Widget build(BuildContext context) {
+
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: ListView.builder(

@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:turing_deal/marketData/model/strategy.dart';
+import 'package:turing_deal/strategyEngine/model/strategy/buyAndHoldStrategyResult.dart';
 import 'package:turing_deal/marketData/model/stockTicker.dart';
 import 'package:turing_deal/shared/ui/checkError.dart';
 import './ui/strategyResumeUI.dart';
@@ -30,7 +30,7 @@ class BigPictureScreen extends StatelessWidget{
               }
 
               // Return the big picture screen
-              Map<StockTicker, StrategyResult> data = bigPictureState.getBigPictureData();
+              Map<StockTicker, BuyAndHoldStrategyResult> data = bigPictureState.getBigPictureData();
               List<StockTicker> tickers = data.keys.toList();
 
               double width = MediaQuery.of(context).size.width;
@@ -54,7 +54,7 @@ class BigPictureScreen extends StatelessWidget{
                       i < (index + 1) * columns && i < tickers.length;
                       i++) {
                         StockTicker ticker = tickers[i];
-                        StrategyResult? strategy = data[ticker];
+                        BuyAndHoldStrategyResult? strategy = data[ticker];
                         resumes.add(StrategyResume(ticker, strategy!));
                       }
                       return Wrap(

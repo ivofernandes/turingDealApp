@@ -1,4 +1,4 @@
-class CandlePrices{
+class CandlePrice{
   final DateTime date;
   final double volume;
 
@@ -7,7 +7,9 @@ class CandlePrices{
   final double high;
   final double low;
 
-  const CandlePrices({
+  final Map<String, double> indicators = const {};
+
+  const CandlePrice({
     required this.date,
     required this.volume,
 
