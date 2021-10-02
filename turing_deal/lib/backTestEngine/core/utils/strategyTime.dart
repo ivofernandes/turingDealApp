@@ -1,10 +1,10 @@
 import 'package:turing_deal/marketData/model/candlePrice.dart';
-import 'package:turing_deal/strategyEngine/model/strategy/baseStrategyResult.dart';
-import 'package:turing_deal/strategyEngine/model/strategy/buyAndHoldStrategyResult.dart';
+import 'package:turing_deal/backTestEngine/model/strategyResult/baseStrategyResult.dart';
+import 'package:turing_deal/backTestEngine/model/strategyResult/buyAndHoldStrategyResult.dart';
 
 class StrategyTime{
 
-  /// Add start, end date and trading years to a strategy,
+  /// Add start, end date and trading years to a strategyResult,
   /// note that the time comes in seconds since 1970
   static void addTimeToStrategy(List<CandlePrice> prices, BaseStrategyResult strategy) {
     // Get the start and end date, and the total trading years

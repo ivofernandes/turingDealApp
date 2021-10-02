@@ -8,11 +8,15 @@
 import 'dart:convert';
 import 'dart:io';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:turing_deal/marketData/core/utils/calculateIndicators.dart';
 import 'package:turing_deal/marketData/core/utils/cleanPrices.dart';
 import 'package:turing_deal/marketData/model/candlePrice.dart';
 
 void main() {
-  test('Test clean prices', () async {
+
+  test('Test calculate indicators', () async {
+
+    print(DateTime.now().toString() + ' > getting an sp500 dataframe');
     // Get static data from assets
     String path = 'test/testData/yahooFinance/^GSPC.json';
     String content = await File(path).readAsString();
@@ -20,14 +24,19 @@ void main() {
 
     List<CandlePrice> candlePrices = CleanPrices.clean(jsonObject);
 
+    print(DateTime.now().toString() + ' > calculating indicators');
     assert(candlePrices.isNotEmpty);
 
-    CandlePrice lastCandle = candlePrices.last;
-    assert(lastCandle.volume > 0);
-    assert(lastCandle.close > 0);
-    assert(lastCandle.high > 0);
-    assert(lastCandle.low > 0);
-    assert(lastCandle.open > 0);
-    assert(lastCandle.high >= lastCandle.low);
+    // TODO Check if it can deal with invalid data,
+    //  will need to raise an exception so the user can receive and UI indicator that something is wrong
+    //
+    // CalculateIndicators.calculateIndicators(candlePrices, ['invalid_indicator', 'strangeStuff']);
+
+    // Check if with data that is okay can perform a calculation
+    CalculateIndicators.calculateIndicators(candlePrices, ['SMA_50','SMA_20']);
+
+    assert(candlePrices[100].indicators.isNotEmpty);
+
+    print(DateTime.now().toString() + ' > calculated indicators');
   });
 }

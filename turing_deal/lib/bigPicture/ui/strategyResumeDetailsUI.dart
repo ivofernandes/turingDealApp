@@ -4,7 +4,7 @@ import 'package:turing_deal/bigPicture/ui/explain/explainCagrUI.dart';
 import 'package:turing_deal/bigPicture/ui/explain/explainDrawdownUI.dart';
 import 'package:turing_deal/bigPicture/ui/explain/explainMarUI.dart';
 import 'package:turing_deal/bigPicture/state/BigPictureStateProvider.dart';
-import 'package:turing_deal/strategyEngine/model/strategy/buyAndHoldStrategyResult.dart';
+import 'package:turing_deal/backTestEngine/model/strategyResult/buyAndHoldStrategyResult.dart';
 import 'package:turing_deal/shared/ui/UIUtils.dart';
 import 'package:turing_deal/ticker/details/priveVariationChipUI.dart';
 

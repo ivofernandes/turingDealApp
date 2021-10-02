@@ -10,11 +10,11 @@ import 'package:flutter_test/flutter_test.dart';
 
 import 'package:turing_deal/main.dart';
 import 'package:turing_deal/marketData/model/candlePrice.dart';
-import 'package:turing_deal/strategyEngine/model/strategy/buyAndHoldStrategyResult.dart';
-import 'package:turing_deal/strategyEngine/core/buyAndHoldStrategy.dart';
+import 'package:turing_deal/backTestEngine/model/strategyResult/buyAndHoldStrategyResult.dart';
+import 'package:turing_deal/backTestEngine/core/buyAndHoldStrategy.dart';
 
 void main() {
-  test('Test buy and hold strategy', () async {
+  test('Test buy and hold strategyResult', () async {
     List<CandlePrice> prices = [
       CandlePrice(date: DateTime(2020, 1, 1), volume: 1, open: 1, close: 1, high: 1, low: 1),
       CandlePrice(date: DateTime(2020, 3, 1), volume: 1, open: 1, close: 1, high: 1, low: 0.5),

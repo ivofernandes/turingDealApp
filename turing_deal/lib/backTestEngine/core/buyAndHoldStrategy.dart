@@ -1,16 +1,16 @@
 import 'dart:math';
 
 import 'package:turing_deal/bigPicture/state/BigPictureStateProvider.dart';
+import 'package:turing_deal/marketData/core/indicators/SMA.dart';
 import 'package:turing_deal/marketData/core/utils/cleanPrices.dart';
 import 'package:turing_deal/marketData/model/candlePrice.dart';
-import 'package:turing_deal/strategyEngine/core/indicators/movingAverage.dart';
-import 'package:turing_deal/strategyEngine/model/strategy/baseStrategyResult.dart';
-import 'package:turing_deal/strategyEngine/model/strategy/buyAndHoldStrategyResult.dart';
+import 'package:turing_deal/backTestEngine/model/strategyResult/baseStrategyResult.dart';
+import 'package:turing_deal/backTestEngine/model/strategyResult/buyAndHoldStrategyResult.dart';
 import 'utils/calculateDrawdown.dart';
 
 class BuyAndHoldStrategy {
 
-  /// Simulate a buy and hold strategy in the entire dataframe
+  /// Simulate a buy and hold strategyResult in the entire dataframe
   static BuyAndHoldStrategyResult buyAndHoldAnalysis(List<CandlePrice> prices) {
     BuyAndHoldStrategyResult strategy = BaseStrategyResult.createBuyAndHoldStrategyResult(prices);
 
@@ -30,16 +30,16 @@ class BuyAndHoldStrategy {
     return strategy;
   }
 
-  /// Add current price indicators to a strategy: SMA
+  /// Add current price indicators to a strategyResult: SMA
   static void addIndicators(List<CandlePrice> prices, BuyAndHoldStrategyResult strategy) {
     List<int> periods = [20, 50, 200];
     periods.forEach((period) {
-      double movingAverage = CalculateMovingAverage.atEnd(prices, period);
+      double movingAverage = SMA.atEnd(prices, period);
       strategy.movingAverages[period] = movingAverage;
     });
   }
 
-  /// Calculate CAGR drawdown and MAR of an strategy
+  /// Calculate CAGR drawdown and MAR of an strategyResult
   static void calculateStrategyMetrics(List<CandlePrice> prices, double buyPrice,
       double sellPrice, BuyAndHoldStrategyResult strategy) {
 

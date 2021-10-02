@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:turing_deal/strategyEngine/model/strategy/buyAndHoldStrategyResult.dart';
+import 'package:turing_deal/backTestEngine/model/strategyResult/buyAndHoldStrategyResult.dart';
 import 'package:turing_deal/marketData/model/stockTicker.dart';
 import 'package:turing_deal/shared/ui/checkError.dart';
 import './ui/strategyResumeUI.dart';

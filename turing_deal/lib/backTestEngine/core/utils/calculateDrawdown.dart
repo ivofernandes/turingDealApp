@@ -3,7 +3,7 @@ import 'dart:math';
 import 'package:turing_deal/marketData/model/candlePrice.dart';
 
 class CalculateDrawdown{
-  /// Calculate the drawdown of the buy and hold strategy
+  /// Calculate the drawdown of the buy and hold strategyResult
   static double maxDrawdown(List<CandlePrice> prices) {
     double maxDrawdown = 0;
     double currentDrawdown = 0;

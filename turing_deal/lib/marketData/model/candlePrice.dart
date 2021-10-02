@@ -7,9 +7,9 @@ class CandlePrice{
   final double high;
   final double low;
 
-  final Map<String, double> indicators = const {};
+  Map<String, double> indicators = {};
 
-  const CandlePrice({
+  CandlePrice({
     required this.date,
     required this.volume,
 
@@ -18,4 +18,9 @@ class CandlePrice{
     required this.high,
     required this.low,
   });
+
+  @override
+  String toString() {
+    return '$date>$close';
+  }
 }

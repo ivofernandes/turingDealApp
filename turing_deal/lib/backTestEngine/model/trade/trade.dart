@@ -1,3 +1,5 @@
+import 'package:turing_deal/backTestEngine/model/shared/backTestEnums.dart';
+
 /// Represents a trade
 class Trade {
   // If the trade is long or short
@@ -9,13 +11,6 @@ class Trade {
   // Price of the asset at the opening of the trade
   final double openPrice;
 
-
-
-  /*
-  'stopLossLimit': stopLossLimit,
-  'drawdown': 0,
-  'maxResult':0
-*/
   Trade({
     required this.tradeType,
     required this.openDate,
@@ -29,6 +24,12 @@ class TradeOpen extends Trade{
   double currentMaxDrawdown = 0;
 
   // current result
+
+
+  /*
+  'stopLossLimit': stopLossLimit,
+  'maxResult':0
+*/
 
   TradeOpen({
     required Trade trade
@@ -61,5 +62,3 @@ class TradeHistory extends Trade{
     openPrice: trade.openPrice
   );
 }
-
-enum TradeType{LONG, SHORT}

@@ -19,11 +19,11 @@ class ListPricesText extends StatelessWidget {
             if (index == 0) {
               return Row(
                 children: [
-                  Expanded(child: Text('Date')),
-                  Expanded(child: Text('Open')),
-                  Expanded(child: Text('High')),
-                  Expanded(child: Text('Low')),
-                  Expanded(child: Text('Close')),
+                  Expanded(child: Text('Date', textAlign: TextAlign.center)),
+                  Expanded(child: Text('Open', textAlign: TextAlign.center)),
+                  Expanded(child: Text('High', textAlign: TextAlign.center)),
+                  Expanded(child: Text('Low', textAlign: TextAlign.center)),
+                  Expanded(child: Text('Close', textAlign: TextAlign.center)),
                 ],
               );
             } else {
@@ -53,9 +53,11 @@ class TickerDetailsCell extends StatelessWidget {
     return Expanded(
         child: Padding(
           padding: const EdgeInsets.all(8.0),
-          child: Text(text!,
-              style:
-              Theme.of(context).textTheme.bodyText1!.copyWith(fontSize: 9)),
+          child: FittedBox(
+            child: SelectableText(text!,
+                style:
+                Theme.of(context).textTheme.bodyText1!.copyWith(fontSize: 9)),
+          ),
         ));
   }
 }

@@ -41,6 +41,7 @@ class _TickerScreenState extends State<TickerScreen> {
                     : Container(
                       padding: const EdgeInsets.all(20.0),
                       child: PageView(
+                        physics: NeverScrollableScrollPhysics(),
                         controller: _pageController,
                         onPageChanged: _onItemSelected,
                         children: [
@@ -73,7 +74,7 @@ class _TickerScreenState extends State<TickerScreen> {
     setState(() {
       _pageController.animateToPage(
           index,
-          duration: Duration(milliseconds: 200),
+          duration: const Duration(milliseconds: 200),
           curve: Curves.easeOut);
       _selectedIndex = index;
     });

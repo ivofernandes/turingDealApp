@@ -1,12 +1,12 @@
 import 'dart:collection';
 
 import 'package:turing_deal/marketData/model/candlePrice.dart';
-import 'package:turing_deal/strategyEngine/core/buyAndHoldStrategy.dart';
-import 'package:turing_deal/strategyEngine/core/utils/strategyTime.dart';
-import 'package:turing_deal/strategyEngine/model/strategy/buyAndHoldStrategyResult.dart';
+import 'package:turing_deal/backTestEngine/core/utils/strategyTime.dart';
+import 'package:turing_deal/backTestEngine/model/strategyResult/buyAndHoldStrategyResult.dart';
+import 'package:turing_deal/backTestEngine/model/strategyResult/strategyResult.dart';
 
 class BaseStrategyResult{
-  // Percentage of strategy executed
+  // Percentage of strategyResult executed
   int progress = 0;
 
   DateTime? startDate;
@@ -24,6 +24,13 @@ class BaseStrategyResult{
 
   static BuyAndHoldStrategyResult createBuyAndHoldStrategyResult(List<CandlePrice> prices){
     BuyAndHoldStrategyResult strategy = BuyAndHoldStrategyResult();
+    addBaseDataToStrategy(strategy, prices);
+
+    return strategy;
+  }
+
+  static StrategyResult createStrategyResult(List<CandlePrice> prices) {
+    StrategyResult strategy = StrategyResult();
     addBaseDataToStrategy(strategy, prices);
 
     return strategy;

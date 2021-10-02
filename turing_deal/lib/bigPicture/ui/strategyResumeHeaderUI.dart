@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:turing_deal/bigPicture/state/BigPictureStateProvider.dart';
-import 'package:turing_deal/strategyEngine/model/strategy/buyAndHoldStrategyResult.dart';
+import 'package:turing_deal/backTestEngine/model/strategyResult/buyAndHoldStrategyResult.dart';
 import 'package:turing_deal/marketData/model/stockTicker.dart';
 import 'package:turing_deal/marketData/static/TickerResolve.dart';
 
