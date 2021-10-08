@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 import 'package:provider/single_child_widget.dart';
-import 'package:turing_deal/shared/appTheme.dart';
-import 'package:turing_deal/home/state/AppStateProvider.dart';
-import 'package:turing_deal/home/homeScreen.dart';
+import 'package:turing_deal/shared/app_theme.dart';
+import 'package:turing_deal/home/state/app_state_provider.dart';
+import 'package:turing_deal/home/home_screen.dart';
 
-import 'bigPicture/state/BigPictureStateProvider.dart';
+import 'bigPicture/state/big_picture_state_provider.dart';
 
 void main() {
   runApp(TuringDealApp());

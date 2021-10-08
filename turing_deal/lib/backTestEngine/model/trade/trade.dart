@@ -1,4 +1,4 @@
-import 'package:turing_deal/backTestEngine/model/shared/backTestEnums.dart';
+import 'package:turing_deal/backTestEngine/model/shared/back_test_enums.dart';
 
 /// Represents a trade
 class Trade {
