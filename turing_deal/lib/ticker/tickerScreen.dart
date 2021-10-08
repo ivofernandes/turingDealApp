@@ -5,6 +5,7 @@ import 'package:turing_deal/bigPicture/state/BigPictureStateProvider.dart';
 import 'package:turing_deal/marketData/model/candlePrice.dart';
 import 'package:turing_deal/marketData/model/stockTicker.dart';
 import 'package:turing_deal/marketData/static/TickerResolve.dart';
+import 'package:turing_deal/marketData/yahooFinance/services/yahooFinanceService.dart';
 import 'package:turing_deal/ticker/chart/turingDealChart.dart';
 
 import 'details/listPricesTextUI.dart';
@@ -29,7 +30,7 @@ class _TickerScreenState extends State<TickerScreen> {
       Provider.of<BigPictureStateProvider>(context, listen: false);
 
     return FutureBuilder<dynamic>(
-        future: bigPictureState.getTickerData(this.widget.ticker),
+        future: YahooFinanceService.getTickerData(this.widget.ticker),
         builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
           return SafeArea(
             child: Scaffold(

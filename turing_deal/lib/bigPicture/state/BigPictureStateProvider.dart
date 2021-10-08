@@ -8,6 +8,7 @@ import 'package:turing_deal/backTestEngine/model/strategyResult/buyAndHoldStrate
 import 'package:turing_deal/marketData/model/stockTicker.dart';
 import 'package:turing_deal/marketData/static/TickersList.dart';
 import 'package:turing_deal/marketData/yahooFinance/api/yahooFinance.dart';
+import 'package:turing_deal/marketData/yahooFinance/services/yahooFinanceService.dart';
 import 'package:turing_deal/marketData/yahooFinance/storage/yahooFinanceDao.dart';
 import 'package:turing_deal/home/state/mixins/connectivityState.dart';
 
@@ -70,37 +71,11 @@ class BigPictureStateProvider with ChangeNotifier, ConnectivityState {
     }
   }
 
-  Future<List<CandlePrice>> getTickerData(ticker) async {
-    List<dynamic>? prices =
-        await YahooFinanceDAO().getAllDailyData(ticker.symbol);
-    List<CandlePrice> candlePrices = [];
-
-    // If have no cached historical data
-    if (prices == null || prices.isEmpty || !StrategyTime.isUpToDate(prices)) {
-      // Get data from yahoo finance
-      Map<String, dynamic>? historicalData =
-          await (YahooFinance.getAllDailyData(ticker.symbol));
-
-      if (historicalData != null && historicalData['prices'] != null) {
-        prices = historicalData['prices'];
-        // Cache data locally
-        YahooFinanceDAO()
-            .saveDailyData(ticker.symbol, historicalData['prices']);
-      }
-    }
-    // Clean and format the data
-    if(prices != null){
-      candlePrices = CleanPrices.clean(prices);
-    }
-
-    return candlePrices;
-  }
-
   Future<void> addTicker(StockTicker ticker, BuildContext context) async {
     _bigPictureData[ticker] = BuyAndHoldStrategyResult();
 
     try {
-      List<CandlePrice> prices = await getTickerData(ticker);
+      List<CandlePrice> prices = await YahooFinanceService.getTickerData(ticker);
 
       _bigPictureData[ticker]!.progress = 10;
       this.refresh();

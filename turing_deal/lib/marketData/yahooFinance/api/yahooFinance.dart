@@ -14,12 +14,15 @@ class YahooFinance{
   /// 2 - Find the delimiters of the begging and end of the json
   /// 3 - Get item ["context"]["dispatcher"]["stores"]["HistoricalPriceStore"]
   static Future<Map<String,dynamic>?> getAllDailyData(String ticker) async{
+    return getDailyDataFrom(ticker, -1577908800);
+  }
 
+  static Future<Map<String,dynamic>?>  getDailyDataFrom(String ticker, int startTimestamp) async{
     ticker = ticker.toUpperCase();
     String now = DateTime.now().millisecondsSinceEpoch.toString();
 
     Uri uri = Uri.https('finance.yahoo.com', 'quote/' + ticker +'/history', {
-      'period1': '-1577908800',
+      'period1': startTimestamp.toString(),
       'period2': now,
       'interval': '1d',
       'indicators': 'quote',
