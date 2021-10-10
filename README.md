@@ -9,7 +9,7 @@ https://www.interactivebrokers.com/referral/ivo376
 
 ## Screenshots
 
-![price dataframe](https://github.com/ivofernandes/turingDealApp/blob/main/turing_deal/screenshots/bigPicture.jpeg?raw=true)
+![price dataframe](https://github.com/ivofernandes/turingDealApp/blob/main/screenshots/bigPicture.jpeg?raw=true)
 
 ## Getting Started
 

@@ -6,9 +6,9 @@ import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 import 'package:turing_deal/backTestEngine/model/strategyResult/buy_and_hold_strategyResult.dart';
 import 'package:turing_deal/marketData/model/stock_picker.dart';
-import './strategy_resume_header_ui.dart';
-import '../../ticker/ticker_screen.dart';
-import '../state/big_picture_state_provider.dart';
+import 'strategy_resume_header_ui.dart';
+import '../../../ticker/ticker_screen.dart';
+import '../../state/big_picture_state_provider.dart';
 import 'strategy_resume_details_ui.dart';
 
 class StrategyResume extends StatelessWidget {
