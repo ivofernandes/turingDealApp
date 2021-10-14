@@ -8,7 +8,7 @@ class CleanPrices{
 
     List<CandlePrice> cleanedPrices = [];
 
-    for(int i=prices.length-1 ; i>0 ; i--){
+    for(int i=prices.length-1 ; i>=0 ; i--){
       if(prices[i].keys.contains('type')
           && (prices[i]['type'] == 'DIVIDEND' || prices[i]['type'] == 'SPLIT')){
         // Ignore dividends in the middle, all the juice is on adjclose

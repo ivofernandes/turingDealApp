@@ -11,7 +11,10 @@ class MenuComponent extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
           SizedBox(height: 10,),
-          Text('The objective of this project is to help people to make decisions based on past measurable data instead of pseudo-science beliefs that fill the stock market, specially in this bubble environment.'),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Text('The objective of this project is to help people to make decisions based on past measurable data instead of pseudo-science beliefs that fill the stock market, specially in this bubble environment.'),
+          ),
 
           SizedBox(height: 10,),
 

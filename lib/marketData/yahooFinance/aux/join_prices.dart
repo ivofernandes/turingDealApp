@@ -10,11 +10,13 @@ class JoinPrices{
     while(oldPricesList[indexToStart]['date'] != oldestDateInTheRecentList && indexToStart < oldPricesList.length){
       indexToStart++;
     }
+    print('reference date: ' + oldPricesList[indexToStart]['date'].toString());
 
     // Check if there is a need to apply a porportion adjustment int ehe adjusted close
     double porportion = recentPricesList.last['adjclose'] / oldPricesList[indexToStart]['adjclose'];
 
     if(porportion != 1){
+      print('Found porportion != 1: ' + recentPricesList.last['date'].toString());
       for(int i=0 ; i<oldPricesList.length ; i++){
         oldPricesList[i]['adjclose'] *= porportion;
       }
