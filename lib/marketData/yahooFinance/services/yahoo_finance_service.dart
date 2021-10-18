@@ -41,11 +41,12 @@ class YahooFinanceService {
 
   static Future<List<dynamic>> refreshData(
       List<dynamic> prices, StockTicker ticker) async {
+
     if (prices.length > 1) {
       // Get one of the lasts dates in the cache, this is not the more recent,
       // because could have the current price of the request in the close,
       // instead of the real close price
-      int lastDate = prices[1]['date'];
+      int lastDate = prices[2]['date'];
 
       // Get remaing data from yahoo finance
       Map<String, dynamic>? historicalData =
@@ -75,7 +76,8 @@ class YahooFinanceService {
     if (historicalData != null && historicalData['prices'] != null) {
       List<dynamic> prices = historicalData['prices'];
       // Cache data locally
-      YahooFinanceDAO().saveDailyData(ticker.symbol, historicalData['prices']);
+      prices = prices.sublist(6); //TODO delete this line
+      YahooFinanceDAO().saveDailyData(ticker.symbol, prices);
       return prices;
     }
 

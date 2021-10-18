@@ -1,5 +1,6 @@
 
 import 'package:flutter/material.dart';
+import 'package:turing_deal/bigPicture/ui/resume/strategy_resume_ui.dart';
 import 'package:turing_deal/shared/core/color_for_value.dart';
 
 class PriceVariationChip extends StatelessWidget{
@@ -11,20 +12,36 @@ class PriceVariationChip extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
     String text = value.toStringAsFixed(2) + '%';
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        prefix != null ? Text(prefix! + ': ' ) : Container(),
-        Container(
-          margin: EdgeInsets.all(2),
-          padding: EdgeInsets.all(5),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.all(Radius.circular(10.0)),
-            color: ColorForValue().getColorForPriceVariation(value),
+
+    MediaQuery.of(context).size.width;
+
+    return SizedBox(
+      width: StrategyResume.RESUME_RIGHT_COLUMN,
+      child: Wrap(
+        crossAxisAlignment: WrapCrossAlignment.center,
+        alignment: WrapAlignment.end,
+        children: [
+          prefix != null ? Text(
+              prefix! + ': ' ,
+              style: Theme.of(context).textTheme.bodyText2!.copyWith(
+                fontSize: 10
+              ),
+          ) : Container(),
+          Container(
+            alignment: Alignment.bottomRight,
+            width: 60,
+            margin: EdgeInsets.all(2),
+            padding: EdgeInsets.all(5),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.all(Radius.circular(10.0)),
+              color: ColorForValue().getColorForPriceVariation(value),
+            ),
+            child: FittedBox(
+              fit: BoxFit.scaleDown,
+                child: Text(text)),
           ),
-          child: Text(text),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }

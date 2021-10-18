@@ -8,7 +8,7 @@ import 'package:turing_deal/home/home_screen.dart';
 
 import 'bigPicture/state/big_picture_state_provider.dart';
 
-void main() {
+void main() async{
   runApp(TuringDealApp());
 }
 

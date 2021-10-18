@@ -6,6 +6,7 @@ import 'package:turing_deal/marketData/model/stock_picker.dart';
 import 'package:turing_deal/shared/ui/checkError.dart';
 import 'package:turing_deal/home/state/app_state_provider.dart';
 import './state/big_picture_state_provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class BigPictureScreen extends StatelessWidget{
 
@@ -22,8 +23,9 @@ class BigPictureScreen extends StatelessWidget{
 
               if (searchingTickers != null && searchingTickers.isNotEmpty) {
                 StockTicker ticker = searchingTickers.removeAt(0);
-                bigPictureState.addTicker(ticker, context).onError(
-                        (error, stackTrace) {
+                bigPictureState.addTicker(ticker).then((value) =>
+                    bigPictureState.persistAddTicker(ticker)
+                ).onError((error, stackTrace) {
                       CheckError.checkErrorState('Can\'t and the ticker ' + ticker.symbol, context);
                     });
               }

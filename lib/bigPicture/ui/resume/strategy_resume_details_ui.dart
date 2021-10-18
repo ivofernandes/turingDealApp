@@ -5,6 +5,8 @@ import 'package:turing_deal/bigPicture/ui/explain/explain_drawdown_ui.dart';
 import 'package:turing_deal/bigPicture/ui/explain/explain_mar_ui.dart';
 import 'package:turing_deal/bigPicture/state/big_picture_state_provider.dart';
 import 'package:turing_deal/backTestEngine/model/strategyResult/buy_and_hold_strategyResult.dart';
+import 'package:turing_deal/bigPicture/ui/resume/strategy_resume_item.dart';
+import 'package:turing_deal/bigPicture/ui/resume/strategy_resume_ui.dart';
 import 'package:turing_deal/shared/ui/UIUtils.dart';
 import 'package:turing_deal/ticker/details/prive_variation_chip_ui.dart';
 
@@ -17,10 +19,6 @@ class StrategyResumeDetails extends StatelessWidget{
   Widget build(BuildContext context) {
     BigPictureStateProvider bigPictureState =
       Provider.of<BigPictureStateProvider>(context, listen: false);
-
-    String cagrText = 'CAGR: ' + strategy.CAGR.toStringAsFixed(2) + '%';
-    String drawdownText = 'Drawdown: ' + strategy.drawdown.toStringAsFixed(2) + '%';
-    String marText = 'MAR: ' + strategy.MAR.toStringAsFixed(2) ;
 
     double price_sma20 = (strategy.endPrice / strategy.movingAverages[20]! - 1) *100;
     double sma20sma50 = (strategy.movingAverages[20]! / strategy.movingAverages[50]! - 1) *100;
@@ -36,19 +34,28 @@ class StrategyResumeDetails extends StatelessWidget{
     ) : Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            InkWell(
-                onTap: () => UIUtils.bottomSheet(ExplainCagr()),
-                child: Text(cagrText)),
-            InkWell(
-                onTap: () => UIUtils.bottomSheet(ExplainDrawdown()),
-                child: Text(drawdownText)),
-            InkWell(
-                onTap: () => UIUtils.bottomSheet(ExplainMAR()),
-                child: Text(marText))
-          ],
+        SizedBox(
+          width: StrategyResume.RESUME_LEFT_COLUMN,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              StrategyResumeItem(
+                  title: 'CAGR: ',
+                  value: strategy.CAGR.toStringAsFixed(2) + '%',
+                  onTap: () => UIUtils.bottomSheet(ExplainCagr())
+              ),
+              StrategyResumeItem(
+                  title: 'Drawdown: ',
+                  value: strategy.drawdown.toStringAsFixed(2) + '%',
+                  onTap: () => UIUtils.bottomSheet(ExplainDrawdown())
+              ),
+              StrategyResumeItem(
+                  title: 'MAR: ',
+                  value: strategy.MAR.toStringAsFixed(2) ,
+                  onTap: () => UIUtils.bottomSheet(ExplainMAR())
+              ),
+            ],
+          ),
         ),
         Column(
           crossAxisAlignment: CrossAxisAlignment.end,
@@ -61,5 +68,4 @@ class StrategyResumeDetails extends StatelessWidget{
       ],
     );
   }
-
 }

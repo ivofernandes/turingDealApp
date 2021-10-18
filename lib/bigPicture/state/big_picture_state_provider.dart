@@ -11,6 +11,7 @@ import 'package:turing_deal/marketData/yahooFinance/api/yahoo_finance.dart';
 import 'package:turing_deal/marketData/yahooFinance/services/yahoo_finance_service.dart';
 import 'package:turing_deal/marketData/yahooFinance/storage/yahoo_finance_dao.dart';
 import 'package:turing_deal/home/state/mixins/connectivity_state.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class BigPictureStateProvider with ChangeNotifier, ConnectivityState {
   bool _compactView = false;
@@ -33,29 +34,23 @@ class BigPictureStateProvider with ChangeNotifier, ConnectivityState {
     await initConnectivity();
 
     await YahooFinanceDAO().initDatabase();
-
     List<String> symbols = [
       '^GSPC',
-      '^NDX',
-      'XLE',
-      'XLF',
-      'XLU',
-      'XLI',
-      'XLV',
-      'XLY',
-      'XLP',
-      'XLB',
-      'REET',
-      'XLC',
-      'FCOM'
+      '^NDX'
     ];
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    if(prefs.getStringList('symbols') != null){
+      symbols = prefs.getStringList('symbols')!;
+    }else{
+      prefs.setStringList('symbols', symbols);
+    }
 
     if (hasInternetConnection()) {
       if (_bigPictureData.isEmpty || true) {
         symbols.forEach((symbol) async {
           print('adding ticker $symbol');
           StockTicker ticker = StockTicker(symbol, TickersList.main[symbol]);
-          await addTicker(ticker, context);
+          await addTicker(ticker);
         });
         globalAnalysis();
       }
@@ -71,7 +66,7 @@ class BigPictureStateProvider with ChangeNotifier, ConnectivityState {
     }
   }
 
-  Future<void> addTicker(StockTicker ticker, BuildContext context) async {
+  Future<void> addTicker(StockTicker ticker) async {
     _bigPictureData[ticker] = BuyAndHoldStrategyResult();
 
     try {
@@ -84,6 +79,7 @@ class BigPictureStateProvider with ChangeNotifier, ConnectivityState {
           BuyAndHoldStrategy.buyAndHoldAnalysis(prices);
 
       _bigPictureData[ticker] = strategy;
+
       this.refresh();
     } catch (e) {
       _bigPictureData.remove(ticker);
@@ -100,8 +96,14 @@ class BigPictureStateProvider with ChangeNotifier, ConnectivityState {
     notifyListeners();
   }
 
-  removeTicker(StockTicker ticker) {
+  removeTicker(StockTicker ticker) async{
     this._bigPictureData.remove(ticker);
+
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    List<String> symbols = prefs.getStringList('symbols')!;
+    symbols.remove(ticker.symbol);
+    prefs.setStringList('symbols',symbols);
+
     this.refresh();
   }
 
@@ -109,5 +111,12 @@ class BigPictureStateProvider with ChangeNotifier, ConnectivityState {
     // TODO use big picture investing theory to know how the market is performing
     // Comparing each etf with the SP500
     // https://www.fidelity.com/webcontent/ap101883-markets_sectors-content/21.01.0/business_cycle/Business_Cycle_Chart.png
+  }
+
+  void persistAddTicker(StockTicker ticker) async{
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    List<String> symbols = prefs.getStringList('symbols')!;
+    symbols.add(ticker.symbol);
+    prefs.setStringList('symbols',symbols);
   }
 }

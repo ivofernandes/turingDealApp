@@ -7,7 +7,9 @@ class JoinPrices{
     //Get the index on prices that matches the last value in next prices
     int oldestDateInTheRecentList = recentPricesList.last['date'];
     int indexToStart = 0;
-    while(oldPricesList[indexToStart]['date'] != oldestDateInTheRecentList && indexToStart < oldPricesList.length){
+    while(indexToStart < oldPricesList.length - 1
+        && oldPricesList[indexToStart]['date'] != oldestDateInTheRecentList
+        && indexToStart < oldPricesList.length){
       indexToStart++;
     }
     print('reference date: ' + oldPricesList[indexToStart]['date'].toString());

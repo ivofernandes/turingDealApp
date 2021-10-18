@@ -12,7 +12,10 @@ import '../../state/big_picture_state_provider.dart';
 import 'strategy_resume_details_ui.dart';
 
 class StrategyResume extends StatelessWidget {
-  static final int RESUME_WIDTH = 350;
+  static const double RESUME_WIDTH = 320;
+  static const double RESUME_LEFT_COLUMN = 140 - 15;
+  static const double RESUME_RIGHT_COLUMN = RESUME_WIDTH - RESUME_LEFT_COLUMN- 30;
+
 
   final StockTicker ticker;
   final BuyAndHoldStrategyResult strategy;

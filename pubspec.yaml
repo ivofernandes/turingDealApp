@@ -35,13 +35,13 @@ dependencies:
   sembast: ^3.1.0+2
   sembast_web: ^2.0.0+2
   cupertino_icons: ^1.0.2
-  shared_preferences: ^2.0.6
   intl: ^0.17.0
   webview_flutter: ^2.0.10
   url_launcher: ^6.0.9
   get: ^4.3.8
   connectivity_plus: ^1.1.0
   interactive_chart: ^0.2.1
+  shared_preferences: ^2.0.8
 dev_dependencies:
   flutter_test:
     sdk: flutter
