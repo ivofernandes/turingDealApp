@@ -21,7 +21,7 @@ class ExplainDrawdown extends StatelessWidget {
               height: 20,
             ),
             Text(
-              'The Max Drawdown is the biggest fall in the value of a portfolio following a strategyResult',
+              'The Max Drawdown is the biggest fall in the value of a portfolio following a strategy',
             ),
             SizedBox(
               height: 20,

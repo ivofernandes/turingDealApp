@@ -20,10 +20,10 @@ class TuringDealApp extends StatelessWidget {
     return MultiProvider(
         providers: <SingleChildWidget>[
           ChangeNotifierProvider<AppStateProvider>(
-            create: (_) => AppStateProvider(context),
+            create: (_) => AppStateProvider(),
           ),
           ChangeNotifierProvider<BigPictureStateProvider>(
-            create: (_) => BigPictureStateProvider(context),
+            create: (_) => BigPictureStateProvider(),
           ),
         ],
         child: Consumer<AppStateProvider>(

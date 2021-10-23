@@ -1,24 +1,22 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:turing_deal/marketData/core/utils/clean_prices.dart';
 import 'package:turing_deal/marketData/model/candle_price.dart';
 import 'package:turing_deal/backTestEngine/core/buy_and_hold_strategy.dart';
-import 'package:turing_deal/backTestEngine/core/utils/strategy_time.dart';
 import 'package:turing_deal/backTestEngine/model/strategyResult/buy_and_hold_strategyResult.dart';
 import 'package:turing_deal/marketData/model/stock_picker.dart';
 import 'package:turing_deal/marketData/static/tickers_list.dart';
-import 'package:turing_deal/marketData/yahooFinance/api/yahoo_finance.dart';
 import 'package:turing_deal/marketData/yahooFinance/services/yahoo_finance_service.dart';
 import 'package:turing_deal/marketData/yahooFinance/storage/yahoo_finance_dao.dart';
 import 'package:turing_deal/home/state/mixins/connectivity_state.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:turing_deal/shared/ui/UIUtils.dart';
 
 class BigPictureStateProvider with ChangeNotifier, ConnectivityState {
   bool _compactView = false;
   Map<StockTicker, BuyAndHoldStrategyResult> _bigPictureData = {};
 
-  BigPictureStateProvider(BuildContext context) {
-    this.loadData(context);
+  BigPictureStateProvider() {
+    this.loadData();
   }
 
   bool isCompactView(){
@@ -30,7 +28,7 @@ class BigPictureStateProvider with ChangeNotifier, ConnectivityState {
     refresh();
   }
 
-  void loadData(BuildContext context) async {
+  void loadData() async {
     await initConnectivity();
 
     await YahooFinanceDAO().initDatabase();
@@ -55,14 +53,7 @@ class BigPictureStateProvider with ChangeNotifier, ConnectivityState {
         globalAnalysis();
       }
     } else {
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-          content: Text(
-        'Check your internet connection',
-        style: Theme.of(context)
-            .textTheme
-            .headline6!
-            .copyWith(color: Theme.of(context).errorColor),
-      )));
+      UIUtils.snackBarError('Check your internet connection');
     }
   }
 

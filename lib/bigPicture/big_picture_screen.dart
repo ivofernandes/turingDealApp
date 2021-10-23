@@ -26,7 +26,8 @@ class BigPictureScreen extends StatelessWidget{
                 bigPictureState.addTicker(ticker).then((value) =>
                     bigPictureState.persistAddTicker(ticker)
                 ).onError((error, stackTrace) {
-                      CheckError.checkErrorState('Can\'t and the ticker ' + ticker.symbol, context);
+                      CheckError.checkErrorState('Can\'t add the ticker '
+                          + ticker.symbol+ ', because of ' + error.toString(), context);
                     });
               }
 

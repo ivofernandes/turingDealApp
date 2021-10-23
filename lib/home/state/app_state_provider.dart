@@ -8,10 +8,6 @@ class AppStateProvider with ChangeNotifier, ConnectivityState, NavigationState {
 
   List<StockTicker>? searching = [];
 
-  AppStateProvider(BuildContext context){
-    //TODO the context is here to get user preferences in the future
-  }
-
   void loadData() async{
     await initConnectivity();
   }

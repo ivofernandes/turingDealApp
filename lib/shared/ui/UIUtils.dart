@@ -14,4 +14,11 @@ class UIUtils{
       elevation: 10
     );
   }
+
+  static void snackBarError(String message) {
+    Get.snackbar('', message,
+        colorText: Theme.of(Get.context!).errorColor,
+        snackPosition: SnackPosition.BOTTOM
+    );
+  }
 }
