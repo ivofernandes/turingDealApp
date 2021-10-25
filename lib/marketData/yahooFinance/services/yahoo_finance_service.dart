@@ -12,7 +12,7 @@ import 'package:turing_deal/marketData/yahooFinance/storage/yahoo_finance_dao.da
 class YahooFinanceService {
   /// Gets the candles for a ticker
   static Future<List<CandlePrice>> getTickerData(StockTicker ticker) async {
-    if (kIsWeb) {
+    if (kIsWeb && false) {
       var result = await YahooFinanceOfficialAPI.getDailyData(ticker);
       print(result);
       return Future.value([]);
@@ -76,7 +76,6 @@ class YahooFinanceService {
     if (historicalData != null && historicalData['prices'] != null) {
       List<dynamic> prices = historicalData['prices'];
       // Cache data locally
-      prices = prices.sublist(6); //TODO delete this line
       YahooFinanceDAO().saveDailyData(ticker.symbol, prices);
       return prices;
     }

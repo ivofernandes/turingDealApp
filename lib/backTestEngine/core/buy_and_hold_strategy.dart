@@ -20,9 +20,8 @@ class BuyAndHoldStrategy {
       strategy.endPrice = sellPrice;
 
       calculateStrategyMetrics(prices, buyPrice, sellPrice, strategy);
-
-      strategy.progress = 100;
     }
+    strategy.progress = 100;
 
     addIndicators(prices, strategy);
 

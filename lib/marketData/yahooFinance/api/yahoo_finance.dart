@@ -17,7 +17,7 @@ class YahooFinance{
     return getDailyDataFrom(ticker, -1577908800);
   }
 
-  static Future<Map<String,dynamic>?>  getDailyDataFrom(String ticker, int startTimestamp) async{
+  static Future<Map<String,dynamic>?> getDailyDataFrom(String ticker, int startTimestamp) async{
     ticker = ticker.toUpperCase();
     String now = DateTime.now().millisecondsSinceEpoch.toString();
 

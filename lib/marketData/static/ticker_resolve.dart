@@ -16,6 +16,12 @@ class TickerResolve{
         return TickersList.main[symbol]!;
       } else if(TickersList.bonds[symbol] != null){
         return TickersList.bonds[symbol]!;
+      } else if(TickersList.commodities[symbol] != null){
+        return TickersList.commodities[symbol]!;
+      } else if(TickersList.companies[symbol] != null){
+        return TickersList.companies[symbol]!;
+      } else if(TickersList.countries[symbol] != null){
+        return TickersList.countries[symbol]!;
       }
       //TODO get from TickersList
       return symbol;

@@ -5,6 +5,7 @@ import 'package:turing_deal/backTestEngine/core/buy_and_hold_strategy.dart';
 import 'package:turing_deal/backTestEngine/model/strategyResult/buy_and_hold_strategyResult.dart';
 import 'package:turing_deal/marketData/model/stock_picker.dart';
 import 'package:turing_deal/marketData/static/tickers_list.dart';
+import 'package:turing_deal/marketData/yahooFinance/mocked/yahoo_finance_mocked_data.dart';
 import 'package:turing_deal/marketData/yahooFinance/services/yahoo_finance_service.dart';
 import 'package:turing_deal/marketData/yahooFinance/storage/yahoo_finance_dao.dart';
 import 'package:turing_deal/home/state/mixins/connectivity_state.dart';
@@ -13,6 +14,7 @@ import 'package:turing_deal/shared/ui/UIUtils.dart';
 
 class BigPictureStateProvider with ChangeNotifier, ConnectivityState {
   bool _compactView = false;
+  bool _mockedData = false;
   Map<StockTicker, BuyAndHoldStrategyResult> _bigPictureData = {};
 
   BigPictureStateProvider() {
@@ -21,6 +23,10 @@ class BigPictureStateProvider with ChangeNotifier, ConnectivityState {
 
   bool isCompactView(){
     return _compactView;
+  }
+
+  bool isMockedData(){
+    return _mockedData;
   }
 
   void toogleCompactView(){
@@ -60,23 +66,38 @@ class BigPictureStateProvider with ChangeNotifier, ConnectivityState {
   Future<void> addTicker(StockTicker ticker) async {
     _bigPictureData[ticker] = BuyAndHoldStrategyResult();
 
+    List<CandlePrice> prices = [];
     try {
-      List<CandlePrice> prices = await YahooFinanceService.getTickerData(ticker);
-
-      _bigPictureData[ticker]!.progress = 10;
-      this.refresh();
-
-      BuyAndHoldStrategyResult strategy =
-          BuyAndHoldStrategy.buyAndHoldAnalysis(prices);
-
-      _bigPictureData[ticker] = strategy;
-
-      this.refresh();
+      prices = await YahooFinanceService.getTickerData(ticker);
+      if(ticker.symbol == '^GSPC'){
+        prices = YahooFinanceMockedData.getSP500MockedData();
+        _mockedData = true;
+      }
     } catch (e) {
-      _bigPictureData.remove(ticker);
-      this.refresh();
-      throw e;
+      // If got an http error and is requesting ^GSPC let's step to mocked data
+      print('exception: ' + e.toString());
+      print('symbol ' + ticker.symbol);
+      print('use mocked: '+ (e.toString() == 'XMLHttpRequest error.' && ticker.symbol == '^GSPC').toString());
+      if(e.toString() == 'XMLHttpRequest error.' && ticker.symbol == '^GSPC'){
+        _mockedData = true;
+        prices = YahooFinanceMockedData.getSP500MockedData();
+      }else {
+        _bigPictureData.remove(ticker);
+        this.refresh();
+        throw e;
+      }
     }
+
+    _bigPictureData[ticker]!.progress = 10;
+    this.refresh();
+
+    BuyAndHoldStrategyResult strategy =
+        BuyAndHoldStrategy.buyAndHoldAnalysis(prices);
+
+    _bigPictureData[ticker] = strategy;
+
+    this.refresh();
+
   }
 
   Map<StockTicker, BuyAndHoldStrategyResult> getBigPictureData() {

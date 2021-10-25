@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:turing_deal/backTestEngine/model/strategyResult/buy_and_hold_strategyResult.dart';
 import 'package:turing_deal/bigPicture/state/big_picture_state_provider.dart';
+import 'package:turing_deal/bigPicture/ui/mocked_data_disclaimer.dart';
 import 'package:turing_deal/bigPicture/ui/resume/strategy_resume_ui.dart';
 import 'package:turing_deal/marketData/model/stock_picker.dart';
 
@@ -26,22 +27,29 @@ class BigPictureResumeList extends StatelessWidget {
     }
     int lines = (tickers.length / columns).ceil();
 
-    return ListView.builder(
-      itemCount: lines,
-      itemBuilder: (BuildContext context, int index) {
-        List<Widget> resumes = [];
+    return Column(
+      children: [
+        bigPictureState.isMockedData() ? MockedDataDisclaimer() : Container(),
+        Expanded(
+          child: ListView.builder(
+            itemCount: lines,
+            itemBuilder: (BuildContext context, int index) {
+              List<Widget> resumes = [];
 
-        for (int i = index * columns;
-        i < (index + 1) * columns && i < tickers.length;
-        i++) {
-          StockTicker ticker = tickers[i];
-          BuyAndHoldStrategyResult? strategy = data[ticker];
-          resumes.add(StrategyResume(ticker, strategy!));
-        }
-        return Wrap(
-          children: resumes,
-        );
-      }
+              for (int i = index * columns;
+              i < (index + 1) * columns && i < tickers.length;
+              i++) {
+                StockTicker ticker = tickers[i];
+                BuyAndHoldStrategyResult? strategy = data[ticker];
+                resumes.add(StrategyResume(ticker, strategy!));
+              }
+              return Wrap(
+                children: resumes,
+              );
+            }
+          ),
+        ),
+      ],
     );
   }
 }
