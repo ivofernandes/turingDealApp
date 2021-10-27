@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:turing_deal/home/ui/ticker_widget_ui.dart';
+import 'package:turing_deal/home/ui/tickers_block.dart';
 import 'package:turing_deal/marketData/model/stock_picker.dart';
 import 'package:turing_deal/marketData/static/tickers_list.dart';
 
@@ -31,10 +32,13 @@ class TickerSearch extends SearchDelegate<List<StockTicker>>{
   @override
   Widget buildResults(BuildContext context) {
     return InkWell(
-        onTap: () => close(context, [StockTicker(query, query)]),
-        child: Text(
-            query,
-            style: Theme.of(context).textTheme.headline6
+        onTap: () => close(context, [StockTicker(query.toUpperCase(), query.toUpperCase())]),
+        child: TickerWidget(
+          symbol: query.toUpperCase(),
+          description: '',
+          onSelection: (ticker) {
+            close(context, [ticker]);
+          },
         )
     );
   }
@@ -51,84 +55,31 @@ class TickerSearch extends SearchDelegate<List<StockTicker>>{
         children: [
           searchingWidget,
           suggestion(
-              Icon(Icons.view_headline), 'Main', TickersList.main, context),
+              Icon(Icons.view_headline), 'Main', TickersList.main),
           suggestion(Icon(Icons.precision_manufacturing_outlined), 'Sectors',
-              TickersList.sectors, context),
+              TickersList.sectors),
           suggestion(Icon(Icons.computer), 'Cryptos',
-              TickersList.cryptoCurrencies, context),
-          suggestion(Icon(Icons.language), 'Countries', TickersList.countries,
-              context),
+              TickersList.cryptoCurrencies),
+          suggestion(Icon(Icons.language), 'Countries', TickersList.countries),
           suggestion(Icon(Icons.account_balance_outlined), 'Bonds',
-              TickersList.bonds, context),
-          suggestion(Icon(Icons.workspaces_outline), 'Commodities', TickersList.commodities, context),
+              TickersList.bonds),
+          suggestion(Icon(Icons.workspaces_outline), 'Commodities', TickersList.commodities),
 
-          suggestion(Icon(Icons.architecture_sharp), 'Sizes',TickersList.sizes, context),
+          suggestion(Icon(Icons.architecture_sharp), 'Sizes',TickersList.sizes),
 
-          suggestion(Icon(Icons.business_sharp), 'Companies', TickersList.companies, context)
+          suggestion(Icon(Icons.business_sharp), 'Companies', TickersList.companies)
         ],
       ),
     );
   }
 
-  Widget suggestion(Icon icon, String title, Map<String, String> tickers, BuildContext context) {
-    List<String> keys = tickers.keys.toList();
-
-    // Filter keys by text added
-    List<String> filteredKeys = keys.where((element) {
-      String lowerCaseQuery = query.toString().toLowerCase();
-
-      bool containsQuery = element.toString().toLowerCase().contains(lowerCaseQuery)
-          || tickers[element].toString().toLowerCase().contains(lowerCaseQuery);
-
-      return containsQuery;
-    }).toList();
-
-    int size = filteredKeys.length;
-
-    return size > 0 ? Column(
-      children: [
-        suggestionTitle(icon,title, filteredKeys, tickers, context),
-        ListView.builder(
-            physics: NeverScrollableScrollPhysics(),
-            shrinkWrap: true,
-            itemCount: size,
-            itemBuilder: (BuildContext context, int index){
-              final String symbol = filteredKeys[index];
-              return TickerWidget(
-                symbol: symbol,
-                description: tickers[symbol]!,
-                onSelection: (ticker) {
-                  close(context, [ticker]);
-                },
-              );
-              // return tickerWidget(context, symbol, tickers[symbol]!);
-            }),
-      ],
-    ) : SizedBox();
-  }
-
-  /// Create a suggestion title that divide sectors from country etf etc
-  /// @returns a widget ready
-  Widget suggestionTitle(Icon icon, String s, List<String> filteredKeys,
-      Map<String, String> tickers, BuildContext context) {
-
-    return ListTile(
-      leading: icon,
-      title: Text(s),
-      trailing: MaterialButton(
-        shape: RoundedRectangleBorder(borderRadius:BorderRadius.circular(10.0) ),
-        color: Theme.of(context).colorScheme.primary,
-        child: Text('Add all'),
-        onPressed: () {
-          List<StockTicker> result = [];
-          filteredKeys.forEach((element) {
-            String symbol = element.toString();
-            result.add(StockTicker(symbol, tickers[symbol]));
-          });
-          // Finish the search passing a result
-          close(context, result);
-        },
-      )
+  TickersBlock suggestion(Icon icon, String title, Map<String, String> companies) {
+    return TickersBlock(
+      icon: icon,
+      title: title,
+      tickers: companies,
+      query: query,
+      close: close,
     );
   }
 }

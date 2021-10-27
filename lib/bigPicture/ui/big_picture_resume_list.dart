@@ -41,7 +41,7 @@ class BigPictureResumeList extends StatelessWidget {
               i++) {
                 StockTicker ticker = tickers[i];
                 BuyAndHoldStrategyResult? strategy = data[ticker];
-                resumes.add(StrategyResume(ticker, strategy!));
+                resumes.add(StrategyResume(ticker, strategy!, (width/columns)));
               }
               return Wrap(
                 children: resumes,

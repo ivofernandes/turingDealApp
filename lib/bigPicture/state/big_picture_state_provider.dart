@@ -69,16 +69,9 @@ class BigPictureStateProvider with ChangeNotifier, ConnectivityState {
     List<CandlePrice> prices = [];
     try {
       prices = await YahooFinanceService.getTickerData(ticker);
-      if(ticker.symbol == '^GSPC'){
-        prices = YahooFinanceMockedData.getSP500MockedData();
-        _mockedData = true;
-      }
     } catch (e) {
       // If got an http error and is requesting ^GSPC let's step to mocked data
-      print('exception: ' + e.toString());
-      print('symbol ' + ticker.symbol);
-      print('use mocked: '+ (e.toString() == 'XMLHttpRequest error.' && ticker.symbol == '^GSPC').toString());
-      if(e.toString() == 'XMLHttpRequest error.' && ticker.symbol == '^GSPC'){
+      if(kIsWeb && e.toString() == 'XMLHttpRequest error.' && ticker.symbol == '^GSPC'){
         _mockedData = true;
         prices = YahooFinanceMockedData.getSP500MockedData();
       }else {

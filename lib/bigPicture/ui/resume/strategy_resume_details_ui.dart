@@ -20,17 +20,19 @@ class StrategyResumeDetails extends StatelessWidget{
     BigPictureStateProvider bigPictureState =
       Provider.of<BigPictureStateProvider>(context, listen: false);
 
-    double price_sma20 = (strategy.endPrice / strategy.movingAverages[20]! - 1) *100;
+    double pricesma20 = (strategy.endPrice / strategy.movingAverages[20]! - 1) *100;
     double sma20sma50 = (strategy.movingAverages[20]! / strategy.movingAverages[50]! - 1) *100;
     double sma50sma200 = (strategy.movingAverages[50]! / strategy.movingAverages[200]! - 1) *100;
 
-    return bigPictureState.isCompactView() ? Column(
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: [
-        PriceVariationChip(null, price_sma20),
-        PriceVariationChip(null, sma20sma50),
-        PriceVariationChip(null, sma50sma200)
-      ],
+    return bigPictureState.isCompactView() ? Container(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          PriceVariationChip(null, pricesma20),
+          PriceVariationChip(null, sma20sma50),
+          PriceVariationChip(null, sma50sma200)
+        ],
+      ),
     ) : Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
@@ -60,7 +62,7 @@ class StrategyResumeDetails extends StatelessWidget{
         Column(
           crossAxisAlignment: CrossAxisAlignment.end,
           children: [
-            PriceVariationChip('price/sma20', price_sma20),
+            PriceVariationChip('price/sma20', pricesma20),
             PriceVariationChip('sma20/sma50', sma20sma50),
             PriceVariationChip('sma50/sma200', sma50sma200)
           ],

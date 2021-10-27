@@ -30,6 +30,7 @@ class TickerWidget extends StatelessWidget{
                   constraints: new BoxConstraints(
                     minHeight: 30.0,
                     minWidth: 80.0,
+                    maxHeight: 30,
                   ),
                   child: Container(
                     color: Theme.of(context).backgroundColor.withOpacity(0.3),

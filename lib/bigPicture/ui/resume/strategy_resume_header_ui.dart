@@ -9,8 +9,9 @@ import 'package:turing_deal/marketData/static/ticker_resolve.dart';
 class StrategyResumeHeader extends StatelessWidget {
   final StockTicker ticker;
   final BuyAndHoldStrategyResult? strategy;
+  final double width;
 
-  const StrategyResumeHeader(this.ticker, this.strategy);
+  const StrategyResumeHeader(this.ticker, this.strategy, this.width);
 
   @override
   Widget build(BuildContext context) {
@@ -25,8 +26,14 @@ class StrategyResumeHeader extends StatelessWidget {
       Row(
         mainAxisAlignment: bigPictureState.isCompactView() ? MainAxisAlignment.center :MainAxisAlignment.spaceBetween,
         children: [
-          Text(ticker.symbol,
-                style: theme.textTheme.headline6),
+          SizedBox(
+            width: bigPictureState.isCompactView() ? width/3 - 50 : width/3,
+            child: Text(
+                ticker.symbol,
+                style: theme.textTheme.headline6,
+            overflow: TextOverflow.clip
+            ),
+          ),
           bigPictureState.isCompactView() ? Container() : Text(
               ticketDescription,
               style: theme.textTheme.bodyText1)

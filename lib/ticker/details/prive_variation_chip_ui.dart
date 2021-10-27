@@ -16,7 +16,6 @@ class PriceVariationChip extends StatelessWidget{
     MediaQuery.of(context).size.width;
 
     return SizedBox(
-      width: StrategyResume.RESUME_RIGHT_COLUMN,
       child: Wrap(
         crossAxisAlignment: WrapCrossAlignment.center,
         alignment: WrapAlignment.end,
@@ -27,18 +26,20 @@ class PriceVariationChip extends StatelessWidget{
                 fontSize: 10
               ),
           ) : Container(),
-          Container(
-            alignment: Alignment.bottomRight,
-            width: 60,
-            margin: EdgeInsets.all(2),
-            padding: EdgeInsets.all(5),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.all(Radius.circular(10.0)),
-              color: ColorForValue().getColorForPriceVariation(value),
+          Center(
+            child: Container(
+              alignment: Alignment.bottomRight,
+              width: 60,
+              margin: EdgeInsets.all(2),
+              padding: EdgeInsets.all(5),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                color: ColorForValue().getColorForPriceVariation(value),
+              ),
+              child: FittedBox(
+                fit: BoxFit.scaleDown,
+                  child: Text(text)),
             ),
-            child: FittedBox(
-              fit: BoxFit.scaleDown,
-                child: Text(text)),
           ),
         ],
       ),

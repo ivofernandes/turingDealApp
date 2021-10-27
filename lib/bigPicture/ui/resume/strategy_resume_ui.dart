@@ -19,8 +19,9 @@ class StrategyResume extends StatelessWidget {
 
   final StockTicker ticker;
   final BuyAndHoldStrategyResult strategy;
+  final double width;
 
-  StrategyResume(this.ticker, this.strategy);
+  StrategyResume(this.ticker, this.strategy, this.width);
 
   @override
   Widget build(BuildContext context) {
@@ -44,29 +45,34 @@ class StrategyResume extends StatelessWidget {
         color: Colors.red,
         child: Icon(Icons.close),
       ),
-      child: Container(
-        width: cardWidth,
-        child: InkWell(
-          onTap: () => Get.to(TickerScreen(ticker)),
-          child: Card(
-            child: Padding(
-              padding: const EdgeInsets.all(10.0),
-              child: strategy.progress > 0
-                  ? Column(
-                      children: [
-                        StrategyResumeHeader(
-                            this.ticker, this.strategy),
-                        StrategyResumeDetails(this.strategy),
-                        strategy.progress < 100
-                            ? CircularProgressIndicator()
-                            : Container()
-                      ],
-                    )
-                  : Column(
-                      children: [
-                        CircularProgressIndicator(),
-                      ],
-                    ),
+      child: ConstrainedBox(
+        constraints: BoxConstraints(
+          minHeight: 190
+        ),
+        child: Container(
+          width: cardWidth,
+          child: InkWell(
+            onTap: () => Get.to(TickerScreen(ticker)),
+            child: Card(
+              child: Container(
+                padding: const EdgeInsets.all(10.0),
+                child: strategy.progress > 0
+                    ? Column(
+                        children: [
+                          StrategyResumeHeader(
+                              this.ticker, this.strategy, width),
+                          StrategyResumeDetails(this.strategy),
+                          strategy.progress < 100
+                              ? CircularProgressIndicator()
+                              : Container()
+                        ],
+                      )
+                    : Column(
+                        children: [
+                          CircularProgressIndicator(),
+                        ],
+                      ),
+              ),
             ),
           ),
         ),

@@ -15,6 +15,10 @@ class ColorForValue {
 
 
   Color getColorForBounds(double value, int min, int max) {
+    if(value.isNaN || value.isInfinite){
+      return Colors.black;
+    }
+
     if(value > 0){
       double green = 256 * value / max;
       double blue = (256 - green) / 8;
