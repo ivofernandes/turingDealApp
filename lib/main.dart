@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 import 'package:provider/single_child_widget.dart';
+import 'package:turing_deal/settings/settings_screen.dart';
 import 'package:turing_deal/shared/app_theme.dart';
 import 'package:turing_deal/home/state/app_state_provider.dart';
 import 'package:turing_deal/home/home_screen.dart';
@@ -33,7 +34,11 @@ class TuringDealApp extends StatelessWidget {
                 theme: AppTheme.darkTheme(),
                 debugShowCheckedModeBanner: false,
                 title: "TuringDeal",
-                home: HomeScreen()
+                initialRoute: '/',
+                routes: {
+                  '/': (context) => HomeScreen(),
+                  SettingsScreen.route: (context) => SettingsScreen(),
+                }
             );
         })
     );

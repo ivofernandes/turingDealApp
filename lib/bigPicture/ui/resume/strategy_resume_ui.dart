@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:get/get.dart';
@@ -52,7 +53,11 @@ class StrategyResume extends StatelessWidget {
         child: Container(
           width: cardWidth,
           child: InkWell(
-            onTap: () => Get.to(TickerScreen(ticker)),
+            onTap: (){
+              if(!bigPictureState.isMockedData()) {
+                Get.to(TickerScreen(ticker));
+              }
+            },
             child: Card(
               child: Container(
                 padding: const EdgeInsets.all(10.0),

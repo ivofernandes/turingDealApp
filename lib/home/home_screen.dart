@@ -2,12 +2,13 @@ import 'package:backdrop/backdrop.dart';
 import 'package:backdrop/scaffold.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 import 'package:turing_deal/marketData/model/stock_picker.dart';
 import 'package:turing_deal/home/ui/ticker_search.dart';
 import 'package:turing_deal/home/state/app_state_provider.dart';
 import '../bigPicture/big_picture_screen.dart';
-import 'menu/menu_component.dart';
+import '../settings/settings_screen.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen();
@@ -20,8 +21,12 @@ class HomeScreen extends StatelessWidget {
     forcePortraitModeInPhones(context);
 
 
-    return BackdropScaffold(
-      appBar: BackdropAppBar(
+    return Scaffold(
+      appBar: AppBar(
+        leading: IconButton(
+          onPressed: () => Get.toNamed(SettingsScreen.route),
+          icon: Icon(Icons.menu),
+        ),
         title: Text('Turing deal'),
         actions: <Widget>[
           IconButton(
@@ -34,8 +39,7 @@ class HomeScreen extends StatelessWidget {
               })
         ],
       ),
-      backLayer: MenuComponent(),
-      frontLayer: Center(
+      body: Center(
         child: BigPictureScreen(),
       ),
     );

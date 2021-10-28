@@ -39,7 +39,9 @@ class MockedDataDisclaimer extends StatelessWidget {
               Expanded(
                 child: InkWell(
                   onTap: () => Web.launchLink(context, Environment.PLAY_STORE_URL),
-                  child: Image.asset('assets/images/stores/play_store.png'),
+                  child: Image.asset(
+                    'assets/images/stores/play_store.png',
+                    height: 75,),
                 ),
               ),
               Expanded(

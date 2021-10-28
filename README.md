@@ -75,3 +75,22 @@ flutter pub run flutter_launcher_icons:main
 
 # Generate splash screen
 flutter pub run flutter_native_splash:create
+
+
+# Relase of the app
+
+## Android
+First generate the bundle
+
+### terminal command
+flutter build appbundle
+
+### Play store
+On play store go to the open testing
+https://play.google.com/console/u/0/developers/5672276779228687801/app/4975563596992797244/tracks/open-testing
+
+## iPhone
+For the iphone app in android studio, go to iOS folder, right click, then you need to manually generate an generic archive to be send to app store
+
+## Web
+Run publish.sh
