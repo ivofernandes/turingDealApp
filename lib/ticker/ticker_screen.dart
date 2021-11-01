@@ -26,9 +26,6 @@ class _TickerScreenState extends State<TickerScreen> {
   @override
   Widget build(BuildContext context) {
 
-    BigPictureStateProvider bigPictureState =
-      Provider.of<BigPictureStateProvider>(context, listen: false);
-
     return FutureBuilder<dynamic>(
         future: YahooFinanceService.getTickerData(this.widget.ticker),
         builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {

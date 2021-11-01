@@ -73,7 +73,7 @@ class BigPictureStateProvider with ChangeNotifier, ConnectivityState {
       // If got an http error and is requesting ^GSPC let's step to mocked data
       if(kIsWeb && e.toString() == 'XMLHttpRequest error.' && ticker.symbol == '^GSPC'){
         _mockedData = true;
-        prices = YahooFinanceMockedData.getSP500MockedData();
+        prices = await YahooFinanceMockedData.getSP500MockedData();
       }else {
         _bigPictureData.remove(ticker);
         this.refresh();
