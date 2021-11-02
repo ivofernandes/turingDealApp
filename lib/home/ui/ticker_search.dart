@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:turing_deal/home/ui/ticker_widget_ui.dart';
 import 'package:turing_deal/home/ui/tickers_block.dart';
-import 'package:turing_deal/marketData/model/stock_picker.dart';
-import 'package:turing_deal/marketData/static/tickers_list.dart';
+import 'package:turing_deal/market_data/model/stock_picker.dart';
+import 'package:turing_deal/market_data/static/tickers_list.dart';
 
 class TickerSearch extends SearchDelegate<List<StockTicker>>{
 

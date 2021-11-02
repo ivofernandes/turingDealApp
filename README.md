@@ -18,6 +18,7 @@ This project can be executed like any flutter application just by importing in a
 Ideas about the arquitecture of the app:
 
 - lib -> All the flutter code
+    - ba
     - bigPicture, module that manages the big picture screens
     - marketData, module to get the market data and presist it in local device
         - core, business logic

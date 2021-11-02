@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:turing_deal/home/ui/ticker_widget_ui.dart';
-import 'package:turing_deal/marketData/model/stock_picker.dart';
+import 'package:turing_deal/market_data/model/stock_picker.dart';
 
 class TickersBlock extends StatelessWidget {
   final Icon icon;

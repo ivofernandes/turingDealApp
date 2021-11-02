@@ -4,10 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
-import 'package:turing_deal/marketData/model/stock_picker.dart';
+import 'package:turing_deal/market_data/model/stock_picker.dart';
 import 'package:turing_deal/home/ui/ticker_search.dart';
 import 'package:turing_deal/home/state/app_state_provider.dart';
-import '../bigPicture/big_picture_screen.dart';
+import '../big_picture/big_picture_screen.dart';
 import '../settings/settings_screen.dart';
 
 class HomeScreen extends StatelessWidget {

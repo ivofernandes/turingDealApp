@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:turing_deal/marketData/model/candle_price.dart';
+import 'package:turing_deal/market_data/model/candle_price.dart';
 
 class ListPricesText extends StatelessWidget {
   final List<CandlePrice> data;

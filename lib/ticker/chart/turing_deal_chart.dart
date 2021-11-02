@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:interactive_chart/interactive_chart.dart';
-import 'package:turing_deal/marketData/model/candle_price.dart';
+import 'package:turing_deal/market_data/model/candle_price.dart';
 
 class TuringDealChart extends StatelessWidget{
   final List<CandlePrice> data;

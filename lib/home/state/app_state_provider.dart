@@ -1,6 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:turing_deal/marketData/model/stock_picker.dart';
+import 'package:turing_deal/market_data/model/stock_picker.dart';
 import 'mixins/connectivity_state.dart';
 import 'mixins/navigation_state.dart';
 

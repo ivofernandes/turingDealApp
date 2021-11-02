@@ -1,6 +1,6 @@
 
 import 'package:flutter/material.dart';
-import 'package:turing_deal/bigPicture/ui/resume/strategy_resume_ui.dart';
+import 'package:turing_deal/big_picture/ui/resume/strategy_resume_ui.dart';
 import 'package:turing_deal/shared/core/color_for_value.dart';
 
 class PriceVariationChip extends StatelessWidget{

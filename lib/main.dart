@@ -7,7 +7,7 @@ import 'package:turing_deal/shared/app_theme.dart';
 import 'package:turing_deal/home/state/app_state_provider.dart';
 import 'package:turing_deal/home/home_screen.dart';
 
-import 'bigPicture/state/big_picture_state_provider.dart';
+import 'big_picture/state/big_picture_state_provider.dart';
 
 void main() async{
   runApp(TuringDealApp());

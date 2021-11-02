@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:interactive_chart/interactive_chart.dart';
 import 'package:provider/provider.dart';
-import 'package:turing_deal/bigPicture/state/big_picture_state_provider.dart';
-import 'package:turing_deal/marketData/model/candle_price.dart';
-import 'package:turing_deal/marketData/model/stock_picker.dart';
-import 'package:turing_deal/marketData/static/ticker_resolve.dart';
-import 'package:turing_deal/marketData/yahooFinance/services/yahoo_finance_service.dart';
+import 'package:turing_deal/big_picture/state/big_picture_state_provider.dart';
+import 'package:turing_deal/market_data/model/candle_price.dart';
+import 'package:turing_deal/market_data/model/stock_picker.dart';
+import 'package:turing_deal/market_data/static/ticker_resolve.dart';
+import 'package:turing_deal/market_data/yahoo_finance/services/yahoo_finance_service.dart';
 import 'package:turing_deal/ticker/chart/turing_deal_chart.dart';
 
 import 'details/list_prices_text_ui.dart';
