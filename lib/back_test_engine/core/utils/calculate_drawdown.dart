@@ -11,7 +11,7 @@ class CalculateDrawdown{
 
     for(int i=0 ; i<prices.length ; i++){
       double adjhigh = prices[i].high;
-      double? adjlow = prices[i].low;
+      double adjlow = prices[i].low;
 
       // Update drawdown
       if (adjhigh > allTimeHigh) {

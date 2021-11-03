@@ -85,9 +85,6 @@ class BigPictureStateProvider with ChangeNotifier, ConnectivityState {
       }
     }
 
-    _bigPictureData[ticker]!.progress = 10;
-    this.refresh();
-
     // Execute the backtest
     BuyAndHoldStrategyResult strategy =
         BuyAndHoldStrategy.buyAndHoldAnalysis(prices);

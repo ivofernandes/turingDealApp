@@ -6,7 +6,7 @@ import 'package:http/http.dart' as http;
 
 class YahooFinance{
 
-  static int TIMEOUT = 30;
+  static const int TIMEOUT = 30;
 
   /// Python like get allDailyData, inspired on pandas_datareader/yahoo/daily
   /// Steps:
