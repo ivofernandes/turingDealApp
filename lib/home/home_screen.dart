@@ -20,6 +20,7 @@ class HomeScreen extends StatelessWidget {
 
     forcePortraitModeInPhones(context);
 
+    TickerSearch t = TickerSearch(searchFieldLabel: 'Search'.tr);
 
     return Scaffold(
       appBar: AppBar(
@@ -33,7 +34,7 @@ class HomeScreen extends StatelessWidget {
               icon: Icon(Icons.search),
               onPressed: () async {
                 List<StockTicker>? tickers = await showSearch(
-                    context: context, delegate: TickerSearch());
+                    context: context, delegate: t);
 
                 appState.search(tickers);
               })

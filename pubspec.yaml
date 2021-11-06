@@ -42,6 +42,7 @@ dependencies:
   connectivity_plus: ^1.1.0
   interactive_chart: ^0.2.1
   shared_preferences: ^2.0.8
+  country_icons: ^2.0.2
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -61,6 +62,7 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
+    - assets/locales/
     - assets/images/stores/
     - assets/market_data/
   #   - images/a_dot_ham.jpeg

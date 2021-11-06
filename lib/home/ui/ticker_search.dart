@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:get/get_utils/src/extensions/internacionalization.dart';
 import 'package:turing_deal/home/ui/ticker_widget_ui.dart';
 import 'package:turing_deal/home/ui/tickers_block.dart';
 import 'package:turing_deal/market_data/model/stock_picker.dart';
 import 'package:turing_deal/market_data/static/tickers_list.dart';
 
 class TickerSearch extends SearchDelegate<List<StockTicker>>{
+
+  TickerSearch({searchFieldLabel}) : super(searchFieldLabel: searchFieldLabel);
 
   @override
   List<Widget> buildActions(BuildContext context) {
@@ -55,19 +58,19 @@ class TickerSearch extends SearchDelegate<List<StockTicker>>{
         children: [
           searchingWidget,
           suggestion(
-              Icon(Icons.view_headline), 'Main', TickersList.main),
-          suggestion(Icon(Icons.precision_manufacturing_outlined), 'Sectors',
+              Icon(Icons.view_headline), 'Main'.tr, TickersList.main),
+          suggestion(Icon(Icons.precision_manufacturing_outlined), 'Sectors'.tr,
               TickersList.sectors),
-          suggestion(Icon(Icons.computer), 'Cryptos',
+          suggestion(Icon(Icons.computer), 'Cryptos'.tr,
               TickersList.cryptoCurrencies),
-          suggestion(Icon(Icons.language), 'Countries', TickersList.countries),
+          suggestion(Icon(Icons.language), 'Countries'.tr, TickersList.countries),
           suggestion(Icon(Icons.account_balance_outlined), 'Bonds',
               TickersList.bonds),
-          suggestion(Icon(Icons.workspaces_outline), 'Commodities', TickersList.commodities),
+          suggestion(Icon(Icons.workspaces_outline), 'Commodities'.tr, TickersList.commodities),
 
-          suggestion(Icon(Icons.architecture_sharp), 'Sizes',TickersList.sizes),
+          suggestion(Icon(Icons.architecture_sharp), 'Sizes'.tr,TickersList.sizes),
 
-          suggestion(Icon(Icons.business_sharp), 'Companies', TickersList.companies)
+          suggestion(Icon(Icons.business_sharp), 'Companies'.tr, TickersList.companies)
         ],
       ),
     );

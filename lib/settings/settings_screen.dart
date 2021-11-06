@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:turing_deal/settings/ui/language_settings_widget.dart';
 import 'package:turing_deal/shared/ui/Web.dart';
 import 'package:turing_deal/shared/environment.dart';
 
@@ -16,16 +17,17 @@ class SettingsScreen extends StatelessWidget {
               onPressed: () => Get.back(),
               icon: Icon(Icons.arrow_back_ios),
             ),
-            title: Text('Settings')
+            title: Text('Settings'.tr)
         ),
         body: SingleChildScrollView(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
+              LanguageSettingsWidget(),
               SizedBox(height: 10,),
               Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: Text('The objective of this project is to help people to make investment decisions based on past measurable data instead of pseudo-science beliefs that fill the stock market, specially in this bubble environment.'),
+                child: Text('The objective of this project is to help people to make investment decisions'.tr),
               ),
 
               SizedBox(height: 10,),
@@ -35,7 +37,7 @@ class SettingsScreen extends StatelessWidget {
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10.0)),
                 elevation: 10,
-                child: Text('Contribute on github'),
+                child: Text('Contribute on github'.tr),
                   onPressed: () => Web.launchLink(context, Environment.GITHUB_URL))
             ],
           ),
@@ -44,3 +46,4 @@ class SettingsScreen extends StatelessWidget {
     );
   }
 }
+

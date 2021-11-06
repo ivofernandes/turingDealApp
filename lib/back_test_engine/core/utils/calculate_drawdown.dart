@@ -17,6 +17,7 @@ class CalculateDrawdown{
       if (adjhigh > allTimeHigh) {
         allTimeHigh = adjhigh;
       }
+
       else {
         currentDrawdown = (adjlow / allTimeHigh - 1) * 100;
       }

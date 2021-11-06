@@ -38,9 +38,20 @@ class TuringDealApp extends StatelessWidget {
                 routes: {
                   '/': (context) => HomeScreen(),
                   SettingsScreen.route: (context) => SettingsScreen(),
-                }
+                },
+                locale: Locale(appState.getSelectedLanguage()),
+                translations: TranslationsContainer(translationKeys: appState.getKeys())
             );
         })
     );
   }
+}
+
+class TranslationsContainer extends Translations{
+  final Map<String, Map<String, String>>  translationKeys;
+
+  TranslationsContainer({required this.translationKeys});
+
+  @override
+  get keys => translationKeys;
 }
