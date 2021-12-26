@@ -28,7 +28,7 @@ http://paletton.com/#uid=32V0u0ksHn-iOuBomrKwbjjHje4
    shade 4 = #5E002B = rgb( 94,  0, 43) = rgba( 94,  0, 43,1) = rgb0(0.369,0,0.169)
 
 */
-class AppTheme{
+class AppTheme {
   static Color aux = Color(0xff212121);
   static Color brand = Color(0xff0E8B34);
   static Color brandVariant = Color(0xffBC6813);
@@ -37,67 +37,57 @@ class AppTheme{
   static Color secondary = Color(0xff0E8B34);
   static Color secondaryVariant = Color(0xffBC6813);
 
-
   static Color backgroundDracula = Color(0xff002D50);
   static Color foregroundDracula = Color(0xffEDFCFF);
   static Color focusDracula = Color(0xff3DE5D2);
 
+  static Color ma20 = Color(0xff9999ff);
+  static Color ma50 = Color(0xff0099ff);
+  static Color ma200 = Color(0xff0000ff);
+
   static CardTheme cardTheme = CardTheme(
-      shape:  RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(10.0),
-      )
-  );
+      shape: RoundedRectangleBorder(
+    borderRadius: BorderRadius.circular(10.0),
+  ));
 
   static TextTheme textTheme = TextTheme(
-      headline6: TextStyle(
-          fontSize: 18
-      ),
-      headline5: TextStyle(
-          fontSize: 22
-      ),
-      headline4: TextStyle(
-          fontSize: 28
-      )
-  );
+      headline6: TextStyle(fontSize: 18),
+      headline5: TextStyle(fontSize: 22),
+      headline4: TextStyle(fontSize: 28));
 
   static ThemeData darkTheme() => ThemeData.dark().copyWith(
-    cardTheme: cardTheme,
-    primaryIconTheme: IconThemeData(
-        color:brand
-    ),
-    errorColor: error,
-    colorScheme: ColorScheme.dark().copyWith(
-      primary: brand,
-      primaryVariant: brandVariant,
-      secondary: secondary,
-      secondaryVariant: secondaryVariant,
-      error: error,
-    ),
-    toggleableActiveColor: brand,
-    floatingActionButtonTheme: FloatingActionButtonThemeData(
-      splashColor: focusDracula,
-      backgroundColor: brand,
-    ) ,
-    backgroundColor: backgroundDracula,
-    textTheme: textTheme.copyWith(
-        bodyText1: TextStyle(
-          color: foregroundDracula,
+        cardTheme: cardTheme,
+        primaryIconTheme: IconThemeData(color: brand),
+        errorColor: error,
+        colorScheme: ColorScheme.dark().copyWith(
+          primary: brand,
+          primaryVariant: brandVariant,
+          secondary: secondary,
+          secondaryVariant: secondaryVariant,
+          error: error,
         ),
-        bodyText2: TextStyle(
-          color: foregroundDracula,
+        toggleableActiveColor: brand,
+        floatingActionButtonTheme: FloatingActionButtonThemeData(
+          splashColor: focusDracula,
+          backgroundColor: brand,
         ),
-        headline6: TextStyle(
-          color: foregroundDracula,
-        )
-    ),
-  );
+        backgroundColor: backgroundDracula,
+        textTheme: textTheme.copyWith(
+            bodyText1: TextStyle(
+              color: foregroundDracula,
+            ),
+            bodyText2: TextStyle(
+              color: foregroundDracula,
+            ),
+            headline6: TextStyle(
+              color: foregroundDracula,
+            )),
+      );
 
   static ThemeData lightTheme() => ThemeData.light().copyWith(
       cardTheme: cardTheme,
       primaryColor: Colors.white,
-      primaryIconTheme: IconThemeData(
-          color:brand
-      ),
+      primaryIconTheme: IconThemeData(color: brand),
       colorScheme: ColorScheme.light().copyWith(
         primary: brand,
         primaryVariant: brandVariant,
@@ -109,6 +99,5 @@ class AppTheme{
         backgroundColor: brand,
       ),
       errorColor: error,
-      toggleableActiveColor: brand
-  );
+      toggleableActiveColor: brand);
 }
