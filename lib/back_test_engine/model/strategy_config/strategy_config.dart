@@ -6,7 +6,7 @@ import 'package:turing_deal/back_test_engine/model/strategy_config/strategy_rule
 ///       RSI_3 < 20
 ///     close long:
 ///       RSI_3 > 80
-class StrategyConfig{
+class StrategyConfig {
   // The name of the strategy
   String name;
 
@@ -32,22 +32,24 @@ class StrategyConfig{
   // Rules for close trades
   List<StrategyConfigRules> closingRules;
 
-  StrategyConfig({
-    required this.name,
-    required this.direction,
-    this.target,
-    this.stopLimit,
-    this.trailingStopLimit,
-    this.trailingStopStep,
-    required this.openningRules,
-    required this.closingRules
-  });
+  StrategyConfig(
+      {required this.name,
+      required this.direction,
+      this.target,
+      this.stopLimit,
+      this.trailingStopLimit,
+      this.trailingStopStep,
+      required this.openningRules,
+      required this.closingRules});
+
+  @override
+  String toString() {
+    return 'StrategyConfig{name: $name, direction: $direction, target: $target, stopLimit: $stopLimit, trailingStopLimit: $trailingStopLimit, trailingStopStep: $trailingStopStep, openningRules: $openningRules, closingRules: $closingRules}';
+  }
 }
 
 class StrategyConfigRules {
   List<StrategyConfigRule> rules;
 
-  StrategyConfigRules({
-    required this.rules
-  });
+  StrategyConfigRules({required this.rules});
 }

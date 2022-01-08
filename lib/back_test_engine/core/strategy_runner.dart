@@ -1,5 +1,6 @@
 import 'dart:collection';
 
+import 'package:turing_deal/back_test_engine/core/negotiation/signalizer/negotiation_signalizer.dart';
 import 'package:turing_deal/back_test_engine/core/parser/parser_indicator.dart';
 import 'package:turing_deal/back_test_engine/model/strategy_config/strategy_config.dart';
 import 'package:turing_deal/back_test_engine/model/strategy_result/base_strategy_result.dart';
@@ -26,22 +27,31 @@ class StrategyRunner {
       CalculateIndicators.calculateIndicators(
           candlePrices, indicators.toList());
 
-      executeStrategy(strategy);
+      executeStrategy(strategy, strategyConfig);
     }
 
     strategy.logs['strategyDone'] = DateTime.now();
     return strategy;
   }
 
-  void executeStrategy(StrategyResult strategy) {
-    //TODO execute the strategy
+  void executeStrategy(StrategyResult strategy, StrategyConfig strategyConfig) {
     for (int i = 0; i < this.candlePrices.length; i++) {
+      CandlePrice currentCandle = this.candlePrices[i];
       //TODO update the strategy stats and triggers (stops, targets, drawdown...)
 
       //TODO perform the execution of rules for opening
-
+      Signal? openSignal =
+          NegotiationSignalizer().openSignal(currentCandle, strategyConfig);
       //TODO perform the execution of rules for closing
 
+      // Perform trade
+      if (openSignal == Signal.OPEN_LONG) {
+        print('Open long trade ${currentCandle.date} ');
+      }
+
+      if (openSignal == Signal.OPEN_SHORT) {
+        print('Open short trade ${currentCandle.date} ');
+      }
     }
 
     strategy.CAGR = 10;
