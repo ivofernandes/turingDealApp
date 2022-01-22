@@ -44,7 +44,7 @@ void main() {
     List<CandlePrice> candlePrices = CleanPrices.clean(jsonObject);
     assert(candlePrices.isNotEmpty);
 
-    StrategyRunner strategyRunner = StrategyRunner(candlePrices);
+    StrategyRunner strategyRunner = StrategyRunner('^GSPC', candlePrices);
     StrategyResult result = strategyRunner.run(crossSMABaseStrategy);
 
     // Check if the strategy returned is valid
@@ -78,7 +78,7 @@ void main() {
     List<CandlePrice> candlePrices = CleanPrices.clean(jsonObject);
     assert(candlePrices.isNotEmpty);
 
-    StrategyRunner strategyRunner = StrategyRunner(candlePrices);
+    StrategyRunner strategyRunner = StrategyRunner('^GSPC', candlePrices);
     StrategyResult result = strategyRunner.run(crossSMABaseStrategy);
   });
 }

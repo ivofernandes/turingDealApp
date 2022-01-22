@@ -2,6 +2,8 @@ import 'dart:collection';
 
 import 'package:turing_deal/back_test_engine/core/negotiation/signalizer/negotiation_signalizer.dart';
 import 'package:turing_deal/back_test_engine/core/parser/parser_indicator.dart';
+import 'package:turing_deal/back_test_engine/model/account/trading_account.dart';
+import 'package:turing_deal/back_test_engine/model/shared/back_test_enums.dart';
 import 'package:turing_deal/back_test_engine/model/strategy_config/strategy_config.dart';
 import 'package:turing_deal/back_test_engine/model/strategy_result/base_strategy_result.dart';
 import 'package:turing_deal/back_test_engine/model/strategy_result/strategy_result.dart';
@@ -9,9 +11,10 @@ import 'package:turing_deal/market_data/core/utils/calculate_indicators.dart';
 import 'package:turing_deal/market_data/model/candle_price.dart';
 
 class StrategyRunner {
+  final String ticker;
   final List<CandlePrice> candlePrices;
 
-  StrategyRunner(this.candlePrices) {}
+  StrategyRunner(this.ticker, this.candlePrices) {}
 
   /// Simulate a buy and hold strategy_result in the entire dataframe
   StrategyResult run(StrategyConfig strategyConfig) {
@@ -35,27 +38,56 @@ class StrategyRunner {
   }
 
   void executeStrategy(StrategyResult strategy, StrategyConfig strategyConfig) {
+    // Create an account where the strategy will be executed
+    TradingAccount tradingAccount = TradingAccount();
+
     for (int i = 0; i < this.candlePrices.length; i++) {
       CandlePrice currentCandle = this.candlePrices[i];
-      //TODO update the strategy stats and triggers (stops, targets, drawdown...)
+      // Update the strategy stats and triggers (stops, targets, drawdown...)
+      tradingAccount.updateAccount(currentCandle);
 
-      //TODO perform the execution of rules for opening
-      Signal? openSignal =
-          NegotiationSignalizer().openSignal(currentCandle, strategyConfig);
-      //TODO perform the execution of rules for closing
+      openSignals(tradingAccount, currentCandle, strategyConfig);
 
-      // Perform trade
-      if (openSignal == Signal.OPEN_LONG) {
-        print('Open long trade ${currentCandle.date} ');
-      }
-
-      if (openSignal == Signal.OPEN_SHORT) {
-        print('Open short trade ${currentCandle.date} ');
-      }
+      closeSignals(tradingAccount, currentCandle, strategyConfig);
     }
 
-    strategy.CAGR = 10;
-    strategy.MAR = 1;
-    strategy.drawdown = 30;
+    tradingAccount.getTradingResults(strategy);
+  }
+
+  void openSignals(TradingAccount tradingAccount, CandlePrice currentCandle,
+      StrategyConfig strategyConfig) {
+    // Perform the execution of rules for opening
+    Signal? openSignal =
+        NegotiationSignalizer().openSignal(currentCandle, strategyConfig);
+
+    // Perform trade
+    if (openSignal == Signal.OPEN_LONG) {
+      tradingAccount.openTrade(
+          ticker, TradeType.LONG, currentCandle.date, currentCandle.close);
+    }
+
+    if (openSignal == Signal.OPEN_SHORT) {
+      tradingAccount.openTrade(
+          ticker, TradeType.SHORT, currentCandle.date, currentCandle.close);
+    }
+  }
+
+  void closeSignals(TradingAccount tradingAccount, CandlePrice currentCandle,
+      StrategyConfig strategyConfig) {
+    //TODO perform the execution of rules for closing
+
+    Signal? closeSignal =
+        NegotiationSignalizer().closeSignal(currentCandle, strategyConfig);
+
+    // Perform trade
+    if (closeSignal == Signal.CLOSE_LONG) {
+      tradingAccount.closeTrade(
+          ticker, TradeType.LONG, currentCandle.date, currentCandle.close);
+    }
+
+    if (closeSignal == Signal.CLOSE_SHORT) {
+      tradingAccount.closeTrade(
+          ticker, TradeType.SHORT, currentCandle.date, currentCandle.close);
+    }
   }
 }
