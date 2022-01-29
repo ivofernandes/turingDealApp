@@ -1,15 +1,15 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:turing_deal/market_data/model/candle_price.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:turing_deal/back_test_engine/core/buy_and_hold_strategy.dart';
 import 'package:turing_deal/back_test_engine/model/strategy_result/buy_and_hold_strategyResult.dart';
+import 'package:turing_deal/home/state/mixins/connectivity_state.dart';
+import 'package:turing_deal/market_data/model/candle_price.dart';
 import 'package:turing_deal/market_data/model/stock_picker.dart';
 import 'package:turing_deal/market_data/static/tickers_list.dart';
 import 'package:turing_deal/market_data/yahoo_finance/mocked/yahoo_finance_mocked_data.dart';
 import 'package:turing_deal/market_data/yahoo_finance/services/yahoo_finance_service.dart';
 import 'package:turing_deal/market_data/yahoo_finance/storage/yahoo_finance_dao.dart';
-import 'package:turing_deal/home/state/mixins/connectivity_state.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:turing_deal/shared/ui/UIUtils.dart';
 
 class BigPictureStateProvider with ChangeNotifier, ConnectivityState {
@@ -21,15 +21,15 @@ class BigPictureStateProvider with ChangeNotifier, ConnectivityState {
     this.loadData();
   }
 
-  bool isCompactView(){
+  bool isCompactView() {
     return _compactView;
   }
 
-  bool isMockedData(){
+  bool isMockedData() {
     return _mockedData;
   }
 
-  void toogleCompactView(){
+  void toogleCompactView() {
     this._compactView = !this._compactView;
     refresh();
   }
@@ -38,14 +38,11 @@ class BigPictureStateProvider with ChangeNotifier, ConnectivityState {
     await initConnectivity();
 
     await YahooFinanceDAO().initDatabase();
-    List<String> symbols = [
-      '^GSPC',
-      '^NDX'
-    ];
+    List<String> symbols = ['^GSPC', '^NDX'];
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    if(prefs.getStringList('symbols') != null){
+    if (prefs.getStringList('symbols') != null) {
       symbols = prefs.getStringList('symbols')!;
-    }else{
+    } else {
       prefs.setStringList('symbols', symbols);
     }
 
@@ -63,9 +60,6 @@ class BigPictureStateProvider with ChangeNotifier, ConnectivityState {
     }
   }
 
-  /// Main flow of adding a tiker to the big picture screen,
-  /// will get the data from yahoo finance and then
-  /// execute a buy and hold backtest
   Future<void> addTicker(StockTicker ticker) async {
     _bigPictureData[ticker] = BuyAndHoldStrategyResult();
 
@@ -75,10 +69,12 @@ class BigPictureStateProvider with ChangeNotifier, ConnectivityState {
       prices = await YahooFinanceService.getTickerData(ticker);
     } catch (e) {
       // If got an http error and is requesting ^GSPC let's step to mocked data
-      if(kIsWeb && e.toString() == 'XMLHttpRequest error.' && ticker.symbol == '^GSPC'){
+      if (kIsWeb &&
+          e.toString() == 'XMLHttpRequest error.' &&
+          ticker.symbol == '^GSPC') {
         _mockedData = true;
         prices = await YahooFinanceMockedData.getSP500MockedData();
-      }else {
+      } else {
         _bigPictureData.remove(ticker);
         this.refresh();
         throw e;
@@ -92,7 +88,6 @@ class BigPictureStateProvider with ChangeNotifier, ConnectivityState {
     _bigPictureData[ticker] = strategy;
 
     this.refresh();
-
   }
 
   Map<StockTicker, BuyAndHoldStrategyResult> getBigPictureData() {
@@ -103,13 +98,13 @@ class BigPictureStateProvider with ChangeNotifier, ConnectivityState {
     notifyListeners();
   }
 
-  removeTicker(StockTicker ticker) async{
+  removeTicker(StockTicker ticker) async {
     this._bigPictureData.remove(ticker);
 
     SharedPreferences prefs = await SharedPreferences.getInstance();
     List<String> symbols = prefs.getStringList('symbols')!;
     symbols.remove(ticker.symbol);
-    prefs.setStringList('symbols',symbols);
+    prefs.setStringList('symbols', symbols);
 
     this.refresh();
   }
@@ -120,10 +115,10 @@ class BigPictureStateProvider with ChangeNotifier, ConnectivityState {
     // https://www.fidelity.com/webcontent/ap101883-markets_sectors-content/21.01.0/business_cycle/Business_Cycle_Chart.png
   }
 
-  void persistAddTicker(StockTicker ticker) async{
+  void persistAddTicker(StockTicker ticker) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     List<String> symbols = prefs.getStringList('symbols')!;
     symbols.add(ticker.symbol);
-    prefs.setStringList('symbols',symbols);
+    prefs.setStringList('symbols', symbols);
   }
 }

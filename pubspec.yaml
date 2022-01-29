@@ -42,6 +42,9 @@ dependencies:
   interactive_chart: ^0.3.4
   shared_preferences: ^2.0.8
   country_icons: ^2.0.2
+  charts_flutter: ^0.12.0
+  stats: ^2.0.0
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

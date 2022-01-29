@@ -34,7 +34,6 @@ class TuringDealChart extends StatelessWidget {
       _data[i].trends = [ma20[i], ma50[i], ma200[i]];
     }
 
-    ;
     return Stack(
       children: [
         Container(

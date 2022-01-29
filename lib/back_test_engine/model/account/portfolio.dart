@@ -42,5 +42,9 @@ mixin Portfolio {
     //TODO check if any stop order was triggered
 
     //TODO check if any limit order was triggered
+
+    for (TradeOpen portfolioItem in portfolio) {
+      print(portfolioItem);
+    }
   }
 }
