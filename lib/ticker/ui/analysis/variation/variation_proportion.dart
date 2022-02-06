@@ -1,23 +1,27 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:stats/stats.dart';
 import 'package:turing_deal/market_data/core/indicators/variations.dart';
 import 'package:turing_deal/market_data/model/candle_price.dart';
 import 'package:turing_deal/market_data/model/variation/variation_count.dart';
-import 'package:turing_deal/ticker/analysis/variation/variation_porportion_chart.dart';
+import 'package:turing_deal/ticker/state/ticker_state_provider.dart';
+import 'package:turing_deal/ticker/ui/analysis/variation/variation_porportion_chart.dart';
 
 class VariationProportion extends StatelessWidget {
-  final List<CandlePrice> data;
   final int delta;
 
-  VariationProportion({required this.data, required this.delta});
+  VariationProportion({required this.delta});
 
   @override
   Widget build(BuildContext context) {
-    Variations.calculateVariations(data, delta);
+    TickerStateProvider tickerState =
+        Provider.of<TickerStateProvider>(context, listen: false);
 
+    List<CandlePrice> data = tickerState.getCandlesData();
     List<double> vars = Variations.extractList(data, delta);
-
+    if (vars.isEmpty) {
+      return Center(child: CircularProgressIndicator());
+    }
     final stats = Stats.fromData(vars);
     Stats statistics = stats.withPrecision(3);
 

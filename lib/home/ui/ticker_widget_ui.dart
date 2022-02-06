@@ -1,23 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:turing_deal/market_data/model/stock_picker.dart';
 
-class TickerWidget extends StatelessWidget{
+class TickerWidget extends StatelessWidget {
   final String symbol;
   final String description;
   final Function? onSelection;
 
-  const TickerWidget({
-    required this.symbol,
-    this.description = '',
-    this.onSelection
-  });
-
+  const TickerWidget(
+      {required this.symbol, this.description = '', this.onSelection});
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: (){
-        if(onSelection != null){
+      onTap: () {
+        if (onSelection != null) {
           onSelection!(StockTicker(symbol, description));
         }
       },
@@ -34,12 +30,11 @@ class TickerWidget extends StatelessWidget{
                   ),
                   child: Container(
                     color: Theme.of(context).backgroundColor.withOpacity(0.3),
-                    child: Center(child:
-                    Text(
-                        symbol.toUpperCase(),
-                        style: Theme.of(context).textTheme.headline6)),
+                    child: Center(
+                        child: Text(symbol.toUpperCase(),
+                            style: Theme.of(context).textTheme.headline6)),
                   )),
-              SizedBox(width:10),
+              SizedBox(width: 10),
               Text(description),
             ],
           ),

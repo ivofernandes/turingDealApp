@@ -8,7 +8,7 @@ import 'package:turing_deal/big_picture/ui/explain/explain_mar_ui.dart';
 import 'package:turing_deal/big_picture/ui/resume/strategy_resume_item.dart';
 import 'package:turing_deal/big_picture/ui/resume/strategy_resume_ui.dart';
 import 'package:turing_deal/shared/ui/UIUtils.dart';
-import 'package:turing_deal/ticker/details/prive_variation_chip_ui.dart';
+import 'package:turing_deal/ticker/ui/details/prive_variation_chip_ui.dart';
 
 class StrategyResumeDetails extends StatelessWidget {
   final BuyAndHoldStrategyResult strategy;
@@ -51,8 +51,13 @@ class StrategyResumeDetails extends StatelessWidget {
                         value: strategy.CAGR.toStringAsFixed(2) + '%',
                         onTap: () => UIUtils.bottomSheet(ExplainCagr())),
                     StrategyResumeItem(
+                        title: '% from top',
+                        value:
+                            strategy.currentDrawdown.toStringAsFixed(2) + '%',
+                        onTap: () => UIUtils.bottomSheet(ExplainDrawdown())),
+                    StrategyResumeItem(
                         title: 'Drawdown',
-                        value: strategy.drawdown.toStringAsFixed(2) + '%',
+                        value: strategy.maxDrawdown.toStringAsFixed(2) + '%',
                         onTap: () => UIUtils.bottomSheet(ExplainDrawdown())),
                     StrategyResumeItem(
                         title: 'MAR',

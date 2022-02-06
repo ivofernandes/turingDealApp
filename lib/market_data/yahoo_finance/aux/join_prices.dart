@@ -20,15 +20,19 @@ class JoinPrices {
         oldPricesList[indexToStart]['adjclose'];
 
     if (porportion != 1) {
-      oldPricesList = oldPricesList.toList();
+      List<Map<dynamic, dynamic>> oldPricesListMutable =
+          oldPricesList.map((e) => Map.of(e)).toList();
+
       print(
           'Found porportion != 1: ' + recentPricesList.last['date'].toString());
       for (int i = 0; i < oldPricesList.length; i++) {
-        oldPricesList[i]['adjclose'] *= porportion;
+        oldPricesListMutable[i]['adjclose'] *= porportion;
       }
-    }
 
-    return finishJoin(oldPricesList, recentPricesList, porportion);
+      return finishJoin(oldPricesListMutable, recentPricesList, porportion);
+    } else {
+      return finishJoin(oldPricesList, recentPricesList, porportion);
+    }
   }
 
   static List<dynamic> finishJoin(

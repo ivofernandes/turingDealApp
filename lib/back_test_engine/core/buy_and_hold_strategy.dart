@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:turing_deal/back_test_engine/model/strategy_result/strategy_drawdown.dart';
 import 'package:turing_deal/big_picture/state/big_picture_state_provider.dart';
 import 'package:turing_deal/market_data/core/indicators/sma.dart';
 import 'package:turing_deal/market_data/core/utils/clean_prices.dart';
@@ -46,10 +47,13 @@ class BuyAndHoldStrategy {
     strategy.CAGR =
         (pow(sellPrice / buyPrice, 1 / strategy.tradingYears) - 1) * 100;
 
-    strategy.drawdown = CalculateDrawdown.maxDrawdown(prices);
+    StrategyDrawdown strategyDrawdown = CalculateDrawdown.calculateStrategyDrawdown(prices);
+
+    strategy.maxDrawdown = strategyDrawdown.maxDrawdown;
+    strategy.currentDrawdown = strategyDrawdown.currentDrawdown;
 
     // https://www.investopedia.com/terms/m/mar-ratio.asp
-    strategy.MAR = strategy.CAGR / strategy.drawdown * -1;
+    strategy.MAR = strategy.CAGR / strategy.maxDrawdown * -1;
   }
 
 }

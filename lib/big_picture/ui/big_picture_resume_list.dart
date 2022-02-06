@@ -14,7 +14,7 @@ class BigPictureResumeList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     BigPictureStateProvider bigPictureState =
-    Provider.of<BigPictureStateProvider>(context, listen: false);
+        Provider.of<BigPictureStateProvider>(context, listen: false);
 
     List<StockTicker> tickers = data.keys.toList();
 
@@ -22,34 +22,37 @@ class BigPictureResumeList extends StatelessWidget {
     int columns = (width / StrategyResume.RESUME_WIDTH).floor();
     columns = columns <= 0 ? 1 : columns;
 
-    if(bigPictureState.isCompactView()){
+    if (bigPictureState.isCompactView()) {
       columns *= 3;
     }
     int lines = (tickers.length / columns).ceil();
 
-    return Column(
-      children: [
-        bigPictureState.isMockedData() ? MockedDataDisclaimer() : Container(),
-        Expanded(
-          child: ListView.builder(
-            itemCount: lines,
-            itemBuilder: (BuildContext context, int index) {
-              List<Widget> resumes = [];
+    return Container(
+      padding: EdgeInsets.all(5),
+      child: Column(
+        children: [
+          bigPictureState.isMockedData() ? MockedDataDisclaimer() : Container(),
+          Expanded(
+            child: ListView.builder(
+                itemCount: lines,
+                itemBuilder: (BuildContext context, int index) {
+                  List<Widget> resumes = [];
 
-              for (int i = index * columns;
-              i < (index + 1) * columns && i < tickers.length;
-              i++) {
-                StockTicker ticker = tickers[i];
-                BuyAndHoldStrategyResult? strategy = data[ticker];
-                resumes.add(StrategyResume(ticker, strategy!, (width/columns)));
-              }
-              return Wrap(
-                children: resumes,
-              );
-            }
+                  for (int i = index * columns;
+                      i < (index + 1) * columns && i < tickers.length;
+                      i++) {
+                    StockTicker ticker = tickers[i];
+                    BuyAndHoldStrategyResult? strategy = data[ticker];
+                    resumes.add(
+                        StrategyResume(ticker, strategy!, (width / columns)));
+                  }
+                  return Wrap(
+                    children: resumes,
+                  );
+                }),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }

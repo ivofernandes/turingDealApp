@@ -40,6 +40,6 @@ class TradingAccount with Portfolio {
 
     strategy.CAGR = 10;
     strategy.MAR = 1;
-    strategy.drawdown = 30;
+    strategy.maxDrawdown = 30;
   }
 }
