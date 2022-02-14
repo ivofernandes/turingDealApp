@@ -106,6 +106,8 @@ class BigPictureStateProvider with ChangeNotifier, ConnectivityState {
     symbols.remove(ticker.symbol);
     prefs.setStringList('symbols', symbols);
 
+    int deletedRecords = await YahooFinanceDAO().removeDailyData(ticker.symbol);
+
     this.refresh();
   }
 

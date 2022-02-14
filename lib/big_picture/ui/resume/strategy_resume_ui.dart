@@ -1,22 +1,22 @@
 import 'dart:ui';
 
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 import 'package:turing_deal/back_test_engine/model/strategy_result/buy_and_hold_strategyResult.dart';
 import 'package:turing_deal/market_data/model/stock_picker.dart';
-import 'strategy_resume_header_ui.dart';
+
 import '../../../ticker/ticker_screen.dart';
 import '../../state/big_picture_state_provider.dart';
 import 'strategy_resume_details_ui.dart';
+import 'strategy_resume_header_ui.dart';
 
 class StrategyResume extends StatelessWidget {
   static const double RESUME_WIDTH = 320;
   static const double RESUME_LEFT_COLUMN = 140 - 15;
-  static const double RESUME_RIGHT_COLUMN = RESUME_WIDTH - RESUME_LEFT_COLUMN- 30;
-
+  static const double RESUME_RIGHT_COLUMN =
+      RESUME_WIDTH - RESUME_LEFT_COLUMN - 30;
 
   final StockTicker ticker;
   final BuyAndHoldStrategyResult strategy;
@@ -27,14 +27,16 @@ class StrategyResume extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     BigPictureStateProvider bigPictureState =
-      Provider.of<BigPictureStateProvider>(context, listen: false);
+        Provider.of<BigPictureStateProvider>(context, listen: false);
 
-    double width = window.physicalSize.width / window.devicePixelRatio;
-    int columns = (width / RESUME_WIDTH).floor();
-    double cardWidth = RESUME_WIDTH + (width % RESUME_WIDTH / columns);
+    double screenWidth = window.physicalSize.width / window.devicePixelRatio;
+    int columns = (screenWidth / RESUME_WIDTH).floor();
+    double cardWidth = RESUME_WIDTH + (screenWidth % RESUME_WIDTH / columns);
 
-    if(bigPictureState.isCompactView()){
+    if (bigPictureState.isCompactView()) {
       cardWidth /= 3;
+      cardWidth -= 5;
+      print('card width: $cardWidth');
     }
 
     return Dismissible(
@@ -47,14 +49,12 @@ class StrategyResume extends StatelessWidget {
         child: Icon(Icons.close),
       ),
       child: ConstrainedBox(
-        constraints: BoxConstraints(
-          minHeight: 190
-        ),
+        constraints: BoxConstraints(minHeight: 190),
         child: Container(
           width: cardWidth,
           child: InkWell(
-            onTap: (){
-              if(!bigPictureState.isMockedData()) {
+            onTap: () {
+              if (!bigPictureState.isMockedData()) {
                 Get.to(TickerScreen(ticker));
               }
             },
@@ -65,7 +65,7 @@ class StrategyResume extends StatelessWidget {
                     ? Column(
                         children: [
                           StrategyResumeHeader(
-                              this.ticker, this.strategy, width),
+                              this.ticker, this.strategy, screenWidth),
                           StrategyResumeDetails(this.strategy),
                           strategy.progress < 100
                               ? CircularProgressIndicator()
