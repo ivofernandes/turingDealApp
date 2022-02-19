@@ -1,11 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:turing_deal/market_data/core/indicators/variations.dart';
+import 'package:turing_deal/market_data/core/utils/yearly_calculations.dart';
 import 'package:turing_deal/market_data/model/candle_price.dart';
+
+import '../../market_data/model/yearly_stats.dart';
 
 class TickerStateProvider with ChangeNotifier {
   bool analysisComplete = false;
-
+  bool yearlyStatsComplete = false;
+  List<YearlyStats> _yearlyStats = [];
   List<CandlePrice> data = [];
+
   TickerStateProvider() {
     print('New ticker state provider');
   }
@@ -33,19 +38,31 @@ class TickerStateProvider with ChangeNotifier {
     return this.data;
   }
 
-  void refresh() {
-    notifyListeners();
-  }
-
   analysis() {
-    if (!analysisComplete) {
-      Variations.calculateVariations(data, 1);
-      Variations.calculateVariations(data, 5);
-      Variations.calculateVariations(data, 20);
-
-      analysisComplete = true;
+    if (!yearlyStatsComplete) {
+      _yearlyStats = YearlyCalculations.calculate(data);
 
       refresh();
     }
+
+    if (!analysisComplete) {
+      analysisComplete = true;
+
+      Future.delayed(Duration.zero, () {
+        Variations.calculateVariations(data, 1);
+        Variations.calculateVariations(data, 5);
+        Variations.calculateVariations(data, 20);
+
+        refresh();
+      });
+    }
+  }
+
+  List<YearlyStats> getYearlyStats() {
+    return _yearlyStats;
+  }
+
+  void refresh() {
+    notifyListeners();
   }
 }

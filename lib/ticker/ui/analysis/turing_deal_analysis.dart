@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:turing_deal/ticker/state/ticker_state_provider.dart';
 import 'package:turing_deal/ticker/ui/analysis/variation/variation_proportion.dart';
+import 'package:turing_deal/ticker/ui/analysis/variation/yearly_stats_widget.dart';
 
 class TuringDealAnalysis extends StatelessWidget {
   const TuringDealAnalysis();
@@ -18,6 +19,7 @@ class TuringDealAnalysis extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            YearlyStatsWidget(),
             VariationProportion(
               delta: 1,
             ),
