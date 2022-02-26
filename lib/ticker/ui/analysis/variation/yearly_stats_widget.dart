@@ -1,8 +1,10 @@
 import 'package:charts_flutter/flutter.dart' as charts;
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:turing_deal/market_data/model/yearly_stats.dart';
 import 'package:turing_deal/ticker/state/ticker_state_provider.dart';
+import 'package:turing_deal/ticker/ui/chart/chart_legend_item.dart';
 
 class YearlyStatsWidget extends StatelessWidget {
   @override
@@ -14,6 +16,13 @@ class YearlyStatsWidget extends StatelessWidget {
       children: [
         SizedBox(
           height: 20,
+        ),
+        Column(
+          children: [
+            ChartLegendItem(Colors.white, 'CAGR'),
+            ChartLegendItem(Colors.red.shade200, 'Drawdown'),
+            SizedBox(height: 20)
+          ],
         ),
         InteractiveViewer(
           child: SizedBox(

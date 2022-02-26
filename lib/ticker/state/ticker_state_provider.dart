@@ -42,6 +42,7 @@ class TickerStateProvider with ChangeNotifier {
     if (!yearlyStatsComplete) {
       _yearlyStats = YearlyCalculations.calculate(data);
 
+      yearlyStatsComplete = true;
       refresh();
     }
 

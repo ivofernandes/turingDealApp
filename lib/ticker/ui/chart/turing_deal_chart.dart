@@ -3,8 +3,7 @@ import 'package:interactive_chart/interactive_chart.dart';
 import 'package:intl/intl.dart';
 import 'package:turing_deal/market_data/model/candle_price.dart';
 import 'package:turing_deal/shared/app_theme.dart';
-
-import 'chart_legend.dart';
+import 'package:turing_deal/ticker/ui/chart/chart_legend.dart';
 
 class TuringDealChart extends StatelessWidget {
   final List<CandlePrice> data;

@@ -30,7 +30,8 @@ class YearlyCalculations {
 
   static void addToResult(List<YearlyStats> result, int currentYear,
       List<CandlePrice> candlesOfTheYear) {
-    if (candlesOfTheYear.isNotEmpty) {
+    // To have variation needs two days at least
+    if (candlesOfTheYear.length > 1) {
       StrategyDrawdown strategyDrawdown =
           CalculateDrawdown.calculateStrategyDrawdown(candlesOfTheYear);
       double drawdown = strategyDrawdown.maxDrawdown;

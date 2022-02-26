@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:turing_deal/shared/app_theme.dart';
+import 'package:turing_deal/ticker/ui/chart/chart_legend_item.dart';
 
 class ChartLegend extends StatelessWidget {
+  const ChartLegend();
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -16,33 +19,6 @@ class ChartLegend extends StatelessWidget {
           ChartLegendItem(AppTheme.ma200, "SMA_200"),
         ],
       ),
-    );
-  }
-}
-
-class ChartLegendItem extends StatelessWidget {
-  final Color color;
-  final String text;
-
-  const ChartLegendItem(this.color, this.text);
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      children: [
-        Container(
-          height: 5,
-          width: 5,
-          decoration: BoxDecoration(
-            color: color,
-            shape: BoxShape.circle,
-          ),
-        ),
-        SizedBox(
-          width: 10,
-        ),
-        Text(text)
-      ],
     );
   }
 }

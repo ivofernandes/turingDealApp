@@ -48,11 +48,11 @@ class BigPictureStateProvider with ChangeNotifier, ConnectivityState {
 
     if (hasInternetConnection()) {
       if (_bigPictureData.isEmpty || true) {
-        symbols.forEach((symbol) async {
+        for (String symbol in symbols) {
           print('adding ticker $symbol');
           StockTicker ticker = StockTicker(symbol, TickersList.main[symbol]);
           await addTicker(ticker);
-        });
+        }
         globalAnalysis();
       }
     } else {
