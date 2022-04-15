@@ -5,7 +5,7 @@ import 'package:turing_deal/back_test_engine/core/buy_and_hold_strategy.dart';
 import 'package:turing_deal/back_test_engine/model/strategy_result/buy_and_hold_strategyResult.dart';
 import 'package:turing_deal/home/state/mixins/connectivity_state.dart';
 import 'package:turing_deal/market_data/model/candle_price.dart';
-import 'package:turing_deal/market_data/model/stock_picker.dart';
+import 'package:turing_deal/market_data/model/stock_ticker.dart';
 import 'package:turing_deal/market_data/static/tickers_list.dart';
 import 'package:turing_deal/market_data/yahoo_finance/mocked/yahoo_finance_mocked_data.dart';
 import 'package:turing_deal/market_data/yahoo_finance/services/yahoo_finance_service.dart';

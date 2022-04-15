@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:turing_deal/market_data/model/candle_price.dart';
-import 'package:turing_deal/market_data/model/stock_picker.dart';
+import 'package:turing_deal/market_data/model/stock_ticker.dart';
 import 'package:turing_deal/market_data/yahoo_finance/services/yahoo_finance_service.dart';
 import 'package:turing_deal/ticker/state/ticker_state_provider.dart';
 import 'package:turing_deal/ticker/ui/ticker_tabs.dart';

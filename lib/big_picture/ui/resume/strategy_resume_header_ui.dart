@@ -3,7 +3,7 @@ import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:turing_deal/back_test_engine/model/strategy_result/buy_and_hold_strategyResult.dart';
 import 'package:turing_deal/big_picture/state/big_picture_state_provider.dart';
-import 'package:turing_deal/market_data/model/stock_picker.dart';
+import 'package:turing_deal/market_data/model/stock_ticker.dart';
 import 'package:turing_deal/market_data/static/ticker_resolve.dart';
 
 class StrategyResumeHeader extends StatelessWidget {

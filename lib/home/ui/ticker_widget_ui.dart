@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:turing_deal/market_data/model/stock_picker.dart';
+import 'package:turing_deal/market_data/model/stock_ticker.dart';
 
 class TickerWidget extends StatelessWidget {
   final String symbol;

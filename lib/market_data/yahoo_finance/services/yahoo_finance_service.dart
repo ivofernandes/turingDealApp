@@ -1,19 +1,15 @@
-import 'package:flutter/foundation.dart';
 import 'package:turing_deal/back_test_engine/core/utils/strategy_time.dart';
 import 'package:turing_deal/market_data/core/utils/clean_prices.dart';
 import 'package:turing_deal/market_data/model/candle_price.dart';
-import 'package:turing_deal/market_data/model/stock_picker.dart';
-import 'package:turing_deal/market_data/yahoo_finance/api/yahoo_fInance_official_api.dart';
+import 'package:turing_deal/market_data/model/stock_ticker.dart';
 import 'package:turing_deal/market_data/yahoo_finance/api/yahoo_finance.dart';
 import 'package:turing_deal/market_data/yahoo_finance/aux/join_prices.dart';
 import 'package:turing_deal/market_data/yahoo_finance/storage/yahoo_finance_dao.dart';
 
 /// This class abstracts for the state machine how the API vs cache works
 class YahooFinanceService {
-  
   /// Gets the candles for a ticker
   static Future<List<CandlePrice>> getTickerData(StockTicker ticker) async {
-
     // Try to get data from cache
     List<dynamic>? prices =
         await YahooFinanceDAO().getAllDailyData(ticker.symbol);

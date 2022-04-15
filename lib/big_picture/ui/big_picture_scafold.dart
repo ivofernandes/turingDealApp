@@ -4,7 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:turing_deal/back_test_engine/model/strategy_result/buy_and_hold_strategyResult.dart';
 import 'package:turing_deal/big_picture/state/big_picture_state_provider.dart';
 import 'package:turing_deal/big_picture/ui/big_picture_resume_list.dart';
-import 'package:turing_deal/market_data/model/stock_picker.dart';
+import 'package:turing_deal/market_data/model/stock_ticker.dart';
 
 /// This class makes sure there are data to show in the reume list
 /// and takes care of the floating action button animation
@@ -45,27 +45,29 @@ class _BigPictureScafoldState extends State<BigPictureScafold>
   @override
   Widget build(BuildContext context) {
     BigPictureStateProvider bigPictureState =
-    Provider.of<BigPictureStateProvider>(context, listen: false);
+        Provider.of<BigPictureStateProvider>(context, listen: false);
 
     // Return the big picture screen
-    Map<StockTicker, BuyAndHoldStrategyResult> data = bigPictureState.getBigPictureData();
+    Map<StockTicker, BuyAndHoldStrategyResult> data =
+        bigPictureState.getBigPictureData();
 
-    if(data.length == 0){
+    if (data.length == 0) {
       return Text('No strategies');
-    }else{
+    } else {
       // Hide compact data if there are not enough data
-      if(data.length < minTickerForShowCompatData){
+      if (data.length < minTickerForShowCompatData) {
         _controller.reverse();
         _showFloatingButton = false;
       }
       return NotificationListener<UserScrollNotification>(
         onNotification: (scroll) {
-          if (scroll.direction == ScrollDirection.reverse && _showFloatingButton) {
+          if (scroll.direction == ScrollDirection.reverse &&
+              _showFloatingButton) {
             _controller.reverse();
             _showFloatingButton = false;
           } else if (scroll.direction == ScrollDirection.forward &&
               !_showFloatingButton) {
-            if(data.length >= minTickerForShowCompatData) {
+            if (data.length >= minTickerForShowCompatData) {
               _controller.forward();
               _showFloatingButton = true;
             }
@@ -78,10 +80,9 @@ class _BigPictureScafoldState extends State<BigPictureScafold>
             scale: _animation,
             child: FloatingActionButton(
                 onPressed: () => bigPictureState.toogleCompactView(),
-                child: Icon(
-                    bigPictureState.isCompactView() ? Icons.view_agenda_rounded : Icons.view_comfortable_sharp
-                )
-            ),
+                child: Icon(bigPictureState.isCompactView()
+                    ? Icons.view_agenda_rounded
+                    : Icons.view_comfortable_sharp)),
           ),
         ),
       );

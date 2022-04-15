@@ -18,7 +18,7 @@ class StrategyResumeItem extends StatelessWidget {
             Text(
               title,
               style: Theme.of(context).textTheme.bodyText2!.copyWith(
-                    fontSize: 12,
+                    fontSize: 10,
                     decoration: TextDecoration.underline,
                   ),
               textAlign: TextAlign.left,
@@ -26,14 +26,14 @@ class StrategyResumeItem extends StatelessWidget {
             Text(
               ': ',
               style: Theme.of(context).textTheme.bodyText2!.copyWith(
-                    fontSize: 12,
+                    fontSize: 10,
                   ),
               textAlign: TextAlign.left,
             ),
             Spacer(),
             Text(value,
                 style: Theme.of(context).textTheme.bodyText2!.copyWith(
-                      fontSize: 12,
+                      fontSize: 10,
                     ),
                 textAlign: TextAlign.right),
           ],

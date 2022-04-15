@@ -11,8 +11,7 @@ class TickersList {
     '^IRX': 'USA 13 Week Bond yield',
     '^FVX': 'Treasury Yield 5 Years ',
     '^TNX': 'Treasury Yield 10 Years ',
-    '^TYX': 'Treasury Yield 30 Years',
-    'ZB=F': 'Treasury Bond Futures'
+    '^TYX': 'Treasury Yield 30 Years'
   };
 
   static Map<String, String> sectors = {
@@ -60,7 +59,9 @@ class TickersList {
     'JPXN': 'Japan, Nikkei 400',
   };
 
-  static Map<String, String> commodities = {
+  static Map<String, String> futures = {
+    'ES=F': 'SP500',
+    'NQ=F': 'Nasdaq',
     'GC=F': 'Gold',
     'SI=F': 'Silver',
     'CL=F': 'Oil',
@@ -70,7 +71,8 @@ class TickersList {
     'ZS=F': 'Soybean',
     'CC=F': 'Cocoa',
     'KC=F': 'Coffee',
-    'SB=F': 'Sugar'
+    'SB=F': 'Sugar',
+    'ZB=F': 'Treasury Bond Futures'
   };
 
   static Map<String, String> sizes = {

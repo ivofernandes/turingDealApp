@@ -3,9 +3,10 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:get/get.dart';
+import 'package:pinch_zoom_release_unzoom/pinch_zoom_release_unzoom.dart';
 import 'package:provider/provider.dart';
 import 'package:turing_deal/back_test_engine/model/strategy_result/buy_and_hold_strategyResult.dart';
-import 'package:turing_deal/market_data/model/stock_picker.dart';
+import 'package:turing_deal/market_data/model/stock_ticker.dart';
 
 import '../../../ticker/ticker_screen.dart';
 import '../../state/big_picture_state_provider.dart';
@@ -58,25 +59,27 @@ class StrategyResume extends StatelessWidget {
                 Get.to(TickerScreen(ticker));
               }
             },
-            child: Card(
-              child: Container(
-                padding: const EdgeInsets.all(10.0),
-                child: strategy.progress > 0
-                    ? Column(
-                        children: [
-                          StrategyResumeHeader(
-                              this.ticker, this.strategy, screenWidth),
-                          StrategyResumeDetails(this.strategy),
-                          strategy.progress < 100
-                              ? CircularProgressIndicator()
-                              : Container()
-                        ],
-                      )
-                    : Column(
-                        children: [
-                          CircularProgressIndicator(),
-                        ],
-                      ),
+            child: PinchZoomReleaseUnzoomWidget(
+              child: Card(
+                child: Container(
+                  padding: const EdgeInsets.all(10.0),
+                  child: strategy.progress > 0
+                      ? Column(
+                          children: [
+                            StrategyResumeHeader(
+                                this.ticker, this.strategy, screenWidth),
+                            StrategyResumeDetails(this.strategy),
+                            strategy.progress < 100
+                                ? CircularProgressIndicator()
+                                : Container()
+                          ],
+                        )
+                      : Column(
+                          children: [
+                            CircularProgressIndicator(),
+                          ],
+                        ),
+                ),
               ),
             ),
           ),

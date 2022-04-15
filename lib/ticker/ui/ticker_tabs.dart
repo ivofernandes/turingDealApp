@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:turing_deal/market_data/model/candle_price.dart';
-import 'package:turing_deal/market_data/model/stock_picker.dart';
+import 'package:turing_deal/market_data/model/stock_ticker.dart';
 import 'package:turing_deal/market_data/static/ticker_resolve.dart';
 import 'package:turing_deal/ticker/ui/analysis/turing_deal_analysis.dart';
 import 'package:turing_deal/ticker/ui/chart/turing_deal_chart.dart';
