@@ -13,7 +13,7 @@
    viewBox="0 0 210 297"
    version="1.1"
    id="svg14488"
-   sodipodi:docname="logo_only.svg"
+   sodipodi:docname="turing_deal_logo.svg"
    inkscape:version="1.0.1 (c497b03c, 2020-09-10)">
   <defs
      id="defs14482">
@@ -217,9 +217,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.49497475"
-     inkscape:cx="-2454.8369"
-     inkscape:cy="1997.9407"
+     inkscape:zoom="0.14960694"
+     inkscape:cx="-1302.3824"
+     inkscape:cy="2218.2068"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
      inkscape:document-rotation="0"
@@ -237,7 +237,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -247,7 +247,7 @@
      id="layer1">
     <g
        id="g2500"
-       transform="translate(-858.79113,57.426294)"
+       transform="matrix(0.49085331,0,0,0.49085331,28.546315,-119.70453)"
        inkscape:export-filename="/Users/ivofernandes/git/turingDealApp/assets/images/logo.png"
        inkscape:export-xdpi="96.000023"
        inkscape:export-ydpi="96.000023">

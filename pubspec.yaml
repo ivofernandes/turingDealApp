@@ -68,6 +68,7 @@ flutter:
     - assets/locales/
     - assets/images/stores/
     - assets/market_data/
+    - assets/svg/
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

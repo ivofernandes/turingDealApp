@@ -15,6 +15,7 @@ class YahooFinanceService {
 
     for (String symbol in symbols) {
       List<CandlePrice> prices = await getTickerData(StockTicker(symbol, ''));
+      pricesList.add(prices);
     }
 
     return AverageMixer.mix(pricesList);

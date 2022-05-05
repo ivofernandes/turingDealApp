@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:turing_deal/market_data/model/candle_price.dart';
 
 class AverageMixer {
@@ -54,11 +56,14 @@ class AverageMixer {
       double sumVolume = 0;
 
       for (int a = 0; a < numberOfAssets; a++) {
-        //TODO check if we are in the same day before sum
-        // If there is no data for this date? Get the last date
-        CandlePrice candle = pricesList[a].last;
-        if (pricesList[a].length > d) {
-          candle = pricesList[a][d];
+        // Goes back until find the right date
+        int currentAssetIndex = min(d, pricesList[a].length - 1);
+        CandlePrice candle = pricesList[a][currentAssetIndex];
+        if (candle.date.isAfter(currentDate)) {
+          while (candle.date.isAfter(currentDate) && currentAssetIndex > 0) {
+            candle = pricesList[a][currentAssetIndex];
+            currentAssetIndex--;
+          }
         }
 
         sumOpen += candle.open;
