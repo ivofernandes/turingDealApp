@@ -44,7 +44,13 @@ class StrategyResumeHeader extends StatelessWidget {
                 ),
                 bigPictureState.isCompactView()
                     ? Container()
-                    : Text(ticketDescription, style: theme.textTheme.bodyText1)
+                    : Container(
+                        width: MediaQuery.of(context).size.width / 2 - 40,
+                        child: Align(
+                          alignment: Alignment.centerRight,
+                          child: Text(ticketDescription,
+                              style: theme.textTheme.bodyText1),
+                        ))
               ],
             ),
             Divider(height: 5, color: theme.textTheme.bodyText1!.color),

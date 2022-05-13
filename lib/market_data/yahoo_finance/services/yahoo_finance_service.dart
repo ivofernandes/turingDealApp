@@ -2,10 +2,10 @@ import 'package:turing_deal/back_test_engine/core/utils/strategy_time.dart';
 import 'package:turing_deal/market_data/core/utils/clean_prices.dart';
 import 'package:turing_deal/market_data/model/candle_price.dart';
 import 'package:turing_deal/market_data/model/stock_ticker.dart';
-import 'package:turing_deal/market_data/yahoo_finance/api/yahoo_finance.dart';
 import 'package:turing_deal/market_data/yahoo_finance/aux/join_prices.dart';
 import 'package:turing_deal/market_data/yahoo_finance/mixer/average_mixer.dart';
 import 'package:turing_deal/market_data/yahoo_finance/storage/yahoo_finance_dao.dart';
+import 'package:yahoo_finance_data_reader/yahoo_finance_data_reader.dart';
 
 /// This class abstracts for the state machine how the API vs cache works
 class YahooFinanceService {
@@ -58,12 +58,10 @@ class YahooFinanceService {
       int lastDate = prices[2]['date'];
 
       // Get remaing data from yahoo finance
-      Map<String, dynamic>? historicalData =
-          await YahooFinance.getDailyDataFrom(ticker.symbol, lastDate);
+      List<dynamic> nextPrices = await YahooFinanceDailyReader()
+          .getDailyData(ticker.symbol, startTimestamp: lastDate);
 
-      if (historicalData != null && historicalData['prices'] != null) {
-        List<dynamic> nextPrices = historicalData['prices'];
-
+      if (nextPrices != []) {
         prices = JoinPrices.joinPrices(prices, nextPrices);
 
         // Cache data after join locally
@@ -79,11 +77,10 @@ class YahooFinanceService {
   static Future<List<dynamic>> getAllDataFromYahooFinance(
       StockTicker ticker) async {
     // Get data from yahoo finance
-    Map<String, dynamic>? historicalData =
-        await (YahooFinance.getAllDailyData(ticker.symbol));
+    List<dynamic> prices =
+        await (YahooFinanceDailyReader().getDailyData(ticker.symbol));
 
-    if (historicalData != null && historicalData['prices'] != null) {
-      List<dynamic> prices = historicalData['prices'];
+    if (prices != []) {
       // Cache data locally
       YahooFinanceDAO().saveDailyData(ticker.symbol, prices);
       return prices;
