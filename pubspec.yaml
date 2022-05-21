@@ -29,22 +29,22 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
 
   http: ^0.13.4
-  path_provider: ^2.0.9
+  path_provider: ^2.0.10
   provider: ^6.0.2
   sembast: ^3.2.0
   sembast_web: ^2.0.1+1
   cupertino_icons: ^1.0.4
   intl: ^0.17.0
-  webview_flutter: ^3.0.0
-  url_launcher: ^6.0.20
-  get: ^4.6.1
+  webview_flutter: ^3.0.4
+  url_launcher: ^6.1.2
+  get: ^4.6.3
   connectivity_plus: ^2.3.0
   interactive_chart: ^0.3.4
-  shared_preferences: ^2.0.13
+  shared_preferences: ^2.0.15
   country_icons: ^2.0.2
   charts_flutter: ^0.12.0
   stats: ^2.0.0
-  pinch_zoom_release_unzoom: ^0.0.3
+  pinch_zoom_release_unzoom: ^0.0.4
   yahoo_finance_data_reader: ^0.0.2
 
 dev_dependencies:

@@ -76,6 +76,7 @@ class BigPictureStateProvider with ChangeNotifier, ConnectivityState {
         _mockedData = true;
         prices = await YahooFinanceMockedData.getSP500MockedData();
       } else {
+        YahooFinanceDAO().removeDailyData(ticker.symbol);
         _bigPictureData.remove(ticker);
         this.refresh();
         throw e;

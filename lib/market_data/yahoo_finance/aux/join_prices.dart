@@ -5,37 +5,74 @@ class JoinPrices {
   ///
   static List<dynamic> joinPrices(
       List<dynamic> oldPricesList, List<dynamic> recentPricesList) {
-    //Get the index on prices that matches the last value in next prices
-    int oldestDateInTheRecentList = recentPricesList.last['date'];
-    int indexToStart = 0;
-    while (indexToStart < oldPricesList.length - 1 &&
-        oldPricesList[indexToStart]['date'] != oldestDateInTheRecentList &&
-        indexToStart < oldPricesList.length) {
-      indexToStart++;
-    }
-    print('reference date: ' + oldPricesList[indexToStart]['date'].toString());
+    double proportion = _calculateProportion(oldPricesList, recentPricesList);
 
-    // Check if there is a need to apply a porportion adjustment int ehe adjusted close
-    double porportion = recentPricesList.last['adjclose'] /
-        oldPricesList[indexToStart]['adjclose'];
-
-    if (porportion != 1) {
+    if (proportion != 1) {
       List<Map<dynamic, dynamic>> oldPricesListMutable =
           oldPricesList.map((e) => Map.of(e)).toList();
 
       print(
           'Found porportion != 1: ' + recentPricesList.last['date'].toString());
       for (int i = 0; i < oldPricesList.length; i++) {
-        oldPricesListMutable[i]['adjclose'] *= porportion;
+        if (oldPricesListMutable[i].containsKey('adjclose') &&
+            oldPricesListMutable[i]['adjclose'] != null) {
+          oldPricesListMutable[i]['adjclose'] =
+              oldPricesListMutable[i]['adjclose'] * proportion;
+        }
       }
 
-      return finishJoin(oldPricesListMutable, recentPricesList, porportion);
+      return _finishJoin(oldPricesListMutable, recentPricesList, proportion);
     } else {
-      return finishJoin(oldPricesList, recentPricesList, porportion);
+      return _finishJoin(oldPricesList, recentPricesList, proportion);
     }
   }
 
-  static List<dynamic> finishJoin(
+  static double _calculateProportion(
+      List oldPricesList, List recentPricesList) {
+    //Get the index on prices that matches the last value in next prices
+
+    int indexInOld = 0;
+    int indexInRecent = recentPricesList.length;
+
+    bool foundMatch = false;
+
+    // Start in the last recent index of the recent dataframe
+    // and goes on searching for a date in the old dataframe that matches
+    while (!foundMatch && indexInRecent != 0) {
+      indexInRecent--;
+      indexInOld = 0;
+
+      DateTime oldestDateInTheRecentList = DateTime.fromMillisecondsSinceEpoch(
+          recentPricesList[indexInRecent]['date'] * 1000);
+
+      while (indexInOld < oldPricesList.length - 1 &&
+          recentPricesList[indexInRecent]['date'] !=
+              oldPricesList[indexInOld]['date'] &&
+          indexInOld < oldPricesList.length) {
+        indexInOld++;
+
+        DateTime referenceDate = DateTime.fromMillisecondsSinceEpoch(
+            oldPricesList[indexInOld]['date'] * 1000);
+        print('reference date: $referenceDate');
+      }
+
+      //
+      foundMatch = recentPricesList[indexInRecent]['date'] ==
+          oldPricesList[indexInOld]['date'];
+    }
+
+    double proportion = 1;
+
+    if (foundMatch) {
+      // Check if there is a need to apply a porportion adjustment int ehe adjusted close
+      proportion = recentPricesList[indexInRecent]['adjclose'] /
+          oldPricesList[indexInOld]['adjclose'];
+    }
+
+    return proportion;
+  }
+
+  static List<dynamic> _finishJoin(
       List oldPricesList, List recentPricesList, double porportion) {
     List<dynamic> result = oldPricesList.toList();
 

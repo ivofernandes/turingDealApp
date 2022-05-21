@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:turing_deal/market_data/model/yearly_stats.dart';
+import 'package:turing_deal/shared/app_theme.dart';
 import 'package:turing_deal/ticker/state/ticker_state_provider.dart';
 import 'package:turing_deal/ticker/ui/chart/chart_legend_item.dart';
 
@@ -19,7 +20,7 @@ class YearlyStatsWidget extends StatelessWidget {
         ),
         Column(
           children: [
-            ChartLegendItem(Colors.white, 'CAGR'),
+            ChartLegendItem(AppTheme.brand, 'CAGR'),
             ChartLegendItem(Colors.red.shade200, 'Drawdown'),
             SizedBox(height: 20)
           ],
@@ -35,25 +36,25 @@ class YearlyStatsWidget extends StatelessWidget {
                 barGroupingType: charts.BarGroupingType.grouped,
                 barRendererDecorator: new charts.BarLabelDecorator<String>(
                     insideLabelStyleSpec: charts.TextStyleSpec(
-                        fontSize: 12,
-                        color: charts.Color.fromHex(code: "#000000")),
+                        fontSize: 12, color: charts.MaterialPalette.black),
                     outsideLabelStyleSpec: charts.TextStyleSpec(
-                        fontSize: 12,
-                        color: charts.Color.fromHex(code: "#FFFFFF"))),
+                        fontSize: 12, color: charts.MaterialPalette.black)),
                 // Left labels
                 domainAxis: charts.OrdinalAxisSpec(
                     renderSpec: charts.SmallTickRendererSpec(
                         labelStyle: charts.TextStyleSpec(
-                            fontSize: 12, color: charts.MaterialPalette.white),
+                            fontSize: 12,
+                            color: charts.MaterialPalette.blue.shadeDefault),
                         lineStyle: charts.LineStyleSpec(
-                            color: charts.MaterialPalette.white))),
+                            color: charts.MaterialPalette.blue.shadeDefault))),
                 // Top labels
                 secondaryMeasureAxis: charts.NumericAxisSpec(
                     renderSpec: charts.GridlineRendererSpec(
                         labelStyle: charts.TextStyleSpec(
-                            fontSize: 12, color: charts.MaterialPalette.white),
+                            fontSize: 12,
+                            color: charts.MaterialPalette.blue.shadeDefault),
                         lineStyle: charts.LineStyleSpec(
-                            color: charts.MaterialPalette.white))),
+                            color: charts.MaterialPalette.blue.shadeDefault))),
               )),
         ),
       ],
@@ -69,7 +70,7 @@ class YearlyStatsWidget extends StatelessWidget {
           domainFn: (YearlyStats yearlyStat, _) => yearlyStat.year.toString(),
           measureFn: (YearlyStats yearlyStat, _) => yearlyStat.variation,
           data: yearlyStats,
-          fillColorFn: (_, __) => charts.MaterialPalette.white,
+          fillColorFn: (_, __) => charts.MaterialPalette.green.shadeDefault,
           labelAccessorFn: (YearlyStats yearlyStat, _) =>
               '${yearlyStat.variation.toStringAsFixed(0)} %')
         ..setAttribute(charts.measureAxisIdKey, 'secondaryMeasureAxisId'),

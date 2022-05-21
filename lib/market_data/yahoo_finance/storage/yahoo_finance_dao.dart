@@ -31,7 +31,7 @@ class YahooFinanceDAO with SembastDatabase {
     return resultsList;
   }
 
-  Future<int?> saveDailyData(String? ticker, List<dynamic> data) async {
+  Future<void> saveDailyData(String? ticker, List<dynamic> data) async {
     var store = intMapStoreFactory.store(STORE_DAILY);
 
     await store.delete(getDatabase()!,

@@ -57,14 +57,14 @@ class TickerSearch extends SearchDelegate<List<StockTicker>> {
           suggestion(Icon(Icons.view_headline), 'Main'.tr, TickersList.main),
           suggestion(Icon(Icons.precision_manufacturing_outlined), 'Sectors'.tr,
               TickersList.sectors),
+          suggestion(Icon(Icons.workspaces_outline), 'Futures'.tr,
+              TickersList.futures),
           suggestion(
               Icon(Icons.computer), 'Cryptos'.tr, TickersList.cryptoCurrencies),
           suggestion(
               Icon(Icons.language), 'Countries'.tr, TickersList.countries),
           suggestion(
               Icon(Icons.account_balance_outlined), 'Bonds', TickersList.bonds),
-          suggestion(Icon(Icons.workspaces_outline), 'Futures'.tr,
-              TickersList.futures),
           suggestion(
               Icon(Icons.architecture_sharp), 'Sizes'.tr, TickersList.sizes),
           suggestion(

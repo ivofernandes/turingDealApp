@@ -52,9 +52,10 @@ class YahooFinanceService {
   static Future<List<dynamic>> refreshData(
       List<dynamic> prices, StockTicker ticker) async {
     if (prices.length > 1) {
-      // Get one of the lasts dates in the cache, this is not the more recent,
-      // because could have the current price of the request in the close,
-      // instead of the real close price
+      // Get one of the lasts dates in the cache, this is not the most recent,
+      // because the most recent often is in the middle of the day,
+      // and the yahoo finance returns us the current price in the close price column, 
+      // and for joining dates, we need real instead of the real close prices
       int lastDate = prices[2]['date'];
 
       // Get remaing data from yahoo finance
