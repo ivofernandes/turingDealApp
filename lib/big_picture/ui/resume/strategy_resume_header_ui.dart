@@ -11,9 +11,9 @@ import 'package:turing_deal/market_data/static/ticker_resolve.dart';
 class StrategyResumeHeader extends StatelessWidget {
   final StockTicker ticker;
   final BuyAndHoldStrategyResult? strategy;
-  final double width;
+  final double cardWidth;
 
-  const StrategyResumeHeader(this.ticker, this.strategy, this.width);
+  const StrategyResumeHeader(this.ticker, this.strategy, this.cardWidth);
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +24,7 @@ class StrategyResumeHeader extends StatelessWidget {
 
     String ticketDescription = TickerResolve.getTickerDescription(ticker);
 
-    TickerSearch t = TickerSearch(searchFieldLabel: 'Add'.tr);
+    TickerSearch tickerSearch = TickerSearch(searchFieldLabel: 'Add'.tr);
 
     return Container(
       child: Stack(
@@ -36,16 +36,22 @@ class StrategyResumeHeader extends StatelessWidget {
                   ? MainAxisAlignment.center
                   : MainAxisAlignment.spaceBetween,
               children: [
-                SizedBox(
-                  //width: bigPictureState.isCompactView() ? width / 3 - 50 : width / 3,
-                  child: Text(ticker.symbol,
-                      style: theme.textTheme.headline6,
-                      overflow: TextOverflow.clip),
+                Container(
+                  width: bigPictureState.isCompactView()
+                      ? cardWidth - 30
+                      : cardWidth / 2 - 20,
+                  child: Text(
+                    ticker.symbol,
+                    style: theme.textTheme.headline6,
+                    textAlign: bigPictureState.isCompactView()
+                        ? TextAlign.center
+                        : TextAlign.start,
+                  ),
                 ),
                 bigPictureState.isCompactView()
                     ? Container()
                     : Container(
-                        width: MediaQuery.of(context).size.width / 2 - 40,
+                        width: cardWidth / 2 - 20,
                         child: Align(
                           alignment: Alignment.centerRight,
                           child: Text(ticketDescription,
@@ -87,9 +93,10 @@ class StrategyResumeHeader extends StatelessWidget {
                         Icons.add,
                       )),
                   onTap: () async {
-                    List<StockTicker>? tickers =
-                        await showSearch(context: context, delegate: t);
-                    bigPictureState.joinTicker(ticker, tickers);
+                    List<StockTicker>? tickers = await showSearch(
+                        context: context, delegate: tickerSearch);
+                    await bigPictureState.joinTicker(ticker, tickers);
+                    bigPictureState.persistTickers();
                   },
                 ),
         ],

@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:turing_deal/back_test_engine/model/strategy_result/buy_and_hold_strategyResult.dart';
 import 'package:turing_deal/big_picture/state/big_picture_state_provider.dart';
-import 'package:turing_deal/big_picture/ui/mocked_data_disclaimer.dart';
 import 'package:turing_deal/big_picture/ui/resume/strategy_resume_ui.dart';
 import 'package:turing_deal/market_data/model/stock_ticker.dart';
+import 'package:turing_deal/settings/ui/apps_banner.dart';
 
 class BigPictureResumeList extends StatelessWidget {
   final Map<StockTicker, BuyAndHoldStrategyResult> data;
@@ -31,7 +31,7 @@ class BigPictureResumeList extends StatelessWidget {
       padding: EdgeInsets.all(5),
       child: Column(
         children: [
-          bigPictureState.isMockedData() ? MockedDataDisclaimer() : Container(),
+          bigPictureState.isMockedData() ? AppsBanner() : Container(),
           Expanded(
             child: ListView.builder(
                 itemCount: lines,

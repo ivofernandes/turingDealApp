@@ -53,7 +53,6 @@ class JoinPrices {
 
         DateTime referenceDate = DateTime.fromMillisecondsSinceEpoch(
             oldPricesList[indexInOld]['date'] * 1000);
-        print('reference date: $referenceDate');
       }
 
       //

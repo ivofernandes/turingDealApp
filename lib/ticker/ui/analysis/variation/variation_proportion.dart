@@ -35,7 +35,7 @@ class VariationProportion extends StatelessWidget {
         Variations.countByInterval(lowerLimit, upperLimit, step, data, delta);
 
     return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         SizedBox(
           width: double.maxFinite,
@@ -46,14 +46,19 @@ class VariationProportion extends StatelessWidget {
             ),
           ),
         ),
-        SizedBox(
-          height: 10,
+        Container(
+          margin: EdgeInsets.all(10),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text('Average: ${statistics.average}'),
+              Text('Min: ${statistics.max}'),
+              Text('Max: ${statistics.min}'),
+              Text('Median: ${statistics.median}'),
+              Text('Stddev: ${statistics.standardDeviation}'),
+            ],
+          ),
         ),
-        Text('Average: ${statistics.average}'),
-        Text('Min: ${statistics.max}'),
-        Text('Max: ${statistics.min}'),
-        Text('Median: ${statistics.median}'),
-        Text('Stddev: ${statistics.standardDeviation}'),
         SizedBox(
             height: 300,
             width: 300,

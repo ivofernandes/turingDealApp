@@ -45,7 +45,7 @@ dependencies:
   charts_flutter: ^0.12.0
   stats: ^2.0.0
   pinch_zoom_release_unzoom: ^0.0.4
-  yahoo_finance_data_reader: ^0.0.2
+  yahoo_finance_data_reader: ^0.0.3
 
 dev_dependencies:
   flutter_test:

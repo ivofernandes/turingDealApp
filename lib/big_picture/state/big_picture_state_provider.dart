@@ -15,7 +15,7 @@ import 'package:turing_deal/shared/ui/UIUtils.dart';
 
 class BigPictureStateProvider with ChangeNotifier, ConnectivityState {
   bool _compactView = false;
-  bool _mockedData = false;
+  bool _isMocked = false;
   Map<StockTicker, BuyAndHoldStrategyResult> _bigPictureData = {};
 
   BigPictureStateProvider() {
@@ -27,7 +27,7 @@ class BigPictureStateProvider with ChangeNotifier, ConnectivityState {
   }
 
   bool isMockedData() {
-    return _mockedData;
+    return _isMocked;
   }
 
   void toogleCompactView() {
@@ -69,11 +69,9 @@ class BigPictureStateProvider with ChangeNotifier, ConnectivityState {
     try {
       prices = await YahooFinanceService.getTickerData(ticker);
     } catch (e) {
-      // If got an http error and is requesting ^GSPC let's step to mocked data
-      if (kIsWeb &&
-          e.toString() == 'XMLHttpRequest error.' &&
-          ticker.symbol == '^GSPC') {
-        _mockedData = true;
+      // If got an CORS error let's step to use proxy
+      if (kIsWeb && e.toString() == 'XMLHttpRequest error.') {
+        _isMocked = true;
         prices = await YahooFinanceMockedData.getSP500MockedData();
       } else {
         YahooFinanceDAO().removeDailyData(ticker.symbol);
@@ -144,10 +142,11 @@ class BigPictureStateProvider with ChangeNotifier, ConnectivityState {
     // https://www.fidelity.com/webcontent/ap101883-markets_sectors-content/21.01.0/business_cycle/Business_Cycle_Chart.png
   }
 
-  void persistAddTicker(StockTicker ticker) async {
+  void persistTickers() async {
+    List<String> symbols = _bigPictureData.keys
+        .map((StockTicker stockTicker) => stockTicker.symbol)
+        .toList();
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    List<String> symbols = prefs.getStringList('symbols')!;
-    symbols.add(ticker.symbol);
     prefs.setStringList('symbols', symbols);
   }
 }

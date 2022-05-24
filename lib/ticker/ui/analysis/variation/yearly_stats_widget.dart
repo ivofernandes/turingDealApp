@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:turing_deal/market_data/model/yearly_stats.dart';
 import 'package:turing_deal/shared/app_theme.dart';
+import 'package:turing_deal/shared/ui/touch_interative_viewer.dart';
 import 'package:turing_deal/ticker/state/ticker_state_provider.dart';
 import 'package:turing_deal/ticker/ui/chart/chart_legend_item.dart';
 
@@ -19,16 +20,17 @@ class YearlyStatsWidget extends StatelessWidget {
           height: 20,
         ),
         Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             ChartLegendItem(AppTheme.brand, 'CAGR'),
             ChartLegendItem(Colors.red.shade200, 'Drawdown'),
             SizedBox(height: 20)
           ],
         ),
-        InteractiveViewer(
+        TouchInteractiveViewer(
           child: SizedBox(
               height: tickerState.getYearlyStats().length * 40,
-              width: 300,
+              width: MediaQuery.of(context).size.width - 100,
               child: charts.BarChart(
                 _getData(tickerState.getYearlyStats()),
                 animate: false,

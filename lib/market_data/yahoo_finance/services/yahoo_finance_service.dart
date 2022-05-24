@@ -1,4 +1,5 @@
 import 'package:turing_deal/back_test_engine/core/utils/strategy_time.dart';
+import 'package:turing_deal/home/state/app_state_provider.dart';
 import 'package:turing_deal/market_data/core/utils/clean_prices.dart';
 import 'package:turing_deal/market_data/model/candle_price.dart';
 import 'package:turing_deal/market_data/model/stock_ticker.dart';
@@ -54,7 +55,7 @@ class YahooFinanceService {
     if (prices.length > 1) {
       // Get one of the lasts dates in the cache, this is not the most recent,
       // because the most recent often is in the middle of the day,
-      // and the yahoo finance returns us the current price in the close price column, 
+      // and the yahoo finance returns us the current price in the close price column,
       // and for joining dates, we need real instead of the real close prices
       int lastDate = prices[2]['date'];
 
@@ -77,9 +78,19 @@ class YahooFinanceService {
 
   static Future<List<dynamic>> getAllDataFromYahooFinance(
       StockTicker ticker) async {
+    List<dynamic> prices = [];
+
     // Get data from yahoo finance
-    List<dynamic> prices =
-        await (YahooFinanceDailyReader().getDailyData(ticker.symbol));
+    try {
+      prices = await YahooFinanceDailyReader().getDailyData(ticker.symbol);
+    } catch (e) {
+      if (AppStateProvider.isDesktopWeb() &&
+          e.toString().contains('XMLHttpRequest error.')) {
+        prices = await YahooFinanceDailyReader(
+                prefix: 'https://thingproxy.freeboard.io/fetch/https://')
+            .getDailyData(ticker.symbol);
+      }
+    }
 
     if (prices != []) {
       // Cache data locally

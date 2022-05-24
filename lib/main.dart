@@ -28,7 +28,9 @@ class TuringDealApp extends StatelessWidget {
         child: Consumer<AppStateProvider>(builder: (context, appState, child) {
           appState.loadData();
           return GetMaterialApp(
-              theme: AppTheme.darkTheme(),
+              theme: appState.isDark()
+                  ? AppTheme.darkTheme()
+                  : AppTheme.lightTheme(),
               debugShowCheckedModeBanner: false,
               title: "TuringDeal",
               initialRoute: '/',

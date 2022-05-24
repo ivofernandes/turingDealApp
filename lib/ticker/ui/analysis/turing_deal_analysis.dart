@@ -17,7 +17,7 @@ class TuringDealAnalysis extends StatelessWidget {
     if (tickerState.isAnalysisComplete()) {
       return SingleChildScrollView(
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             YearlyStatsWidget(),
             VariationProportion(
@@ -29,7 +29,10 @@ class TuringDealAnalysis extends StatelessWidget {
         ),
       );
     } else {
-      return Center(child: CircularProgressIndicator());
+      return SizedBox(
+          width: 100,
+          height: 200,
+          child: Center(child: CircularProgressIndicator()));
     }
   }
 }

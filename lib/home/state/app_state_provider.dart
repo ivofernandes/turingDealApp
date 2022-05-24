@@ -1,17 +1,26 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:turing_deal/home/state/mixins/language_state.dart';
+import 'package:turing_deal/home/state/mixins/theme_state.dart';
 import 'package:turing_deal/market_data/model/stock_ticker.dart';
 
 import 'mixins/connectivity_state.dart';
 import 'mixins/navigation_state.dart';
 
 class AppStateProvider
-    with ChangeNotifier, ConnectivityState, NavigationState, LanguageState {
+    with
+        ChangeNotifier,
+        ConnectivityState,
+        NavigationState,
+        LanguageState,
+        ThemeState {
   List<StockTicker>? searching = [];
 
   AppStateProvider() {
-    loadUserLanguage().then((value) => refresh());
+    Future futureLanguage = loadUserLanguage();
+    Future futureTheme = loadTheme();
+
+    Future.wait([futureLanguage, futureTheme]).then((value) => refresh());
   }
 
   void loadData() async {
@@ -33,5 +42,11 @@ class AppStateProvider
 
   void refresh() {
     notifyListeners();
+  }
+
+  static bool isDesktopWeb() {
+    return kIsWeb &&
+        (defaultTargetPlatform != TargetPlatform.iOS &&
+            defaultTargetPlatform != TargetPlatform.android);
   }
 }

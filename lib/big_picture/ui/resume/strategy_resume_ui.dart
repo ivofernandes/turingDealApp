@@ -67,7 +67,7 @@ class StrategyResume extends StatelessWidget {
                       ? Column(
                           children: [
                             StrategyResumeHeader(
-                                this.ticker, this.strategy, screenWidth),
+                                this.ticker, this.strategy, cardWidth),
                             StrategyResumeDetails(this.strategy),
                             strategy.progress < 100
                                 ? CircularProgressIndicator()
