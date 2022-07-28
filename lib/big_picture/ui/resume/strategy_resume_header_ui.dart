@@ -4,6 +4,7 @@ import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:turing_deal/back_test_engine/model/strategy_result/buy_and_hold_strategyResult.dart';
 import 'package:turing_deal/big_picture/state/big_picture_state_provider.dart';
+import 'package:turing_deal/home/state/app_state_provider.dart';
 import 'package:turing_deal/home/ui/ticker_search.dart';
 import 'package:turing_deal/market_data/model/stock_ticker.dart';
 import 'package:turing_deal/market_data/static/ticker_resolve.dart';
@@ -88,7 +89,10 @@ class StrategyResumeHeader extends StatelessWidget {
                   child: Container(
                       color: Colors.lightBlue.withOpacity(0.0),
                       padding: EdgeInsets.only(
-                          left: 40, right: 40, top: 0, bottom: 30),
+                          left: 40,
+                          right: 40,
+                          top: 0,
+                          bottom: AppStateProvider.isDesktopWeb() ? 0 : 30),
                       child: Icon(
                         Icons.add,
                       )),

@@ -1,3 +1,4 @@
+import 'package:anchor_tabs/anchor_tabs.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:turing_deal/ticker/state/ticker_state_provider.dart';
@@ -15,19 +16,24 @@ class TuringDealAnalysis extends StatelessWidget {
     List<int> variationsList = tickerState.getAvailableVariations();
 
     if (tickerState.isAnalysisComplete()) {
-      return SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            YearlyStatsWidget(),
-            VariationProportion(
-              delta: 1,
-            ),
-            VariationProportion(delta: 5),
-            VariationProportion(delta: 20)
-          ],
+      List<Widget> tabs = [
+        Text('Year stats'),
+        Text('Daily variation'),
+        Text('5d variation'),
+        Text('20d variation'),
+      ];
+      List<Widget> body = [
+        YearlyStatsWidget(),
+        VariationProportion(
+          delta: 1,
         ),
-      );
+        VariationProportion(delta: 5),
+        VariationProportion(delta: 20)
+      ];
+
+      return Container(
+          margin: const EdgeInsets.all(10),
+          child: AnchorTabPanel(tabs: tabs, body: body));
     } else {
       return SizedBox(
           width: 100,

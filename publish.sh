@@ -1,4 +1,4 @@
-flutter build web
+ flutter build web
 cd publish
 rm -rf public/
 mkdir public
