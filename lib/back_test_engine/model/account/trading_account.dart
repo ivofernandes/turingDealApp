@@ -27,7 +27,15 @@ class TradingAccount with Portfolio {
       String ticker, TradeType tradeType, DateTime date, double close) {
     if (isTradeOpen(ticker, tradeType)) {
       print('Close $tradeType trade $date @price $close');
-      removeFromPortfolio(ticker, tradeType);
+      TradeOpen? tradeOpen = removeFromPortfolio(ticker, tradeType);
+
+      if (tradeOpen != null) {
+        tradesHistory.add(TradeHistory(
+            trade: tradeOpen,
+            closeDate: date,
+            closePrice: close,
+            maxDrawdown: tradeOpen.maxDrawdown));
+      }
     }
   }
 

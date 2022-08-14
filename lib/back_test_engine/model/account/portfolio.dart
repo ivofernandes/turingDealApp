@@ -1,3 +1,5 @@
+import 'package:turing_deal/back_test_engine/core/utils/calculate_drawdown.dart';
+import 'package:turing_deal/back_test_engine/model/account/trade_checks.dart';
 import 'package:turing_deal/back_test_engine/model/shared/back_test_enums.dart';
 import 'package:turing_deal/back_test_engine/model/trade/trade.dart';
 import 'package:turing_deal/market_data/model/candle_price.dart';
@@ -28,23 +30,32 @@ mixin Portfolio {
             openPrice: price)));
   }
 
-  void removeFromPortfolio(String ticker, TradeType tradeType) {
+  TradeOpen? removeFromPortfolio(String ticker, TradeType tradeType) {
     for (TradeOpen portfolioItem in portfolio) {
       if (portfolioItem.ticker == ticker &&
           portfolioItem.tradeType == tradeType) {
         portfolio.remove(portfolioItem);
-        break;
+        return portfolioItem;
       }
     }
+
+    return null;
   }
 
+  /// update portfolio open positions
   void updatePortfolio(CandlePrice currentCandle) {
-    //TODO check if any stop order was triggered
+    for (TradeOpen position in portfolio) {
+      // Check if any stop order was triggered
+      bool stopped = TradeChecks.checkStop(position, currentCandle);
+      if (stopped) continue;
 
-    //TODO check if any limit order was triggered
+      // Check if any limit order was triggered
+      bool limited = TradeChecks.checkLimit(position, currentCandle);
+      if (limited) continue;
 
-    for (TradeOpen portfolioItem in portfolio) {
-      print(portfolioItem);
+      // Check how the drawdown changed
+      CalculateDrawdown.updateTradeDrawdown(position, currentCandle);
+      print(position);
     }
   }
 }

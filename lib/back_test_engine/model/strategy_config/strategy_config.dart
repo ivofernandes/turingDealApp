@@ -52,4 +52,9 @@ class StrategyConfigRules {
   List<StrategyConfigRule> rules;
 
   StrategyConfigRules({required this.rules});
+
+  @override
+  String toString() {
+    return 'rules: $rules';
+  }
 }

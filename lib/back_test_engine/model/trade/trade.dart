@@ -19,18 +19,16 @@ class Trade {
       required this.tradeType,
       required this.openDate,
       required this.openPrice});
+
+  @override
+  String toString() {
+    return 'Trade{ticker: $ticker, tradeType: $tradeType, openDate: $openDate, openPrice: $openPrice}';
+  }
 }
 
 class TradeOpen extends Trade {
   // currentDrawdown
-  double currentMaxDrawdown = 0;
-
-  // current result
-
-  /*
-  'stopLossLimit': stopLossLimit,
-  'maxResult':0
-*/
+  double maxDrawdown = 0;
 
   TradeOpen({required Trade trade})
       : super(
