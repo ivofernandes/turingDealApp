@@ -28,14 +28,20 @@ class Trade {
 
 class TradeOpen extends Trade {
   // currentDrawdown
-  double maxDrawdown = 0;
+  double maxDrawdown;
+  // Trade all time high in case of a long trade,
+  // and all time low in case of the short trade
+  double mostFavorablePrice;
 
-  TradeOpen({required Trade trade})
+  TradeOpen(
+      {required Trade trade, this.maxDrawdown = 0, this.mostFavorablePrice = 0})
       : super(
             ticker: trade.ticker,
             tradeType: trade.tradeType,
             openDate: trade.openDate,
-            openPrice: trade.openPrice);
+            openPrice: trade.openPrice) {
+    mostFavorablePrice = trade.openPrice;
+  }
 }
 
 class TradeHistory extends Trade {

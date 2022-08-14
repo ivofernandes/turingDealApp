@@ -32,17 +32,44 @@ class CalculateDrawdown {
 
   static void updateTradeDrawdown(
       TradeOpen position, CandlePrice currentCandle) {
-    if (position.tradeType == TradeType.LONG) {}
+    double currentDrawdown = 0;
+
+    if (position.tradeType == TradeType.LONG) {
+      currentDrawdown = calculatePercentageChange(
+          position.tradeType, position.mostFavorablePrice, currentCandle.low);
+    } else if (position.tradeType == TradeType.SHORT) {
+      currentDrawdown = calculatePercentageChange(
+          position.tradeType, position.mostFavorablePrice, currentCandle.high);
+    }
+
+    if (currentDrawdown < position.maxDrawdown) {
+      position.maxDrawdown = currentDrawdown;
+    }
+
+    // Update the most favorable price after calculate the drawdown,
+    // this should be after to avoid a situation
+    // where the high is after the low but in the same daily bar
+    if (position.tradeType == TradeType.LONG) {
+      if (currentCandle.high > position.mostFavorablePrice) {
+        position.mostFavorablePrice = currentCandle.high;
+      }
+    } else if (position.tradeType == TradeType.SHORT) {
+      if (currentCandle.low < position.mostFavorablePrice) {
+        position.mostFavorablePrice = currentCandle.low;
+      }
+    }
   }
 
+  /// Calculate the percentage of change from the entry to the exit price
   static double calculatePercentageChange(
       TradeType type, double entry, double exit) {
     if (type == TradeType.LONG) {
       return (exit / entry - 1) * 100;
-    }
-    // Short
-    else {
+    } else if (type == TradeType.SHORT) {
       return (entry / exit - 1) * 100;
+    } else {
+      // If is not long neither short something is calculated here
+      throw UnimplementedError();
     }
   }
 }
