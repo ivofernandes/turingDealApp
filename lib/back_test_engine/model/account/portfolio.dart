@@ -55,7 +55,6 @@ mixin Portfolio {
 
       // Check how the drawdown changed
       CalculateDrawdown.updateTradeDrawdown(position, currentCandle);
-      print(position);
     }
   }
 }

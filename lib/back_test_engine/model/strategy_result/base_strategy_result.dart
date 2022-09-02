@@ -21,6 +21,8 @@ class BaseStrategyResult {
 
   LinkedHashMap<String, DateTime> logs = LinkedHashMap();
 
+  int tradesNum = 0;
+
   @override
   String toString() => 'CAGR: $CAGR , drawdown: $maxDrawdown, MAR: $MAR';
 

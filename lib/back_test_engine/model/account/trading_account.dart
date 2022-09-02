@@ -39,13 +39,20 @@ class TradingAccount with Portfolio {
     }
   }
 
-  void updateAccount(CandlePrice currentCandle) {
+  void updateAccount(CandlePrice currentCandle, CandlePrice? previousCandle) {
+    // If nothing changed
+    if (previousCandle == null || portfolio.isEmpty) {
+      DateTime date = currentCandle.date;
+
+      balanceHistory[date] = balance;
+    }
+
     updatePortfolio(currentCandle);
   }
 
   void getTradingResults(StrategyResult strategy) {
     // TODO Calculate the metrics from trades list
-
+    strategy.tradesNum = tradesHistory.length;
     strategy.CAGR = 10;
     strategy.MAR = 1;
     strategy.maxDrawdown = 30;

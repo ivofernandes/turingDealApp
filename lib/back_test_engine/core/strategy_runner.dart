@@ -40,15 +40,16 @@ class StrategyRunner {
   void executeStrategy(StrategyResult strategy, StrategyConfig strategyConfig) {
     // Create an account where the strategy will be executed
     TradingAccount tradingAccount = TradingAccount();
-
+    CandlePrice? previousCandle;
     for (int i = 0; i < this.candlePrices.length; i++) {
       CandlePrice currentCandle = this.candlePrices[i];
       // Update the strategy stats and triggers (stops, targets, drawdown...)
-      tradingAccount.updateAccount(currentCandle);
+      tradingAccount.updateAccount(currentCandle, previousCandle);
 
       openSignals(tradingAccount, currentCandle, strategyConfig);
 
       closeSignals(tradingAccount, currentCandle, strategyConfig);
+      previousCandle = currentCandle;
     }
 
     tradingAccount.getTradingResults(strategy);

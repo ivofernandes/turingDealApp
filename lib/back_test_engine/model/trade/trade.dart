@@ -64,4 +64,11 @@ class TradeHistory extends Trade {
             tradeType: trade.tradeType,
             openDate: trade.openDate,
             openPrice: trade.openPrice);
+
+  @override
+  String toString() {
+    return 'TradeHistory{ticker: $ticker, tradeType: $tradeType, '
+        'openDate: $openDate, openPrice: $openPrice, '
+        'closeDate: $closeDate, closePrice: $closePrice}';
+  }
 }
