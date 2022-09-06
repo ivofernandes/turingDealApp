@@ -15,7 +15,7 @@ https://www.interactivebrokers.com/referral/ivo376
 
 This project can be executed like any flutter application just by importing in android studio, flutter pub get and running in a device
 
-Ideas about the arquitecture of the app:
+Ideas about the architecture of the app:
 
 - lib -> All the flutter code
     - ba
@@ -70,6 +70,11 @@ As we will access yahoo finance data from our browser we need to avoid the CORS 
 
 4- Add '--disable-web-security'
 
+# M1 errors, for m1 you may need to run a pod install with 
+cd ios
+arch -x86_64 pod install
+
+
 
 # Generate icons
 flutter pub run flutter_launcher_icons:main
@@ -78,7 +83,7 @@ flutter pub run flutter_launcher_icons:main
 flutter pub run flutter_native_splash:create
 
 
-# Relase of the app
+# Release of the app
 
 ## Android
 First generate the bundle
