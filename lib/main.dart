@@ -17,15 +17,16 @@ class TuringDealApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
-        providers: <SingleChildWidget>[
-          ChangeNotifierProvider<AppStateProvider>(
-            create: (_) => AppStateProvider(),
-          ),
-          ChangeNotifierProvider<BigPictureStateProvider>(
-            create: (_) => BigPictureStateProvider(),
-          ),
-        ],
-        child: Consumer<AppStateProvider>(builder: (context, appState, child) {
+      providers: <SingleChildWidget>[
+        ChangeNotifierProvider<AppStateProvider>(
+          create: (_) => AppStateProvider(),
+        ),
+        ChangeNotifierProvider<BigPictureStateProvider>(
+          create: (_) => BigPictureStateProvider(),
+        ),
+      ],
+      child: Consumer<AppStateProvider>(
+        builder: (context, appState, child) {
           appState.loadData();
           return GetMaterialApp(
               theme: appState.isDark()
@@ -41,7 +42,9 @@ class TuringDealApp extends StatelessWidget {
               locale: Locale(appState.getSelectedLanguage()),
               translations:
                   TranslationsContainer(translationKeys: appState.getKeys()));
-        }));
+        },
+      ),
+    );
   }
 }
 

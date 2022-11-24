@@ -386,7 +386,7 @@ packages:
       name: pinch_zoom_release_unzoom
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.0.5"
+    version: "0.0.8"
   platform:
     dependency: transitive
     description:
@@ -685,7 +685,7 @@ packages:
       name: yahoo_finance_data_reader
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.0.5"
+    version: "0.0.7"
   yaml:
     dependency: transitive
     description:

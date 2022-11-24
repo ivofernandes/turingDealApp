@@ -14,7 +14,8 @@ class TuringDealChart extends StatelessWidget {
     List<CandleData> _data = [
       // timestamp, open, high, low, close, volume
     ];
-    data.forEach((element) {
+
+    for (final element in data) {
       CandleData candle = CandleData(
           timestamp: element.date.millisecondsSinceEpoch,
           open: element.open,
@@ -23,7 +24,7 @@ class TuringDealChart extends StatelessWidget {
           low: element.low,
           high: element.high);
       _data.add(candle);
-    });
+    }
 
     final ma20 = CandleData.computeMA(_data, 20);
     final ma50 = CandleData.computeMA(_data, 50);

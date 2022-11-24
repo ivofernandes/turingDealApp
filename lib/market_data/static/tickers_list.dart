@@ -30,7 +30,6 @@ class TickersList {
 
   static Map<String, String> countries = {
     'URTH': 'Whole World',
-    'EWI': 'Italia',
     'RSX': 'Russia',
     'EWL': 'Switzerland',
     'EWU': 'UK',
@@ -39,7 +38,6 @@ class TickersList {
     'EWA': 'Australia',
     'AFK': 'Whole Africa',
     'EGPT': 'Egypt',
-    'EWA': 'South Africa',
     'MCHI': 'China',
     'FXI': 'China Large Cap',
     'CQQQ': 'China Tech',
