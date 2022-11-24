@@ -1,5 +1,4 @@
 import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:turing_deal/back_test_engine/core/buy_and_hold_strategy.dart';
 import 'package:turing_deal/back_test_engine/model/strategy_result/buy_and_hold_strategyResult.dart';

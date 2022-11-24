@@ -36,10 +36,10 @@ class YearlyCalculations {
           CalculateDrawdown.calculateStrategyDrawdown(candlesOfTheYear);
       double drawdown = strategyDrawdown.maxDrawdown;
 
-      double CAGR = CalculateStrategyMetrics.calculateCAGR(candlesOfTheYear);
+      double cagr = CalculateStrategyMetrics.calculateCAGR(candlesOfTheYear);
 
       result.add(
-          YearlyStats(year: currentYear, variation: CAGR, drawdown: drawdown));
+          YearlyStats(year: currentYear, variation: cagr, drawdown: drawdown));
     }
   }
 }

@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'dart:io';
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -29,7 +28,7 @@ class Web extends StatefulWidget {
       launch(url);
     } else {
       Get.snackbar('Error on trying to open url', '',
-      colorText: Theme.of(context).errorColor);
+          colorText: Theme.of(context).errorColor);
     }
   }
 }
@@ -145,8 +144,11 @@ class NavigationControls extends StatelessWidget {
                       if (await controller!.canGoForward()) {
                         await controller.goForward();
                       } else {
-                        Get.snackbar('No forward history item', '',
-                            colorText: Theme.of(context).errorColor,);
+                        Get.snackbar(
+                          'No forward history item',
+                          '',
+                          colorText: Theme.of(context).errorColor,
+                        );
                         return;
                       }
                     },

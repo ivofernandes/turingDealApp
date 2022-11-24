@@ -1,5 +1,4 @@
 import 'package:charts_flutter/flutter.dart' as charts;
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:turing_deal/market_data/model/yearly_stats.dart';

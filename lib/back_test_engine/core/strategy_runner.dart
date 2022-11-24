@@ -14,7 +14,7 @@ class StrategyRunner {
   final String ticker;
   final List<CandlePrice> candlePrices;
 
-  StrategyRunner(this.ticker, this.candlePrices) {}
+  StrategyRunner(this.ticker, this.candlePrices);
 
   /// Simulate a buy and hold strategy_result in the entire dataframe
   StrategyResult run(StrategyConfig strategyConfig) {
