@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+import 'package:interactive_i18n/interactive_i18n.dart';
 import 'package:turing_deal/market_data/model/candle_price.dart';
 import 'package:turing_deal/market_data/model/stock_ticker.dart';
 import 'package:turing_deal/market_data/static/ticker_resolve.dart';
@@ -43,10 +43,17 @@ class _TickerTabsState extends State<TickerTabs> {
         currentIndex: _selectedIndex,
         items: [
           BottomNavigationBarItem(
-              icon: Icon(Icons.show_chart_outlined), label: 'Chart'.tr),
+            icon: Icon(Icons.show_chart_outlined),
+            label: 'Chart'.t,
+          ),
           BottomNavigationBarItem(
-              icon: Icon(Icons.analytics_outlined), label: 'Analysis'.tr),
-          BottomNavigationBarItem(icon: Icon(Icons.list), label: 'Prices'.tr),
+            icon: Icon(Icons.analytics_outlined),
+            label: 'Analysis'.t,
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.list),
+            label: 'Prices'.t,
+          ),
         ],
       ),
     );

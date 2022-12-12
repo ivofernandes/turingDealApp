@@ -8,9 +8,9 @@ class CalculateStrategyMetrics {
         candles.last.date.difference(candles.first.date).inDays.toDouble();
     double tradingYears = tradingDays / 365;
 
-    double CAGR =
+    double cagr =
         (pow(candles.last.close / candles.first.close, 1 / tradingYears) - 1) *
             100;
-    return CAGR;
+    return cagr;
   }
 }

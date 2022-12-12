@@ -39,9 +39,9 @@ void main() {
     BuyAndHoldStrategyResult strategy =
         BuyAndHoldStrategy.buyAndHoldAnalysis(prices);
 
-    assert(strategy.CAGR == 100);
+    assert(strategy.cagr == 100);
     assert(strategy.maxDrawdown == -50);
-    assert(strategy.MAR == 2);
+    assert(strategy.mar == 2);
     assert(strategy.tradingYears == 1);
 
     print(strategy.toString());

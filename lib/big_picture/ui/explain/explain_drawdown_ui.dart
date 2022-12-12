@@ -34,7 +34,7 @@ class ExplainDrawdown extends StatelessWidget {
                         .bodyText1!
                         .copyWith(color: Theme.of(context).backgroundColor)),
                 onPressed: () {
-                  Web.openView(context,
+                  Web.launchLink(context,
                       'https://www.investopedia.com/terms/m/maximum-drawdown-mdd.asp');
                 })
           ],

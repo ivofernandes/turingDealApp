@@ -1,4 +1,4 @@
-class CandlePrice{
+class CandlePrice {
   final DateTime date;
   final double volume;
 
@@ -12,7 +12,6 @@ class CandlePrice{
   CandlePrice({
     required this.date,
     required this.volume,
-
     required this.open,
     required this.close,
     required this.high,

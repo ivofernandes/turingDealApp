@@ -1,5 +1,4 @@
 import 'package:flutter/foundation.dart';
-import 'package:turing_deal/home/state/mixins/language_state.dart';
 import 'package:turing_deal/home/state/mixins/theme_state.dart';
 import 'package:turing_deal/market_data/model/stock_ticker.dart';
 
@@ -7,19 +6,13 @@ import 'mixins/connectivity_state.dart';
 import 'mixins/navigation_state.dart';
 
 class AppStateProvider
-    with
-        ChangeNotifier,
-        ConnectivityState,
-        NavigationState,
-        LanguageState,
-        ThemeState {
+    with ChangeNotifier, ConnectivityState, NavigationState, ThemeState {
   List<StockTicker>? searching = [];
 
   AppStateProvider() {
-    Future futureLanguage = loadUserLanguage();
     Future futureTheme = loadTheme();
 
-    Future.wait([futureLanguage, futureTheme]).then((value) => refresh());
+    Future.wait([futureTheme]).then((value) => refresh());
   }
 
   void loadData() async {

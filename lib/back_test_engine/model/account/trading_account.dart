@@ -53,8 +53,8 @@ class TradingAccount with Portfolio {
   void getTradingResults(StrategyResult strategy) {
     // TODO Calculate the metrics from trades list
     strategy.tradesNum = tradesHistory.length;
-    strategy.CAGR = 10;
-    strategy.MAR = 1;
+    strategy.cagr = 10;
+    strategy.mar = 1;
     strategy.maxDrawdown = 30;
   }
 }

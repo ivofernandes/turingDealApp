@@ -1,7 +1,6 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:pinch_zoom_release_unzoom/pinch_zoom_release_unzoom.dart';
 import 'package:provider/provider.dart';
 import 'package:turing_deal/back_test_engine/model/strategy_result/buy_and_hold_strategyResult.dart';
@@ -55,7 +54,11 @@ class StrategyResume extends StatelessWidget {
           child: InkWell(
             onTap: () {
               if (!bigPictureState.isMockedData()) {
-                Get.to(TickerScreen(ticker));
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => TickerScreen(ticker),
+                  ),
+                );
               }
             },
             child: PinchZoomReleaseUnzoomWidget(

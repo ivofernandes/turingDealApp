@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:get/get_utils/src/extensions/internacionalization.dart';
+import 'package:interactive_i18n/interactive_i18n.dart';
 import 'package:turing_deal/home/ui/ticker_widget_ui.dart';
 import 'package:turing_deal/home/ui/tickers_block.dart';
 import 'package:turing_deal/market_data/model/stock_ticker.dart';
@@ -54,21 +54,21 @@ class TickerSearch extends SearchDelegate<List<StockTicker>> {
       child: Column(
         children: [
           searchingWidget,
-          suggestion(Icon(Icons.view_headline), 'Main'.tr, TickersList.main),
-          suggestion(Icon(Icons.precision_manufacturing_outlined), 'Sectors'.tr,
+          suggestion(Icon(Icons.view_headline), 'Main'.t, TickersList.main),
+          suggestion(Icon(Icons.precision_manufacturing_outlined), 'Sectors'.t,
               TickersList.sectors),
-          suggestion(Icon(Icons.workspaces_outline), 'Futures'.tr,
-              TickersList.futures),
           suggestion(
-              Icon(Icons.computer), 'Cryptos'.tr, TickersList.cryptoCurrencies),
+              Icon(Icons.workspaces_outline), 'Futures'.t, TickersList.futures),
           suggestion(
-              Icon(Icons.language), 'Countries'.tr, TickersList.countries),
+              Icon(Icons.computer), 'Cryptos'.t, TickersList.cryptoCurrencies),
+          suggestion(
+              Icon(Icons.language), 'Countries'.t, TickersList.countries),
           suggestion(
               Icon(Icons.account_balance_outlined), 'Bonds', TickersList.bonds),
           suggestion(
-              Icon(Icons.architecture_sharp), 'Sizes'.tr, TickersList.sizes),
+              Icon(Icons.architecture_sharp), 'Sizes'.t, TickersList.sizes),
           suggestion(
-              Icon(Icons.business_sharp), 'Companies'.tr, TickersList.companies)
+              Icon(Icons.business_sharp), 'Companies'.t, TickersList.companies)
         ],
       ),
     );

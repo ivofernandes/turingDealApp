@@ -1,24 +1,65 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+import 'package:top_snackbar_flutter/top_snack_bar.dart';
+import 'package:turing_deal/shared/app_theme.dart';
+import 'package:turing_deal/shared/my_app_context.dart';
 
-class UIUtils{
+class UIUtils {
+  static void bottomSheet(
+    Widget bottomSheet, {
+    BuildContext? contextParam,
+  }) {
+    BuildContext context =
+        contextParam ?? MyAppContext.globalNavigatorKey.currentContext!;
 
-  static void bottomSheet(Widget bottomsheet){
-    Get.bottomSheet(
-        bottomsheet,
-        backgroundColor: Theme.of(Get.context!).canvasColor,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(20.0),
-        ),
-      enableDrag: true,
-      elevation: 10
+    showModalBottomSheet(
+      backgroundColor: Theme.of(context).canvasColor,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(20.0),
+      ),
+      context: context,
+      builder: (context) {
+        return bottomSheet;
+      },
     );
   }
 
-  static void snackBarError(String message) {
-    Get.snackbar('', message,
-        colorText: Theme.of(Get.context!).errorColor,
-        snackPosition: SnackPosition.BOTTOM
+  static void snackBarError(String message, {BuildContext? contextParam}) {
+    BuildContext context = contextParam ?? MyAppContext.context;
+
+    UIUtils.show(
+      context: context,
+      content: Text(
+        message,
+        style: Theme.of(context).textTheme.bodyText1!.copyWith(
+              color: AppTheme.error,
+            ),
+      ),
+    );
+  }
+
+  static void show({
+    required BuildContext context,
+    required Widget content,
+    Duration duration = const Duration(milliseconds: 2000),
+  }) {
+    showTopSnackBar(
+      Overlay.of(context)!,
+      Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Container(
+            padding: const EdgeInsets.all(50),
+            decoration: BoxDecoration(
+              color: Theme.of(context).colorScheme.background,
+              borderRadius: const BorderRadius.all(
+                Radius.circular(10),
+              ),
+            ),
+            child: content,
+          ),
+        ],
+      ),
+      displayDuration: duration,
     );
   }
 }

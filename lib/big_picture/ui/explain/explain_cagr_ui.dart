@@ -39,7 +39,7 @@ class ExplainCagr extends StatelessWidget {
                         .bodyText1!
                         .copyWith(color: Theme.of(context).backgroundColor)),
                 onPressed: () {
-                  Web.openView(
+                  Web.launchLink(
                       context, 'https://www.investopedia.com/terms/c/cagr.asp');
                 })
           ],

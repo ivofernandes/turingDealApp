@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+import 'package:interactive_i18n/interactive_i18n.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:turing_deal/back_test_engine/model/strategy_result/buy_and_hold_strategyResult.dart';
@@ -25,7 +25,7 @@ class StrategyResumeHeader extends StatelessWidget {
 
     String ticketDescription = TickerResolve.getTickerDescription(ticker);
 
-    TickerSearch tickerSearch = TickerSearch(searchFieldLabel: 'Add'.tr);
+    TickerSearch tickerSearch = TickerSearch(searchFieldLabel: 'Add'.t);
 
     return Container(
       child: Stack(

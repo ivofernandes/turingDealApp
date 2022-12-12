@@ -1,10 +1,9 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+import 'package:interactive_i18n/interactive_i18n.dart';
 import 'package:provider/provider.dart';
 import 'package:turing_deal/home/state/app_state_provider.dart';
 import 'package:turing_deal/settings/ui/apps_banner.dart';
-import 'package:turing_deal/settings/ui/language_settings_widget.dart';
 import 'package:turing_deal/shared/environment.dart';
 import 'package:turing_deal/shared/ui/Web.dart';
 
@@ -18,10 +17,10 @@ class SettingsScreen extends StatelessWidget {
       child: Scaffold(
         appBar: AppBar(
           leading: IconButton(
-            onPressed: () => Get.back(),
+            onPressed: () => Navigator.of(context).pop(),
             icon: Icon(Icons.arrow_back_ios),
           ),
-          title: Text('Settings'.tr),
+          title: Text('Settings'.t),
           actions: [
             appState.isDark()
                 ? IconButton(
@@ -45,15 +44,19 @@ class SettingsScreen extends StatelessWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  LanguageSettingsWidget(),
-                  SizedBox(
-                    height: 10,
+                  Container(
+                    margin: EdgeInsets.all(10.0),
+                    child: InteractiveI18nSelector(
+                      onLanguageSelected: (language) {
+                        appState.refresh();
+                      },
+                    ),
                   ),
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Text(
                         'The objective of this project is to help people to make investment decisions'
-                            .tr),
+                            .t),
                   ),
                   SizedBox(
                     height: 10,
@@ -63,7 +66,7 @@ class SettingsScreen extends StatelessWidget {
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(10.0)),
                       elevation: 10,
-                      child: Text('Contribute on github'.tr),
+                      child: Text('Contribute on github'.t),
                       onPressed: () =>
                           Web.launchLink(context, Environment.GITHUB_URL)),
                   kIsWeb ? AppsBanner() : const SizedBox()

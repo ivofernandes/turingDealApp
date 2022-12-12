@@ -48,8 +48,8 @@ void main() {
     StrategyResult result = strategyRunner.run(crossSMABaseStrategy);
 
     // Check if the strategy returned is valid
-    assert(result.CAGR > 0);
-    assert(result.MAR > 0);
+    assert(result.cagr > 0);
+    assert(result.mar > 0);
     assert(result.tradingYears > 0);
 
     // Check if the indicators were added

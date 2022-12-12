@@ -13,9 +13,9 @@ class BaseStrategyResult {
   DateTime? endDate;
   double tradingYears = 0;
 
-  double CAGR = 0;
+  double cagr = 0;
   double maxDrawdown = 0;
-  double MAR = 0;
+  double mar = 0;
 
   double currentDrawdown = 0;
 
@@ -24,7 +24,7 @@ class BaseStrategyResult {
   int tradesNum = 0;
 
   @override
-  String toString() => 'CAGR: $CAGR , drawdown: $maxDrawdown, MAR: $MAR';
+  String toString() => 'CAGR: $cagr , drawdown: $maxDrawdown, MAR: $mar';
 
   static BuyAndHoldStrategyResult createBuyAndHoldStrategyResult(
       List<CandlePrice> prices) {

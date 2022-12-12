@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+import 'package:interactive_i18n/interactive_i18n.dart';
 import 'package:provider/provider.dart';
 import 'package:provider/single_child_widget.dart';
 import 'package:turing_deal/home/home_screen.dart';
 import 'package:turing_deal/home/state/app_state_provider.dart';
 import 'package:turing_deal/settings/settings_screen.dart';
 import 'package:turing_deal/shared/app_theme.dart';
+import 'package:turing_deal/shared/my_app_context.dart';
 
 import 'big_picture/state/big_picture_state_provider.dart';
 
@@ -28,7 +29,11 @@ class TuringDealApp extends StatelessWidget {
       child: Consumer<AppStateProvider>(
         builder: (context, appState, child) {
           appState.loadData();
-          return GetMaterialApp(
+          return InteractiveLocalization(
+            availableLanguages: const ['en', 'pt'],
+            languageUpdated: () => appState.refresh(),
+            child: MaterialApp(
+              navigatorKey: MyAppContext.globalNavigatorKey,
               theme: appState.isDark()
                   ? AppTheme.darkTheme()
                   : AppTheme.lightTheme(),
@@ -39,20 +44,10 @@ class TuringDealApp extends StatelessWidget {
                 '/': (context) => HomeScreen(),
                 SettingsScreen.route: (context) => SettingsScreen(),
               },
-              locale: Locale(appState.getSelectedLanguage()),
-              translations:
-                  TranslationsContainer(translationKeys: appState.getKeys()));
+            ),
+          );
         },
       ),
     );
   }
-}
-
-class TranslationsContainer extends Translations {
-  final Map<String, Map<String, String>> translationKeys;
-
-  TranslationsContainer({required this.translationKeys});
-
-  @override
-  get keys => translationKeys;
 }

@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:get/get.dart';
+import 'package:interactive_i18n/interactive_i18n.dart';
 import 'package:provider/provider.dart';
 import 'package:turing_deal/home/state/app_state_provider.dart';
 import 'package:turing_deal/home/ui/ticker_search.dart';
 import 'package:turing_deal/market_data/model/stock_ticker.dart';
+import 'package:turing_deal/shared/my_app_context.dart';
 
 import '../big_picture/big_picture_screen.dart';
 import '../settings/settings_screen.dart';
@@ -19,12 +20,14 @@ class HomeScreen extends StatelessWidget {
 
     forcePortraitModeInPhones(context);
 
-    TickerSearch t = TickerSearch(searchFieldLabel: 'Search'.tr);
+    TickerSearch t = TickerSearch(searchFieldLabel: 'Search'.t);
+    MyAppContext.context = context;
 
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
-          onPressed: () => Get.toNamed(SettingsScreen.route),
+          onPressed: () =>
+              Navigator.of(context).pushNamed(SettingsScreen.route),
           icon: Icon(Icons.menu),
         ),
         title: Text('Turing deal'),

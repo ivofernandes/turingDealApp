@@ -43,7 +43,7 @@ class BuyAndHoldStrategy {
   static void calculateStrategyMetrics(List<CandlePrice> prices,
       double buyPrice, double sellPrice, BuyAndHoldStrategyResult strategy) {
     // https://www.investopedia.com/terms/c/cagr.asp
-    strategy.CAGR =
+    strategy.cagr =
         (pow(sellPrice / buyPrice, 1 / strategy.tradingYears) - 1) * 100;
 
     StrategyDrawdown strategyDrawdown =
@@ -53,6 +53,6 @@ class BuyAndHoldStrategy {
     strategy.currentDrawdown = strategyDrawdown.currentDrawdown;
 
     // https://www.investopedia.com/terms/m/mar-ratio.asp
-    strategy.MAR = strategy.CAGR / strategy.maxDrawdown * -1;
+    strategy.mar = strategy.cagr / strategy.maxDrawdown * -1;
   }
 }

@@ -47,22 +47,35 @@ class StrategyResumeDetails extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     StrategyResumeItem(
-                        title: 'CAGR',
-                        value: strategy.CAGR.toStringAsFixed(2) + '%',
-                        onTap: () => UIUtils.bottomSheet(ExplainCagr())),
+                      title: 'CAGR',
+                      value: strategy.cagr.toStringAsFixed(2) + '%',
+                      onTap: () => UIUtils.bottomSheet(
+                        ExplainCagr(),
+                        contextParam: context,
+                      ),
+                    ),
                     StrategyResumeItem(
                         title: '% from top',
                         value:
                             strategy.currentDrawdown.toStringAsFixed(2) + '%',
-                        onTap: () => UIUtils.bottomSheet(ExplainDrawdown())),
+                        onTap: () => UIUtils.bottomSheet(
+                              ExplainDrawdown(),
+                              contextParam: context,
+                            )),
                     StrategyResumeItem(
                         title: 'Drawdown',
                         value: strategy.maxDrawdown.toStringAsFixed(2) + '%',
-                        onTap: () => UIUtils.bottomSheet(ExplainDrawdown())),
+                        onTap: () => UIUtils.bottomSheet(
+                              ExplainDrawdown(),
+                              contextParam: context,
+                            )),
                     StrategyResumeItem(
                         title: 'MAR',
-                        value: strategy.MAR.toStringAsFixed(2),
-                        onTap: () => UIUtils.bottomSheet(ExplainMAR())),
+                        value: strategy.mar.toStringAsFixed(2),
+                        onTap: () => UIUtils.bottomSheet(
+                              ExplainMAR(),
+                              contextParam: context,
+                            )),
                   ],
                 ),
               ),
