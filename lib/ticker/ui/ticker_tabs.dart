@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:interactive_i18n/interactive_i18n.dart';
-import 'package:turing_deal/market_data/model/candle_price.dart';
 import 'package:turing_deal/market_data/model/stock_ticker.dart';
 import 'package:turing_deal/market_data/static/ticker_resolve.dart';
 import 'package:turing_deal/ticker/ui/analysis/turing_deal_analysis.dart';
 import 'package:turing_deal/ticker/ui/chart/turing_deal_chart.dart';
 import 'package:turing_deal/ticker/ui/details/list_prices_text_ui.dart';
+import 'package:yahoo_finance_data_reader/yahoo_finance_data_reader.dart';
 
 class TickerTabs extends StatefulWidget {
   final StockTicker ticker;
-  final List<CandlePrice> data;
+  final List<YahooFinanceCandleData> data;
 
-  const TickerTabs(this.ticker, this.data, {Key? key}) : super(key: key);
+  const TickerTabs(this.ticker, this.data, {super.key});
 
   @override
   State<TickerTabs> createState() => _TickerTabsState();

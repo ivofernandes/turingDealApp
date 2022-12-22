@@ -1,5 +1,5 @@
 import 'package:turing_deal/back_test_engine/model/strategy_config/strategy_rule.dart';
-import 'package:turing_deal/market_data/model/candle_price.dart';
+import 'package:yahoo_finance_data_reader/yahoo_finance_data_reader.dart';
 
 /// Class to create the signals
 class NegotiationSignalizerChecker {
@@ -11,27 +11,28 @@ class NegotiationSignalizerChecker {
   }
   NegotiationSignalizerChecker._internal();
 
-  bool checkCondition(StrategyConfigRule rule, CandlePrice candlePrice) {
+  bool checkCondition(
+      StrategyConfigRule rule, YahooFinanceCandleData YahooFinanceCandleData) {
     String indicator = rule.indicator;
 
     if (indicator.contains('/')) {
-      return checkConditionDivision(rule, candlePrice, indicator);
+      return checkConditionDivision(rule, YahooFinanceCandleData, indicator);
     }
 
     return false;
   }
 
-  bool checkConditionDivision(
-      StrategyConfigRule rule, CandlePrice candlePrice, String indicator) {
+  bool checkConditionDivision(StrategyConfigRule rule,
+      YahooFinanceCandleData YahooFinanceCandleData, String indicator) {
     List<String> indicators = indicator.split('/');
 
     String indicatorA = indicators[0];
     String indicatorB = indicators[1];
 
-    if (candlePrice.indicators.containsKey(indicatorA) &&
-        candlePrice.indicators.containsKey(indicatorB)) {
-      double indicatorAValue = candlePrice.indicators[indicatorA]!;
-      double indicatorBValue = candlePrice.indicators[indicatorB]!;
+    if (YahooFinanceCandleData.indicators.containsKey(indicatorA) &&
+        YahooFinanceCandleData.indicators.containsKey(indicatorB)) {
+      double indicatorAValue = YahooFinanceCandleData.indicators[indicatorA]!;
+      double indicatorBValue = YahooFinanceCandleData.indicators[indicatorB]!;
 
       double ratio = indicatorAValue / indicatorBValue;
 

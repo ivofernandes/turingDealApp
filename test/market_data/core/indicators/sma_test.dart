@@ -7,61 +7,61 @@
 
 import 'package:flutter_test/flutter_test.dart';
 import 'package:turing_deal/market_data/core/indicators/sma.dart';
-import 'package:turing_deal/market_data/model/candle_price.dart';
+import 'package:yahoo_finance_data_reader/yahoo_finance_data_reader.dart';
 
 void main() {
   test('Test SMA_2', () async {
-    List<CandlePrice> prices = [
-      CandlePrice(
+    List<YahooFinanceCandleData> prices = [
+      YahooFinanceCandleData(
           date: DateTime(2019, 1, 1),
           volume: 1,
           open: 1,
           close: 0,
           high: 1,
           low: 0),
-      CandlePrice(
+      YahooFinanceCandleData(
           date: DateTime(2019, 3, 1),
           volume: 1,
           open: 1,
           close: 0.5,
           high: 1,
           low: 0.5),
-      CandlePrice(
+      YahooFinanceCandleData(
           date: DateTime(2019, 6, 1),
           volume: 1,
           open: 1,
           close: 0.5,
           high: 2,
           low: 1.5),
-      CandlePrice(
+      YahooFinanceCandleData(
           date: DateTime(2019, 12, 31),
           volume: 1,
           open: 2,
           close: 1,
           high: 2,
           low: 2),
-      CandlePrice(
+      YahooFinanceCandleData(
           date: DateTime(2020, 1, 1),
           volume: 1,
           open: 1,
           close: 1,
           high: 1,
           low: 1),
-      CandlePrice(
+      YahooFinanceCandleData(
           date: DateTime(2020, 3, 1),
           volume: 1,
           open: 1,
           close: 1,
           high: 1,
           low: 0.5),
-      CandlePrice(
+      YahooFinanceCandleData(
           date: DateTime(2020, 6, 1),
           volume: 1,
           open: 1,
           close: 1,
           high: 2,
           low: 1.5),
-      CandlePrice(
+      YahooFinanceCandleData(
           date: DateTime(2020, 12, 31),
           volume: 1,
           open: 2,

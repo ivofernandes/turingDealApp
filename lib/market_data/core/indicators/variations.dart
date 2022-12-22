@@ -1,10 +1,14 @@
-import 'package:turing_deal/market_data/model/candle_price.dart';
 import 'package:turing_deal/market_data/model/variation/variation_count.dart';
+import 'package:yahoo_finance_data_reader/yahoo_finance_data_reader.dart';
 
 class Variations {
   /// Base method to get intervals from the chart
-  static List<VariationCount> countByInterval(double lowerLimit,
-      double upperLimit, double step, List<CandlePrice> data, int delta) {
+  static List<VariationCount> countByInterval(
+      double lowerLimit,
+      double upperLimit,
+      double step,
+      List<YahooFinanceCandleData> data,
+      int delta) {
     Map<String, List<double?>> intervals =
         getIntervals(lowerLimit, upperLimit, step);
     return countVariationsInIntervals(intervals, data, delta);
@@ -33,7 +37,9 @@ class Variations {
   }
 
   static List<VariationCount> countVariationsInIntervals(
-      Map<String, List<double?>> intervals, List<CandlePrice> data, int delta) {
+      Map<String, List<double?>> intervals,
+      List<YahooFinanceCandleData> data,
+      int delta) {
     List<VariationCount> result = [];
 
     for (String intervalDescription in intervals.keys) {
@@ -49,7 +55,8 @@ class Variations {
   }
 
   ///
-  static void calculateVariations(List<CandlePrice> prices, int delta) {
+  static void calculateVariations(
+      List<YahooFinanceCandleData> prices, int delta) {
     for (int i = 0; i < prices.length - delta; i++) {
       double variation = (prices[i + delta].close / prices[i].close - 1) * 100;
 
@@ -58,9 +65,9 @@ class Variations {
   }
 
   static int countVariations(double? lowerLimit, double? upperLimit,
-      List<CandlePrice> data, int delta) {
+      List<YahooFinanceCandleData> data, int delta) {
     int count = data
-        .where((CandlePrice candle) =>
+        .where((YahooFinanceCandleData candle) =>
             candle.indicators.containsKey('var_$delta') &&
             validLowerLimit(lowerLimit, candle.indicators['var_$delta']!) &&
             validUpperLimit(upperLimit, candle.indicators['var_$delta']!))
@@ -77,9 +84,11 @@ class Variations {
     return upperLimit == null || value < upperLimit;
   }
 
-  static List<double> extractList(List<CandlePrice> data, int delta) {
-    List<double?> vars =
-        data.map((CandlePrice e) => e.indicators['var_$delta']).toList();
+  static List<double> extractList(
+      List<YahooFinanceCandleData> data, int delta) {
+    List<double?> vars = data
+        .map((YahooFinanceCandleData e) => e.indicators['var_$delta'])
+        .toList();
 
     vars.removeWhere((element) => element == null);
     List<double> v = vars.cast();

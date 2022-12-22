@@ -7,9 +7,11 @@
 
 import 'dart:convert';
 import 'dart:io';
+
 import 'package:flutter_test/flutter_test.dart';
 import 'package:turing_deal/market_data/core/utils/clean_prices.dart';
 import 'package:turing_deal/market_data/model/candle_price.dart';
+import 'package:yahoo_finance_data_reader/yahoo_finance_data_reader.dart';
 
 void main() {
   test('Test clean prices', () async {
@@ -18,11 +20,12 @@ void main() {
     String content = await File(path).readAsString();
     List<dynamic> jsonObject = json.decode(content);
 
-    List<CandlePrice> candlePrices = CleanPrices.clean(jsonObject);
+    List<YahooFinanceCandleData> YahooFinanceCandleDatas =
+        YahooFinanceCandleData.;
 
-    assert(candlePrices.isNotEmpty);
+    assert(YahooFinanceCandleDatas.isNotEmpty);
 
-    CandlePrice lastCandle = candlePrices.last;
+    YahooFinanceCandleData lastCandle = YahooFinanceCandleDatas.last;
     assert(lastCandle.volume > 0);
     assert(lastCandle.close > 0);
     assert(lastCandle.high > 0);

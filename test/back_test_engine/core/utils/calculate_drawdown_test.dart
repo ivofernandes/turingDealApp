@@ -36,7 +36,7 @@ void main() {
         openPrice: 10,
         openDate: DateTime(2022, 1, 2));
     TradeOpen tradeOpen = TradeOpen(trade: trade, maxDrawdown: -1);
-    CandlePrice lastCandle = CandlePrice(
+    YahooFinanceCandleData lastCandle = YahooFinanceCandleData(
         date: DateTime(2022, 1, 2),
         open: 8,
         high: 9,
@@ -55,7 +55,7 @@ void main() {
         openPrice: 10,
         openDate: DateTime(2022, 1, 2));
     TradeOpen tradeOpen = TradeOpen(trade: trade, maxDrawdown: -60);
-    CandlePrice lastCandle = CandlePrice(
+    YahooFinanceCandleData lastCandle = YahooFinanceCandleData(
         date: DateTime(2022, 1, 2),
         open: 8,
         high: 9,
@@ -74,7 +74,7 @@ void main() {
         openPrice: 10,
         openDate: DateTime(2022, 1, 2));
     TradeOpen tradeOpen = TradeOpen(trade: trade, maxDrawdown: -1);
-    CandlePrice lastCandle = CandlePrice(
+    YahooFinanceCandleData lastCandle = YahooFinanceCandleData(
         date: DateTime(2022, 1, 2),
         open: 8,
         high: 20,
@@ -93,7 +93,7 @@ void main() {
         openPrice: 10,
         openDate: DateTime(2022, 1, 2));
     TradeOpen tradeOpen = TradeOpen(trade: trade, maxDrawdown: -60);
-    CandlePrice lastCandle = CandlePrice(
+    YahooFinanceCandleData lastCandle = YahooFinanceCandleData(
         date: DateTime(2022, 1, 2),
         open: 8,
         high: 20,

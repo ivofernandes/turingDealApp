@@ -8,14 +8,14 @@ import 'package:turing_deal/market_data/model/stock_ticker.dart';
 
 /// This class makes sure there are data to show in the reume list
 /// and takes care of the floating action button animation
-class BigPictureScafold extends StatefulWidget {
-  const BigPictureScafold({Key? key}) : super(key: key);
+class BigPictureScaffold extends StatefulWidget {
+  const BigPictureScaffold({Key? key}) : super(key: key);
 
   @override
-  _BigPictureScafoldState createState() => _BigPictureScafoldState();
+  _BigPictureScaffoldState createState() => _BigPictureScaffoldState();
 }
 
-class _BigPictureScafoldState extends State<BigPictureScafold>
+class _BigPictureScaffoldState extends State<BigPictureScaffold>
     with SingleTickerProviderStateMixin {
   static const int minTickerForShowCompatData = 10;
 

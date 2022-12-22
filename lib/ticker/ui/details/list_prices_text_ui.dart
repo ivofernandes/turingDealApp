@@ -1,20 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:turing_deal/market_data/model/candle_price.dart';
+import 'package:yahoo_finance_data_reader/yahoo_finance_data_reader.dart';
 
 class ListPricesText extends StatelessWidget {
-  final List<CandlePrice> data;
+  final List<YahooFinanceCandleData> data;
 
   const ListPricesText(this.data);
 
   @override
   Widget build(BuildContext context) {
-
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: ListView.builder(
           shrinkWrap: true,
-          itemCount: this.data.length +1 ,
+          itemCount: this.data.length + 1,
           itemBuilder: (BuildContext context, int index) {
             if (index == 0) {
               return Row(
@@ -29,12 +28,12 @@ class ListPricesText extends StatelessWidget {
             } else {
               return Row(
                 children: [
-                  TickerDetailsCell(DateFormat.yMd().format(this.data[index].date)),
+                  TickerDetailsCell(
+                      DateFormat.yMd().format(this.data[index].date)),
                   TickerDetailsCell(this.data[index].open.toStringAsFixed(2)),
                   TickerDetailsCell(this.data[index].high.toStringAsFixed(2)),
                   TickerDetailsCell(this.data[index].low.toStringAsFixed(2)),
                   TickerDetailsCell(this.data[index].close.toStringAsFixed(2)),
-
                 ],
               );
             }
@@ -52,12 +51,12 @@ class TickerDetailsCell extends StatelessWidget {
   Widget build(BuildContext context) {
     return Expanded(
         child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: FittedBox(
-            child: SelectableText(text!,
-                style:
+      padding: const EdgeInsets.all(8.0),
+      child: FittedBox(
+        child: SelectableText(text!,
+            style:
                 Theme.of(context).textTheme.bodyText1!.copyWith(fontSize: 9)),
-          ),
-        ));
+      ),
+    ));
   }
 }

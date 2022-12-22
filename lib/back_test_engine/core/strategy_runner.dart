@@ -8,19 +8,19 @@ import 'package:turing_deal/back_test_engine/model/strategy_config/strategy_conf
 import 'package:turing_deal/back_test_engine/model/strategy_result/base_strategy_result.dart';
 import 'package:turing_deal/back_test_engine/model/strategy_result/strategy_result.dart';
 import 'package:turing_deal/market_data/core/utils/calculate_indicators.dart';
-import 'package:turing_deal/market_data/model/candle_price.dart';
+import 'package:yahoo_finance_data_reader/yahoo_finance_data_reader.dart';
 
 class StrategyRunner {
   final String ticker;
-  final List<CandlePrice> candlePrices;
+  final List<YahooFinanceCandleData> YahooFinanceCandleDatas;
 
-  StrategyRunner(this.ticker, this.candlePrices);
+  StrategyRunner(this.ticker, this.YahooFinanceCandleDatas);
 
   /// Simulate a buy and hold strategy_result in the entire dataframe
   StrategyResult run(StrategyConfig strategyConfig) {
     StrategyResult strategy =
-        BaseStrategyResult.createStrategyResult(this.candlePrices);
-    if (this.candlePrices.isNotEmpty) {
+        BaseStrategyResult.createStrategyResult(this.YahooFinanceCandleDatas);
+    if (this.YahooFinanceCandleDatas.isNotEmpty) {
       //TODO execute the strategy_result
       print(strategyConfig.toString());
 
@@ -28,7 +28,7 @@ class StrategyRunner {
       HashSet<String> indicators =
           ParserIndicator.extractBaseIndicators(strategyConfig.openningRules);
       CalculateIndicators.calculateIndicators(
-          candlePrices, indicators.toList());
+          YahooFinanceCandleDatas, indicators.toList());
 
       executeStrategy(strategy, strategyConfig);
     }
@@ -40,9 +40,9 @@ class StrategyRunner {
   void executeStrategy(StrategyResult strategy, StrategyConfig strategyConfig) {
     // Create an account where the strategy will be executed
     TradingAccount tradingAccount = TradingAccount();
-    CandlePrice? previousCandle;
-    for (int i = 0; i < this.candlePrices.length; i++) {
-      CandlePrice currentCandle = this.candlePrices[i];
+    YahooFinanceCandleData? previousCandle;
+    for (int i = 0; i < this.YahooFinanceCandleDatas.length; i++) {
+      YahooFinanceCandleData currentCandle = this.YahooFinanceCandleDatas[i];
       // Update the strategy stats and triggers (stops, targets, drawdown...)
       tradingAccount.updateAccount(currentCandle, previousCandle);
 
@@ -55,8 +55,8 @@ class StrategyRunner {
     tradingAccount.getTradingResults(strategy);
   }
 
-  void openSignals(TradingAccount tradingAccount, CandlePrice currentCandle,
-      StrategyConfig strategyConfig) {
+  void openSignals(TradingAccount tradingAccount,
+      YahooFinanceCandleData currentCandle, StrategyConfig strategyConfig) {
     // Perform the execution of rules for opening
     Signal? openSignal =
         NegotiationSignalizer().openSignal(currentCandle, strategyConfig);
@@ -73,8 +73,8 @@ class StrategyRunner {
     }
   }
 
-  void closeSignals(TradingAccount tradingAccount, CandlePrice currentCandle,
-      StrategyConfig strategyConfig) {
+  void closeSignals(TradingAccount tradingAccount,
+      YahooFinanceCandleData currentCandle, StrategyConfig strategyConfig) {
     //TODO perform the execution of rules for closing
 
     Signal? closeSignal =

@@ -7,8 +7,7 @@ import 'package:turing_deal/back_test_engine/model/shared/back_test_enums.dart';
 import 'package:turing_deal/back_test_engine/model/strategy_config/strategy_config.dart';
 import 'package:turing_deal/back_test_engine/model/strategy_config/strategy_rule.dart';
 import 'package:turing_deal/back_test_engine/model/strategy_result/strategy_result.dart';
-import 'package:turing_deal/market_data/core/utils/clean_prices.dart';
-import 'package:turing_deal/market_data/model/candle_price.dart';
+import 'package:yahoo_finance_data_reader/yahoo_finance_data_reader.dart';
 
 void main() {
   StrategyConfig crossSMABaseStrategy = StrategyConfig(
@@ -41,10 +40,12 @@ void main() {
     String content = await File(path).readAsString();
     List<dynamic> jsonObject = json.decode(content);
 
-    List<CandlePrice> candlePrices = CleanPrices.clean(jsonObject);
-    assert(candlePrices.isNotEmpty);
+    List<YahooFinanceCandleData> yahooFinanceCandleDatas =
+        CleanPrices.clean(jsonObject);
+    assert(yahooFinanceCandleDatas.isNotEmpty);
 
-    StrategyRunner strategyRunner = StrategyRunner('^GSPC', candlePrices);
+    StrategyRunner strategyRunner =
+        StrategyRunner('^GSPC', yahooFinanceCandleDatas);
     StrategyResult result = strategyRunner.run(crossSMABaseStrategy);
 
     // Check if the strategy returned is valid
@@ -53,8 +54,8 @@ void main() {
     assert(result.tradingYears > 0);
 
     // Check if the indicators were added
-    assert(candlePrices.last.indicators.containsKey('SMA_50'));
-    assert(candlePrices.last.indicators.containsKey('SMA_200'));
+    assert(yahooFinanceCandleDatas.last.indicators.containsKey('SMA_50'));
+    assert(yahooFinanceCandleDatas.last.indicators.containsKey('SMA_200'));
 
     // TODO Check if made any trades
   });
@@ -75,10 +76,12 @@ void main() {
     String content = await File(path).readAsString();
     List<dynamic> jsonObject = json.decode(content);
 
-    List<CandlePrice> candlePrices = CleanPrices.clean(jsonObject);
-    assert(candlePrices.isNotEmpty);
+    List<YahooFinanceCandleData> YahooFinanceCandleDatas =
+        CleanPrices.clean(jsonObject);
+    assert(YahooFinanceCandleDatas.isNotEmpty);
 
-    StrategyRunner strategyRunner = StrategyRunner('^GSPC', candlePrices);
+    StrategyRunner strategyRunner =
+        StrategyRunner('^GSPC', YahooFinanceCandleDatas);
     StrategyResult result = strategyRunner.run(crossSMABaseStrategy);
   });
 }

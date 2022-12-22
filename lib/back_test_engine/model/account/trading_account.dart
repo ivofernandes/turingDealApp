@@ -4,7 +4,7 @@ import 'package:turing_deal/back_test_engine/model/account/portfolio.dart';
 import 'package:turing_deal/back_test_engine/model/shared/back_test_enums.dart';
 import 'package:turing_deal/back_test_engine/model/strategy_result/strategy_result.dart';
 import 'package:turing_deal/back_test_engine/model/trade/trade.dart';
-import 'package:turing_deal/market_data/model/candle_price.dart';
+import 'package:yahoo_finance_data_reader/yahoo_finance_data_reader.dart';
 
 /// Class that represents the account in a broker
 class TradingAccount with Portfolio {
@@ -39,7 +39,8 @@ class TradingAccount with Portfolio {
     }
   }
 
-  void updateAccount(CandlePrice currentCandle, CandlePrice? previousCandle) {
+  void updateAccount(YahooFinanceCandleData currentCandle,
+      YahooFinanceCandleData? previousCandle) {
     // If nothing changed
     if (previousCandle == null || portfolio.isEmpty) {
       DateTime date = currentCandle.date;

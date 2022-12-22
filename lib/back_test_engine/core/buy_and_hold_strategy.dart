@@ -4,13 +4,14 @@ import 'package:turing_deal/back_test_engine/model/strategy_result/base_strategy
 import 'package:turing_deal/back_test_engine/model/strategy_result/buy_and_hold_strategyResult.dart';
 import 'package:turing_deal/back_test_engine/model/strategy_result/strategy_drawdown.dart';
 import 'package:turing_deal/market_data/core/indicators/sma.dart';
-import 'package:turing_deal/market_data/model/candle_price.dart';
+import 'package:yahoo_finance_data_reader/yahoo_finance_data_reader.dart';
 
 import 'utils/calculate_drawdown.dart';
 
 class BuyAndHoldStrategy {
   /// Simulate a buy and hold strategy_result in the entire dataframe
-  static BuyAndHoldStrategyResult buyAndHoldAnalysis(List<CandlePrice> prices) {
+  static BuyAndHoldStrategyResult buyAndHoldAnalysis(
+      List<YahooFinanceCandleData> prices) {
     BuyAndHoldStrategyResult strategy =
         BaseStrategyResult.createBuyAndHoldStrategyResult(prices);
 
@@ -31,7 +32,7 @@ class BuyAndHoldStrategy {
 
   /// Add current price indicators to a strategy_result: SMA
   static void addIndicators(
-      List<CandlePrice> prices, BuyAndHoldStrategyResult strategy) {
+      List<YahooFinanceCandleData> prices, BuyAndHoldStrategyResult strategy) {
     List<int> periods = [20, 50, 200];
     periods.forEach((period) {
       double movingAverage = SMA.atEnd(prices, period);
@@ -40,7 +41,7 @@ class BuyAndHoldStrategy {
   }
 
   /// Calculate CAGR drawdown and MAR of an strategy_result
-  static void calculateStrategyMetrics(List<CandlePrice> prices,
+  static void calculateStrategyMetrics(List<YahooFinanceCandleData> prices,
       double buyPrice, double sellPrice, BuyAndHoldStrategyResult strategy) {
     // https://www.investopedia.com/terms/c/cagr.asp
     strategy.cagr =

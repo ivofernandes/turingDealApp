@@ -36,7 +36,7 @@ class BigPictureScreen extends StatelessWidget {
         });
       }
 
-      return BigPictureScafold();
+      return BigPictureScaffold();
     });
   }
 }

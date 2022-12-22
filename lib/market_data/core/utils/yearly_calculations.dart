@@ -1,18 +1,18 @@
 import 'package:turing_deal/back_test_engine/core/utils/calculate_drawdown.dart';
 import 'package:turing_deal/back_test_engine/core/utils/calculate_strategy_metrics.dart';
 import 'package:turing_deal/back_test_engine/model/strategy_result/strategy_drawdown.dart';
-import 'package:turing_deal/market_data/model/candle_price.dart';
 import 'package:turing_deal/market_data/model/yearly_stats.dart';
+import 'package:yahoo_finance_data_reader/yahoo_finance_data_reader.dart';
 
 class YearlyCalculations {
-  static List<YearlyStats> calculate(List<CandlePrice> data) {
+  static List<YearlyStats> calculate(List<YahooFinanceCandleData> data) {
     List<YearlyStats> result = [];
 
     if (data.isNotEmpty) {
       int currentYear = data.first.date.year;
-      List<CandlePrice> candlesOfTheYear = [];
+      List<YahooFinanceCandleData> candlesOfTheYear = [];
 
-      for (CandlePrice candle in data) {
+      for (YahooFinanceCandleData candle in data) {
         if (candle.date.year == currentYear) {
           candlesOfTheYear.add(candle);
         } else {
@@ -29,7 +29,7 @@ class YearlyCalculations {
   }
 
   static void addToResult(List<YearlyStats> result, int currentYear,
-      List<CandlePrice> candlesOfTheYear) {
+      List<YahooFinanceCandleData> candlesOfTheYear) {
     // To have variation needs two days at least
     if (candlesOfTheYear.length > 1) {
       StrategyDrawdown strategyDrawdown =

@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:stats/stats.dart';
 import 'package:turing_deal/market_data/core/indicators/variations.dart';
-import 'package:turing_deal/market_data/model/candle_price.dart';
 import 'package:turing_deal/market_data/model/variation/variation_count.dart';
 import 'package:turing_deal/ticker/state/ticker_state_provider.dart';
 import 'package:turing_deal/ticker/ui/analysis/variation/variation_proportion_chart.dart';
+import 'package:yahoo_finance_data_reader/yahoo_finance_data_reader.dart';
 
 class VariationProportion extends StatelessWidget {
   final int delta;
@@ -17,7 +17,7 @@ class VariationProportion extends StatelessWidget {
     TickerStateProvider tickerState =
         Provider.of<TickerStateProvider>(context, listen: false);
 
-    List<CandlePrice> data = tickerState.getCandlesData();
+    List<YahooFinanceCandleData> data = tickerState.getCandlesData();
     List<double> vars = Variations.extractList(data, delta);
     if (vars.isEmpty) {
       return Center(child: CircularProgressIndicator());

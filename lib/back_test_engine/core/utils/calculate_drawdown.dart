@@ -3,11 +3,12 @@ import 'dart:math';
 import 'package:turing_deal/back_test_engine/model/shared/back_test_enums.dart';
 import 'package:turing_deal/back_test_engine/model/strategy_result/strategy_drawdown.dart';
 import 'package:turing_deal/back_test_engine/model/trade/trade.dart';
-import 'package:turing_deal/market_data/model/candle_price.dart';
+import 'package:yahoo_finance_data_reader/yahoo_finance_data_reader.dart';
 
 class CalculateDrawdown {
   /// Calculate the drawdown of the buy and hold strategy_result
-  static StrategyDrawdown calculateStrategyDrawdown(List<CandlePrice> prices) {
+  static StrategyDrawdown calculateStrategyDrawdown(
+      List<YahooFinanceCandleData> prices) {
     double maxDrawdown = 0;
     double currentDrawdown = 0;
     double allTimeHigh = 0;
@@ -31,7 +32,7 @@ class CalculateDrawdown {
   }
 
   static void updateTradeDrawdown(
-      TradeOpen position, CandlePrice currentCandle) {
+      TradeOpen position, YahooFinanceCandleData currentCandle) {
     double currentDrawdown = 0;
 
     if (position.tradeType == TradeType.LONG) {

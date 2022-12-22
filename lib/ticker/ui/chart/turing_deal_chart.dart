@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:interactive_chart/interactive_chart.dart';
 import 'package:intl/intl.dart';
-import 'package:turing_deal/market_data/model/candle_price.dart';
 import 'package:turing_deal/shared/app_theme.dart';
 import 'package:turing_deal/ticker/ui/chart/chart_legend.dart';
+import 'package:yahoo_finance_data_reader/yahoo_finance_data_reader.dart';
 
 class TuringDealChart extends StatelessWidget {
-  final List<CandlePrice> data;
+  final List<YahooFinanceCandleData> data;
   const TuringDealChart(this.data);
 
   @override
@@ -20,7 +20,7 @@ class TuringDealChart extends StatelessWidget {
           timestamp: element.date.millisecondsSinceEpoch,
           open: element.open,
           close: element.close,
-          volume: element.volume,
+          volume: element.volume.toDouble(),
           low: element.low,
           high: element.high);
       _data.add(candle);

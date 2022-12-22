@@ -2,7 +2,7 @@ import 'package:turing_deal/back_test_engine/core/negotiation/signalizer/negotia
 import 'package:turing_deal/back_test_engine/model/shared/back_test_enums.dart';
 import 'package:turing_deal/back_test_engine/model/strategy_config/strategy_config.dart';
 import 'package:turing_deal/back_test_engine/model/strategy_config/strategy_rule.dart';
-import 'package:turing_deal/market_data/model/candle_price.dart';
+import 'package:yahoo_finance_data_reader/yahoo_finance_data_reader.dart';
 
 /// Class to create the signals
 class NegotiationSignalizer {
@@ -14,7 +14,8 @@ class NegotiationSignalizer {
   }
   NegotiationSignalizer._internal();
 
-  Signal? openSignal(CandlePrice currentCandle, StrategyConfig strategyConfig) {
+  Signal? openSignal(
+      YahooFinanceCandleData currentCandle, StrategyConfig strategyConfig) {
     for (StrategyConfigRules openRules in strategyConfig.openningRules) {
       for (StrategyConfigRule openRule in openRules.rules) {
         if (NegotiationSignalizerChecker()
@@ -32,7 +33,7 @@ class NegotiationSignalizer {
   }
 
   Signal? closeSignal(
-      CandlePrice currentCandle, StrategyConfig strategyConfig) {
+      YahooFinanceCandleData currentCandle, StrategyConfig strategyConfig) {
     for (StrategyConfigRules closeRules in strategyConfig.closingRules) {
       for (StrategyConfigRule closeRule in closeRules.rules) {
         if (NegotiationSignalizerChecker()

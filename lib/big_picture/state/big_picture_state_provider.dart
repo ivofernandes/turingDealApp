@@ -3,14 +3,10 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:turing_deal/back_test_engine/core/buy_and_hold_strategy.dart';
 import 'package:turing_deal/back_test_engine/model/strategy_result/buy_and_hold_strategyResult.dart';
 import 'package:turing_deal/home/state/mixins/connectivity_state.dart';
-import 'package:turing_deal/market_data/model/candle_price.dart';
 import 'package:turing_deal/market_data/model/stock_ticker.dart';
 import 'package:turing_deal/market_data/static/tickers_list.dart';
-import 'package:turing_deal/market_data/yahoo_finance/mixer/average_mixer.dart';
-import 'package:turing_deal/market_data/yahoo_finance/mocked/yahoo_finance_mocked_data.dart';
-import 'package:turing_deal/market_data/yahoo_finance/services/yahoo_finance_service.dart';
-import 'package:turing_deal/market_data/yahoo_finance/storage/yahoo_finance_dao.dart';
 import 'package:turing_deal/shared/ui/UIUtils.dart';
+import 'package:yahoo_finance_data_reader/yahoo_finance_data_reader.dart';
 
 class BigPictureStateProvider with ChangeNotifier, ConnectivityState {
   bool _compactView = false;
@@ -64,21 +60,8 @@ class BigPictureStateProvider with ChangeNotifier, ConnectivityState {
     _bigPictureData[ticker] = BuyAndHoldStrategyResult();
 
     //  Get data from yahoo finance
-    List<CandlePrice> prices = [];
-    try {
-      prices = await YahooFinanceService.getTickerData(ticker);
-    } catch (e) {
-      // If got an CORS error let's step to use proxy
-      if (kIsWeb && e.toString() == 'XMLHttpRequest error.') {
-        _isMocked = true;
-        prices = await YahooFinanceMockedData.getSP500MockedData();
-      } else {
-        YahooFinanceDAO().removeDailyData(ticker.symbol);
-        _bigPictureData.remove(ticker);
-        this.refresh();
-        throw e;
-      }
-    }
+    List<YahooFinanceCandleData> prices =
+        await YahooFinanceService().getTickerData(ticker.symbol);
 
     // Execute the backtest
     BuyAndHoldStrategyResult strategy =
@@ -94,16 +77,8 @@ class BigPictureStateProvider with ChangeNotifier, ConnectivityState {
     ticker.symbol = ticker.symbol + ', ' + tickers!.first.symbol;
     ticker.description = '';
 
-    List<String> tickersSymbols = ticker.symbol.split(', ');
-    List<List<CandlePrice>> pricesList = [];
-
-    for (String symbol in tickersSymbols) {
-      List<CandlePrice> symbolPrices =
-          await YahooFinanceService.getTickerData(StockTicker(symbol, ''));
-      pricesList.add(symbolPrices);
-    }
-
-    List<CandlePrice> prices = AverageMixer.mix(pricesList);
+    List<YahooFinanceCandleData> prices =
+        await YahooFinanceService().getTickerData(ticker.symbol);
 
     // Execute the backtest
     BuyAndHoldStrategyResult strategy =

@@ -2,7 +2,7 @@ import 'package:turing_deal/back_test_engine/core/utils/calculate_drawdown.dart'
 import 'package:turing_deal/back_test_engine/model/account/trade_checks.dart';
 import 'package:turing_deal/back_test_engine/model/shared/back_test_enums.dart';
 import 'package:turing_deal/back_test_engine/model/trade/trade.dart';
-import 'package:turing_deal/market_data/model/candle_price.dart';
+import 'package:yahoo_finance_data_reader/yahoo_finance_data_reader.dart';
 
 /// Here we manage the current trades
 mixin Portfolio {
@@ -43,7 +43,7 @@ mixin Portfolio {
   }
 
   /// update portfolio open positions
-  void updatePortfolio(CandlePrice currentCandle) {
+  void updatePortfolio(YahooFinanceCandleData currentCandle) {
     for (TradeOpen position in portfolio) {
       // Check if any stop order was triggered
       bool stopped = TradeChecks.checkStop(position, currentCandle);
