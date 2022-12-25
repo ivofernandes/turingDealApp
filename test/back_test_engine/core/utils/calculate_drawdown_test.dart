@@ -6,37 +6,37 @@ import 'package:turing_deal/market_data/model/candle_price.dart';
 
 void main() {
   test('Test long gain', () async {
-    double percentage =
+    final double percentage =
         CalculateDrawdown.calculatePercentageChange(TradeType.LONG, 10, 20);
     assert(percentage == 100);
   });
 
   test('Test long loss', () async {
-    double percentage =
+    final double percentage =
         CalculateDrawdown.calculatePercentageChange(TradeType.LONG, 10, 5);
     assert(percentage == -50);
   });
 
   test('Test short loss', () async {
-    double percentage =
+    final double percentage =
         CalculateDrawdown.calculatePercentageChange(TradeType.SHORT, 10, 20);
     assert(percentage == -50);
   });
 
   test('Test short gain', () async {
-    double percentage =
+    final double percentage =
         CalculateDrawdown.calculatePercentageChange(TradeType.SHORT, 10, 5);
     assert(percentage == 100);
   });
 
   test('Test long drawdown in last candle', () async {
-    Trade trade = Trade(
+    final Trade trade = Trade(
         ticker: 'DUMMY',
         tradeType: TradeType.LONG,
         openPrice: 10,
         openDate: DateTime(2022, 1, 2));
-    TradeOpen tradeOpen = TradeOpen(trade: trade, maxDrawdown: -1);
-    YahooFinanceCandleData lastCandle = YahooFinanceCandleData(
+    final TradeOpen tradeOpen = TradeOpen(trade: trade, maxDrawdown: -1);
+    final YahooFinanceCandleData lastCandle = YahooFinanceCandleData(
         date: DateTime(2022, 1, 2),
         open: 8,
         high: 9,
@@ -49,13 +49,13 @@ void main() {
   });
 
   test('Test long drawdown in position', () async {
-    Trade trade = Trade(
+    final Trade trade = Trade(
         ticker: 'DUMMY',
         tradeType: TradeType.LONG,
         openPrice: 10,
         openDate: DateTime(2022, 1, 2));
-    TradeOpen tradeOpen = TradeOpen(trade: trade, maxDrawdown: -60);
-    YahooFinanceCandleData lastCandle = YahooFinanceCandleData(
+    final TradeOpen tradeOpen = TradeOpen(trade: trade, maxDrawdown: -60);
+    final YahooFinanceCandleData lastCandle = YahooFinanceCandleData(
         date: DateTime(2022, 1, 2),
         open: 8,
         high: 9,
@@ -68,13 +68,13 @@ void main() {
   });
 
   test('Test short drawdown in last candle', () async {
-    Trade trade = Trade(
+    final Trade trade = Trade(
         ticker: 'DUMMY',
         tradeType: TradeType.SHORT,
         openPrice: 10,
         openDate: DateTime(2022, 1, 2));
-    TradeOpen tradeOpen = TradeOpen(trade: trade, maxDrawdown: -1);
-    YahooFinanceCandleData lastCandle = YahooFinanceCandleData(
+    final TradeOpen tradeOpen = TradeOpen(trade: trade, maxDrawdown: -1);
+    final YahooFinanceCandleData lastCandle = YahooFinanceCandleData(
         date: DateTime(2022, 1, 2),
         open: 8,
         high: 20,
@@ -87,13 +87,13 @@ void main() {
   });
 
   test('Test short drawdown in position', () async {
-    Trade trade = Trade(
+    final Trade trade = Trade(
         ticker: 'DUMMY',
         tradeType: TradeType.SHORT,
         openPrice: 10,
         openDate: DateTime(2022, 1, 2));
-    TradeOpen tradeOpen = TradeOpen(trade: trade, maxDrawdown: -60);
-    YahooFinanceCandleData lastCandle = YahooFinanceCandleData(
+    final TradeOpen tradeOpen = TradeOpen(trade: trade, maxDrawdown: -60);
+    final YahooFinanceCandleData lastCandle = YahooFinanceCandleData(
         date: DateTime(2022, 1, 2),
         open: 8,
         high: 20,

@@ -6,15 +6,15 @@ class CalculateIndicators {
   static void calculateIndicators(
       List<YahooFinanceCandleData> prices, List<String> indicators) {
     // Calculate the indicators one by one
-    indicators.forEach((indicator) {
-      Map<String, int> indicatorValidated = validateIndicator(indicator);
+    for (final indicator in indicators) {
+      final Map<String, int> indicatorValidated = validateIndicator(indicator);
       if (indicatorValidated.isNotEmpty) {
-        String indicatorType = indicatorValidated.keys.first;
-        int indicatorPeriod = indicatorValidated[indicatorType]!;
+        final String indicatorType = indicatorValidated.keys.first;
+        final int indicatorPeriod = indicatorValidated[indicatorType]!;
 
         _calculateIndicator(prices, indicatorType, indicatorPeriod);
       }
-    });
+    }
   }
 
   static void _calculateIndicator(
@@ -29,15 +29,15 @@ class CalculateIndicators {
   }
 
   static Map<String, int> validateIndicator(String indicator) {
-    List<String> indicatorParts = indicator.split('_');
+    final List<String> indicatorParts = indicator.split('_');
 
     if (indicatorParts.length == 2) {
       try {
-        var period = int.parse(indicatorParts[1]);
+        final period = int.parse(indicatorParts[1]);
 
         return {indicatorParts[0]: period};
       } catch (e) {
-        print(indicator + ' is not an indicator!');
+        print('$indicator is not an indicator!');
       }
     }
 

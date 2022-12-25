@@ -2,13 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:interactive_i18n/interactive_i18n.dart';
 import 'package:provider/provider.dart';
 import 'package:provider/single_child_widget.dart';
+import 'package:turing_deal/big_picture/state/big_picture_state_provider.dart';
 import 'package:turing_deal/home/home_screen.dart';
 import 'package:turing_deal/home/state/app_state_provider.dart';
 import 'package:turing_deal/settings/settings_screen.dart';
 import 'package:turing_deal/shared/app_theme.dart';
 import 'package:turing_deal/shared/my_app_context.dart';
-
-import 'big_picture/state/big_picture_state_provider.dart';
 
 void main() async {
   runApp(TuringDealApp());
@@ -16,8 +15,7 @@ void main() async {
 
 class TuringDealApp extends StatelessWidget {
   @override
-  Widget build(BuildContext context) {
-    return MultiProvider(
+  Widget build(BuildContext context) => MultiProvider(
       providers: <SingleChildWidget>[
         ChangeNotifierProvider<AppStateProvider>(
           create: (_) => AppStateProvider(),
@@ -38,10 +36,10 @@ class TuringDealApp extends StatelessWidget {
                   ? AppTheme.darkTheme()
                   : AppTheme.lightTheme(),
               debugShowCheckedModeBanner: false,
-              title: "TuringDeal",
+              title: 'TuringDeal',
               initialRoute: '/',
               routes: {
-                '/': (context) => HomeScreen(),
+                '/': (context) => const HomeScreen(),
                 SettingsScreen.route: (context) => SettingsScreen(),
               },
             ),
@@ -49,5 +47,4 @@ class TuringDealApp extends StatelessWidget {
         },
       ),
     );
-  }
 }

@@ -8,23 +8,21 @@ class UIUtils {
     Widget bottomSheet, {
     BuildContext? contextParam,
   }) {
-    BuildContext context =
+    final BuildContext context =
         contextParam ?? MyAppContext.globalNavigatorKey.currentContext!;
 
     showModalBottomSheet(
       backgroundColor: Theme.of(context).canvasColor,
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(20.0),
+        borderRadius: BorderRadius.circular(20),
       ),
       context: context,
-      builder: (context) {
-        return bottomSheet;
-      },
+      builder: (context) => bottomSheet,
     );
   }
 
   static void snackBarError(String message, {BuildContext? contextParam}) {
-    BuildContext context = contextParam ?? MyAppContext.context;
+    final BuildContext context = contextParam ?? MyAppContext.context;
 
     UIUtils.show(
       context: context,

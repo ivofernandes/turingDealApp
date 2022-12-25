@@ -9,9 +9,7 @@ class StrategyConfigRule {
       required this.referenceValue});
 
   @override
-  String toString() {
-    return '$indicator $condition $referenceValue';
-  }
+  String toString() => '$indicator $condition $referenceValue';
 }
 
 enum ConditionRule { OVER, BELOW }

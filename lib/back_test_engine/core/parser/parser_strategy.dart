@@ -14,7 +14,7 @@ class ParserStrategy{
   static StrategyConfig parse(String strategy){
     print('!! TODO parse strategy!!');
 
-    StrategyConfig crossSMABaseStrategy = StrategyConfig(
+    final StrategyConfig crossSMABaseStrategy = StrategyConfig(
         name: 'cross sm50/sma200',
         direction: TradeType.LONG,
         openningRules: [

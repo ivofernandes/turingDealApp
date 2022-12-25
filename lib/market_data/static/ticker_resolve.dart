@@ -1,13 +1,13 @@
 import 'package:turing_deal/market_data/model/stock_ticker.dart';
 
-import 'tickers_list.dart';
+import 'package:turing_deal/market_data/static/tickers_list.dart';
 
 class TickerResolve {
   static String getTickerDescription(StockTicker ticker) {
     if (ticker.description != null) {
       return ticker.description!;
     } else {
-      String symbol = ticker.symbol;
+      final String symbol = ticker.symbol;
 
       if (TickersList.sectors[symbol] != null) {
         return TickersList.sectors[symbol]!;

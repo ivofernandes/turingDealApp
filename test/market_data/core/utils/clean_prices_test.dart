@@ -16,16 +16,16 @@ import 'package:yahoo_finance_data_reader/yahoo_finance_data_reader.dart';
 void main() {
   test('Test clean prices', () async {
     // Get static data from assets
-    String path = 'test/test_data/yahoo_finance/^GSPC.json';
-    String content = await File(path).readAsString();
-    List<dynamic> jsonObject = json.decode(content);
+    const String path = 'test/test_data/yahoo_finance/^GSPC.json';
+    final String content = await File(path).readAsString();
+    final List<dynamic> jsonObject = json.decode(content);
 
-    List<YahooFinanceCandleData> YahooFinanceCandleDatas =
+    final List<YahooFinanceCandleData> YahooFinanceCandleDatas =
         YahooFinanceCandleData.;
 
     assert(YahooFinanceCandleDatas.isNotEmpty);
 
-    YahooFinanceCandleData lastCandle = YahooFinanceCandleDatas.last;
+    final YahooFinanceCandleData lastCandle = YahooFinanceCandleDatas.last;
     assert(lastCandle.volume > 0);
     assert(lastCandle.close > 0);
     assert(lastCandle.high > 0);

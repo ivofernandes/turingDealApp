@@ -9,7 +9,7 @@ class PriceVariationChip extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    String text = value.toStringAsFixed(2) + '%';
+    final String text = '${value.toStringAsFixed(2)}%';
 
     return SizedBox(
       child: Wrap(
@@ -18,7 +18,7 @@ class PriceVariationChip extends StatelessWidget {
         children: [
           prefix != null
               ? Text(
-                  prefix! + ': ',
+                  '${prefix!}: ',
                   style: Theme.of(context)
                       .textTheme
                       .bodyText2!
@@ -27,13 +27,13 @@ class PriceVariationChip extends StatelessWidget {
               : Container(),
           Center(
             child: Container(
-              margin: EdgeInsets.all(2),
+              margin: const EdgeInsets.all(2),
               child: ClipRRect(
-                borderRadius: BorderRadius.all(Radius.circular(20.0)),
+                borderRadius: const BorderRadius.all(Radius.circular(20)),
                 child: ColorScaleWidget(
                   value: value,
                   child: Container(
-                      padding: EdgeInsets.all(5),
+                      padding: const EdgeInsets.all(5),
                       alignment: Alignment.bottomRight,
                       width: 60,
                       child:

@@ -11,23 +11,23 @@ import 'package:yahoo_finance_data_reader/yahoo_finance_data_reader.dart';
 
 void main() {
   test('Test SMA_2', () async {
-    List<YahooFinanceCandleData> prices = [
+    final List<YahooFinanceCandleData> prices = [
       YahooFinanceCandleData(
-          date: DateTime(2019, 1, 1),
+          date: DateTime(2019),
           volume: 1,
           open: 1,
           close: 0,
           high: 1,
           low: 0),
       YahooFinanceCandleData(
-          date: DateTime(2019, 3, 1),
+          date: DateTime(2019, 3),
           volume: 1,
           open: 1,
           close: 0.5,
           high: 1,
           low: 0.5),
       YahooFinanceCandleData(
-          date: DateTime(2019, 6, 1),
+          date: DateTime(2019, 6),
           volume: 1,
           open: 1,
           close: 0.5,
@@ -41,21 +41,21 @@ void main() {
           high: 2,
           low: 2),
       YahooFinanceCandleData(
-          date: DateTime(2020, 1, 1),
+          date: DateTime(2020),
           volume: 1,
           open: 1,
           close: 1,
           high: 1,
           low: 1),
       YahooFinanceCandleData(
-          date: DateTime(2020, 3, 1),
+          date: DateTime(2020, 3),
           volume: 1,
           open: 1,
           close: 1,
           high: 1,
           low: 0.5),
       YahooFinanceCandleData(
-          date: DateTime(2020, 6, 1),
+          date: DateTime(2020, 6),
           volume: 1,
           open: 1,
           close: 1,

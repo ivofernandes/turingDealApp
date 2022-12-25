@@ -15,18 +15,17 @@ class TickersBlock extends StatelessWidget {
       required this.tickers,
       required this.query,
       required this.close,
-      Key? key})
-      : super(key: key);
+      super.key});
 
   @override
   Widget build(BuildContext context) {
-    List<String> keys = tickers.keys.toList();
+    final List<String> keys = tickers.keys.toList();
 
     // Filter keys by text added
-    List<String> filteredKeys = keys.where((element) {
-      String lowerCaseQuery = query.toString().toLowerCase();
+    final List<String> filteredKeys = keys.where((element) {
+      final String lowerCaseQuery = query.toString().toLowerCase();
 
-      bool containsQuery = element
+      final bool containsQuery = element
               .toString()
               .toLowerCase()
               .contains(lowerCaseQuery) ||
@@ -35,14 +34,14 @@ class TickersBlock extends StatelessWidget {
       return containsQuery;
     }).toList();
 
-    int size = filteredKeys.length;
+    final int size = filteredKeys.length;
 
     return size > 0
         ? Column(
             children: [
               suggestionTitle(icon, title, filteredKeys, tickers, context),
               ListView.builder(
-                  physics: NeverScrollableScrollPhysics(),
+                  physics: const NeverScrollableScrollPhysics(),
                   shrinkWrap: true,
                   itemCount: size,
                   itemBuilder: (BuildContext context, int index) {
@@ -50,7 +49,7 @@ class TickersBlock extends StatelessWidget {
                     return TickerWidget(
                       symbol: symbol,
                       description: tickers[symbol]!,
-                      onSelection: (ticker) {
+                      onSelection: (StockTicker ticker) {
                         close(context, <StockTicker>[ticker]);
                       },
                     );
@@ -58,30 +57,28 @@ class TickersBlock extends StatelessWidget {
                   }),
             ],
           )
-        : SizedBox();
+        : const SizedBox();
   }
 
   /// Create a suggestion title that divide sectors from country etf etc
   /// @returns a widget ready
   Widget suggestionTitle(Icon icon, String s, List<String> filteredKeys,
-      Map<String, String> tickers, BuildContext context) {
-    return ListTile(
+      Map<String, String> tickers, BuildContext context) => ListTile(
         leading: icon,
         title: Text(s),
         trailing: MaterialButton(
           shape:
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
           color: Theme.of(context).colorScheme.primary,
-          child: Text('Add all'),
+          child: const Text('Add all'),
           onPressed: () {
-            List<StockTicker> result = [];
+            final List<StockTicker> result = [];
             filteredKeys.forEach((element) {
-              String symbol = element.toString();
+              final String symbol = element.toString();
               result.add(StockTicker(symbol, tickers[symbol]));
             });
             // Finish the search passing a result
             close(context, result);
           },
         ));
-  }
 }

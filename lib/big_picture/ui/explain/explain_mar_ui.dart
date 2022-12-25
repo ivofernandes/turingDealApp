@@ -3,13 +3,12 @@ import 'package:turing_deal/shared/ui/Web.dart';
 
 class ExplainMAR extends StatelessWidget {
   @override
-  Widget build(BuildContext context) {
-    return SafeArea(
+  Widget build(BuildContext context) => SafeArea(
       child: Padding(
-        padding: const EdgeInsets.all(8.0),
+        padding: const EdgeInsets.all(8),
         child: Column(
           children: [
-            SizedBox(
+            const SizedBox(
               height: 20,
             ),
             Text(
@@ -17,18 +16,18 @@ class ExplainMAR extends StatelessWidget {
               style: Theme.of(context).textTheme.headline6,
               textAlign: TextAlign.center,
             ),
-            SizedBox(
+            const SizedBox(
               height: 20,
             ),
-            Text(
+            const Text(
               'A MAR ratio is a measurement of returns adjusted for risk that can be used to compare the performance of different assets or strategies',
             ),
-            SizedBox(
+            const SizedBox(
               height: 20,
             ),
-            Text('The MAR forumla is: MAR ='),
-            Text('CAGR / Max drawdown'),
-            SizedBox(
+            const Text('The MAR forumla is: MAR ='),
+            const Text('CAGR / Max drawdown'),
+            const SizedBox(
               height: 20,
             ),
             MaterialButton(
@@ -47,5 +46,4 @@ class ExplainMAR extends StatelessWidget {
         ),
       ),
     );
-  }
 }

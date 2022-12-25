@@ -1,4 +1,4 @@
-import 'base_strategy_result.dart';
+import 'package:turing_deal/back_test_engine/model/strategy_result/base_strategy_result.dart';
 
 class BuyAndHoldStrategyResult extends BaseStrategyResult {
   double endPrice = 0;

@@ -19,22 +19,21 @@ class TickerTabs extends StatefulWidget {
 
 class _TickerTabsState extends State<TickerTabs> {
   int _selectedIndex = 0;
-  PageController _pageController = PageController();
+  final PageController _pageController = PageController();
 
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
+  Widget build(BuildContext context) => Scaffold(
       appBar: AppBar(
-          title: Text(TickerResolve.getTickerDescription(this.widget.ticker))),
+          title: Text(TickerResolve.getTickerDescription(widget.ticker))),
       body: Container(
-          padding: const EdgeInsets.all(20.0),
+          padding: const EdgeInsets.all(20),
           child: PageView(
-            physics: NeverScrollableScrollPhysics(),
+            physics: const NeverScrollableScrollPhysics(),
             controller: _pageController,
             onPageChanged: _onItemSelected,
             children: [
               TuringDealChart(widget.data),
-              TuringDealAnalysis(),
+              const TuringDealAnalysis(),
               ListPricesText((widget.data).reversed.toList())
             ],
           )),
@@ -43,21 +42,20 @@ class _TickerTabsState extends State<TickerTabs> {
         currentIndex: _selectedIndex,
         items: [
           BottomNavigationBarItem(
-            icon: Icon(Icons.show_chart_outlined),
+            icon: const Icon(Icons.show_chart_outlined),
             label: 'Chart'.t,
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.analytics_outlined),
+            icon: const Icon(Icons.analytics_outlined),
             label: 'Analysis'.t,
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.list),
+            icon: const Icon(Icons.list),
             label: 'Prices'.t,
           ),
         ],
       ),
     );
-  }
 
   void _onItemSelected(int index) {
     setState(() {

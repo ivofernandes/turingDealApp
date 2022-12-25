@@ -16,21 +16,20 @@ class StrategyResumeDetails extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    BigPictureStateProvider bigPictureState =
+    final BigPictureStateProvider bigPictureState =
         Provider.of<BigPictureStateProvider>(context, listen: false);
 
-    double pricesma20 =
+    final double pricesma20 =
         (strategy.endPrice / strategy.movingAverages[20]! - 1) * 100;
-    double sma20sma50 =
+    final double sma20sma50 =
         (strategy.movingAverages[20]! / strategy.movingAverages[50]! - 1) * 100;
-    double sma50sma200 =
+    final double sma50sma200 =
         (strategy.movingAverages[50]! / strategy.movingAverages[200]! - 1) *
             100;
 
     return bigPictureState.isCompactView()
         ? Container(
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 PriceVariationChip(null, pricesma20),
                 PriceVariationChip(null, sma20sma50),
@@ -48,7 +47,7 @@ class StrategyResumeDetails extends StatelessWidget {
                   children: [
                     StrategyResumeItem(
                       title: 'CAGR',
-                      value: strategy.cagr.toStringAsFixed(2) + '%',
+                      value: '${strategy.cagr.toStringAsFixed(2)}%',
                       onTap: () => UIUtils.bottomSheet(
                         ExplainCagr(),
                         contextParam: context,
@@ -57,14 +56,14 @@ class StrategyResumeDetails extends StatelessWidget {
                     StrategyResumeItem(
                         title: '% from top',
                         value:
-                            strategy.currentDrawdown.toStringAsFixed(2) + '%',
+                            '${strategy.currentDrawdown.toStringAsFixed(2)}%',
                         onTap: () => UIUtils.bottomSheet(
                               ExplainDrawdown(),
                               contextParam: context,
                             )),
                     StrategyResumeItem(
                         title: 'Drawdown',
-                        value: strategy.maxDrawdown.toStringAsFixed(2) + '%',
+                        value: '${strategy.maxDrawdown.toStringAsFixed(2)}%',
                         onTap: () => UIUtils.bottomSheet(
                               ExplainDrawdown(),
                               contextParam: context,

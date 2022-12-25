@@ -10,22 +10,21 @@ class TickerWidget extends StatelessWidget {
       {required this.symbol, this.description = '', this.onSelection});
 
   @override
-  Widget build(BuildContext context) {
-    return InkWell(
+  Widget build(BuildContext context) => InkWell(
       onTap: () {
         if (onSelection != null) {
           onSelection!(StockTicker(symbol, description));
         }
       },
       child: Padding(
-        padding: const EdgeInsets.all(3.0),
+        padding: const EdgeInsets.all(3),
         child: Card(
           child: Row(
             children: [
               ConstrainedBox(
-                  constraints: new BoxConstraints(
-                    minHeight: 30.0,
-                    minWidth: 80.0,
+                  constraints: const BoxConstraints(
+                    minHeight: 30,
+                    minWidth: 80,
                     maxHeight: 30,
                   ),
                   child: Container(
@@ -34,12 +33,11 @@ class TickerWidget extends StatelessWidget {
                         child: Text(symbol.toUpperCase(),
                             style: Theme.of(context).textTheme.headline6)),
                   )),
-              SizedBox(width: 10),
+              const SizedBox(width: 10),
               Text(description),
             ],
           ),
         ),
       ),
     );
-  }
 }

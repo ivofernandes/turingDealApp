@@ -8,16 +8,15 @@ class ListPricesText extends StatelessWidget {
   const ListPricesText(this.data);
 
   @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
+  Widget build(BuildContext context) => Padding(
+      padding: const EdgeInsets.all(8),
       child: ListView.builder(
           shrinkWrap: true,
-          itemCount: this.data.length + 1,
+          itemCount: data.length + 1,
           itemBuilder: (BuildContext context, int index) {
             if (index == 0) {
               return Row(
-                children: [
+                children: const [
                   Expanded(child: Text('Date', textAlign: TextAlign.center)),
                   Expanded(child: Text('Open', textAlign: TextAlign.center)),
                   Expanded(child: Text('High', textAlign: TextAlign.center)),
@@ -29,17 +28,16 @@ class ListPricesText extends StatelessWidget {
               return Row(
                 children: [
                   TickerDetailsCell(
-                      DateFormat.yMd().format(this.data[index].date)),
-                  TickerDetailsCell(this.data[index].open.toStringAsFixed(2)),
-                  TickerDetailsCell(this.data[index].high.toStringAsFixed(2)),
-                  TickerDetailsCell(this.data[index].low.toStringAsFixed(2)),
-                  TickerDetailsCell(this.data[index].close.toStringAsFixed(2)),
+                      DateFormat.yMd().format(data[index].date)),
+                  TickerDetailsCell(data[index].open.toStringAsFixed(2)),
+                  TickerDetailsCell(data[index].high.toStringAsFixed(2)),
+                  TickerDetailsCell(data[index].low.toStringAsFixed(2)),
+                  TickerDetailsCell(data[index].close.toStringAsFixed(2)),
                 ],
               );
             }
           }),
     );
-  }
 }
 
 class TickerDetailsCell extends StatelessWidget {
@@ -48,15 +46,13 @@ class TickerDetailsCell extends StatelessWidget {
   const TickerDetailsCell(this.text);
 
   @override
-  Widget build(BuildContext context) {
-    return Expanded(
+  Widget build(BuildContext context) => Expanded(
         child: Padding(
-      padding: const EdgeInsets.all(8.0),
+      padding: const EdgeInsets.all(8),
       child: FittedBox(
         child: SelectableText(text!,
             style:
                 Theme.of(context).textTheme.bodyText1!.copyWith(fontSize: 9)),
       ),
     ));
-  }
 }

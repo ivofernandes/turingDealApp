@@ -3,13 +3,12 @@ import 'package:turing_deal/shared/ui/Web.dart';
 
 class ExplainDrawdown extends StatelessWidget {
   @override
-  Widget build(BuildContext context) {
-    return SafeArea(
+  Widget build(BuildContext context) => SafeArea(
       child: Padding(
-        padding: const EdgeInsets.all(8.0),
+        padding: const EdgeInsets.all(8),
         child: Column(
           children: [
-            SizedBox(
+            const SizedBox(
               height: 20,
             ),
             Text(
@@ -17,13 +16,13 @@ class ExplainDrawdown extends StatelessWidget {
               style: Theme.of(context).textTheme.headline6,
               textAlign: TextAlign.center,
             ),
-            SizedBox(
+            const SizedBox(
               height: 20,
             ),
-            Text(
+            const Text(
               'The Max Drawdown is the biggest fall in the value of a portfolio following a strategy',
             ),
-            SizedBox(
+            const SizedBox(
               height: 20,
             ),
             MaterialButton(
@@ -41,5 +40,4 @@ class ExplainDrawdown extends StatelessWidget {
         ),
       ),
     );
-  }
 }

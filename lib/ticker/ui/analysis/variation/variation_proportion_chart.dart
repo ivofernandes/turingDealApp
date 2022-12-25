@@ -10,32 +10,29 @@ class VariationProportionChart extends StatelessWidget {
   const VariationProportionChart(this.countByInterval);
 
   @override
-  Widget build(BuildContext context) {
-    return charts.BarChart(
+  Widget build(BuildContext context) => charts.BarChart(
       _getData(),
       animate: false,
       vertical: false,
       // Left labels
-      barRendererDecorator: new charts.BarLabelDecorator<String>(),
-      domainAxis: charts.OrdinalAxisSpec(
+      barRendererDecorator: charts.BarLabelDecorator<String>(),
+      domainAxis: const charts.OrdinalAxisSpec(
           renderSpec: charts.SmallTickRendererSpec(
               labelStyle: charts.TextStyleSpec(
                   fontSize: 12, color: charts.MaterialPalette.white),
               lineStyle:
                   charts.LineStyleSpec(color: charts.MaterialPalette.white))),
       // Top labels
-      secondaryMeasureAxis: charts.NumericAxisSpec(
+      secondaryMeasureAxis: const charts.NumericAxisSpec(
           renderSpec: charts.GridlineRendererSpec(
               labelStyle: charts.TextStyleSpec(
                   fontSize: 12, color: charts.MaterialPalette.white),
               lineStyle:
                   charts.LineStyleSpec(color: charts.MaterialPalette.white))),
     );
-  }
 
-  List<charts.Series<VariationCount, String>> _getData() {
-    return [
-      new charts.Series<VariationCount, String>(
+  List<charts.Series<VariationCount, String>> _getData() => [
+      charts.Series<VariationCount, String>(
           id: 'Data',
           domainFn: (VariationCount variationCount, _) =>
               variationCount.intervalDescription,
@@ -47,5 +44,4 @@ class VariationProportionChart extends StatelessWidget {
         // Set series to use the secondary measure axis.
         ..setAttribute(charts.measureAxisIdKey, 'secondaryMeasureAxisId'),
     ];
-  }
 }

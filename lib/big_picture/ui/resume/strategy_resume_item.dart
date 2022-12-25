@@ -6,12 +6,10 @@ class StrategyResumeItem extends StatelessWidget {
   final Function onTap;
 
   const StrategyResumeItem(
-      {required this.title, required this.value, required this.onTap, Key? key})
-      : super(key: key);
+      {required this.title, required this.value, required this.onTap, super.key});
 
   @override
-  Widget build(BuildContext context) {
-    return InkWell(
+  Widget build(BuildContext context) => InkWell(
         onTap: () => onTap.call(),
         child: Row(
           children: [
@@ -30,7 +28,7 @@ class StrategyResumeItem extends StatelessWidget {
                   ),
               textAlign: TextAlign.left,
             ),
-            Spacer(),
+            const Spacer(),
             Text(value,
                 style: Theme.of(context).textTheme.bodyText2!.copyWith(
                       fontSize: 10,
@@ -38,5 +36,4 @@ class StrategyResumeItem extends StatelessWidget {
                 textAlign: TextAlign.right),
           ],
         ));
-  }
 }

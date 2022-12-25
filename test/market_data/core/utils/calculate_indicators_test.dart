@@ -16,16 +16,16 @@ import 'package:yahoo_finance_data_reader/yahoo_finance_data_reader.dart';
 
 void main() {
   test('Test calculate indicators', () async {
-    print(DateTime.now().toString() + ' > getting an sp500 dataframe');
+    print('${DateTime.now()} > getting an sp500 dataframe');
     // Get static data from assets
-    String path = 'test/test_data/yahoo_finance/^GSPC.json';
-    String content = await File(path).readAsString();
-    List<dynamic> jsonObject = json.decode(content);
+    const String path = 'test/test_data/yahoo_finance/^GSPC.json';
+    final String content = await File(path).readAsString();
+    final List<dynamic> jsonObject = json.decode(content);
 
-    List<YahooFinanceCandleData> YahooFinanceCandleDatas =
+    final List<YahooFinanceCandleData> YahooFinanceCandleDatas =
         CleanPrices.clean(jsonObject);
 
-    print(DateTime.now().toString() + ' > calculating indicators');
+    print('${DateTime.now()} > calculating indicators');
     assert(YahooFinanceCandleDatas.isNotEmpty);
 
     // TODO Check if it can deal with invalid data,
@@ -39,6 +39,6 @@ void main() {
 
     assert(YahooFinanceCandleDatas[100].indicators.isNotEmpty);
 
-    print(DateTime.now().toString() + ' > calculated indicators');
+    print('${DateTime.now()} > calculated indicators');
   });
 }

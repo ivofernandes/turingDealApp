@@ -10,7 +10,7 @@ import 'package:turing_deal/back_test_engine/model/strategy_result/strategy_resu
 import 'package:yahoo_finance_data_reader/yahoo_finance_data_reader.dart';
 
 void main() {
-  StrategyConfig crossSMABaseStrategy = StrategyConfig(
+  final StrategyConfig crossSMABaseStrategy = StrategyConfig(
       name: 'cross sm50/sma200',
       direction: TradeType.LONG,
       openningRules: [
@@ -36,17 +36,18 @@ void main() {
   /// close long:
   /// SMA_50 < SMA_200
   test('Test a cross sma strategy_result on sp500', () async {
-    String path = 'test/test_data/yahoo_finance/^GSPC.json';
-    String content = await File(path).readAsString();
-    List<dynamic> jsonObject = json.decode(content);
+    const String path = 'test/test_data/yahoo_finance/^GSPC.json';
+    final String content = await File(path).readAsString();
+    final List<dynamic> jsonObject = json.decode(content) as List;
 
-    List<YahooFinanceCandleData> yahooFinanceCandleDatas =
-        CleanPrices.clean(jsonObject);
+    final List<YahooFinanceCandleData> yahooFinanceCandleDatas =
+        YahooFinanceCandleData.CleanPrices.clean(jsonObject)
+            as List<YahooFinanceCandleData>;
     assert(yahooFinanceCandleDatas.isNotEmpty);
 
-    StrategyRunner strategyRunner =
+    final StrategyRunner strategyRunner =
         StrategyRunner('^GSPC', yahooFinanceCandleDatas);
-    StrategyResult result = strategyRunner.run(crossSMABaseStrategy);
+    final StrategyResult result = strategyRunner.run(crossSMABaseStrategy);
 
     // Check if the strategy returned is valid
     assert(result.cagr > 0);
@@ -72,16 +73,16 @@ void main() {
   ///   target: 10%
   test('Test a cross sma strategy_result on sp500 with stops and target',
       () async {
-    String path = 'test/test_data/yahoo_finance/^GSPC.json';
-    String content = await File(path).readAsString();
-    List<dynamic> jsonObject = json.decode(content);
+    const String path = 'test/test_data/yahoo_finance/^GSPC.json';
+    final String content = await File(path).readAsString();
+    final List<dynamic> jsonObject = json.decode(content);
 
-    List<YahooFinanceCandleData> YahooFinanceCandleDatas =
+    final List<YahooFinanceCandleData> YahooFinanceCandleDatas =
         CleanPrices.clean(jsonObject);
     assert(YahooFinanceCandleDatas.isNotEmpty);
 
-    StrategyRunner strategyRunner =
+    final StrategyRunner strategyRunner =
         StrategyRunner('^GSPC', YahooFinanceCandleDatas);
-    StrategyResult result = strategyRunner.run(crossSMABaseStrategy);
+    final StrategyResult result = strategyRunner.run(crossSMABaseStrategy);
   });
 }

@@ -7,8 +7,7 @@ class ChartLegendItem extends StatelessWidget {
   const ChartLegendItem(this.color, this.text);
 
   @override
-  Widget build(BuildContext context) {
-    return Row(
+  Widget build(BuildContext context) => Row(
       children: [
         Container(
           height: 5,
@@ -18,11 +17,10 @@ class ChartLegendItem extends StatelessWidget {
             shape: BoxShape.circle,
           ),
         ),
-        SizedBox(
+        const SizedBox(
           width: 10,
         ),
         Text(text)
       ],
     );
-  }
 }

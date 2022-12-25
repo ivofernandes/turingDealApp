@@ -9,15 +9,13 @@ class NegotiationSignalizer {
   // Singleton
   static final NegotiationSignalizer _singleton =
       NegotiationSignalizer._internal();
-  factory NegotiationSignalizer() {
-    return _singleton;
-  }
+  factory NegotiationSignalizer() => _singleton;
   NegotiationSignalizer._internal();
 
   Signal? openSignal(
       YahooFinanceCandleData currentCandle, StrategyConfig strategyConfig) {
-    for (StrategyConfigRules openRules in strategyConfig.openningRules) {
-      for (StrategyConfigRule openRule in openRules.rules) {
+    for (final StrategyConfigRules openRules in strategyConfig.openningRules) {
+      for (final StrategyConfigRule openRule in openRules.rules) {
         if (NegotiationSignalizerChecker()
             .checkCondition(openRule, currentCandle)) {
           if (strategyConfig.direction == TradeType.LONG) {
@@ -34,8 +32,8 @@ class NegotiationSignalizer {
 
   Signal? closeSignal(
       YahooFinanceCandleData currentCandle, StrategyConfig strategyConfig) {
-    for (StrategyConfigRules closeRules in strategyConfig.closingRules) {
-      for (StrategyConfigRule closeRule in closeRules.rules) {
+    for (final StrategyConfigRules closeRules in strategyConfig.closingRules) {
+      for (final StrategyConfigRule closeRule in closeRules.rules) {
         if (NegotiationSignalizerChecker()
             .checkCondition(closeRule, currentCandle)) {
           if (strategyConfig.direction == TradeType.LONG) {

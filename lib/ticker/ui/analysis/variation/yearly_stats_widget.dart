@@ -10,20 +10,19 @@ import 'package:turing_deal/ticker/ui/chart/chart_legend_item.dart';
 class YearlyStatsWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    TickerStateProvider tickerState =
+    final TickerStateProvider tickerState =
         Provider.of<TickerStateProvider>(context, listen: false);
 
     return Column(
       children: [
-        SizedBox(
+        const SizedBox(
           height: 20,
         ),
         Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             ChartLegendItem(AppTheme.brand, 'CAGR'),
             ChartLegendItem(Colors.red.shade200, 'Drawdown'),
-            SizedBox(height: 20)
+            const SizedBox(height: 20)
           ],
         ),
         TouchInteractiveViewer(
@@ -35,10 +34,10 @@ class YearlyStatsWidget extends StatelessWidget {
                 animate: false,
                 vertical: false,
                 barGroupingType: charts.BarGroupingType.grouped,
-                barRendererDecorator: new charts.BarLabelDecorator<String>(
-                    insideLabelStyleSpec: charts.TextStyleSpec(
+                barRendererDecorator: charts.BarLabelDecorator<String>(
+                    insideLabelStyleSpec: const charts.TextStyleSpec(
                         fontSize: 12, color: charts.MaterialPalette.black),
-                    outsideLabelStyleSpec: charts.TextStyleSpec(
+                    outsideLabelStyleSpec: const charts.TextStyleSpec(
                         fontSize: 12, color: charts.MaterialPalette.black)),
                 // Left labels
                 domainAxis: charts.OrdinalAxisSpec(
@@ -63,9 +62,8 @@ class YearlyStatsWidget extends StatelessWidget {
   }
 
   List<charts.Series<YearlyStats, String>> _getData(
-      List<YearlyStats> yearlyStats) {
-    return [
-      new charts.Series<YearlyStats, String>(
+      List<YearlyStats> yearlyStats) => [
+      charts.Series<YearlyStats, String>(
           id: 'CAGR',
           displayName: 'CAGR',
           domainFn: (YearlyStats yearlyStat, _) => yearlyStat.year.toString(),
@@ -75,14 +73,14 @@ class YearlyStatsWidget extends StatelessWidget {
           labelAccessorFn: (YearlyStats yearlyStat, _) =>
               '${yearlyStat.variation.toStringAsFixed(0)} %')
         ..setAttribute(charts.measureAxisIdKey, 'secondaryMeasureAxisId'),
-      new charts.Series<YearlyStats, String>(
+      charts.Series<YearlyStats, String>(
           id: 'Drawdown',
           domainFn: (YearlyStats yearlyStat, _) => yearlyStat.year.toString(),
           measureFn: (YearlyStats yearlyStat, _) => yearlyStat.drawdown,
           data: yearlyStats,
           insideLabelStyleAccessorFn: (YearlyStats yearlyStat, _) =>
               charts.TextStyleSpec(
-                  fontSize: 12, color: charts.Color.fromHex(code: "#000000")),
+                  fontSize: 12, color: charts.Color.fromHex(code: '#000000')),
           outsideLabelStyleAccessorFn: (YearlyStats yearlyStat, _) =>
               charts.TextStyleSpec(
                   fontSize: 12,
@@ -93,5 +91,4 @@ class YearlyStatsWidget extends StatelessWidget {
               charts.MaterialPalette.red.shadeDefault.lighter)
         ..setAttribute(charts.measureAxisIdKey, 'secondaryMeasureAxisId'),
     ];
-  }
 }

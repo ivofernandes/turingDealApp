@@ -11,35 +11,35 @@ class TuringDealChart extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    List<CandleData> _data = [
+    final List<CandleData> candleDataArray = [
       // timestamp, open, high, low, close, volume
     ];
 
-    for (final element in data) {
-      CandleData candle = CandleData(
+    for (final YahooFinanceCandleData element in data) {
+      final CandleData candle = CandleData(
           timestamp: element.date.millisecondsSinceEpoch,
           open: element.open,
           close: element.close,
           volume: element.volume.toDouble(),
           low: element.low,
           high: element.high);
-      _data.add(candle);
+      candleDataArray.add(candle);
     }
 
-    final ma20 = CandleData.computeMA(_data, 20);
-    final ma50 = CandleData.computeMA(_data, 50);
-    final ma200 = CandleData.computeMA(_data, 200);
+    final ma20 = CandleData.computeMA(candleDataArray, 20);
+    final ma50 = CandleData.computeMA(candleDataArray, 50);
+    final ma200 = CandleData.computeMA(candleDataArray, 200);
 
-    for (int i = 0; i < _data.length; i++) {
-      _data[i].trends = [ma20[i], ma50[i], ma200[i]];
+    for (int i = 0; i < data.length; i++) {
+      candleDataArray[i].trends = [ma20[i], ma50[i], ma200[i]];
     }
 
     return Stack(
       children: [
         Container(
-          padding: EdgeInsets.symmetric(vertical: 10),
+          padding: const EdgeInsets.symmetric(vertical: 10),
           child: InteractiveChart(
-            candles: _data,
+            candles: candleDataArray,
             style: ChartStyle(
               priceGainColor: Theme.of(context).colorScheme.primary,
               priceLossColor: Theme.of(context).colorScheme.error,
@@ -64,7 +64,7 @@ class TuringDealChart extends StatelessWidget {
             },
           ),
         ),
-        ChartLegend()
+        const ChartLegend()
       ],
     );
   }
@@ -73,15 +73,15 @@ class TuringDealChart extends StatelessWidget {
     final date = DateFormat.yMMMd()
         .format(DateTime.fromMillisecondsSinceEpoch(candle.timestamp));
     return {
-      "Date": date,
-      "Open": candle.open?.toStringAsFixed(2) ?? "-",
-      "High": candle.high?.toStringAsFixed(2) ?? "-",
-      "Low": candle.low?.toStringAsFixed(2) ?? "-",
-      "Close": candle.close?.toStringAsFixed(2) ?? "-",
-      "Volume": candle.volume?.asAbbreviated() ?? "-",
-      "Moving average 20": candle.trends[0]?.toStringAsFixed(2) ?? "-",
-      "Moving average 50": candle.trends[1]?.toStringAsFixed(2) ?? "-",
-      "Moving average 200": candle.trends[2]?.toStringAsFixed(2) ?? "-"
+      'Date': date,
+      'Open': candle.open?.toStringAsFixed(2) ?? '-',
+      'High': candle.high?.toStringAsFixed(2) ?? '-',
+      'Low': candle.low?.toStringAsFixed(2) ?? '-',
+      'Close': candle.close?.toStringAsFixed(2) ?? '-',
+      'Volume': candle.volume?.asAbbreviated() ?? '-',
+      'Moving average 20': candle.trends[0]?.toStringAsFixed(2) ?? '-',
+      'Moving average 50': candle.trends[1]?.toStringAsFixed(2) ?? '-',
+      'Moving average 200': candle.trends[2]?.toStringAsFixed(2) ?? '-'
     };
   }
 }

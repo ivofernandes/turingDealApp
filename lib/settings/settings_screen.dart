@@ -12,13 +12,13 @@ class SettingsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    AppStateProvider appState = Provider.of<AppStateProvider>(context);
+    final AppStateProvider appState = Provider.of<AppStateProvider>(context);
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
           leading: IconButton(
             onPressed: () => Navigator.of(context).pop(),
-            icon: Icon(Icons.arrow_back_ios),
+            icon: const Icon(Icons.arrow_back_ios),
           ),
           title: Text('Settings'.t),
           actions: [
@@ -28,24 +28,23 @@ class SettingsScreen extends StatelessWidget {
                       await appState.setIsDark(false);
                       appState.refresh();
                     },
-                    icon: Icon(Icons.brightness_5))
+                    icon: const Icon(Icons.brightness_5))
                 : IconButton(
                     onPressed: () async {
                       await appState.setIsDark(true);
                       appState.refresh();
                     },
-                    icon: Icon(Icons.dark_mode))
+                    icon: const Icon(Icons.dark_mode))
           ],
         ),
         body: SingleChildScrollView(
           child: Center(
             child: ConstrainedBox(
-              constraints: BoxConstraints(maxWidth: 800),
+              constraints: const BoxConstraints(maxWidth: 800),
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   Container(
-                    margin: EdgeInsets.all(10.0),
+                    margin: const EdgeInsets.all(10),
                     child: InteractiveI18nSelector(
                       onLanguageSelected: (language) {
                         appState.refresh();
@@ -53,23 +52,23 @@ class SettingsScreen extends StatelessWidget {
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.all(8.0),
+                    padding: const EdgeInsets.all(8),
                     child: Text(
                         'The objective of this project is to help people to make investment decisions'
                             .t),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 10,
                   ),
                   MaterialButton(
                       color: Theme.of(context).colorScheme.primary,
                       shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10.0)),
+                          borderRadius: BorderRadius.circular(10)),
                       elevation: 10,
                       child: Text('Contribute on github'.t),
                       onPressed: () =>
                           Web.launchLink(context, Environment.GITHUB_URL)),
-                  kIsWeb ? AppsBanner() : const SizedBox()
+                  kIsWeb ? const AppsBanner() : const SizedBox()
                 ],
               ),
             ),

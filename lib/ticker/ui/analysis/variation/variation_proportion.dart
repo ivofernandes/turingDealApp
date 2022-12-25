@@ -10,32 +10,31 @@ import 'package:yahoo_finance_data_reader/yahoo_finance_data_reader.dart';
 class VariationProportion extends StatelessWidget {
   final int delta;
 
-  VariationProportion({required this.delta});
+  const VariationProportion({required this.delta});
 
   @override
   Widget build(BuildContext context) {
-    TickerStateProvider tickerState =
+    final TickerStateProvider tickerState =
         Provider.of<TickerStateProvider>(context, listen: false);
 
-    List<YahooFinanceCandleData> data = tickerState.getCandlesData();
-    List<double> vars = Variations.extractList(data, delta);
+    final List<YahooFinanceCandleData> data = tickerState.getCandlesData();
+    final List<double> vars = Variations.extractList(data, delta);
     if (vars.isEmpty) {
-      return Center(child: CircularProgressIndicator());
+      return const Center(child: CircularProgressIndicator());
     }
     final stats = Stats.fromData(vars);
-    Stats statistics = stats.withPrecision(3);
+    final Stats statistics = stats.withPrecision(3);
 
     print(statistics);
 
-    double upperLimit = (statistics.standardDeviation * 2).round().toDouble();
-    double lowerLimit = -upperLimit;
-    double step = (statistics.standardDeviation / 4 * 10).round() / 10;
+    final double upperLimit = (statistics.standardDeviation * 2).round().toDouble();
+    final double lowerLimit = -upperLimit;
+    final double step = (statistics.standardDeviation / 4 * 10).round() / 10;
 
-    List<VariationCount> countByInterval =
+    final List<VariationCount> countByInterval =
         Variations.countByInterval(lowerLimit, upperLimit, step, data, delta);
 
     return Column(
-      crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         SizedBox(
           width: double.maxFinite,
@@ -47,7 +46,7 @@ class VariationProportion extends StatelessWidget {
           ),
         ),
         Container(
-          margin: EdgeInsets.all(10),
+          margin: const EdgeInsets.all(10),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -63,7 +62,7 @@ class VariationProportion extends StatelessWidget {
             height: 300,
             width: 300,
             child: VariationProportionChart(countByInterval)),
-        SizedBox(
+        const SizedBox(
           height: 20,
         )
       ],

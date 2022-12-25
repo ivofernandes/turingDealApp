@@ -27,7 +27,7 @@ class BaseStrategyResult {
 
   static BuyAndHoldStrategyResult createBuyAndHoldStrategyResult(
       List<YahooFinanceCandleData> prices) {
-    BuyAndHoldStrategyResult strategy = BuyAndHoldStrategyResult();
+    final BuyAndHoldStrategyResult strategy = BuyAndHoldStrategyResult();
     addBaseDataToStrategy(strategy, prices);
 
     return strategy;
@@ -35,7 +35,7 @@ class BaseStrategyResult {
 
   static StrategyResult createStrategyResult(
       List<YahooFinanceCandleData> prices) {
-    StrategyResult strategy = StrategyResult();
+    final StrategyResult strategy = StrategyResult();
     addBaseDataToStrategy(strategy, prices);
 
     return strategy;
@@ -55,10 +55,10 @@ class BaseStrategyResult {
   static void addTimeToStrategy(
       List<YahooFinanceCandleData> prices, BaseStrategyResult strategy) {
     // Get the start and end date, and the total trading years
-    DateTime endDate = prices.last.date;
-    DateTime startDate = prices.first.date;
-    double tradingDays = endDate.difference(startDate).inDays.toDouble();
-    double tradingYears = tradingDays / 365;
+    final DateTime endDate = prices.last.date;
+    final DateTime startDate = prices.first.date;
+    final double tradingDays = endDate.difference(startDate).inDays.toDouble();
+    final double tradingYears = tradingDays / 365;
     strategy.startDate = startDate;
     strategy.endDate = endDate;
     strategy.tradingYears = tradingYears;

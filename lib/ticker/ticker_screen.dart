@@ -11,12 +11,11 @@ class TickerScreen extends StatelessWidget {
   TickerScreen(this.ticker);
 
   @override
-  Widget build(BuildContext context) {
-    return FutureBuilder<dynamic>(
-        future: YahooFinanceService().getTickerData(this.ticker.symbol),
+  Widget build(BuildContext context) => FutureBuilder<dynamic>(
+        future: YahooFinanceService().getTickerData(ticker.symbol),
         builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
           if (snapshot.data == null) {
-            return Center(
+            return const Center(
               child: CircularProgressIndicator(),
             );
           }
@@ -29,9 +28,8 @@ class TickerScreen extends StatelessWidget {
                     snapshot.data as List<YahooFinanceCandleData>);
 
                 return SafeArea(
-                    child: TickerTabs(this.ticker,
+                    child: TickerTabs(ticker,
                         snapshot.data as List<YahooFinanceCandleData>));
               }));
         });
-  }
 }

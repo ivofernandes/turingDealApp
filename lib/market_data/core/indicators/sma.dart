@@ -1,7 +1,7 @@
 import 'package:yahoo_finance_data_reader/yahoo_finance_data_reader.dart';
 
 class SMA {
-  static double atEnd(List<YahooFinanceCandleData> prices, period) {
+  static double atEnd(List<YahooFinanceCandleData> prices, int period) {
     double sum = 0;
 
     for (int i = prices.length - 1; i > 0 && i >= prices.length - period; i--) {

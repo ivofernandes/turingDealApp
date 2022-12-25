@@ -21,9 +21,7 @@ class Trade {
       required this.openPrice});
 
   @override
-  String toString() {
-    return 'Trade{ticker: $ticker, tradeType: $tradeType, openDate: $openDate, openPrice: $openPrice}';
-  }
+  String toString() => 'Trade{ticker: $ticker, tradeType: $tradeType, openDate: $openDate, openPrice: $openPrice}';
 }
 
 class TradeOpen extends Trade {
@@ -66,9 +64,7 @@ class TradeHistory extends Trade {
             openPrice: trade.openPrice);
 
   @override
-  String toString() {
-    return 'TradeHistory{ticker: $ticker, tradeType: $tradeType, '
+  String toString() => 'TradeHistory{ticker: $ticker, tradeType: $tradeType, '
         'openDate: $openDate, openPrice: $openPrice, '
         'closeDate: $closeDate, closePrice: $closePrice}';
-  }
 }

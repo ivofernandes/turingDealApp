@@ -6,21 +6,19 @@ mixin ThemeState {
   Future<void> setIsDark(bool param) async {
     _isDark = param;
 
-    SharedPreferences prefs = await SharedPreferences.getInstance();
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
     await prefs.setBool('theme', param);
   }
 
-  bool isDark() {
-    return _isDark;
-  }
+  bool isDark() => _isDark;
 
   Future<void> loadTheme() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
 
-    bool? currentIsDark = prefs.getBool('theme');
+    final bool? currentIsDark = prefs.getBool('theme');
 
     if (currentIsDark != null) {
-      setIsDark(currentIsDark);
+      await setIsDark(currentIsDark);
     }
   }
 }

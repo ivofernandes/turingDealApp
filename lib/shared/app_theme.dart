@@ -29,28 +29,28 @@ http://paletton.com/#uid=32V0u0ksHn-iOuBomrKwbjjHje4
 
 */
 class AppTheme {
-  static Color aux = Color(0xff212121);
-  static Color brand = Color(0xff0E8B34);
-  static Color brandVariant = Color(0xffBC6813);
+  static Color aux = const Color(0xff212121);
+  static Color brand = const Color(0xff0E8B34);
+  static Color brandVariant = const Color(0xffBC6813);
 
-  static Color error = Color(0xff9E1051);
-  static Color secondary = Color(0xff0E8B34);
-  static Color secondaryVariant = Color(0xffBC6813);
+  static Color error = const Color(0xff9E1051);
+  static Color secondary = const Color(0xff0E8B34);
+  static Color secondaryVariant = const Color(0xffBC6813);
 
-  static Color backgroundDracula = Color(0xff002D50);
-  static Color foregroundDracula = Color(0xffEDFCFF);
-  static Color focusDracula = Color(0xff3DE5D2);
+  static Color backgroundDracula = const Color(0xff002D50);
+  static Color foregroundDracula = const Color(0xffEDFCFF);
+  static Color focusDracula = const Color(0xff3DE5D2);
 
-  static Color ma20 = Color(0xff9999ff);
-  static Color ma50 = Color(0xff0099ff);
-  static Color ma200 = Color(0xff0000ff);
+  static Color ma20 = const Color(0xff9999ff);
+  static Color ma50 = const Color(0xff0099ff);
+  static Color ma200 = const Color(0xff0000ff);
 
   static CardTheme cardTheme = CardTheme(
       shape: RoundedRectangleBorder(
-    borderRadius: BorderRadius.circular(10.0),
+    borderRadius: BorderRadius.circular(10),
   ));
 
-  static TextTheme textTheme = TextTheme(
+  static TextTheme textTheme = const TextTheme(
       headline6: TextStyle(fontSize: 18),
       headline5: TextStyle(fontSize: 22),
       headline4: TextStyle(fontSize: 28));
@@ -59,11 +59,9 @@ class AppTheme {
         cardTheme: cardTheme,
         primaryIconTheme: IconThemeData(color: brand),
         errorColor: error,
-        colorScheme: ColorScheme.dark().copyWith(
+        colorScheme: const ColorScheme.dark().copyWith(
           primary: brand,
-          primaryVariant: brandVariant,
           secondary: secondary,
-          secondaryVariant: secondaryVariant,
           error: error,
         ),
         toggleableActiveColor: brand,
@@ -88,11 +86,9 @@ class AppTheme {
       cardTheme: cardTheme,
       primaryColor: Colors.white,
       primaryIconTheme: IconThemeData(color: brand),
-      colorScheme: ColorScheme.light().copyWith(
+      colorScheme: const ColorScheme.light().copyWith(
         primary: brand,
-        primaryVariant: brandVariant,
         secondary: secondary,
-        secondaryVariant: secondaryVariant,
         error: error,
       ),
       floatingActionButtonTheme: FloatingActionButtonThemeData(

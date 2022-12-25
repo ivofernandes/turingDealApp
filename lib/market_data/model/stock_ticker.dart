@@ -6,12 +6,18 @@ class StockTicker{
 
   StockTicker(this.symbol,this.description);
 
+  @override
   bool operator ==(Object other) => other is StockTicker && other.symbol == symbol;
 
-  @override
-  int get hashCode => super.hashCode;
 
   @override
   String toString() => 'symbol: $symbol > description: $description';
+
+  @override
+  // TODO: implement hashCode
+  int get hashCode => super.hashCode;
+
+
+
 
 }

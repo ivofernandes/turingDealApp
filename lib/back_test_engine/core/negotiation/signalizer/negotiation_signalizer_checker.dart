@@ -6,14 +6,12 @@ class NegotiationSignalizerChecker {
   // Singleton
   static final NegotiationSignalizerChecker _singleton =
       NegotiationSignalizerChecker._internal();
-  factory NegotiationSignalizerChecker() {
-    return _singleton;
-  }
+  factory NegotiationSignalizerChecker() => _singleton;
   NegotiationSignalizerChecker._internal();
 
   bool checkCondition(
       StrategyConfigRule rule, YahooFinanceCandleData YahooFinanceCandleData) {
-    String indicator = rule.indicator;
+    final String indicator = rule.indicator;
 
     if (indicator.contains('/')) {
       return checkConditionDivision(rule, YahooFinanceCandleData, indicator);
@@ -24,17 +22,17 @@ class NegotiationSignalizerChecker {
 
   bool checkConditionDivision(StrategyConfigRule rule,
       YahooFinanceCandleData YahooFinanceCandleData, String indicator) {
-    List<String> indicators = indicator.split('/');
+    final List<String> indicators = indicator.split('/');
 
-    String indicatorA = indicators[0];
-    String indicatorB = indicators[1];
+    final String indicatorA = indicators[0];
+    final String indicatorB = indicators[1];
 
     if (YahooFinanceCandleData.indicators.containsKey(indicatorA) &&
         YahooFinanceCandleData.indicators.containsKey(indicatorB)) {
-      double indicatorAValue = YahooFinanceCandleData.indicators[indicatorA]!;
-      double indicatorBValue = YahooFinanceCandleData.indicators[indicatorB]!;
+      final double indicatorAValue = YahooFinanceCandleData.indicators[indicatorA]!;
+      final double indicatorBValue = YahooFinanceCandleData.indicators[indicatorB]!;
 
-      double ratio = indicatorAValue / indicatorBValue;
+      final double ratio = indicatorAValue / indicatorBValue;
 
       if (rule.condition == ConditionRule.OVER) {
         return ratio > rule.referenceValue;

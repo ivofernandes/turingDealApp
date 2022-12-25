@@ -6,7 +6,7 @@ import 'package:turing_deal/back_test_engine/model/strategy_config/strategy_rule
 class ParserIndicator{
 
   static HashSet<String> extractBaseIndicators(List<StrategyConfigRules> openningRules) {
-    HashSet<String> result = HashSet();
+    final HashSet<String> result = HashSet();
 
     openningRules.forEach((StrategyConfigRules configRules) {
       configRules.rules.forEach((StrategyConfigRule rule) {
@@ -18,7 +18,7 @@ class ParserIndicator{
   }
 
  static HashSet<String> extractIndicatorsFromString(String input){
-   HashSet<String> result = HashSet();
+   final HashSet<String> result = HashSet();
 
    result.addAll(input.split('/'));
 

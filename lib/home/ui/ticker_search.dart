@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:interactive_i18n/interactive_i18n.dart';
 import 'package:turing_deal/home/ui/ticker_widget_ui.dart';
 import 'package:turing_deal/home/ui/tickers_block.dart';
@@ -7,81 +6,72 @@ import 'package:turing_deal/market_data/model/stock_ticker.dart';
 import 'package:turing_deal/market_data/static/tickers_list.dart';
 
 class TickerSearch extends SearchDelegate<List<StockTicker>> {
-  TickerSearch({searchFieldLabel}) : super(searchFieldLabel: searchFieldLabel);
+  TickerSearch({super.searchFieldLabel});
 
   @override
-  List<Widget> buildActions(BuildContext context) {
-    return [
-      IconButton(
-          icon: Icon(Icons.clear),
-          onPressed: () {
-            query = '';
-          })
-    ];
-  }
+  List<Widget> buildActions(BuildContext context) => [
+        IconButton(
+            icon: const Icon(Icons.clear),
+            onPressed: () {
+              query = '';
+            })
+      ];
 
   @override
-  Widget buildLeading(BuildContext context) {
-    return IconButton(
-        icon: Icon(Icons.arrow_back),
-        onPressed: () {
-          close(context, []);
-        });
-  }
+  Widget buildLeading(BuildContext context) => IconButton(
+      icon: const Icon(Icons.arrow_back),
+      onPressed: () {
+        close(context, []);
+      });
 
   @override
-  Widget buildResults(BuildContext context) {
-    return InkWell(
-        onTap: () => close(
-            context, [StockTicker(query.toUpperCase(), query.toUpperCase())]),
-        child: TickerWidget(
-          symbol: query.toUpperCase(),
-          description: '',
-          onSelection: (ticker) {
-            close(context, [ticker]);
-          },
-        ));
-  }
+  Widget buildResults(BuildContext context) => InkWell(
+      onTap: () => close(
+          context, [StockTicker(query.toUpperCase(), query.toUpperCase())]),
+      child: TickerWidget(
+        symbol: query.toUpperCase(),
+        onSelection: (StockTicker ticker) {
+          close(context, [ticker]);
+        },
+      ));
 
   @override
   Widget buildSuggestions(BuildContext context) {
-    Widget searchingWidget = query != ''
+    final Widget searchingWidget = query != ''
         ? TickerWidget(
             symbol: query.toUpperCase(),
-            onSelection: (ticker) => close(context, [ticker]))
+            onSelection: (StockTicker ticker) => close(context, [ticker]))
         : Container();
     return SingleChildScrollView(
       child: Column(
         children: [
           searchingWidget,
-          suggestion(Icon(Icons.view_headline), 'Main'.t, TickersList.main),
-          suggestion(Icon(Icons.precision_manufacturing_outlined), 'Sectors'.t,
+          suggestion(const Icon(Icons.view_headline), 'Main'.t, TickersList.main),
+          suggestion(const Icon(Icons.precision_manufacturing_outlined), 'Sectors'.t,
               TickersList.sectors),
           suggestion(
-              Icon(Icons.workspaces_outline), 'Futures'.t, TickersList.futures),
+              const Icon(Icons.workspaces_outline), 'Futures'.t, TickersList.futures),
           suggestion(
-              Icon(Icons.computer), 'Cryptos'.t, TickersList.cryptoCurrencies),
+              const Icon(Icons.computer), 'Cryptos'.t, TickersList.cryptoCurrencies),
           suggestion(
-              Icon(Icons.language), 'Countries'.t, TickersList.countries),
+              const Icon(Icons.language), 'Countries'.t, TickersList.countries),
           suggestion(
-              Icon(Icons.account_balance_outlined), 'Bonds', TickersList.bonds),
+              const Icon(Icons.account_balance_outlined), 'Bonds', TickersList.bonds),
           suggestion(
-              Icon(Icons.architecture_sharp), 'Sizes'.t, TickersList.sizes),
+              const Icon(Icons.architecture_sharp), 'Sizes'.t, TickersList.sizes),
           suggestion(
-              Icon(Icons.business_sharp), 'Companies'.t, TickersList.companies)
+              const Icon(Icons.business_sharp), 'Companies'.t, TickersList.companies)
         ],
       ),
     );
   }
 
   TickersBlock suggestion(
-      Icon icon, String title, Map<String, String> companies) {
-    return TickersBlock(
+      Icon icon, String title, Map<String, String> companies) => TickersBlock(
       icon: icon,
       title: title,
       tickers: companies,
       query: query,
       close: close,
     );
-  }
 }

@@ -18,14 +18,14 @@ class StrategyResumeHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    BigPictureStateProvider bigPictureState =
+    final BigPictureStateProvider bigPictureState =
         Provider.of<BigPictureStateProvider>(context, listen: false);
 
-    ThemeData theme = Theme.of(context);
+    final ThemeData theme = Theme.of(context);
 
-    String ticketDescription = TickerResolve.getTickerDescription(ticker);
+    final String ticketDescription = TickerResolve.getTickerDescription(ticker);
 
-    TickerSearch tickerSearch = TickerSearch(searchFieldLabel: 'Add'.t);
+    final TickerSearch tickerSearch = TickerSearch(searchFieldLabel: 'Add'.t);
 
     return Container(
       child: Stack(
@@ -37,7 +37,7 @@ class StrategyResumeHeader extends StatelessWidget {
                   ? MainAxisAlignment.center
                   : MainAxisAlignment.spaceBetween,
               children: [
-                Container(
+                SizedBox(
                   width: bigPictureState.isCompactView()
                       ? cardWidth - 30
                       : cardWidth / 2 - 20,
@@ -51,7 +51,7 @@ class StrategyResumeHeader extends StatelessWidget {
                 ),
                 bigPictureState.isCompactView()
                     ? Container()
-                    : Container(
+                    : SizedBox(
                         width: cardWidth / 2 - 20,
                         child: Align(
                           alignment: Alignment.centerRight,
@@ -63,44 +63,37 @@ class StrategyResumeHeader extends StatelessWidget {
             Divider(height: 5, color: theme.textTheme.bodyText1!.color),
             bigPictureState.isCompactView()
                 ? Container()
-                : SizedBox(height: 10),
+                : const SizedBox(height: 10),
             bigPictureState.isCompactView()
                 ? Container()
                 : Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text(strategy!.tradingYears.ceil().toString() +
-                          'y' +
-                          (strategy!.tradingYears % 1 * 12).ceil().toString() +
-                          'm'),
+                      Text('${strategy!.tradingYears.ceil()}y${(strategy!.tradingYears % 1 * 12).ceil()}m'),
                       strategy!.startDate != null && strategy!.endDate != null
-                          ? Text('' +
-                              DateFormat.yMd().format(strategy!.startDate!) +
-                              ' to ' +
-                              DateFormat.yMd().format(strategy!.endDate!))
+                          ? Text('${DateFormat.yMd().format(strategy!.startDate!)} to ${DateFormat.yMd().format(strategy!.endDate!)}')
                           : Container()
                     ],
                   ),
-            bigPictureState.isCompactView() ? Container() : SizedBox(height: 10)
+            bigPictureState.isCompactView() ? Container() : const SizedBox(height: 10)
           ]),
           bigPictureState.isCompactView() || ticker.symbol.contains(',')
               ? Container()
               : InkWell(
                   child: Container(
-                      color: Colors.lightBlue.withOpacity(0.0),
+                      color: Colors.lightBlue.withOpacity(0),
                       padding: EdgeInsets.only(
                           left: 40,
                           right: 40,
-                          top: 0,
                           bottom: AppStateProvider.isDesktopWeb() ? 0 : 30),
-                      child: Icon(
+                      child: const Icon(
                         Icons.add,
                       )),
                   onTap: () async {
-                    List<StockTicker>? tickers = await showSearch(
+                    final List<StockTicker>? tickers = await showSearch(
                         context: context, delegate: tickerSearch);
                     await bigPictureState.joinTicker(ticker, tickers);
-                    bigPictureState.persistTickers();
+                    await bigPictureState.persistTickers();
                   },
                 ),
         ],

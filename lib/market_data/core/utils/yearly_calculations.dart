@@ -6,13 +6,13 @@ import 'package:yahoo_finance_data_reader/yahoo_finance_data_reader.dart';
 
 class YearlyCalculations {
   static List<YearlyStats> calculate(List<YahooFinanceCandleData> data) {
-    List<YearlyStats> result = [];
+    final List<YearlyStats> result = [];
 
     if (data.isNotEmpty) {
       int currentYear = data.first.date.year;
       List<YahooFinanceCandleData> candlesOfTheYear = [];
 
-      for (YahooFinanceCandleData candle in data) {
+      for (final YahooFinanceCandleData candle in data) {
         if (candle.date.year == currentYear) {
           candlesOfTheYear.add(candle);
         } else {
@@ -32,11 +32,11 @@ class YearlyCalculations {
       List<YahooFinanceCandleData> candlesOfTheYear) {
     // To have variation needs two days at least
     if (candlesOfTheYear.length > 1) {
-      StrategyDrawdown strategyDrawdown =
+      final StrategyDrawdown strategyDrawdown =
           CalculateDrawdown.calculateStrategyDrawdown(candlesOfTheYear);
-      double drawdown = strategyDrawdown.maxDrawdown;
+      final double drawdown = strategyDrawdown.maxDrawdown;
 
-      double cagr = CalculateStrategyMetrics.calculateCAGR(candlesOfTheYear);
+      final double cagr = CalculateStrategyMetrics.calculateCAGR(candlesOfTheYear);
 
       result.add(
           YearlyStats(year: currentYear, variation: cagr, drawdown: drawdown));

@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:turing_deal/market_data/core/indicators/variations.dart';
 import 'package:turing_deal/market_data/core/utils/yearly_calculations.dart';
+import 'package:turing_deal/market_data/model/yearly_stats.dart';
 import 'package:yahoo_finance_data_reader/yahoo_finance_data_reader.dart';
-
-import '../../market_data/model/yearly_stats.dart';
 
 class TickerStateProvider with ChangeNotifier {
   bool analysisComplete = false;
@@ -17,26 +16,22 @@ class TickerStateProvider with ChangeNotifier {
 
   void startAnalysis(List<YahooFinanceCandleData> data) {
     this.data = data;
-    Future.delayed(Duration.zero, () => analysis());
+    Future.delayed(Duration.zero, analysis);
   }
 
-  bool isAnalysisComplete() {
-    return this.analysisComplete;
-  }
+  bool isAnalysisComplete() => analysisComplete;
 
   List<int> getAvailableVariations() {
-    List<int> variations = [];
+    final List<int> variations = [];
 
-    for (String key in data.last.indicators.keys) {
+    for (final String key in data.last.indicators.keys) {
       print(key);
     }
 
     return variations;
   }
 
-  List<YahooFinanceCandleData> getCandlesData() {
-    return this.data;
-  }
+  List<YahooFinanceCandleData> getCandlesData() => data;
 
   analysis() {
     if (!yearlyStatsComplete) {
@@ -59,9 +54,7 @@ class TickerStateProvider with ChangeNotifier {
     }
   }
 
-  List<YearlyStats> getYearlyStats() {
-    return _yearlyStats;
-  }
+  List<YearlyStats> getYearlyStats() => _yearlyStats;
 
   void refresh() {
     notifyListeners();

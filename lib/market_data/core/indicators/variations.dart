@@ -9,21 +9,21 @@ class Variations {
       double step,
       List<YahooFinanceCandleData> data,
       int delta) {
-    Map<String, List<double?>> intervals =
+    final Map<String, List<double?>> intervals =
         getIntervals(lowerLimit, upperLimit, step);
     return countVariationsInIntervals(intervals, data, delta);
   }
 
   static Map<String, List<double?>> getIntervals(
       double lowerLimit, double upperLimit, double interval) {
-    Map<String, List<double?>> intervals = {
+    final Map<String, List<double?>> intervals = {
       '<$lowerLimit%': [null, lowerLimit]
     };
 
     for (double lowerValue = lowerLimit;
         lowerValue < upperLimit;
         lowerValue += interval) {
-      double upperValue = lowerValue + interval;
+      final double upperValue = lowerValue + interval;
 
       intervals[
           '${lowerValue.toStringAsFixed(0)}% .. ${upperValue.toStringAsFixed(0)}%'] = [
@@ -40,12 +40,12 @@ class Variations {
       Map<String, List<double?>> intervals,
       List<YahooFinanceCandleData> data,
       int delta) {
-    List<VariationCount> result = [];
+    final List<VariationCount> result = [];
 
-    for (String intervalDescription in intervals.keys) {
-      List<double?> interval = intervals[intervalDescription]!;
+    for (final String intervalDescription in intervals.keys) {
+      final List<double?> interval = intervals[intervalDescription]!;
 
-      int count =
+      final int count =
           Variations.countVariations(interval[0], interval[1], data, delta);
 
       result.add(VariationCount(intervalDescription, count));
@@ -58,7 +58,7 @@ class Variations {
   static void calculateVariations(
       List<YahooFinanceCandleData> prices, int delta) {
     for (int i = 0; i < prices.length - delta; i++) {
-      double variation = (prices[i + delta].close / prices[i].close - 1) * 100;
+      final double variation = (prices[i + delta].close / prices[i].close - 1) * 100;
 
       prices[i].indicators['var_$delta'] = variation;
     }
@@ -66,7 +66,7 @@ class Variations {
 
   static int countVariations(double? lowerLimit, double? upperLimit,
       List<YahooFinanceCandleData> data, int delta) {
-    int count = data
+    final int count = data
         .where((YahooFinanceCandleData candle) =>
             candle.indicators.containsKey('var_$delta') &&
             validLowerLimit(lowerLimit, candle.indicators['var_$delta']!) &&
@@ -76,22 +76,18 @@ class Variations {
     return count;
   }
 
-  static bool validLowerLimit(double? lowerLimit, double value) {
-    return lowerLimit == null || value >= lowerLimit;
-  }
+  static bool validLowerLimit(double? lowerLimit, double value) => lowerLimit == null || value >= lowerLimit;
 
-  static bool validUpperLimit(double? upperLimit, double value) {
-    return upperLimit == null || value < upperLimit;
-  }
+  static bool validUpperLimit(double? upperLimit, double value) => upperLimit == null || value < upperLimit;
 
   static List<double> extractList(
       List<YahooFinanceCandleData> data, int delta) {
-    List<double?> vars = data
+    final List<double?> vars = data
         .map((YahooFinanceCandleData e) => e.indicators['var_$delta'])
         .toList();
 
     vars.removeWhere((element) => element == null);
-    List<double> v = vars.cast();
+    final List<double> v = vars.cast();
 
     return v;
   }

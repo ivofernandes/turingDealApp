@@ -12,7 +12,7 @@ class ConnectivityState{
     ConnectivityResult? result;
     // Platform messages may fail, so we use a try/catch PlatformException.
     try {
-      result = await (Connectivity().checkConnectivity());
+      result = await Connectivity().checkConnectivity();
     } on PlatformException catch (e) {
       print(e.toString());
     }

@@ -6,19 +6,17 @@ class ChartLegend extends StatelessWidget {
   const ChartLegend();
 
   @override
-  Widget build(BuildContext context) {
-    return Container(
+  Widget build(BuildContext context) => Container(
       height: 65,
       width: 100,
-      padding: EdgeInsets.symmetric(horizontal: 7, vertical: 3),
+      padding: const EdgeInsets.symmetric(horizontal: 7, vertical: 3),
       color: Colors.black.withOpacity(0.5),
       child: Column(
         children: [
-          ChartLegendItem(AppTheme.ma20, "SMA_20"),
-          ChartLegendItem(AppTheme.ma50, "SMA_50"),
-          ChartLegendItem(AppTheme.ma200, "SMA_200"),
+          ChartLegendItem(AppTheme.ma20, 'SMA_20'),
+          ChartLegendItem(AppTheme.ma50, 'SMA_50'),
+          ChartLegendItem(AppTheme.ma200, 'SMA_200'),
         ],
       ),
     );
-  }
 }

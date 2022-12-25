@@ -18,14 +18,14 @@ class StrategyRunner {
 
   /// Simulate a buy and hold strategy_result in the entire dataframe
   StrategyResult run(StrategyConfig strategyConfig) {
-    StrategyResult strategy =
-        BaseStrategyResult.createStrategyResult(this.YahooFinanceCandleDatas);
-    if (this.YahooFinanceCandleDatas.isNotEmpty) {
+    final StrategyResult strategy =
+        BaseStrategyResult.createStrategyResult(YahooFinanceCandleDatas);
+    if (YahooFinanceCandleDatas.isNotEmpty) {
       //TODO execute the strategy_result
       print(strategyConfig.toString());
 
       // Prepare the candle prices to have the needed indicators
-      HashSet<String> indicators =
+      final HashSet<String> indicators =
           ParserIndicator.extractBaseIndicators(strategyConfig.openningRules);
       CalculateIndicators.calculateIndicators(
           YahooFinanceCandleDatas, indicators.toList());
@@ -39,10 +39,10 @@ class StrategyRunner {
 
   void executeStrategy(StrategyResult strategy, StrategyConfig strategyConfig) {
     // Create an account where the strategy will be executed
-    TradingAccount tradingAccount = TradingAccount();
+    final TradingAccount tradingAccount = TradingAccount();
     YahooFinanceCandleData? previousCandle;
-    for (int i = 0; i < this.YahooFinanceCandleDatas.length; i++) {
-      YahooFinanceCandleData currentCandle = this.YahooFinanceCandleDatas[i];
+    for (int i = 0; i < YahooFinanceCandleDatas.length; i++) {
+      final YahooFinanceCandleData currentCandle = YahooFinanceCandleDatas[i];
       // Update the strategy stats and triggers (stops, targets, drawdown...)
       tradingAccount.updateAccount(currentCandle, previousCandle);
 
@@ -58,7 +58,7 @@ class StrategyRunner {
   void openSignals(TradingAccount tradingAccount,
       YahooFinanceCandleData currentCandle, StrategyConfig strategyConfig) {
     // Perform the execution of rules for opening
-    Signal? openSignal =
+    final Signal? openSignal =
         NegotiationSignalizer().openSignal(currentCandle, strategyConfig);
 
     // Perform trade
@@ -77,7 +77,7 @@ class StrategyRunner {
       YahooFinanceCandleData currentCandle, StrategyConfig strategyConfig) {
     //TODO perform the execution of rules for closing
 
-    Signal? closeSignal =
+    final Signal? closeSignal =
         NegotiationSignalizer().closeSignal(currentCandle, strategyConfig);
 
     // Perform trade

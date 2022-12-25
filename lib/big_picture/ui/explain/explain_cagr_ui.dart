@@ -3,13 +3,12 @@ import 'package:turing_deal/shared/ui/Web.dart';
 
 class ExplainCagr extends StatelessWidget {
   @override
-  Widget build(BuildContext context) {
-    return SafeArea(
+  Widget build(BuildContext context) => SafeArea(
       child: Padding(
-        padding: const EdgeInsets.all(8.0),
+        padding: const EdgeInsets.all(8),
         child: Column(
           children: [
-            SizedBox(
+            const SizedBox(
               height: 20,
             ),
             Text(
@@ -17,18 +16,18 @@ class ExplainCagr extends StatelessWidget {
               style: Theme.of(context).textTheme.headline6,
               textAlign: TextAlign.center,
             ),
-            SizedBox(
+            const SizedBox(
               height: 20,
             ),
-            Text(
+            const Text(
               'CAGR is the annualized percentage of return of an investment',
             ),
-            SizedBox(
+            const SizedBox(
               height: 20,
             ),
-            Text('The CAGR forumla is: CAGR ='),
-            Text('(Starting value / Ending value) ^ (1 / number of years) - 1'),
-            SizedBox(
+            const Text('The CAGR forumla is: CAGR ='),
+            const Text('(Starting value / Ending value) ^ (1 / number of years) - 1'),
+            const SizedBox(
               height: 20,
             ),
             MaterialButton(
@@ -46,5 +45,4 @@ class ExplainCagr extends StatelessWidget {
         ),
       ),
     );
-  }
 }

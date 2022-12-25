@@ -10,43 +10,39 @@ import 'package:yahoo_finance_data_reader/yahoo_finance_data_reader.dart';
 
 class BigPictureStateProvider with ChangeNotifier, ConnectivityState {
   bool _compactView = false;
-  bool _isMocked = false;
-  Map<StockTicker, BuyAndHoldStrategyResult> _bigPictureData = {};
+  final bool _isMocked = false;
+  final Map<StockTicker, BuyAndHoldStrategyResult> _bigPictureData = {};
 
   BigPictureStateProvider() {
-    this.loadData();
+    loadData();
   }
 
-  bool isCompactView() {
-    return _compactView;
-  }
+  bool isCompactView() => _compactView;
 
-  bool isMockedData() {
-    return _isMocked;
-  }
+  bool isMockedData() => _isMocked;
 
   void toogleCompactView() {
-    this._compactView = !this._compactView;
+    _compactView = !_compactView;
     refresh();
   }
 
-  void loadData() async {
+  Future<void> loadData() async {
     await initConnectivity();
 
     await YahooFinanceDAO().initDatabase();
     List<String> symbols = ['^GSPC', '^NDX'];
-    SharedPreferences prefs = await SharedPreferences.getInstance();
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
     if (prefs.getStringList('symbols') != null) {
       symbols = prefs.getStringList('symbols')!;
     } else {
-      prefs.setStringList('symbols', symbols);
+      await prefs.setStringList('symbols', symbols);
     }
 
     if (hasInternetConnection()) {
       if (_bigPictureData.isEmpty || true) {
-        for (String symbol in symbols) {
+        for (final String symbol in symbols) {
           print('adding ticker $symbol');
-          StockTicker ticker = StockTicker(symbol, TickersList.main[symbol]);
+          final StockTicker ticker = StockTicker(symbol, TickersList.main[symbol]);
           await addTicker(ticker);
         }
         globalAnalysis();
@@ -60,28 +56,11 @@ class BigPictureStateProvider with ChangeNotifier, ConnectivityState {
     _bigPictureData[ticker] = BuyAndHoldStrategyResult();
 
     //  Get data from yahoo finance
-    List<YahooFinanceCandleData> prices =
+    final List<YahooFinanceCandleData> prices =
         await YahooFinanceService().getTickerData(ticker.symbol);
 
     // Execute the backtest
-    BuyAndHoldStrategyResult strategy =
-        BuyAndHoldStrategy.buyAndHoldAnalysis(prices);
-
-    _bigPictureData[ticker] = strategy;
-
-    this.refresh();
-  }
-
-  Future<void> joinTicker(
-      StockTicker ticker, List<StockTicker>? tickers) async {
-    ticker.symbol = ticker.symbol + ', ' + tickers!.first.symbol;
-    ticker.description = '';
-
-    List<YahooFinanceCandleData> prices =
-        await YahooFinanceService().getTickerData(ticker.symbol);
-
-    // Execute the backtest
-    BuyAndHoldStrategyResult strategy =
+    final BuyAndHoldStrategyResult strategy =
         BuyAndHoldStrategy.buyAndHoldAnalysis(prices);
 
     _bigPictureData[ticker] = strategy;
@@ -89,25 +68,40 @@ class BigPictureStateProvider with ChangeNotifier, ConnectivityState {
     refresh();
   }
 
-  Map<StockTicker, BuyAndHoldStrategyResult> getBigPictureData() {
-    return this._bigPictureData;
+  Future<void> joinTicker(
+      StockTicker ticker, List<StockTicker>? tickers) async {
+    ticker.symbol = '${ticker.symbol}, ${tickers!.first.symbol}';
+    ticker.description = '';
+
+    final List<YahooFinanceCandleData> prices =
+        await YahooFinanceService().getTickerData(ticker.symbol);
+
+    // Execute the backtest
+    final BuyAndHoldStrategyResult strategy =
+        BuyAndHoldStrategy.buyAndHoldAnalysis(prices);
+
+    _bigPictureData[ticker] = strategy;
+
+    refresh();
   }
+
+  Map<StockTicker, BuyAndHoldStrategyResult> getBigPictureData() => _bigPictureData;
 
   void refresh() {
     notifyListeners();
   }
 
   removeTicker(StockTicker ticker) async {
-    this._bigPictureData.remove(ticker);
+    _bigPictureData.remove(ticker);
 
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    List<String> symbols = prefs.getStringList('symbols')!;
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    final List<String> symbols = prefs.getStringList('symbols')!;
     symbols.remove(ticker.symbol);
-    prefs.setStringList('symbols', symbols);
+    await prefs.setStringList('symbols', symbols);
 
-    int deletedRecords = await YahooFinanceDAO().removeDailyData(ticker.symbol);
+    final int deletedRecords = await YahooFinanceDAO().removeDailyData(ticker.symbol);
 
-    this.refresh();
+    refresh();
   }
 
   void globalAnalysis() {
@@ -116,11 +110,11 @@ class BigPictureStateProvider with ChangeNotifier, ConnectivityState {
     // https://www.fidelity.com/webcontent/ap101883-markets_sectors-content/21.01.0/business_cycle/Business_Cycle_Chart.png
   }
 
-  void persistTickers() async {
-    List<String> symbols = _bigPictureData.keys
+  Future<void> persistTickers() async {
+    final List<String> symbols = _bigPictureData.keys
         .map((StockTicker stockTicker) => stockTicker.symbol)
         .toList();
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    prefs.setStringList('symbols', symbols);
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setStringList('symbols', symbols);
   }
 }

@@ -9,7 +9,7 @@ import 'package:turing_deal/market_data/model/stock_ticker.dart';
 /// This class makes sure there are data to show in the reume list
 /// and takes care of the floating action button animation
 class BigPictureScaffold extends StatefulWidget {
-  const BigPictureScaffold({Key? key}) : super(key: key);
+  const BigPictureScaffold({super.key});
 
   @override
   _BigPictureScaffoldState createState() => _BigPictureScaffoldState();
@@ -44,15 +44,15 @@ class _BigPictureScaffoldState extends State<BigPictureScaffold>
 
   @override
   Widget build(BuildContext context) {
-    BigPictureStateProvider bigPictureState =
+    final BigPictureStateProvider bigPictureState =
         Provider.of<BigPictureStateProvider>(context, listen: false);
 
     // Return the big picture screen
-    Map<StockTicker, BuyAndHoldStrategyResult> data =
+    final Map<StockTicker, BuyAndHoldStrategyResult> data =
         bigPictureState.getBigPictureData();
 
-    if (data.length == 0) {
-      return Text('No strategies');
+    if (data.isEmpty) {
+      return const Text('No strategies');
     } else {
       // Hide compact data if there are not enough data
       if (data.length < minTickerForShowCompatData) {
@@ -79,7 +79,7 @@ class _BigPictureScaffoldState extends State<BigPictureScaffold>
           floatingActionButton: ScaleTransition(
             scale: _animation,
             child: FloatingActionButton(
-                onPressed: () => bigPictureState.toogleCompactView(),
+                onPressed: bigPictureState.toogleCompactView,
                 child: Icon(bigPictureState.isCompactView()
                     ? Icons.view_agenda_rounded
                     : Icons.view_comfortable_sharp)),

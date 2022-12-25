@@ -5,7 +5,5 @@ class VariationCount {
   VariationCount(this.intervalDescription, this.count);
 
   @override
-  String toString() {
-    return '$intervalDescription = $count';
-  }
+  String toString() => '$intervalDescription = $count';
 }

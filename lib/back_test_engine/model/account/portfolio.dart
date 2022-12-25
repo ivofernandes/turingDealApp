@@ -10,7 +10,7 @@ mixin Portfolio {
 
   /// Check the portfolio to know if a trade is already open
   bool isTradeOpen(String ticker, TradeType tradeType) {
-    for (TradeOpen portfolioItem in portfolio) {
+    for (final TradeOpen portfolioItem in portfolio) {
       if (portfolioItem.ticker == ticker &&
           portfolioItem.tradeType == tradeType) {
         return true;
@@ -31,7 +31,7 @@ mixin Portfolio {
   }
 
   TradeOpen? removeFromPortfolio(String ticker, TradeType tradeType) {
-    for (TradeOpen portfolioItem in portfolio) {
+    for (final TradeOpen portfolioItem in portfolio) {
       if (portfolioItem.ticker == ticker &&
           portfolioItem.tradeType == tradeType) {
         portfolio.remove(portfolioItem);
@@ -44,13 +44,13 @@ mixin Portfolio {
 
   /// update portfolio open positions
   void updatePortfolio(YahooFinanceCandleData currentCandle) {
-    for (TradeOpen position in portfolio) {
+    for (final TradeOpen position in portfolio) {
       // Check if any stop order was triggered
-      bool stopped = TradeChecks.checkStop(position, currentCandle);
+      final bool stopped = TradeChecks.checkStop(position, currentCandle);
       if (stopped) continue;
 
       // Check if any limit order was triggered
-      bool limited = TradeChecks.checkLimit(position, currentCandle);
+      final bool limited = TradeChecks.checkLimit(position, currentCandle);
       if (limited) continue;
 
       // Check how the drawdown changed

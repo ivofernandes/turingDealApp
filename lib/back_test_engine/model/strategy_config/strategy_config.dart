@@ -43,9 +43,7 @@ class StrategyConfig {
       required this.closingRules});
 
   @override
-  String toString() {
-    return 'StrategyConfig{name: $name, direction: $direction, target: $target, stopLimit: $stopLimit, trailingStopLimit: $trailingStopLimit, trailingStopStep: $trailingStopStep, openningRules: $openningRules, closingRules: $closingRules}';
-  }
+  String toString() => 'StrategyConfig{name: $name, direction: $direction, target: $target, stopLimit: $stopLimit, trailingStopLimit: $trailingStopLimit, trailingStopStep: $trailingStopStep, openningRules: $openningRules, closingRules: $closingRules}';
 }
 
 class StrategyConfigRules {
@@ -54,7 +52,5 @@ class StrategyConfigRules {
   StrategyConfigRules({required this.rules});
 
   @override
-  String toString() {
-    return 'rules: $rules';
-  }
+  String toString() => 'rules: $rules';
 }

@@ -3,20 +3,20 @@ import 'package:turing_deal/shared/environment.dart';
 import 'package:turing_deal/shared/ui/Web.dart';
 
 class AppsBanner extends StatelessWidget {
-  const AppsBanner({Key? key}) : super(key: key);
+  const AppsBanner({super.key});
 
   @override
   Widget build(BuildContext context) {
-    double width = MediaQuery.of(context).size.width;
+    final double width = MediaQuery.of(context).size.width;
 
     return Container(
-      padding: EdgeInsets.all(10),
+      padding: const EdgeInsets.all(10),
       child: Column(
         children: [
-          Text(
+          const Text(
             'You can also enjoy better performance in our mobile apps',
           ),
-          SizedBox(height: 10),
+          const SizedBox(height: 10),
           Row(
             children: [
               Expanded(
