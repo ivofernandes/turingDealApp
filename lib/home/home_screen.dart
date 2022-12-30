@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:interactive_i18n/interactive_i18n.dart';
 import 'package:provider/provider.dart';
+import 'package:stock_market_data/stock_market_data.dart';
 import 'package:turing_deal/big_picture/big_picture_screen.dart';
 import 'package:turing_deal/home/state/app_state_provider.dart';
 import 'package:turing_deal/home/ui/ticker_search.dart';
-import 'package:turing_deal/market_data/model/stock_ticker.dart';
 import 'package:turing_deal/settings/settings_screen.dart';
 import 'package:turing_deal/shared/my_app_context.dart';
 
@@ -34,8 +34,10 @@ class HomeScreen extends StatelessWidget {
           IconButton(
               icon: const Icon(Icons.search),
               onPressed: () async {
-                final List<StockTicker>? tickers =
-                    await showSearch(context: context, delegate: t);
+                final List<StockTicker>? tickers = await showSearch(
+                  context: context,
+                  delegate: t,
+                );
 
                 appState.search(tickers);
               })

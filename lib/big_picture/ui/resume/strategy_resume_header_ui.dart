@@ -2,12 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:interactive_i18n/interactive_i18n.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
-import 'package:turing_deal/back_test_engine/model/strategy_result/buy_and_hold_strategyResult.dart';
+import 'package:stock_market_data/stock_market_data.dart';
 import 'package:turing_deal/big_picture/state/big_picture_state_provider.dart';
 import 'package:turing_deal/home/state/app_state_provider.dart';
 import 'package:turing_deal/home/ui/ticker_search.dart';
-import 'package:turing_deal/market_data/model/stock_ticker.dart';
-import 'package:turing_deal/market_data/static/ticker_resolve.dart';
 
 class StrategyResumeHeader extends StatelessWidget {
   final StockTicker ticker;
@@ -69,13 +67,17 @@ class StrategyResumeHeader extends StatelessWidget {
                 : Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text('${strategy!.tradingYears.ceil()}y${(strategy!.tradingYears % 1 * 12).ceil()}m'),
+                      Text(
+                          '${strategy!.tradingYears.ceil()}y${(strategy!.tradingYears % 1 * 12).ceil()}m'),
                       strategy!.startDate != null && strategy!.endDate != null
-                          ? Text('${DateFormat.yMd().format(strategy!.startDate!)} to ${DateFormat.yMd().format(strategy!.endDate!)}')
+                          ? Text(
+                              '${DateFormat.yMd().format(strategy!.startDate!)} to ${DateFormat.yMd().format(strategy!.endDate!)}')
                           : Container()
                     ],
                   ),
-            bigPictureState.isCompactView() ? Container() : const SizedBox(height: 10)
+            bigPictureState.isCompactView()
+                ? Container()
+                : const SizedBox(height: 10)
           ]),
           bigPictureState.isCompactView() || ticker.symbol.contains(',')
               ? Container()

@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:stats/stats.dart';
-import 'package:turing_deal/market_data/core/indicators/variations.dart';
-import 'package:turing_deal/market_data/model/variation/variation_count.dart';
+import 'package:stock_market_data/stock_market_data.dart';
 import 'package:turing_deal/ticker/state/ticker_state_provider.dart';
 import 'package:turing_deal/ticker/ui/analysis/variation/variation_proportion_chart.dart';
 import 'package:yahoo_finance_data_reader/yahoo_finance_data_reader.dart';
@@ -27,7 +26,8 @@ class VariationProportion extends StatelessWidget {
 
     print(statistics);
 
-    final double upperLimit = (statistics.standardDeviation * 2).round().toDouble();
+    final double upperLimit =
+        (statistics.standardDeviation * 2).round().toDouble();
     final double lowerLimit = -upperLimit;
     final double step = (statistics.standardDeviation / 4 * 10).round() / 10;
 

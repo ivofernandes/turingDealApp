@@ -1,15 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:turing_deal/back_test_engine/model/strategy_result/buy_and_hold_strategyResult.dart';
+import 'package:stock_market_data/stock_market_data.dart';
 import 'package:turing_deal/big_picture/state/big_picture_state_provider.dart';
 import 'package:turing_deal/big_picture/ui/resume/strategy_resume_ui.dart';
-import 'package:turing_deal/market_data/model/stock_ticker.dart';
 import 'package:turing_deal/settings/ui/apps_banner.dart';
 
 class BigPictureResumeList extends StatelessWidget {
   final Map<StockTicker, BuyAndHoldStrategyResult> data;
 
-  const BigPictureResumeList(this.data, {super.key});
+  const BigPictureResumeList(
+    this.data, {
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {

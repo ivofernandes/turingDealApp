@@ -1,5 +1,4 @@
-
-class NavigationState {
+mixin NavigationState {
   static const int SCREEN_BIG_PICTURE = 0;
   static const int SCREEN_TICKER = 1;
 

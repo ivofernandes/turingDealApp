@@ -1,7 +1,7 @@
 import 'package:charts_flutter/flutter.dart' as charts;
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:turing_deal/market_data/model/yearly_stats.dart';
+import 'package:stock_market_data/stock_market_data.dart';
 import 'package:turing_deal/shared/app_theme.dart';
 import 'package:turing_deal/shared/ui/touch_interative_viewer.dart';
 import 'package:turing_deal/ticker/state/ticker_state_provider.dart';
@@ -62,33 +62,34 @@ class YearlyStatsWidget extends StatelessWidget {
   }
 
   List<charts.Series<YearlyStats, String>> _getData(
-      List<YearlyStats> yearlyStats) => [
-      charts.Series<YearlyStats, String>(
-          id: 'CAGR',
-          displayName: 'CAGR',
-          domainFn: (YearlyStats yearlyStat, _) => yearlyStat.year.toString(),
-          measureFn: (YearlyStats yearlyStat, _) => yearlyStat.variation,
-          data: yearlyStats,
-          fillColorFn: (_, __) => charts.MaterialPalette.green.shadeDefault,
-          labelAccessorFn: (YearlyStats yearlyStat, _) =>
-              '${yearlyStat.variation.toStringAsFixed(0)} %')
-        ..setAttribute(charts.measureAxisIdKey, 'secondaryMeasureAxisId'),
-      charts.Series<YearlyStats, String>(
-          id: 'Drawdown',
-          domainFn: (YearlyStats yearlyStat, _) => yearlyStat.year.toString(),
-          measureFn: (YearlyStats yearlyStat, _) => yearlyStat.drawdown,
-          data: yearlyStats,
-          insideLabelStyleAccessorFn: (YearlyStats yearlyStat, _) =>
-              charts.TextStyleSpec(
-                  fontSize: 12, color: charts.Color.fromHex(code: '#000000')),
-          outsideLabelStyleAccessorFn: (YearlyStats yearlyStat, _) =>
-              charts.TextStyleSpec(
-                  fontSize: 12,
-                  color: charts.MaterialPalette.red.shadeDefault.lighter),
-          labelAccessorFn: (YearlyStats yearlyStat, _) =>
-              '${yearlyStat.drawdown.toStringAsFixed(0)} %',
-          fillColorFn: (_, __) =>
-              charts.MaterialPalette.red.shadeDefault.lighter)
-        ..setAttribute(charts.measureAxisIdKey, 'secondaryMeasureAxisId'),
-    ];
+          List<YearlyStats> yearlyStats) =>
+      [
+        charts.Series<YearlyStats, String>(
+            id: 'CAGR',
+            displayName: 'CAGR',
+            domainFn: (YearlyStats yearlyStat, _) => yearlyStat.year.toString(),
+            measureFn: (YearlyStats yearlyStat, _) => yearlyStat.variation,
+            data: yearlyStats,
+            fillColorFn: (_, __) => charts.MaterialPalette.green.shadeDefault,
+            labelAccessorFn: (YearlyStats yearlyStat, _) =>
+                '${yearlyStat.variation.toStringAsFixed(0)} %')
+          ..setAttribute(charts.measureAxisIdKey, 'secondaryMeasureAxisId'),
+        charts.Series<YearlyStats, String>(
+            id: 'Drawdown',
+            domainFn: (YearlyStats yearlyStat, _) => yearlyStat.year.toString(),
+            measureFn: (YearlyStats yearlyStat, _) => yearlyStat.drawdown,
+            data: yearlyStats,
+            insideLabelStyleAccessorFn: (YearlyStats yearlyStat, _) =>
+                charts.TextStyleSpec(
+                    fontSize: 12, color: charts.Color.fromHex(code: '#000000')),
+            outsideLabelStyleAccessorFn: (YearlyStats yearlyStat, _) =>
+                charts.TextStyleSpec(
+                    fontSize: 12,
+                    color: charts.MaterialPalette.red.shadeDefault.lighter),
+            labelAccessorFn: (YearlyStats yearlyStat, _) =>
+                '${yearlyStat.drawdown.toStringAsFixed(0)} %',
+            fillColorFn: (_, __) =>
+                charts.MaterialPalette.red.shadeDefault.lighter)
+          ..setAttribute(charts.measureAxisIdKey, 'secondaryMeasureAxisId'),
+      ];
 }

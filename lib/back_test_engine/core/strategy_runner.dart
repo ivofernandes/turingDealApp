@@ -1,13 +1,12 @@
 import 'dart:collection';
 
+import 'package:stock_market_data/stock_market_data.dart';
 import 'package:turing_deal/back_test_engine/core/negotiation/signalizer/negotiation_signalizer.dart';
 import 'package:turing_deal/back_test_engine/core/parser/parser_indicator.dart';
 import 'package:turing_deal/back_test_engine/model/account/trading_account.dart';
 import 'package:turing_deal/back_test_engine/model/shared/back_test_enums.dart';
 import 'package:turing_deal/back_test_engine/model/strategy_config/strategy_config.dart';
-import 'package:turing_deal/back_test_engine/model/strategy_result/base_strategy_result.dart';
 import 'package:turing_deal/back_test_engine/model/strategy_result/strategy_result.dart';
-import 'package:turing_deal/market_data/core/utils/calculate_indicators.dart';
 import 'package:yahoo_finance_data_reader/yahoo_finance_data_reader.dart';
 
 class StrategyRunner {
@@ -19,7 +18,7 @@ class StrategyRunner {
   /// Simulate a buy and hold strategy_result in the entire dataframe
   StrategyResult run(StrategyConfig strategyConfig) {
     final StrategyResult strategy =
-        BaseStrategyResult.createStrategyResult(YahooFinanceCandleDatas);
+        StrategyResult.createStrategyResult(YahooFinanceCandleDatas);
     if (YahooFinanceCandleDatas.isNotEmpty) {
       //TODO execute the strategy_result
       print(strategyConfig.toString());

@@ -1,10 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:turing_deal/back_test_engine/core/buy_and_hold_strategy.dart';
-import 'package:turing_deal/back_test_engine/model/strategy_result/buy_and_hold_strategyResult.dart';
+import 'package:stock_market_data/stock_market_data.dart';
 import 'package:turing_deal/home/state/mixins/connectivity_state.dart';
-import 'package:turing_deal/market_data/model/stock_ticker.dart';
-import 'package:turing_deal/market_data/static/tickers_list.dart';
 import 'package:turing_deal/shared/ui/UIUtils.dart';
 import 'package:yahoo_finance_data_reader/yahoo_finance_data_reader.dart';
 
@@ -41,9 +38,19 @@ class BigPictureStateProvider with ChangeNotifier, ConnectivityState {
     if (hasInternetConnection()) {
       if (_bigPictureData.isEmpty || true) {
         for (final String symbol in symbols) {
-          print('adding ticker $symbol');
-          final StockTicker ticker = StockTicker(symbol, TickersList.main[symbol]);
-          await addTicker(ticker);
+          try {
+            debugPrint('adding ticker $symbol');
+            final StockTicker ticker = StockTicker(
+              symbol: symbol,
+              description: TickersList.main[symbol],
+            );
+            await addTicker(ticker);
+
+            await Future.delayed(Duration.zero, () {});
+          } catch (e) {
+            UIUtils.snackBarError('Error adding symbol');
+            debugPrint('Error adding ticker $symbol: $e');
+          }
         }
         globalAnalysis();
       }
@@ -69,9 +76,11 @@ class BigPictureStateProvider with ChangeNotifier, ConnectivityState {
   }
 
   Future<void> joinTicker(
-      StockTicker ticker, List<StockTicker>? tickers) async {
-    ticker.symbol = '${ticker.symbol}, ${tickers!.first.symbol}';
-    ticker.description = '';
+      StockTicker tickerParam, List<StockTicker>? tickers) async {
+    StockTicker ticker = tickerParam.copyWith(
+      symbol: '${tickerParam.symbol}, ${tickers!.first.symbol}',
+      description: '',
+    );
 
     final List<YahooFinanceCandleData> prices =
         await YahooFinanceService().getTickerData(ticker.symbol);
@@ -85,13 +94,14 @@ class BigPictureStateProvider with ChangeNotifier, ConnectivityState {
     refresh();
   }
 
-  Map<StockTicker, BuyAndHoldStrategyResult> getBigPictureData() => _bigPictureData;
+  Map<StockTicker, BuyAndHoldStrategyResult> getBigPictureData() =>
+      _bigPictureData;
 
   void refresh() {
     notifyListeners();
   }
 
-  removeTicker(StockTicker ticker) async {
+  Future<void> removeTicker(StockTicker ticker) async {
     _bigPictureData.remove(ticker);
 
     final SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -99,7 +109,8 @@ class BigPictureStateProvider with ChangeNotifier, ConnectivityState {
     symbols.remove(ticker.symbol);
     await prefs.setStringList('symbols', symbols);
 
-    final int deletedRecords = await YahooFinanceDAO().removeDailyData(ticker.symbol);
+    final int deletedRecords =
+        await YahooFinanceDAO().removeDailyData(ticker.symbol);
 
     refresh();
   }

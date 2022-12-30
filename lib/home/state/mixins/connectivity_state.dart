@@ -1,9 +1,7 @@
-
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/services.dart';
 
-class ConnectivityState{
-
+mixin ConnectivityState {
   String _connectionStatus = 'Unknown';
   final Connectivity _connectivity = Connectivity();
 
@@ -33,12 +31,11 @@ class ConnectivityState{
     }
   }
 
-
   bool hasInternetConnection() {
-    if(_connectionStatus == ConnectivityResult.wifi.toString() || _connectionStatus == ConnectivityResult.mobile.toString()){
+    if (_connectionStatus == ConnectivityResult.wifi.toString() ||
+        _connectionStatus == ConnectivityResult.mobile.toString()) {
       return true;
-    }
-    else{
+    } else {
       return false;
     }
   }

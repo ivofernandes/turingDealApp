@@ -5,6 +5,7 @@ import 'package:turing_deal/back_test_engine/model/strategy_result/strategy_draw
 import 'package:turing_deal/back_test_engine/model/trade/trade.dart';
 import 'package:yahoo_finance_data_reader/yahoo_finance_data_reader.dart';
 
+@deprecated
 class CalculateDrawdown {
   /// Calculate the drawdown of the buy and hold strategy_result
   static StrategyDrawdown calculateStrategyDrawdown(

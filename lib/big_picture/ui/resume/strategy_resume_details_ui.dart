@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:turing_deal/back_test_engine/model/strategy_result/buy_and_hold_strategyResult.dart';
+import 'package:stock_market_data/stock_market_data.dart';
 import 'package:turing_deal/big_picture/state/big_picture_state_provider.dart';
 import 'package:turing_deal/big_picture/ui/explain/explain_cagr_ui.dart';
 import 'package:turing_deal/big_picture/ui/explain/explain_drawdown_ui.dart';

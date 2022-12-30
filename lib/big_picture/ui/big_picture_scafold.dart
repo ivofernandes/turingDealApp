@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:provider/provider.dart';
-import 'package:turing_deal/back_test_engine/model/strategy_result/buy_and_hold_strategyResult.dart';
+import 'package:stock_market_data/stock_market_data.dart';
 import 'package:turing_deal/big_picture/state/big_picture_state_provider.dart';
 import 'package:turing_deal/big_picture/ui/big_picture_resume_list.dart';
-import 'package:turing_deal/market_data/model/stock_ticker.dart';
 
 /// This class makes sure there are data to show in the reume list
 /// and takes care of the floating action button animation
@@ -79,10 +78,11 @@ class _BigPictureScaffoldState extends State<BigPictureScaffold>
           floatingActionButton: ScaleTransition(
             scale: _animation,
             child: FloatingActionButton(
-                onPressed: bigPictureState.toogleCompactView,
-                child: Icon(bigPictureState.isCompactView()
-                    ? Icons.view_agenda_rounded
-                    : Icons.view_comfortable_sharp)),
+              onPressed: bigPictureState.toogleCompactView,
+              child: Icon(bigPictureState.isCompactView()
+                  ? Icons.view_agenda_rounded
+                  : Icons.view_comfortable_sharp),
+            ),
           ),
         ),
       );

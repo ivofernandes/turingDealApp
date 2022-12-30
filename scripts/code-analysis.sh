@@ -11,9 +11,6 @@ find ./lib/big_picture -name "*.dart" -type f|xargs wc -l | grep total
 echo "> # home:"
 find ./lib/home -name "*.dart" -type f|xargs wc -l | grep total
 
-echo "> # market_data:"
-find ./lib/market_data -name "*.dart" -type f|xargs wc -l | grep total
-
 echo "> # Settings:"
 find ./lib/settings -name "*.dart" -type f|xargs wc -l | grep total
 

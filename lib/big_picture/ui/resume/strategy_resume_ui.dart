@@ -3,11 +3,10 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:pinch_zoom_release_unzoom/pinch_zoom_release_unzoom.dart';
 import 'package:provider/provider.dart';
-import 'package:turing_deal/back_test_engine/model/strategy_result/buy_and_hold_strategyResult.dart';
+import 'package:stock_market_data/stock_market_data.dart';
 import 'package:turing_deal/big_picture/state/big_picture_state_provider.dart';
 import 'package:turing_deal/big_picture/ui/resume/strategy_resume_details_ui.dart';
 import 'package:turing_deal/big_picture/ui/resume/strategy_resume_header_ui.dart';
-import 'package:turing_deal/market_data/model/stock_ticker.dart';
 import 'package:turing_deal/ticker/ticker_screen.dart';
 
 class StrategyResume extends StatelessWidget {
@@ -27,7 +26,8 @@ class StrategyResume extends StatelessWidget {
     final BigPictureStateProvider bigPictureState =
         Provider.of<BigPictureStateProvider>(context, listen: false);
 
-    final double screenWidth = window.physicalSize.width / window.devicePixelRatio;
+    final double screenWidth =
+        window.physicalSize.width / window.devicePixelRatio;
     final int columns = (screenWidth / RESUME_WIDTH).floor();
     double cardWidth = RESUME_WIDTH + (screenWidth % RESUME_WIDTH / columns);
 
@@ -67,8 +67,7 @@ class StrategyResume extends StatelessWidget {
                   child: strategy.progress > 0
                       ? Column(
                           children: [
-                            StrategyResumeHeader(
-                                ticker, strategy, cardWidth),
+                            StrategyResumeHeader(ticker, strategy, cardWidth),
                             StrategyResumeDetails(strategy),
                             strategy.progress < 100
                                 ? const CircularProgressIndicator()

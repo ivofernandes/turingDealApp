@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:stock_market_data/stock_market_data.dart';
 import 'package:turing_deal/home/ui/ticker_widget_ui.dart';
-import 'package:turing_deal/market_data/model/stock_ticker.dart';
 
 class TickersBlock extends StatelessWidget {
   final Icon icon;
@@ -9,13 +9,14 @@ class TickersBlock extends StatelessWidget {
   final String query;
   final Function close;
 
-  const TickersBlock(
-      {required this.icon,
-      required this.title,
-      required this.tickers,
-      required this.query,
-      required this.close,
-      super.key});
+  const TickersBlock({
+    required this.icon,
+    required this.title,
+    required this.tickers,
+    required this.query,
+    required this.close,
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +27,6 @@ class TickersBlock extends StatelessWidget {
       final String lowerCaseQuery = query.toString().toLowerCase();
 
       final bool containsQuery = element
-              .toString()
               .toLowerCase()
               .contains(lowerCaseQuery) ||
           tickers[element].toString().toLowerCase().contains(lowerCaseQuery);
@@ -63,22 +63,26 @@ class TickersBlock extends StatelessWidget {
   /// Create a suggestion title that divide sectors from country etf etc
   /// @returns a widget ready
   Widget suggestionTitle(Icon icon, String s, List<String> filteredKeys,
-      Map<String, String> tickers, BuildContext context) => ListTile(
-        leading: icon,
-        title: Text(s),
-        trailing: MaterialButton(
-          shape:
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-          color: Theme.of(context).colorScheme.primary,
-          child: const Text('Add all'),
-          onPressed: () {
-            final List<StockTicker> result = [];
-            filteredKeys.forEach((element) {
-              final String symbol = element.toString();
-              result.add(StockTicker(symbol, tickers[symbol]));
-            });
-            // Finish the search passing a result
-            close(context, result);
-          },
-        ));
+          Map<String, String> tickers, BuildContext context) =>
+      ListTile(
+          leading: icon,
+          title: Text(s),
+          trailing: MaterialButton(
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+            color: Theme.of(context).colorScheme.primary,
+            child: const Text('Add all'),
+            onPressed: () {
+              final List<StockTicker> result = [];
+              filteredKeys.forEach((element) {
+                final String symbol = element.toString();
+                result.add(StockTicker(
+                  symbol: symbol,
+                  description: tickers[symbol],
+                ));
+              });
+              // Finish the search passing a result
+              close(context, result);
+            },
+          ));
 }

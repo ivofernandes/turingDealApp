@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:turing_deal/market_data/core/indicators/variations.dart';
-import 'package:turing_deal/market_data/core/utils/yearly_calculations.dart';
-import 'package:turing_deal/market_data/model/yearly_stats.dart';
+import 'package:stock_market_data/stock_market_data.dart';
 import 'package:yahoo_finance_data_reader/yahoo_finance_data_reader.dart';
 
 class TickerStateProvider with ChangeNotifier {
