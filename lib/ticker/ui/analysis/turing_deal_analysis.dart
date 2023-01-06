@@ -6,7 +6,9 @@ import 'package:turing_deal/ticker/ui/analysis/variation/variation_proportion.da
 import 'package:turing_deal/ticker/ui/analysis/variation/yearly_stats_widget.dart';
 
 class TuringDealAnalysis extends StatelessWidget {
-  const TuringDealAnalysis();
+  const TuringDealAnalysis({
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -33,12 +35,18 @@ class TuringDealAnalysis extends StatelessWidget {
 
       return Container(
           margin: const EdgeInsets.all(10),
-          child: AnchorTabPanel(tabs: tabs, body: body));
+          child: AnchorTabPanel(
+            tabs: tabs,
+            body: body,
+          ));
     } else {
       return const SizedBox(
-          width: 100,
-          height: 200,
-          child: Center(child: CircularProgressIndicator()));
+        width: 100,
+        height: 200,
+        child: Center(
+          child: CircularProgressIndicator(),
+        ),
+      );
     }
   }
 }

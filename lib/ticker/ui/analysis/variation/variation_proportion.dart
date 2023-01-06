@@ -24,7 +24,7 @@ class VariationProportion extends StatelessWidget {
     final stats = Stats.fromData(vars);
     final Stats statistics = stats.withPrecision(3);
 
-    print(statistics);
+    debugPrint('$statistics');
 
     final double upperLimit =
         (statistics.standardDeviation * 2).round().toDouble();
@@ -59,9 +59,12 @@ class VariationProportion extends StatelessWidget {
           ),
         ),
         SizedBox(
-            height: 300,
-            width: 300,
-            child: VariationProportionChart(countByInterval)),
+          height: 300,
+          width: 300,
+          child: VariationProportionChart(
+            countByInterval,
+          ),
+        ),
         const SizedBox(
           height: 20,
         )

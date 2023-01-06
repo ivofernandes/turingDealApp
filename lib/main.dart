@@ -16,35 +16,37 @@ void main() async {
 class TuringDealApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) => MultiProvider(
-      providers: <SingleChildWidget>[
-        ChangeNotifierProvider<AppStateProvider>(
-          create: (_) => AppStateProvider(),
+        providers: <SingleChildWidget>[
+          ChangeNotifierProvider<AppStateProvider>(
+            create: (_) => AppStateProvider(),
+          ),
+          ChangeNotifierProvider<BigPictureStateProvider>(
+            create: (_) => BigPictureStateProvider(),
+          ),
+        ],
+        child: Consumer<AppStateProvider>(
+          builder: (context, appState, child) {
+            appState.loadData();
+            return InteractiveLocalization(
+              availableLanguages: const ['en', 'pt'],
+              languageUpdated: () => appState.refresh(),
+              child: MaterialApp(
+                navigatorKey: MyAppContext.globalNavigatorKey,
+                theme: appState.isDark()
+                    ? AppTheme.darkTheme()
+                    : AppTheme.lightTheme(),
+                debugShowCheckedModeBanner: false,
+                title: 'TuringDeal',
+                initialRoute: '/',
+                routes: {
+                  '/': (context) => HomeScreen(
+                        key: UniqueKey(),
+                      ),
+                  SettingsScreen.route: (context) => SettingsScreen(),
+                },
+              ),
+            );
+          },
         ),
-        ChangeNotifierProvider<BigPictureStateProvider>(
-          create: (_) => BigPictureStateProvider(),
-        ),
-      ],
-      child: Consumer<AppStateProvider>(
-        builder: (context, appState, child) {
-          appState.loadData();
-          return InteractiveLocalization(
-            availableLanguages: const ['en', 'pt'],
-            languageUpdated: () => appState.refresh(),
-            child: MaterialApp(
-              navigatorKey: MyAppContext.globalNavigatorKey,
-              theme: appState.isDark()
-                  ? AppTheme.darkTheme()
-                  : AppTheme.lightTheme(),
-              debugShowCheckedModeBanner: false,
-              title: 'TuringDeal',
-              initialRoute: '/',
-              routes: {
-                '/': (context) => const HomeScreen(),
-                SettingsScreen.route: (context) => SettingsScreen(),
-              },
-            ),
-          );
-        },
-      ),
-    );
+      );
 }

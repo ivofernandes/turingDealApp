@@ -7,7 +7,10 @@ import 'package:stock_market_data/stock_market_data.dart';
 class VariationProportionChart extends StatelessWidget {
   final List<VariationCount> countByInterval;
 
-  const VariationProportionChart(this.countByInterval);
+  const VariationProportionChart(
+    this.countByInterval, {
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) => charts.BarChart(
@@ -15,20 +18,36 @@ class VariationProportionChart extends StatelessWidget {
         animate: false,
         vertical: false,
         // Left labels
-        barRendererDecorator: charts.BarLabelDecorator<String>(),
+        barRendererDecorator: charts.BarLabelDecorator<String>(
+          insideLabelStyleSpec: const charts.TextStyleSpec(
+            fontSize: 12,
+            color: charts.MaterialPalette.white,
+          ),
+          outsideLabelStyleSpec: const charts.TextStyleSpec(
+            fontSize: 12,
+            color: charts.MaterialPalette.white,
+          ),
+        ),
         domainAxis: const charts.OrdinalAxisSpec(
-            renderSpec: charts.SmallTickRendererSpec(
-                labelStyle: charts.TextStyleSpec(
-                    fontSize: 12, color: charts.MaterialPalette.white),
-                lineStyle:
-                    charts.LineStyleSpec(color: charts.MaterialPalette.white))),
+          renderSpec: charts.SmallTickRendererSpec(
+            labelStyle: charts.TextStyleSpec(
+              fontSize: 12,
+              color: charts.MaterialPalette.white,
+            ),
+            lineStyle: charts.LineStyleSpec(
+              color: charts.MaterialPalette.white,
+            ),
+          ),
+        ),
         // Top labels
         secondaryMeasureAxis: const charts.NumericAxisSpec(
-            renderSpec: charts.GridlineRendererSpec(
-                labelStyle: charts.TextStyleSpec(
-                    fontSize: 12, color: charts.MaterialPalette.white),
-                lineStyle:
-                    charts.LineStyleSpec(color: charts.MaterialPalette.white))),
+          renderSpec: charts.GridlineRendererSpec(
+            labelStyle: charts.TextStyleSpec(
+                fontSize: 12, color: charts.MaterialPalette.white),
+            lineStyle:
+                charts.LineStyleSpec(color: charts.MaterialPalette.white),
+          ),
+        ),
       );
 
   List<charts.Series<VariationCount, String>> _getData() => [
@@ -37,7 +56,7 @@ class VariationProportionChart extends StatelessWidget {
             domainFn: (VariationCount variationCount, _) =>
                 variationCount.intervalDescription,
             measureFn: (VariationCount variationCount, _) =>
-                variationCount.count.toInt(),
+                variationCount.count,
             data: countByInterval,
             labelAccessorFn: (VariationCount variationCount, _) =>
                 '${variationCount.count}')

@@ -32,7 +32,9 @@ class _TickerTabsState extends State<TickerTabs> {
               onPageChanged: _onItemSelected,
               children: [
                 TuringDealChart(widget.data),
-                const TuringDealAnalysis(),
+                TuringDealAnalysis(
+                  key: UniqueKey(),
+                ),
                 ListPricesText((widget.data).reversed.toList())
               ],
             )),

@@ -10,7 +10,9 @@ import 'package:turing_deal/settings/settings_screen.dart';
 import 'package:turing_deal/shared/my_app_context.dart';
 
 class HomeScreen extends StatelessWidget {
-  const HomeScreen();
+  const HomeScreen({
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -43,8 +45,10 @@ class HomeScreen extends StatelessWidget {
               })
         ],
       ),
-      body: const Center(
-        child: BigPictureScreen(),
+      body: Center(
+        child: BigPictureScreen(
+          key: UniqueKey(),
+        ),
       ),
     );
   }

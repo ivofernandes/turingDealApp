@@ -8,7 +8,9 @@ import 'package:turing_deal/home/state/app_state_provider.dart';
 import 'package:turing_deal/shared/ui/checkError.dart';
 
 class BigPictureScreen extends StatelessWidget {
-  const BigPictureScreen();
+  const BigPictureScreen({
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {

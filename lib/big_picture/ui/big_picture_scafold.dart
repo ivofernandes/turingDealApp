@@ -23,7 +23,7 @@ class _BigPictureScaffoldState extends State<BigPictureScaffold>
   late final _controller = AnimationController(
     duration: const Duration(milliseconds: 400),
     vsync: this,
-  )..forward();
+  );
 
   late final _animation = CurvedAnimation(
     parent: _controller,
@@ -33,6 +33,7 @@ class _BigPictureScaffoldState extends State<BigPictureScaffold>
   @override
   void initState() {
     super.initState();
+    _controller.forward();
   }
 
   @override

@@ -3,7 +3,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:stock_market_data/stock_market_data.dart';
 import 'package:turing_deal/home/state/mixins/connectivity_state.dart';
 import 'package:turing_deal/shared/ui/UIUtils.dart';
-import 'package:yahoo_finance_data_reader/yahoo_finance_data_reader.dart';
 
 class BigPictureStateProvider with ChangeNotifier, ConnectivityState {
   bool _compactView = false;
@@ -77,7 +76,7 @@ class BigPictureStateProvider with ChangeNotifier, ConnectivityState {
 
   Future<void> joinTicker(
       StockTicker tickerParam, List<StockTicker>? tickers) async {
-    StockTicker ticker = tickerParam.copyWith(
+    final StockTicker ticker = tickerParam.copyWith(
       symbol: '${tickerParam.symbol}, ${tickers!.first.symbol}',
       description: '',
     );

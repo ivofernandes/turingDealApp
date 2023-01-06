@@ -35,26 +35,39 @@ class YearlyStatsWidget extends StatelessWidget {
                 vertical: false,
                 barGroupingType: charts.BarGroupingType.grouped,
                 barRendererDecorator: charts.BarLabelDecorator<String>(
-                    insideLabelStyleSpec: const charts.TextStyleSpec(
-                        fontSize: 12, color: charts.MaterialPalette.black),
-                    outsideLabelStyleSpec: const charts.TextStyleSpec(
-                        fontSize: 12, color: charts.MaterialPalette.black)),
+                  insideLabelStyleSpec: const charts.TextStyleSpec(
+                    fontSize: 12,
+                    color: charts.MaterialPalette.white,
+                  ),
+                  outsideLabelStyleSpec: const charts.TextStyleSpec(
+                    fontSize: 12,
+                    color: charts.MaterialPalette.white,
+                  ),
+                ),
                 // Left labels
                 domainAxis: charts.OrdinalAxisSpec(
-                    renderSpec: charts.SmallTickRendererSpec(
-                        labelStyle: charts.TextStyleSpec(
-                            fontSize: 12,
-                            color: charts.MaterialPalette.blue.shadeDefault),
-                        lineStyle: charts.LineStyleSpec(
-                            color: charts.MaterialPalette.blue.shadeDefault))),
+                  renderSpec: charts.SmallTickRendererSpec(
+                    labelStyle: charts.TextStyleSpec(
+                      fontSize: 12,
+                      color: charts.MaterialPalette.blue.shadeDefault,
+                    ),
+                    lineStyle: charts.LineStyleSpec(
+                      color: charts.MaterialPalette.blue.shadeDefault,
+                    ),
+                  ),
+                ),
                 // Top labels
                 secondaryMeasureAxis: charts.NumericAxisSpec(
-                    renderSpec: charts.GridlineRendererSpec(
-                        labelStyle: charts.TextStyleSpec(
-                            fontSize: 12,
-                            color: charts.MaterialPalette.blue.shadeDefault),
-                        lineStyle: charts.LineStyleSpec(
-                            color: charts.MaterialPalette.blue.shadeDefault))),
+                  renderSpec: charts.GridlineRendererSpec(
+                    labelStyle: charts.TextStyleSpec(
+                      fontSize: 12,
+                      color: charts.MaterialPalette.blue.shadeDefault,
+                    ),
+                    lineStyle: charts.LineStyleSpec(
+                      color: charts.MaterialPalette.blue.shadeDefault,
+                    ),
+                  ),
+                ),
               )),
         ),
       ],
@@ -75,21 +88,29 @@ class YearlyStatsWidget extends StatelessWidget {
                 '${yearlyStat.variation.toStringAsFixed(0)} %')
           ..setAttribute(charts.measureAxisIdKey, 'secondaryMeasureAxisId'),
         charts.Series<YearlyStats, String>(
-            id: 'Drawdown',
-            domainFn: (YearlyStats yearlyStat, _) => yearlyStat.year.toString(),
-            measureFn: (YearlyStats yearlyStat, _) => yearlyStat.drawdown,
-            data: yearlyStats,
-            insideLabelStyleAccessorFn: (YearlyStats yearlyStat, _) =>
-                charts.TextStyleSpec(
-                    fontSize: 12, color: charts.Color.fromHex(code: '#000000')),
-            outsideLabelStyleAccessorFn: (YearlyStats yearlyStat, _) =>
-                charts.TextStyleSpec(
-                    fontSize: 12,
-                    color: charts.MaterialPalette.red.shadeDefault.lighter),
-            labelAccessorFn: (YearlyStats yearlyStat, _) =>
-                '${yearlyStat.drawdown.toStringAsFixed(0)} %',
-            fillColorFn: (_, __) =>
-                charts.MaterialPalette.red.shadeDefault.lighter)
-          ..setAttribute(charts.measureAxisIdKey, 'secondaryMeasureAxisId'),
+          id: 'Drawdown',
+          domainFn: (YearlyStats yearlyStat, _) => yearlyStat.year.toString(),
+          measureFn: (YearlyStats yearlyStat, _) => yearlyStat.drawdown,
+          data: yearlyStats,
+          insideLabelStyleAccessorFn: (YearlyStats yearlyStat, _) =>
+              charts.TextStyleSpec(
+            fontSize: 12,
+            color: charts.Color.fromHex(
+              code: '#000000',
+            ),
+          ),
+          outsideLabelStyleAccessorFn: (YearlyStats yearlyStat, _) =>
+              charts.TextStyleSpec(
+            fontSize: 12,
+            color: charts.MaterialPalette.red.shadeDefault.lighter,
+          ),
+          labelAccessorFn: (YearlyStats yearlyStat, _) =>
+              '${yearlyStat.drawdown.toStringAsFixed(0)} %',
+          fillColorFn: (_, __) =>
+              charts.MaterialPalette.red.shadeDefault.lighter,
+        )..setAttribute(
+            charts.measureAxisIdKey,
+            'secondaryMeasureAxisId',
+          ),
       ];
 }
