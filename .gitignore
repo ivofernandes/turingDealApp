@@ -45,3 +45,4 @@ app.*.map.json
 /android/app/profile
 /android/app/release
 /ios/build
+/app-release.aab
