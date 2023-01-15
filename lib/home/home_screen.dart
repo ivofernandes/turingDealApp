@@ -6,13 +6,37 @@ import 'package:stock_market_data/stock_market_data.dart';
 import 'package:turing_deal/big_picture/big_picture_screen.dart';
 import 'package:turing_deal/home/state/app_state_provider.dart';
 import 'package:turing_deal/home/ui/ticker_search.dart';
+import 'package:turing_deal/portfolio/portfolio_screen.dart';
 import 'package:turing_deal/settings/settings_screen.dart';
 import 'package:turing_deal/shared/my_app_context.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({
     super.key,
   });
+
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  static const duration = Duration(milliseconds: 200);
+  static const curve = Curves.ease;
+
+  int _index = 1;
+  final PageController _pageViewController = PageController();
+
+  @override
+  void initState() {
+    super.initState();
+
+    if (_index != 0) {
+      Future.delayed(
+        Duration.zero,
+        () => _pageViewController.jumpToPage(_index),
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -45,10 +69,39 @@ class HomeScreen extends StatelessWidget {
               })
         ],
       ),
-      body: Center(
-        child: BigPictureScreen(
-          key: UniqueKey(),
-        ),
+      body: PageView(
+        physics: const NeverScrollableScrollPhysics(),
+        controller: _pageViewController,
+        children: [
+          Center(
+            child: BigPictureScreen(
+              key: UniqueKey(),
+            ),
+          ),
+          Center(
+            child: PortfolioScreen(
+              key: UniqueKey(),
+            ),
+          ),
+        ],
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        items: const [
+          BottomNavigationBarItem(
+            label: 'Research',
+            icon: Icon(
+              Icons.show_chart,
+            ),
+          ),
+          BottomNavigationBarItem(
+            label: 'Portfolio',
+            icon: Icon(
+              Icons.work,
+            ),
+          ),
+        ],
+        currentIndex: _index,
+        onTap: onItemSelected,
       ),
     );
   }
@@ -60,5 +113,15 @@ class HomeScreen extends StatelessWidget {
         DeviceOrientation.portraitUp,
       ]);
     }
+  }
+
+  void onItemSelected(int value) {
+    _index = value;
+    _pageViewController.animateToPage(
+      value,
+      duration: duration,
+      curve: curve,
+    );
+    setState(() {});
   }
 }
