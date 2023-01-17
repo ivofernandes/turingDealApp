@@ -1,7 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:provider/provider.dart';
-import 'package:stock_market_data/stock_market_data.dart';
+import 'package:stock_market_data/src/model/stock_ticker.dart';
+import 'package:stock_market_data/src/model/strategy/buy_and_hold_strategy_result.dart';
 import 'package:turing_deal/big_picture/state/big_picture_state_provider.dart';
+import 'package:turing_deal/portfolio/core/portfolio_allocation.dart';
+import 'package:turing_deal/portfolio/core/user_portfolio.dart';
 import 'package:turing_deal/portfolio/ui/portfolio_widget.dart';
 
 class PortfolioScreen extends StatelessWidget {
@@ -13,23 +16,27 @@ class PortfolioScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final BigPictureStateProvider bigPictureState =
         Provider.of<BigPictureStateProvider>(context, listen: false);
-    final Map<String, double> pricesOfSymbols =
-        getListFromSymbolToPrice(bigPictureState.getBigPictureData());
 
+    UserPortfolio portfolio = getPortfolioData(
+      bigPictureState.getBigPictureData(),
+    );
     return PortfolioWidget(
-      pricesOfSymbols: pricesOfSymbols,
+      portfolio: portfolio,
     );
   }
 
-  Map<String, double> getListFromSymbolToPrice(
+  UserPortfolio getPortfolioData(
       Map<StockTicker, BuyAndHoldStrategyResult> bigPictureData) {
-    final Map<String, double> pricesOfSymbols = {};
+    final Map<String, PortfolioAllocation> portfolioAllocations = {};
 
-    final List<StockTicker> tickers = bigPictureData.keys.toList();
-    for (final ticker in tickers) {
-      pricesOfSymbols[ticker.symbol] = bigPictureData[ticker]!.endPrice;
+    for (final ticker in bigPictureData.keys.toList()) {
+      final endPrice = bigPictureData[ticker]!.endPrice;
+      portfolioAllocations[ticker.symbol] =
+          PortfolioAllocation(endPrice: endPrice);
     }
 
-    return pricesOfSymbols;
+    return UserPortfolio(
+      portfolioAllocations: portfolioAllocations,
+    );
   }
 }

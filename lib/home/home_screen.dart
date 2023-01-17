@@ -23,7 +23,7 @@ class _HomeScreenState extends State<HomeScreen> {
   static const duration = Duration(milliseconds: 200);
   static const curve = Curves.ease;
 
-  int _index = 1;
+  int _index = 0;
   final PageController _pageViewController = PageController();
 
   @override
@@ -79,9 +79,7 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
           ),
           Center(
-            child: PortfolioScreen(
-              key: UniqueKey(),
-            ),
+            child: PortfolioScreen(),
           ),
         ],
       ),
