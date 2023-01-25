@@ -50,7 +50,7 @@ class _PortfolioWidgetState extends State<PortfolioWidget> {
                                 return;
                               }
 
-                              final newValue = double.parse(value);
+                              final newValue = int.parse(value);
                               widget.portfolio.portfolioAllocations[ticker]!
                                   .numberOfShares = newValue;
                               if (newValue == 0) {

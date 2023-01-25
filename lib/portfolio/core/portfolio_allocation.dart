@@ -1,7 +1,7 @@
 class PortfolioAllocation {
   double endPrice;
   bool isSelected;
-  double numberOfShares;
+  int numberOfShares;
 
   PortfolioAllocation({
     required this.endPrice,

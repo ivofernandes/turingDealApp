@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:provider/provider.dart';
-import 'package:stock_market_data/src/model/stock_ticker.dart';
-import 'package:stock_market_data/src/model/strategy/buy_and_hold_strategy_result.dart';
+import 'package:stock_market_data/stock_market_data.dart';
 import 'package:turing_deal/big_picture/state/big_picture_state_provider.dart';
 import 'package:turing_deal/portfolio/core/portfolio_allocation.dart';
 import 'package:turing_deal/portfolio/core/user_portfolio.dart';
@@ -17,7 +16,7 @@ class PortfolioScreen extends StatelessWidget {
     final BigPictureStateProvider bigPictureState =
         Provider.of<BigPictureStateProvider>(context, listen: false);
 
-    UserPortfolio portfolio = getPortfolioData(
+    final UserPortfolio portfolio = getPortfolioData(
       bigPictureState.getBigPictureData(),
     );
     return PortfolioWidget(
