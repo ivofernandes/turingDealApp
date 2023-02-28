@@ -3,9 +3,9 @@ import 'package:flutter/services.dart';
 import 'package:interactive_i18n/interactive_i18n.dart';
 import 'package:provider/provider.dart';
 import 'package:stock_market_data/stock_market_data.dart';
+import 'package:ticker_search/ticker_search.dart';
 import 'package:turing_deal/big_picture/big_picture_screen.dart';
 import 'package:turing_deal/home/state/app_state_provider.dart';
-import 'package:turing_deal/home/ui/ticker_search.dart';
 import 'package:turing_deal/portfolio/portfolio_screen.dart';
 import 'package:turing_deal/settings/settings_screen.dart';
 import 'package:turing_deal/shared/my_app_context.dart';
@@ -40,19 +40,16 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final AppStateProvider appState =
-        Provider.of<AppStateProvider>(context, listen: false);
+    final AppStateProvider appState = Provider.of<AppStateProvider>(context, listen: false);
 
     forcePortraitModeInPhones(context);
 
-    final TickerSearch t = TickerSearch(searchFieldLabel: 'Search'.t);
     MyAppContext.context = context;
 
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
-          onPressed: () =>
-              Navigator.of(context).pushNamed(SettingsScreen.route),
+          onPressed: () => Navigator.of(context).pushNamed(SettingsScreen.route),
           icon: const Icon(Icons.menu),
         ),
         title: const Text('Turing deal'),
@@ -62,7 +59,7 @@ class _HomeScreenState extends State<HomeScreen> {
               onPressed: () async {
                 final List<StockTicker>? tickers = await showSearch(
                   context: context,
-                  delegate: t,
+                  delegate: TickerSearch(searchFieldLabel: 'Search'.t),
                 );
 
                 appState.search(tickers);

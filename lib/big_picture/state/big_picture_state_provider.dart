@@ -8,10 +8,17 @@ class BigPictureStateProvider with ChangeNotifier, ConnectivityState {
   bool _compactView = false;
   final bool _isMocked = false;
   final Map<StockTicker, BuyAndHoldStrategyResult> _bigPictureData = {};
+  String _error = '';
 
   BigPictureStateProvider() {
     loadData();
   }
+
+  void refresh() {
+    notifyListeners();
+  }
+
+  String get error => _error;
 
   bool isCompactView() => _compactView;
 
@@ -33,6 +40,7 @@ class BigPictureStateProvider with ChangeNotifier, ConnectivityState {
     } else {
       await prefs.setStringList('symbols', symbols);
     }
+    _error = '';
 
     if (hasInternetConnection()) {
       if (_bigPictureData.isEmpty || true) {
@@ -54,7 +62,8 @@ class BigPictureStateProvider with ChangeNotifier, ConnectivityState {
         globalAnalysis();
       }
     } else {
-      UIUtils.snackBarError('Check your internet connection');
+      _error = 'Check your internet connection';
+      UIUtils.snackBarError(_error);
     }
   }
 
@@ -62,43 +71,33 @@ class BigPictureStateProvider with ChangeNotifier, ConnectivityState {
     _bigPictureData[ticker] = BuyAndHoldStrategyResult();
 
     //  Get data from yahoo finance
-    final List<YahooFinanceCandleData> prices =
-        await YahooFinanceService().getTickerData(ticker.symbol);
+    final List<YahooFinanceCandleData> prices = await YahooFinanceService().getTickerData(ticker.symbol);
 
     // Execute the backtest
-    final BuyAndHoldStrategyResult strategy =
-        BuyAndHoldStrategy.buyAndHoldAnalysis(prices);
+    final BuyAndHoldStrategyResult strategy = BuyAndHoldStrategy.buyAndHoldAnalysis(prices);
 
     _bigPictureData[ticker] = strategy;
 
     refresh();
   }
 
-  Future<void> joinTicker(
-      StockTicker tickerParam, List<StockTicker>? tickers) async {
+  Future<void> joinTicker(StockTicker tickerParam, List<StockTicker>? tickers) async {
     final StockTicker ticker = tickerParam.copyWith(
       symbol: '${tickerParam.symbol}, ${tickers!.first.symbol}',
       description: '',
     );
 
-    final List<YahooFinanceCandleData> prices =
-        await YahooFinanceService().getTickerData(ticker.symbol);
+    final List<YahooFinanceCandleData> prices = await YahooFinanceService().getTickerData(ticker.symbol);
 
     // Execute the backtest
-    final BuyAndHoldStrategyResult strategy =
-        BuyAndHoldStrategy.buyAndHoldAnalysis(prices);
+    final BuyAndHoldStrategyResult strategy = BuyAndHoldStrategy.buyAndHoldAnalysis(prices);
 
     _bigPictureData[ticker] = strategy;
 
     refresh();
   }
 
-  Map<StockTicker, BuyAndHoldStrategyResult> getBigPictureData() =>
-      _bigPictureData;
-
-  void refresh() {
-    notifyListeners();
-  }
+  Map<StockTicker, BuyAndHoldStrategyResult> getBigPictureData() => _bigPictureData;
 
   Future<void> removeTicker(StockTicker ticker) async {
     _bigPictureData.remove(ticker);
@@ -108,8 +107,7 @@ class BigPictureStateProvider with ChangeNotifier, ConnectivityState {
     symbols.remove(ticker.symbol);
     await prefs.setStringList('symbols', symbols);
 
-    final int deletedRecords =
-        await YahooFinanceDAO().removeDailyData(ticker.symbol);
+    final int deletedRecords = await YahooFinanceDAO().removeDailyData(ticker.symbol);
 
     refresh();
   }
@@ -121,9 +119,7 @@ class BigPictureStateProvider with ChangeNotifier, ConnectivityState {
   }
 
   Future<void> persistTickers() async {
-    final List<String> symbols = _bigPictureData.keys
-        .map((StockTicker stockTicker) => stockTicker.symbol)
-        .toList();
+    final List<String> symbols = _bigPictureData.keys.map((StockTicker stockTicker) => stockTicker.symbol).toList();
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     await prefs.setStringList('symbols', symbols);
   }

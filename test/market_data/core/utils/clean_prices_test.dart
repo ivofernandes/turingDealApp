@@ -9,8 +9,6 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter_test/flutter_test.dart';
-import 'package:turing_deal/market_data/core/utils/clean_prices.dart';
-import 'package:turing_deal/market_data/model/candle_price.dart';
 import 'package:yahoo_finance_data_reader/yahoo_finance_data_reader.dart';
 
 void main() {
@@ -18,10 +16,9 @@ void main() {
     // Get static data from assets
     const String path = 'test/test_data/yahoo_finance/^GSPC.json';
     final String content = await File(path).readAsString();
-    final List<dynamic> jsonObject = json.decode(content);
+    final List<dynamic> jsonList = json.decode(content) as List<dynamic>;
 
-    final List<YahooFinanceCandleData> YahooFinanceCandleDatas =
-        YahooFinanceCandleData.;
+    final List<YahooFinanceCandleData> YahooFinanceCandleDatas = YahooFinanceCandleData.fromJsonList(jsonList);
 
     assert(YahooFinanceCandleDatas.isNotEmpty);
 

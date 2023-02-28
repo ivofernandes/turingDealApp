@@ -1,7 +1,21 @@
 library app_dependencies;
 
-/// A Calculator.
-class Calculator {
-  /// Returns [value] plus 1.
-  int addOne(int value) => value + 1;
-}
+export 'package:anchor_tabs/anchor_tabs.dart';
+export 'package:color_scale/color_scale.dart';
+export 'package:connectivity_plus/connectivity_plus.dart';
+export 'package:country_icons/country_icons.dart';
+export 'package:http/http.dart';
+export 'package:interactive_chart/interactive_chart.dart';
+export 'package:interactive_i18n/interactive_i18n.dart';
+export 'package:intl/intl.dart';
+export 'package:path_provider/path_provider.dart';
+export 'package:pinch_zoom_release_unzoom/pinch_zoom_release_unzoom.dart';
+export 'package:provider/provider.dart';
+export 'package:sembast/sembast.dart';
+export 'package:sembast_web/sembast_web.dart';
+export 'package:shared_preferences/shared_preferences.dart';
+export 'package:stats/stats.dart';
+export 'package:stock_market_data/stock_market_data.dart';
+export 'package:top_snackbar_flutter/top_snack_bar.dart';
+export 'package:url_launcher/url_launcher.dart';
+export 'package:yahoo_finance_data_reader/yahoo_finance_data_reader.dart';

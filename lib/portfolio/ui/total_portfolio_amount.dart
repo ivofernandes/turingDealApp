@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:turing_deal/portfolio/core/user_portfolio.dart';
 
+/// Widget to control the amount of money in the portfolio
+/// by presenting a text field to the user.
+/// When the text field is changed, the value is updated in the user portfolio.
 class TotalPortfolioAmount extends StatelessWidget {
   final UserPortfolio portfolio;
 
@@ -15,6 +18,29 @@ class TotalPortfolioAmount extends StatelessWidget {
     portfolio.portfolioAllocations.forEach((key, value) {
       totalAmount += value.numberOfShares * value.endPrice;
     });
-    return Text('Total Portfolio Amount: ${totalAmount.toStringAsFixed(2)}');
+
+    const oldText = Text('Total Portfolio Amount');
+
+    /// Text field to change the total amount of money in the portfolio.
+    return Row(
+      children: [
+        oldText,
+        const SizedBox(width: 10),
+        Expanded(
+          child: TextFormField(
+            controller:
+                TextEditingController(text: totalAmount.toStringAsFixed(2)),
+            onChanged: (value) {
+              if (value == '') {
+                return;
+              }
+
+              final newValue = double.parse(value);
+              portfolio.amount = newValue;
+            },
+          ),
+        ),
+      ],
+    );
   }
 }

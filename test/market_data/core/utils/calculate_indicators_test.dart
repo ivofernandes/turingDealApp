@@ -9,10 +9,7 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter_test/flutter_test.dart';
-import 'package:turing_deal/market_data/core/utils/calculate_indicators.dart';
-import 'package:turing_deal/market_data/core/utils/clean_prices.dart';
-import 'package:turing_deal/market_data/model/candle_price.dart';
-import 'package:yahoo_finance_data_reader/yahoo_finance_data_reader.dart';
+import 'package:stock_market_data/stock_market_data.dart';
 
 void main() {
   test('Test calculate indicators', () async {
@@ -20,10 +17,9 @@ void main() {
     // Get static data from assets
     const String path = 'test/test_data/yahoo_finance/^GSPC.json';
     final String content = await File(path).readAsString();
-    final List<dynamic> jsonObject = json.decode(content);
+    final List<dynamic> jsonObject = json.decode(content) as List<dynamic>;
 
-    final List<YahooFinanceCandleData> YahooFinanceCandleDatas =
-        CleanPrices.clean(jsonObject);
+    final List<YahooFinanceCandleData> YahooFinanceCandleDatas = YahooFinanceCandleData.fromJsonList(jsonObject);
 
     print('${DateTime.now()} > calculating indicators');
     assert(YahooFinanceCandleDatas.isNotEmpty);
@@ -34,9 +30,7 @@ void main() {
     // CalculateIndicators.calculateIndicators(YahooFinanceCandleDatas, ['invalid_indicator', 'strangeStuff']);
 
     // Check if with data that is okay can perform a calculation
-    CalculateIndicators.calculateIndicators(
-        YahooFinanceCandleDatas, ['SMA_50', 'SMA_20']);
-
+    CalculateIndicators.calculateIndicators(YahooFinanceCandleDatas, ['SMA_20']);
     assert(YahooFinanceCandleDatas[100].indicators.isNotEmpty);
 
     print('${DateTime.now()} > calculated indicators');
