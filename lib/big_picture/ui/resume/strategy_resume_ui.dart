@@ -4,32 +4,34 @@ import 'package:flutter/material.dart';
 import 'package:pinch_zoom_release_unzoom/pinch_zoom_release_unzoom.dart';
 import 'package:provider/provider.dart';
 import 'package:stock_market_data/stock_market_data.dart';
+import 'package:ticker_details/ticker_details.dart';
 import 'package:turing_deal/big_picture/state/big_picture_state_provider.dart';
 import 'package:turing_deal/big_picture/ui/resume/strategy_resume_details_ui.dart';
 import 'package:turing_deal/big_picture/ui/resume/strategy_resume_header_ui.dart';
-import 'package:turing_deal/ticker/ticker_screen.dart';
 
 class StrategyResume extends StatelessWidget {
-  static const double RESUME_WIDTH = 320;
-  static const double RESUME_LEFT_COLUMN = 140 - 15;
-  static const double RESUME_RIGHT_COLUMN =
-      RESUME_WIDTH - RESUME_LEFT_COLUMN - 30;
+  static const double resumeWidth = 320;
+  static const double resumeLeftColumn = 140 - 15;
+  static const double resumeRightColumn = resumeWidth - resumeLeftColumn - 30;
 
   final StockTicker ticker;
   final BuyAndHoldStrategyResult strategy;
   final double width;
 
-  const StrategyResume(this.ticker, this.strategy, this.width);
+  const StrategyResume(
+    this.ticker,
+    this.strategy,
+    this.width, {
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
-    final BigPictureStateProvider bigPictureState =
-        Provider.of<BigPictureStateProvider>(context, listen: false);
+    final BigPictureStateProvider bigPictureState = Provider.of<BigPictureStateProvider>(context, listen: false);
 
-    final double screenWidth =
-        window.physicalSize.width / window.devicePixelRatio;
-    final int columns = (screenWidth / RESUME_WIDTH).floor();
-    double cardWidth = RESUME_WIDTH + (screenWidth % RESUME_WIDTH / columns);
+    final double screenWidth = window.physicalSize.width / window.devicePixelRatio;
+    final int columns = (screenWidth / resumeWidth).floor();
+    double cardWidth = resumeWidth + (screenWidth % resumeWidth / columns);
 
     if (bigPictureState.isCompactView()) {
       cardWidth /= 3;
@@ -42,9 +44,9 @@ class StrategyResume extends StatelessWidget {
       // Provide a function that tells the app
       // what to do after an item has been swiped away.
       onDismissed: (direction) => bigPictureState.removeTicker(ticker),
-      background: Container(
+      background: const ColoredBox(
         color: Colors.red,
-        child: const Icon(Icons.close),
+        child: Icon(Icons.close),
       ),
       child: ConstrainedBox(
         constraints: const BoxConstraints(minHeight: 190),
@@ -69,9 +71,7 @@ class StrategyResume extends StatelessWidget {
                           children: [
                             StrategyResumeHeader(ticker, strategy, cardWidth),
                             StrategyResumeDetails(strategy),
-                            strategy.progress < 100
-                                ? const CircularProgressIndicator()
-                                : Container()
+                            strategy.progress < 100 ? const CircularProgressIndicator() : Container()
                           ],
                         )
                       : Column(

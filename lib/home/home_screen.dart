@@ -3,11 +3,13 @@ import 'package:flutter/services.dart';
 import 'package:interactive_i18n/interactive_i18n.dart';
 import 'package:provider/provider.dart';
 import 'package:stock_market_data/stock_market_data.dart';
+import 'package:stocks_portfolio/stocks_portfolio.dart';
 import 'package:ticker_search/ticker_search.dart';
 import 'package:turing_deal/big_picture/big_picture_screen.dart';
+import 'package:turing_deal/big_picture/state/big_picture_state_provider.dart';
 import 'package:turing_deal/home/state/app_state_provider.dart';
-import 'package:turing_deal/portfolio/portfolio_screen.dart';
 import 'package:turing_deal/settings/settings_screen.dart';
+import 'package:turing_deal/shared/environment.dart';
 import 'package:turing_deal/shared/my_app_context.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -41,6 +43,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     final AppStateProvider appState = Provider.of<AppStateProvider>(context, listen: false);
+    final BigPictureStateProvider bigPictureState = Provider.of<BigPictureStateProvider>(context, listen: false);
 
     forcePortraitModeInPhones(context);
 
@@ -66,38 +69,47 @@ class _HomeScreenState extends State<HomeScreen> {
               })
         ],
       ),
-      body: PageView(
-        physics: const NeverScrollableScrollPhysics(),
-        controller: _pageViewController,
-        children: [
-          Center(
-            child: BigPictureScreen(
+      body: !Environment.hasPortfolio
+          ? BigPictureScreen(
               key: UniqueKey(),
+            )
+          : PageView(
+              physics: const NeverScrollableScrollPhysics(),
+              controller: _pageViewController,
+              children: [
+                Center(
+                  child: BigPictureScreen(
+                    key: UniqueKey(),
+                  ),
+                ),
+                if (Environment.hasPortfolio)
+                  Center(
+                    child: PortfolioScreen(
+                      stocks: bigPictureState.getBigPictureData(),
+                    ),
+                  ),
+              ],
             ),
-          ),
-          Center(
-            child: PortfolioScreen(),
-          ),
-        ],
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        items: const [
-          BottomNavigationBarItem(
-            label: 'Research',
-            icon: Icon(
-              Icons.show_chart,
+      bottomNavigationBar: Environment.hasPortfolio == false
+          ? null
+          : BottomNavigationBar(
+              items: const [
+                BottomNavigationBarItem(
+                  label: 'Research',
+                  icon: Icon(
+                    Icons.show_chart,
+                  ),
+                ),
+                BottomNavigationBarItem(
+                  label: 'Portfolio',
+                  icon: Icon(
+                    Icons.work,
+                  ),
+                ),
+              ],
+              currentIndex: _index,
+              onTap: onItemSelected,
             ),
-          ),
-          BottomNavigationBarItem(
-            label: 'Portfolio',
-            icon: Icon(
-              Icons.work,
-            ),
-          ),
-        ],
-        currentIndex: _index,
-        onTap: onItemSelected,
-      ),
     );
   }
 

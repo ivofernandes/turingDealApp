@@ -1,21 +1,18 @@
 cd ..
-echo "# All modules:"
-find . -name "*.dart" -type f|xargs wc -l | grep total
+echo "# Main app:"
+find ./lib -name "*.dart" -type f|xargs wc -l | grep total
 
-echo "> # back_test_engine:"
-find ./lib/back_test_engine -name "*.dart" -type f|xargs wc -l | grep total
+echo "> # ticker_details:"
+find ./app_modules/ticker_details -name "*.dart" -type f|xargs wc -l | grep total
 
-echo "> # big_picture:"
-find ./lib/big_picture -name "*.dart" -type f|xargs wc -l | grep total
+echo "> # backtest:"
+find ./packages/backtest -name "*.dart" -type f|xargs wc -l | grep total
 
-echo "> # home:"
-find ./lib/home -name "*.dart" -type f|xargs wc -l | grep total
+echo "> # td_ui:"
+find ./packages/td_ui -name "*.dart" -type f|xargs wc -l | grep total
 
-echo "> # Settings:"
-find ./lib/settings -name "*.dart" -type f|xargs wc -l | grep total
+echo "> # ticker_search:"
+find ./packages/ticker_search -name "*.dart" -type f|xargs wc -l | grep total
 
-echo "> # shared:"
-find ./lib/shared -name "*.dart" -type f|xargs wc -l | grep total
-
-echo "> # ticker:"
-find ./lib/ticker -name "*.dart" -type f|xargs wc -l | grep total
+echo "> # stocks_portfolio:"
+find ./packages/stocks_portfolio -name "*.dart" -type f|xargs wc -l | grep total

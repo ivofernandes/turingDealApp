@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:interactive_i18n/interactive_i18n.dart';
 import 'package:provider/provider.dart';
 import 'package:provider/single_child_widget.dart';
+import 'package:td_ui/td_ui.dart';
 import 'package:turing_deal/big_picture/state/big_picture_state_provider.dart';
 import 'package:turing_deal/home/home_screen.dart';
 import 'package:turing_deal/home/state/app_state_provider.dart';
 import 'package:turing_deal/settings/settings_screen.dart';
-import 'package:turing_deal/shared/app_theme.dart';
 import 'package:turing_deal/shared/my_app_context.dart';
 
 void main() async {
@@ -32,9 +32,7 @@ class TuringDealApp extends StatelessWidget {
               languageUpdated: () => appState.refresh(),
               child: MaterialApp(
                 navigatorKey: MyAppContext.globalNavigatorKey,
-                theme: appState.isDark()
-                    ? AppTheme.darkTheme()
-                    : AppTheme.lightTheme(),
+                theme: appState.isDark() ? AppTheme.darkTheme() : AppTheme.lightTheme(),
                 debugShowCheckedModeBanner: false,
                 title: 'TuringDeal',
                 initialRoute: '/',

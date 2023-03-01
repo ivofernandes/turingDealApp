@@ -27,7 +27,12 @@ dependencies:
     path: packages/app_dependencies
   ticker_search:
     path: packages/ticker_search
-  charts_flutter: ^0.12.0
+  td_ui:
+    path: packages/td_ui
+  stocks_portfolio:
+    path: packages/stocks_portfolio
+  ticker_details:
+    path: app_modules/ticker_details
 
 
 dev_dependencies:

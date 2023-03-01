@@ -65,7 +65,7 @@ packages:
     source: hosted
     version: "0.12.0"
   charts_flutter:
-    dependency: "direct main"
+    dependency: transitive
     description:
       name: charts_flutter
       sha256: "4172c3f4b85322fdffe1896ffbed79ae4689ae72cb6fe6690dcaaea620a9c558"
@@ -556,6 +556,13 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.0.3"
+  stocks_portfolio:
+    dependency: "direct main"
+    description:
+      path: "packages/stocks_portfolio"
+      relative: true
+    source: path
+    version: "1.0.0+1"
   stream_channel:
     dependency: transitive
     description:
@@ -580,6 +587,13 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.0.1"
+  td_ui:
+    dependency: "direct main"
+    description:
+      path: "packages/td_ui"
+      relative: true
+    source: path
+    version: "0.0.1"
   term_glyph:
     dependency: transitive
     description:
@@ -596,6 +610,13 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.4.16"
+  ticker_details:
+    dependency: "direct main"
+    description:
+      path: "app_modules/ticker_details"
+      relative: true
+    source: path
+    version: "0.0.1"
   ticker_search:
     dependency: "direct main"
     description:

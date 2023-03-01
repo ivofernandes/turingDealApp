@@ -21,8 +21,7 @@ class AppsBanner extends StatelessWidget {
             children: [
               Expanded(
                 child: InkWell(
-                  onTap: () =>
-                      Web.launchLink(context, Environment.PLAY_STORE_URL),
+                  onTap: () => Web.launchLink(context, Environment.playStoreUrl),
                   child: Image.asset(
                     'assets/images/stores/play_store.png',
                     height: 75,
@@ -31,10 +30,8 @@ class AppsBanner extends StatelessWidget {
               ),
               Expanded(
                 child: InkWell(
-                  onTap: () =>
-                      Web.launchLink(context, Environment.APP_STORE_URL),
-                  child: Image.asset('assets/images/stores/app_store.png',
-                      width: (width - 40) / 2, height: 50),
+                  onTap: () => Web.launchLink(context, Environment.appStoreUrl),
+                  child: Image.asset('assets/images/stores/app_store.png', width: (width - 40) / 2, height: 50),
                 ),
               )
             ],

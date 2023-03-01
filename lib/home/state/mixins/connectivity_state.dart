@@ -1,4 +1,5 @@
 import 'package:connectivity_plus/connectivity_plus.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 mixin ConnectivityState {
@@ -12,7 +13,7 @@ mixin ConnectivityState {
     try {
       result = await Connectivity().checkConnectivity();
     } on PlatformException catch (e) {
-      print(e.toString());
+      debugPrint(e.toString());
     }
 
     return _updateConnectionStatus(result);

@@ -53,21 +53,17 @@ class SettingsScreen extends StatelessWidget {
                   ),
                   Padding(
                     padding: const EdgeInsets.all(8),
-                    child: Text(
-                        'The objective of this project is to help people to make investment decisions'
-                            .t),
+                    child: Text('The objective of this project is to help people to make investment decisions'.t),
                   ),
                   const SizedBox(
                     height: 10,
                   ),
                   MaterialButton(
                       color: Theme.of(context).colorScheme.primary,
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10)),
+                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
                       elevation: 10,
                       child: Text('Contribute on github'.t),
-                      onPressed: () =>
-                          Web.launchLink(context, Environment.GITHUB_URL)),
+                      onPressed: () => Web.launchLink(context, Environment.githubUrl)),
                   kIsWeb ? const AppsBanner() : const SizedBox()
                 ],
               ),

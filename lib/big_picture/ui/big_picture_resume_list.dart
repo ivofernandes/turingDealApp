@@ -15,13 +15,12 @@ class BigPictureResumeList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final BigPictureStateProvider bigPictureState =
-        Provider.of<BigPictureStateProvider>(context, listen: false);
+    final BigPictureStateProvider bigPictureState = Provider.of<BigPictureStateProvider>(context, listen: false);
 
     final List<StockTicker> tickers = data.keys.toList();
 
     final double width = MediaQuery.of(context).size.width;
-    int columns = (width / StrategyResume.RESUME_WIDTH).floor();
+    int columns = (width / StrategyResume.resumeWidth).floor();
     columns = columns <= 0 ? 1 : columns;
 
     if (bigPictureState.isCompactView()) {
@@ -40,13 +39,10 @@ class BigPictureResumeList extends StatelessWidget {
                 itemBuilder: (BuildContext context, int index) {
                   final List<Widget> resumes = [];
 
-                  for (int i = index * columns;
-                      i < (index + 1) * columns && i < tickers.length;
-                      i++) {
+                  for (int i = index * columns; i < (index + 1) * columns && i < tickers.length; i++) {
                     final StockTicker ticker = tickers[i];
                     final BuyAndHoldStrategyResult? strategy = data[ticker];
-                    resumes.add(
-                        StrategyResume(ticker, strategy!, width / columns));
+                    resumes.add(StrategyResume(ticker, strategy!, width / columns));
                   }
                   return Wrap(
                     children: resumes,

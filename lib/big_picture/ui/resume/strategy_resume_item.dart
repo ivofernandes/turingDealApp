@@ -5,8 +5,7 @@ class StrategyResumeItem extends StatelessWidget {
   final String value;
   final Function onTap;
 
-  const StrategyResumeItem(
-      {required this.title, required this.value, required this.onTap, super.key});
+  const StrategyResumeItem({required this.title, required this.value, required this.onTap, super.key});
 
   @override
   Widget build(BuildContext context) => InkWell(
@@ -15,7 +14,7 @@ class StrategyResumeItem extends StatelessWidget {
           children: [
             Text(
               title,
-              style: Theme.of(context).textTheme.bodyText2!.copyWith(
+              style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                     fontSize: 10,
                     decoration: TextDecoration.underline,
                   ),
@@ -23,17 +22,18 @@ class StrategyResumeItem extends StatelessWidget {
             ),
             Text(
               ': ',
-              style: Theme.of(context).textTheme.bodyText2!.copyWith(
+              style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                     fontSize: 10,
                   ),
               textAlign: TextAlign.left,
             ),
             const Spacer(),
             Text(value,
-                style: Theme.of(context).textTheme.bodyText2!.copyWith(
+                style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                       fontSize: 10,
                     ),
                 textAlign: TextAlign.right),
           ],
-        ));
+        ),
+      );
 }
