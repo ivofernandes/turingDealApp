@@ -6,13 +6,20 @@ import 'package:ticker_details/src/ui/analysis/variation/variation_proportion_ch
 class VariationProportion extends StatelessWidget {
   final int delta;
 
-  const VariationProportion({required this.delta});
+  const VariationProportion({
+    required this.delta,
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
+    debugPrint('VariationProportion.build(');
     final TickerStateProvider tickerState = Provider.of<TickerStateProvider>(context, listen: false);
 
     final List<YahooFinanceCandleData> data = tickerState.getCandlesData();
+
+    bool needToCalculate = data.first.indicators.containsKey('var_$delta');
+
     final List<double> vars = Variations.extractList(data, delta);
     if (vars.isEmpty) {
       return const Center(child: CircularProgressIndicator());

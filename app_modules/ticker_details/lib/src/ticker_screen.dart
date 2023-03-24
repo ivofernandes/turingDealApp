@@ -28,7 +28,12 @@ class TickerScreen extends StatelessWidget {
               builder: (context, tickerState, child) {
                 tickerState.startAnalysis(snapshot.data as List<YahooFinanceCandleData>);
 
-                return SafeArea(child: TickerTabs(ticker, snapshot.data as List<YahooFinanceCandleData>));
+                return SafeArea(
+                  child: TickerTabs(
+                    ticker,
+                    snapshot.data as List<YahooFinanceCandleData>,
+                  ),
+                );
               },
             ),
           );

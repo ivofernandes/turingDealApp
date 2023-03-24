@@ -156,10 +156,10 @@ packages:
     dependency: transitive
     description:
       name: dio
-      sha256: "7d328c4d898a61efc3cd93655a0955858e29a0aa647f0f9e02d59b3bb275e2e8"
+      sha256: "3e5c4a94d112540d0c9a6b7f3969832e1604eb8cde0f88d0808382f9f632100b"
       url: "https://pub.dev"
     source: hosted
-    version: "4.0.6"
+    version: "5.0.3"
   fake_async:
     dependency: transitive
     description:
@@ -235,10 +235,10 @@ packages:
     dependency: transitive
     description:
       name: idb_shim
-      sha256: "7e2ad3d36a4eb549813d1ef10694c0f1fd5b4713a2021f19569c752e74b54cef"
+      sha256: "3ac9d6a90c29e2192d35c8386d7b20cb3865756f5b299d74a829d5b888776d26"
       url: "https://pub.dev"
     source: hosted
-    version: "2.3.0+1"
+    version: "2.3.0+2"
   image:
     dependency: transitive
     description:
@@ -259,10 +259,10 @@ packages:
     dependency: transitive
     description:
       name: interactive_i18n
-      sha256: cff7c0bf2868b31b0dfcc67b2c821678cbf61c320b18c7392fe1f8c2a3c9c3bc
+      sha256: fde8f2132e26494e8c345cb60ebac9b2054971c66253d5b979f2f512c75e1bbd
       url: "https://pub.dev"
     source: hosted
-    version: "0.0.3"
+    version: "0.0.4"
   intl:
     dependency: transitive
     description:
@@ -347,10 +347,10 @@ packages:
     dependency: transitive
     description:
       name: path_provider
-      sha256: "04890b994ee89bfa80bf3080bfec40d5a92c5c7a785ebb02c13084a099d2b6f9"
+      sha256: c7edf82217d4b2952b2129a61d3ad60f1075b9299e629e149a8d2e39c2e6aad4
       url: "https://pub.dev"
     source: hosted
-    version: "2.0.13"
+    version: "2.0.14"
   path_provider_android:
     dependency: transitive
     description:
@@ -451,26 +451,26 @@ packages:
     dependency: transitive
     description:
       name: sembast
-      sha256: "4997717aa84f0622691815d7e2739988b7f7d3a463302fc878f7d5acfa748e96"
+      sha256: "24829715d11c2c437e67b413f29ff91b5325daa9632f851d44deeea7a29bde9e"
       url: "https://pub.dev"
     source: hosted
-    version: "3.4.0+6"
+    version: "3.4.3+1"
   sembast_web:
     dependency: transitive
     description:
       name: sembast_web
-      sha256: ceed2e7df09ed553878e482e56f1cc7d4b86905df0b6735bd577d2ff4620c2c3
+      sha256: "2c651c54e7df9cfcd6a03e1b4aabbeeec5ab713c97e5c2485ae84c0554005eec"
       url: "https://pub.dev"
     source: hosted
-    version: "2.1.0+4"
+    version: "2.1.2"
   shared_preferences:
     dependency: transitive
     description:
       name: shared_preferences
-      sha256: ee6257848f822b8481691f20c3e6d2bfee2e9eccb2a3d249907fcfb198c55b41
+      sha256: "78528fd87d0d08ffd3e69551173c026e8eacc7b7079c82eb6a77413957b7e394"
       url: "https://pub.dev"
     source: hosted
-    version: "2.0.18"
+    version: "2.0.20"
   shared_preferences_android:
     dependency: transitive
     description:
@@ -552,17 +552,17 @@ packages:
     dependency: transitive
     description:
       name: stock_market_data
-      sha256: "7c64eba0d361f44b0623153399d2e56f3ab4f8810594643640c612bc6c231426"
+      sha256: "90d51c667c46fa0569b1d6d9d9d3743388403e7eea96d8dc0d6d8224d3fcabf8"
       url: "https://pub.dev"
     source: hosted
-    version: "0.0.3"
+    version: "0.0.4"
   stocks_portfolio:
     dependency: "direct main"
     description:
       path: "packages/stocks_portfolio"
       relative: true
     source: path
-    version: "1.0.0+1"
+    version: "0.0.1"
   stream_channel:
     dependency: transitive
     description:
@@ -756,10 +756,10 @@ packages:
     dependency: transitive
     description:
       name: yahoo_finance_data_reader
-      sha256: f74ff950b19e5e450ce12b35bd97843752c2130b4e8c9bf2c1f3f50e0a868589
+      sha256: "4758be787c5875a84196d78669a1aa459cc537e604ba050a38cca2df2819eb08"
       url: "https://pub.dev"
     source: hosted
-    version: "1.0.5"
+    version: "1.0.6"
   yaml:
     dependency: transitive
     description:

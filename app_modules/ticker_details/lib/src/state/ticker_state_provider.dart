@@ -1,10 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:stock_market_data/stock_market_data.dart';
 
+/// This class is responsible for holding the state of the ticker details page
 class TickerStateProvider with ChangeNotifier {
-  bool analysisComplete = false;
+  /// Is the analysis complete?
+  bool get analysisComplete => data.isNotEmpty && data.first.indicators.containsKey('var_1');
+
+  /// Are the yearly stats complete?
   bool yearlyStatsComplete = false;
+
+  /// The yearly stats
   List<YearlyStats> _yearlyStats = [];
+
+  /// The candles data
   List<YahooFinanceCandleData> data = [];
 
   TickerStateProvider() {
@@ -39,8 +47,6 @@ class TickerStateProvider with ChangeNotifier {
     }
 
     if (!analysisComplete) {
-      analysisComplete = true;
-
       Future.delayed(Duration.zero, () {
         Variations.calculateVariations(data, 1);
         Variations.calculateVariations(data, 5);
