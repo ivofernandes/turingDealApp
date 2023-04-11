@@ -2,10 +2,10 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:interactive_i18n/interactive_i18n.dart';
 import 'package:provider/provider.dart';
+import 'package:td_ui/src/ui/apps_banner.dart';
+import 'package:td_ui/td_ui.dart';
 import 'package:turing_deal/home/state/app_state_provider.dart';
-import 'package:turing_deal/settings/ui/apps_banner.dart';
 import 'package:turing_deal/shared/environment.dart';
-import 'package:turing_deal/shared/ui/Web.dart';
 
 class SettingsScreen extends StatelessWidget {
   static const String route = 'settings';
@@ -64,7 +64,12 @@ class SettingsScreen extends StatelessWidget {
                       elevation: 10,
                       child: Text('Contribute on github'.t),
                       onPressed: () => Web.launchLink(context, Environment.githubUrl)),
-                  kIsWeb ? const AppsBanner() : const SizedBox()
+                  kIsWeb
+                      ? const AppsBanner(
+                          playStoreUrl: Environment.playStoreUrl,
+                          appStoreUrl: Environment.appStoreUrl,
+                        )
+                      : const SizedBox()
                 ],
               ),
             ),

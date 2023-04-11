@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:turing_deal/shared/ui/Web.dart';
+import 'package:td_ui/td_ui.dart';
 
 class ExplainMAR extends StatelessWidget {
   @override

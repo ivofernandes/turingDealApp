@@ -4,13 +4,13 @@ import 'package:interactive_i18n/interactive_i18n.dart';
 import 'package:provider/provider.dart';
 import 'package:stock_market_data/stock_market_data.dart';
 import 'package:stocks_portfolio/stocks_portfolio.dart';
+import 'package:td_ui/src/my_app_context.dart';
 import 'package:ticker_search/ticker_search.dart';
 import 'package:turing_deal/big_picture/big_picture_screen.dart';
 import 'package:turing_deal/big_picture/state/big_picture_state_provider.dart';
 import 'package:turing_deal/home/state/app_state_provider.dart';
 import 'package:turing_deal/settings/settings_screen.dart';
 import 'package:turing_deal/shared/environment.dart';
-import 'package:turing_deal/shared/my_app_context.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({

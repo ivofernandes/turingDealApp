@@ -1,8 +1,8 @@
 import 'package:flutter/foundation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:stock_market_data/stock_market_data.dart';
+import 'package:td_ui/td_ui.dart';
 import 'package:turing_deal/home/state/mixins/connectivity_state.dart';
-import 'package:turing_deal/shared/ui/UIUtils.dart';
 
 class BigPictureStateProvider with ChangeNotifier, ConnectivityState {
   bool _compactView = false;

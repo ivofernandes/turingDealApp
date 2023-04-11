@@ -1,9 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:turing_deal/shared/environment.dart';
-import 'package:turing_deal/shared/ui/Web.dart';
+import 'package:td_ui/td_ui.dart';
 
 class AppsBanner extends StatelessWidget {
-  const AppsBanner({super.key});
+  final String playStoreUrl;
+  final String appStoreUrl;
+
+  const AppsBanner({
+    required this.playStoreUrl,
+    required this.appStoreUrl,
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +27,7 @@ class AppsBanner extends StatelessWidget {
             children: [
               Expanded(
                 child: InkWell(
-                  onTap: () => Web.launchLink(context, Environment.playStoreUrl),
+                  onTap: () => Web.launchLink(context, playStoreUrl),
                   child: Image.asset(
                     'assets/images/stores/play_store.png',
                     height: 75,
@@ -30,7 +36,7 @@ class AppsBanner extends StatelessWidget {
               ),
               Expanded(
                 child: InkWell(
-                  onTap: () => Web.launchLink(context, Environment.appStoreUrl),
+                  onTap: () => Web.launchLink(context, appStoreUrl),
                   child: Image.asset('assets/images/stores/app_store.png', width: (width - 40) / 2, height: 50),
                 ),
               )

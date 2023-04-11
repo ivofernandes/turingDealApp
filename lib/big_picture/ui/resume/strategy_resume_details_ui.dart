@@ -8,7 +8,6 @@ import 'package:turing_deal/big_picture/ui/explain/explain_drawdown_ui.dart';
 import 'package:turing_deal/big_picture/ui/explain/explain_mar_ui.dart';
 import 'package:turing_deal/big_picture/ui/resume/strategy_resume_item.dart';
 import 'package:turing_deal/big_picture/ui/resume/strategy_resume_ui.dart';
-import 'package:turing_deal/shared/ui/UIUtils.dart';
 
 class StrategyResumeDetails extends StatelessWidget {
   final BuyAndHoldStrategyResult strategy;

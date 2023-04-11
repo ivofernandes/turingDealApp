@@ -9,7 +9,9 @@ class CheckError {
         SnackBar(
           content: Text(
             error,
-            style: Theme.of(context).textTheme.titleLarge!.copyWith(color: Theme.of(context).errorColor),
+            style: Theme.of(context).textTheme.titleLarge!.copyWith(
+                  color: Theme.of(context).colorScheme.error,
+                ),
           ),
         ),
       );

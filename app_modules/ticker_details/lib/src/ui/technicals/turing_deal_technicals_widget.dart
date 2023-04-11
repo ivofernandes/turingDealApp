@@ -1,6 +1,7 @@
 import 'package:app_dependencies/app_dependencies.dart';
 import 'package:flutter/material.dart';
 import 'package:ticker_details/src/ui/technicals/add_indicator_widget.dart';
+import 'package:ticker_details/src/ui/technicals/present_indicator_widget.dart';
 
 class TuringDealTechnicalsWidget extends StatefulWidget {
   final List<YahooFinanceCandleData> prices;
@@ -15,9 +16,21 @@ class TuringDealTechnicalsWidget extends StatefulWidget {
 }
 
 class _TuringDealTechnicalsWidgetState extends State<TuringDealTechnicalsWidget> {
-  static List<String> indicatorsList = ['SMA', 'EMA', 'RSI', 'BB', 'BOP', 'MFI', 'P', 'STDDEV', 'VWMA', '%R'];
+  static List<String> indicatorsList = ['SMA', 'EMA', 'RSI', 'BB', 'MFI', 'STDDEV', 'VWMA', '%R'];
 
-  List<String> indicators = ['RSI_200', 'RSI_50', 'RSI_20'];
+  List<String> indicators = [
+    'EMA_3',
+    'EMA_30',
+    'SMA_2000',
+    'RSI_200',
+    'RSI_50',
+    'RSI_20',
+    'BB_20',
+    'MFI_20',
+    'STDDEV_20',
+    'VWMA_20',
+    '%R_20'
+  ];
 
   void _addIndicator(String indicator, int period) {
     setState(() {
@@ -34,7 +47,9 @@ class _TuringDealTechnicalsWidgetState extends State<TuringDealTechnicalsWidget>
   @override
   Widget build(BuildContext context) {
     CalculateIndicators.calculateIndicators(widget.prices, indicators);
-    Map<String, double> prices = widget.prices.last.indicators;
+    final YahooFinanceCandleData candleData = widget.prices.last;
+    final Map<String, double> prices = candleData.indicators;
+    final List<String> indicatorsCalculated = prices.keys.toList();
 
     return GestureDetector(
       onTap: () => FocusScope.of(context).unfocus(),
@@ -43,35 +58,47 @@ class _TuringDealTechnicalsWidgetState extends State<TuringDealTechnicalsWidget>
           // Widget to show the values of the indicators
           Expanded(
             child: SingleChildScrollView(
-              child: Column(
-                children: indicators.map((indicator) {
+              child: Column(children: [
+                ListTile(
+                  title: Text('Current Price'.t),
+                  trailing: Text(candleData.adjClose!.toStringAsFixed(2)),
+                ),
+                ...indicatorsCalculated.map((indicator) {
                   if (!prices.containsKey(indicator)) {
                     return Container();
                   }
 
                   return Dismissible(
+                    background: Container(
+                      color: Colors.red,
+                      child: const Icon(Icons.delete),
+                    ),
                     key: Key(indicator),
                     onDismissed: (direction) {
                       _removeIndicator(indicator);
                     },
-                    child: ListTile(
-                      title: Text(indicator),
-                      trailing: Text(prices[indicator]!.toStringAsFixed(2)),
+                    child: PresentIndicatorWidget(
+                      indicator: indicator,
+                      value: getValueForIndicator(indicator, prices),
+                      currentPrice: candleData.adjClose!,
                     ),
                   );
                 }).toList(),
-              ),
+              ]),
             ),
           ),
           // AddIndicatorWidget
           AddIndicatorWidget(
             indicatorsList: indicatorsList,
-            onAddIndicator: (indicator, period) {
-              _addIndicator(indicator, period);
-            },
+            onAddIndicator: _addIndicator,
           ),
         ],
       ),
     );
+  }
+
+  double getValueForIndicator(String indicator, Map<String, double> prices) {
+    print('indicator: $indicator');
+    return prices[indicator]!;
   }
 }

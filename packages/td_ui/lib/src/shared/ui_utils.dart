@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:td_ui/td_ui.dart';
 import 'package:top_snackbar_flutter/top_snack_bar.dart';
-import 'package:turing_deal/shared/my_app_context.dart';
 
 class UIUtils {
   static void bottomSheet(
@@ -10,7 +9,7 @@ class UIUtils {
   }) {
     final BuildContext context = contextParam ?? MyAppContext.globalNavigatorKey.currentContext!;
 
-    showModalBottomSheet(
+    showModalBottomSheet<Widget>(
       backgroundColor: Theme.of(context).canvasColor,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(20),
