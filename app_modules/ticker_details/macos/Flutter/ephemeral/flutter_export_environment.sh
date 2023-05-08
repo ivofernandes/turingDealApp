@@ -1,7 +1,7 @@
 #!/bin/sh
 # This is a generated file; do not edit or check into version control.
 export "FLUTTER_ROOT=/Users/ifernandes/development/flutter"
-export "FLUTTER_APPLICATION_PATH=/Users/ifernandes/Documents/GitHub/turingDealApp/app_module/ticker_details"
+export "FLUTTER_APPLICATION_PATH=/Users/ifernandes/Documents/GitHub/turingDealApp/app_modules/ticker_details"
 export "COCOAPODS_PARALLEL_CODE_SIGN=true"
 export "FLUTTER_BUILD_DIR=build"
 export "FLUTTER_BUILD_NAME=0.0.1"

@@ -9,10 +9,12 @@ import 'package:ticker_details/src/ui/technicals/turing_deal_technicals_widget.d
 class TickerTabs extends StatefulWidget {
   final StockTicker ticker;
   final List<YahooFinanceCandleData> data;
+  final bool hasFundamentals;
 
   const TickerTabs(
     this.ticker,
     this.data, {
+    this.hasFundamentals = true,
     super.key,
   });
 
@@ -23,26 +25,22 @@ class TickerTabs extends StatefulWidget {
 class _TickerTabsState extends State<TickerTabs> {
   int _selectedIndex = 0;
   final PageController _pageController = PageController();
-  bool hasFundamentals = false;
 
   @override
   void initState() {
     super.initState();
 
-    if (widget.ticker.symbol == 'AAPL') {
-      hasFundamentals = true;
-    }
     setState(() {});
   }
 
   @override
   Widget build(BuildContext context) {
-    List<BottomNavigationBarItem> bottomSheetItems = [
+    final List<BottomNavigationBarItem> bottomSheetItems = [
       BottomNavigationBarItem(
         icon: const Icon(Icons.show_chart_outlined),
         label: 'Chart'.t,
       ),
-      ...hasFundamentals
+      ...widget.hasFundamentals
           ? [
               BottomNavigationBarItem(
                 icon: const Icon(Icons.foundation),
@@ -73,9 +71,11 @@ class _TickerTabsState extends State<TickerTabs> {
           controller: _pageController,
           children: [
             TuringDealChart(widget.data),
-            ...hasFundamentals
+            ...widget.hasFundamentals
                 ? [
-                    TuringDealFundamentalsWidget(),
+                    TuringDealFundamentalsWidget(
+                      widget.ticker.symbol,
+                    ),
                   ]
                 : [],
             TuringDealTechnicalsWidget(

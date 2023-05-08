@@ -1,12 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_edgar_sec/flutter_edgar_sec.dart';
 
 class TuringDealFundamentalsWidget extends StatelessWidget {
-  const TuringDealFundamentalsWidget({
+  final String symbol;
+
+  const TuringDealFundamentalsWidget(
+    this.symbol, {
     super.key,
   });
 
   @override
   Widget build(BuildContext context) {
-    return Text('TODO - Fundamentals');
+    return EdgarTableUI(
+      symbol: symbol,
+    );
   }
 }

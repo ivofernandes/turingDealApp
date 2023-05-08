@@ -16,6 +16,10 @@ dependencies:
   td_ui:
     path: ../../packages/td_ui
   charts_flutter: ^0.12.0
+  flutter_edgar_sec:
+    git:
+      url: https://github.com/ivofernandes/flutter_edgar_sec.git
+      ref: 47d8e9d05bbc96eeeed438c5f313175242cb6a3b
 
 dev_dependencies:
   flutter_test:

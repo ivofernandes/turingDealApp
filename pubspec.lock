@@ -5,10 +5,10 @@ packages:
     dependency: transitive
     description:
       name: anchor_tabs
-      sha256: "1b7272c8e32793498c6be4e4d418bba44dfd8771e545ef09fe4834b78cd55ca5"
+      sha256: a792cf94b3a984e0cbe1777b1095cd579c88d1b32e6be1ef1573266a8cc83402
       url: "https://pub.dev"
     source: hosted
-    version: "0.0.5"
+    version: "0.0.8"
   app_dependencies:
     dependency: "direct main"
     description:
@@ -100,10 +100,10 @@ packages:
     dependency: transitive
     description:
       name: connectivity_plus
-      sha256: "8875e8ed511a49f030e313656154e4bbbcef18d68dfd32eb853fac10bce48e96"
+      sha256: b74247fad72c171381dbe700ca17da24deac637ab6d43c343b42867acb95c991
       url: "https://pub.dev"
     source: hosted
-    version: "3.0.3"
+    version: "3.0.6"
   connectivity_plus_platform_interface:
     dependency: transitive
     description:
@@ -189,6 +189,15 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  flutter_edgar_sec:
+    dependency: transitive
+    description:
+      path: "."
+      ref: HEAD
+      resolved-ref: "1864bf7e64ef9f8cead0de807b49f6d23ddb1c48"
+      url: "https://github.com/ivofernandes/flutter_edgar_sec.git"
+    source: git
+    version: "0.0.1"
   flutter_launcher_icons:
     dependency: "direct dev"
     description:
@@ -215,14 +224,22 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  horizontal_data_table:
+    dependency: transitive
+    description:
+      name: horizontal_data_table
+      sha256: "32d9a29aad16caeb94d49d2310a041a8561d182719c16a21b360d5d8c5e0b2ad"
+      url: "https://pub.dev"
+    source: hosted
+    version: "4.2.0"
   http:
     dependency: transitive
     description:
       name: http
-      sha256: "6aa2946395183537c8b880962d935877325d6a09a2867c3970c05c0fed6ac482"
+      sha256: "5895291c13fa8a3bd82e76d5627f69e0d85ca6a30dcac95c4ea19a5d555879c2"
       url: "https://pub.dev"
     source: hosted
-    version: "0.13.5"
+    version: "0.13.6"
   http_parser:
     dependency: transitive
     description:
@@ -259,10 +276,10 @@ packages:
     dependency: transitive
     description:
       name: interactive_i18n
-      sha256: fde8f2132e26494e8c345cb60ebac9b2054971c66253d5b979f2f512c75e1bbd
+      sha256: "4b37ce2df07048c41555f4bdc8fd6e336fb12491f7b2abcc1692a4ec5964f45e"
       url: "https://pub.dev"
     source: hosted
-    version: "0.0.4"
+    version: "0.0.6"
   intl:
     dependency: transitive
     description:
@@ -287,6 +304,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "4.8.0"
+  logger:
+    dependency: transitive
+    description:
+      name: logger
+      sha256: db2ff852ed77090ba9f62d3611e4208a3d11dfa35991a81ae724c113fcb3e3f7
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.3.0"
   logging:
     dependency: transitive
     description:
@@ -447,78 +472,86 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "6.0.5"
+  scrollable_positioned_list:
+    dependency: transitive
+    description:
+      name: scrollable_positioned_list
+      sha256: "3806b84fa3da65e47146252061d20d12ce254560a6ad098d24b6bad19e079e5d"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.3.7"
   sembast:
     dependency: transitive
     description:
       name: sembast
-      sha256: "24829715d11c2c437e67b413f29ff91b5325daa9632f851d44deeea7a29bde9e"
+      sha256: a784dbcf313ff38a7f57249694c64a6bcf79f704dbec127958459a7737716830
       url: "https://pub.dev"
     source: hosted
-    version: "3.4.3+1"
+    version: "3.4.4"
   sembast_web:
     dependency: transitive
     description:
       name: sembast_web
-      sha256: "2c651c54e7df9cfcd6a03e1b4aabbeeec5ab713c97e5c2485ae84c0554005eec"
+      sha256: c3dfa9b083a5994ef1cf5c0a4ce2fb4f6fcc7fb2af20854093f9e90f64cfa1e4
       url: "https://pub.dev"
     source: hosted
-    version: "2.1.2"
+    version: "2.1.3"
   shared_preferences:
     dependency: transitive
     description:
       name: shared_preferences
-      sha256: "78528fd87d0d08ffd3e69551173c026e8eacc7b7079c82eb6a77413957b7e394"
+      sha256: "858aaa72d8f61637d64e776aca82e1c67e6d9ee07979123c5d17115031c1b13b"
       url: "https://pub.dev"
     source: hosted
-    version: "2.0.20"
+    version: "2.1.0"
   shared_preferences_android:
     dependency: transitive
     description:
       name: shared_preferences_android
-      sha256: a51a4f9375097f94df1c6e0a49c0374440d31ab026b59d58a7e7660675879db4
+      sha256: "6478c6bbbecfe9aced34c483171e90d7c078f5883558b30ec3163cf18402c749"
       url: "https://pub.dev"
     source: hosted
-    version: "2.0.16"
+    version: "2.1.4"
   shared_preferences_foundation:
     dependency: transitive
     description:
       name: shared_preferences_foundation
-      sha256: "6b84fdf06b32bb336f972d373cd38b63734f3461ba56ac2ba01b56d052796259"
+      sha256: "0c1c16c56c9708aa9c361541a6f0e5cc6fc12a3232d866a687a7b7db30032b07"
       url: "https://pub.dev"
     source: hosted
-    version: "2.1.4"
+    version: "2.2.1"
   shared_preferences_linux:
     dependency: transitive
     description:
       name: shared_preferences_linux
-      sha256: d7fb71e6e20cd3dfffcc823a28da3539b392e53ed5fc5c2b90b55fdaa8a7e8fa
+      sha256: "9d387433ca65717bbf1be88f4d5bb18f10508917a8fa2fb02e0fd0d7479a9afa"
       url: "https://pub.dev"
     source: hosted
-    version: "2.1.4"
+    version: "2.2.0"
   shared_preferences_platform_interface:
     dependency: transitive
     description:
       name: shared_preferences_platform_interface
-      sha256: "824bfd02713e37603b2bdade0842e47d56e7db32b1dcdd1cae533fb88e2913fc"
+      sha256: fb5cf25c0235df2d0640ac1b1174f6466bd311f621574997ac59018a6664548d
       url: "https://pub.dev"
     source: hosted
-    version: "2.1.1"
+    version: "2.2.0"
   shared_preferences_web:
     dependency: transitive
     description:
       name: shared_preferences_web
-      sha256: "6737b757e49ba93de2a233df229d0b6a87728cea1684da828cbc718b65dcf9d7"
+      sha256: "74083203a8eae241e0de4a0d597dbedab3b8fef5563f33cf3c12d7e93c655ca5"
       url: "https://pub.dev"
     source: hosted
-    version: "2.0.5"
+    version: "2.1.0"
   shared_preferences_windows:
     dependency: transitive
     description:
       name: shared_preferences_windows
-      sha256: bd014168e8484837c39ef21065b78f305810ceabc1d4f90be6e3b392ce81b46d
+      sha256: "5e588e2efef56916a3b229c3bfe81e6a525665a454519ca51dbcc4236a274173"
       url: "https://pub.dev"
     source: hosted
-    version: "2.1.4"
+    version: "2.2.0"
   sky_engine:
     dependency: transitive
     description: flutter
@@ -552,10 +585,10 @@ packages:
     dependency: transitive
     description:
       name: stock_market_data
-      sha256: "90d51c667c46fa0569b1d6d9d9d3743388403e7eea96d8dc0d6d8224d3fcabf8"
+      sha256: ff98eb8d737d36b57ae9ef75eb6c5553f4b82d6d17736bf078f7d921e08417a5
       url: "https://pub.dev"
     source: hosted
-    version: "0.0.4"
+    version: "0.0.6"
   stocks_portfolio:
     dependency: "direct main"
     description:
@@ -724,10 +757,10 @@ packages:
     dependency: transitive
     description:
       name: visibility_detector
-      sha256: "15c54a459ec2c17b4705450483f3d5a2858e733aee893dcee9d75fd04814940d"
+      sha256: dd5cc11e13494f432d15939c3aa8ae76844c42b723398643ce9addb88a5ed420
       url: "https://pub.dev"
     source: hosted
-    version: "0.3.3"
+    version: "0.4.0+2"
   win32:
     dependency: transitive
     description:
