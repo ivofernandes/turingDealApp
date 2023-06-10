@@ -39,20 +39,21 @@ class TickersBlock extends StatelessWidget {
             children: [
               suggestionTitle(icon, title, filteredKeys, tickers, context),
               ListView.builder(
-                  physics: const NeverScrollableScrollPhysics(),
-                  shrinkWrap: true,
-                  itemCount: size,
-                  itemBuilder: (BuildContext context, int index) {
-                    final String symbol = filteredKeys[index];
-                    return TickerWidget(
-                      symbol: symbol,
-                      description: tickers[symbol]!,
-                      onSelection: (StockTicker ticker) {
-                        close(context, <StockTicker>[ticker]);
-                      },
-                    );
-                    // return tickerWidget(context, symbol, tickers[symbol]!);
-                  }),
+                physics: const NeverScrollableScrollPhysics(),
+                shrinkWrap: true,
+                itemCount: size,
+                itemBuilder: (BuildContext context, int index) {
+                  final String symbol = filteredKeys[index];
+                  return TickerWidget(
+                    symbol: symbol,
+                    description: tickers[symbol]!,
+                    onSelection: (StockTicker ticker) {
+                      close(context, <StockTicker>[ticker]);
+                    },
+                  );
+                  // return tickerWidget(context, symbol, tickers[symbol]!);
+                },
+              ),
             ],
           )
         : const SizedBox();
@@ -63,23 +64,24 @@ class TickersBlock extends StatelessWidget {
   Widget suggestionTitle(
           Icon icon, String s, List<String> filteredKeys, Map<String, String> tickers, BuildContext context) =>
       ListTile(
-          leading: icon,
-          title: Text(s),
-          trailing: MaterialButton(
-            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-            color: Theme.of(context).colorScheme.primary,
-            child: const Text('Add all'),
-            onPressed: () {
-              final List<StockTicker> result = [];
-              filteredKeys.forEach((element) {
-                final String symbol = element.toString();
-                result.add(StockTicker(
-                  symbol: symbol,
-                  description: tickers[symbol],
-                ));
-              });
-              // Finish the search passing a result
-              close(context, result);
-            },
-          ));
+        leading: icon,
+        title: Text(s),
+        trailing: MaterialButton(
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+          color: Theme.of(context).colorScheme.primary,
+          child: const Text('Add all'),
+          onPressed: () {
+            final List<StockTicker> result = [];
+            filteredKeys.forEach((element) {
+              final String symbol = element.toString();
+              result.add(StockTicker(
+                symbol: symbol,
+                description: tickers[symbol],
+              ));
+            });
+            // Finish the search passing a result
+            close(context, result);
+          },
+        ),
+      );
 }
