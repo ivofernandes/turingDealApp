@@ -51,6 +51,17 @@ class SettingsScreen extends StatelessWidget {
                       },
                     ),
                   ),
+                  MaterialButton(
+                    color: Theme.of(context).colorScheme.primary,
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                    elevation: 10,
+                    child: Text('Market time'.t),
+                    onPressed: () => Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => MarketTimeScreen(),
+                      ),
+                    ),
+                  ),
                   Padding(
                     padding: const EdgeInsets.all(8),
                     child: Text('The objective of this project is to help people to make investment decisions'.t),
@@ -59,11 +70,12 @@ class SettingsScreen extends StatelessWidget {
                     height: 10,
                   ),
                   MaterialButton(
-                      color: Theme.of(context).colorScheme.primary,
-                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-                      elevation: 10,
-                      child: Text('Contribute on github'.t),
-                      onPressed: () => Web.launchLink(context, Environment.githubUrl)),
+                    color: Theme.of(context).colorScheme.primary,
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                    elevation: 10,
+                    child: Text('Contribute on github'.t),
+                    onPressed: () => Web.launchLink(context, Environment.githubUrl),
+                  ),
                   kIsWeb
                       ? const AppsBanner(
                           playStoreUrl: Environment.playStoreUrl,

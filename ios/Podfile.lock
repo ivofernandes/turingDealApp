@@ -16,8 +16,8 @@ PODS:
 DEPENDENCIES:
   - connectivity_plus (from `.symlinks/plugins/connectivity_plus/ios`)
   - Flutter (from `Flutter`)
-  - path_provider_foundation (from `.symlinks/plugins/path_provider_foundation/ios`)
-  - shared_preferences_foundation (from `.symlinks/plugins/shared_preferences_foundation/ios`)
+  - path_provider_foundation (from `.symlinks/plugins/path_provider_foundation/darwin`)
+  - shared_preferences_foundation (from `.symlinks/plugins/shared_preferences_foundation/darwin`)
   - url_launcher_ios (from `.symlinks/plugins/url_launcher_ios/ios`)
 
 SPEC REPOS:
@@ -30,9 +30,9 @@ EXTERNAL SOURCES:
   Flutter:
     :path: Flutter
   path_provider_foundation:
-    :path: ".symlinks/plugins/path_provider_foundation/ios"
+    :path: ".symlinks/plugins/path_provider_foundation/darwin"
   shared_preferences_foundation:
-    :path: ".symlinks/plugins/shared_preferences_foundation/ios"
+    :path: ".symlinks/plugins/shared_preferences_foundation/darwin"
   url_launcher_ios:
     :path: ".symlinks/plugins/url_launcher_ios/ios"
 
@@ -46,4 +46,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: f0330e8b1c2d25ae2402aae1e18df154610face7
 
-COCOAPODS: 1.11.3
+COCOAPODS: 1.12.1
