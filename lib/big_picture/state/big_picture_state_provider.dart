@@ -71,7 +71,10 @@ class BigPictureStateProvider with ChangeNotifier, ConnectivityState {
     _bigPictureData[ticker] = BuyAndHoldStrategyResult();
 
     //  Get data from yahoo finance
-    final List<YahooFinanceCandleData> prices = await YahooFinanceService().getTickerData(ticker.symbol);
+    final List<YahooFinanceCandleData> prices = await YahooFinanceService().getTickerData(
+      ticker.symbol,
+      adjust: true,
+    );
 
     // Execute the backtest
     final BuyAndHoldStrategyResult strategy = BuyAndHoldStrategy.buyAndHoldAnalysis(prices);

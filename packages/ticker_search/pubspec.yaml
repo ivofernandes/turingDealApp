@@ -14,9 +14,9 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  flutter_lints: ^2.0.0
-  interactive_i18n: ^0.0.3
-  stock_market_data: ^0.0.3
+  flutter_lints: ^3.0.0
+  interactive_i18n: ^1.0.5
+  stock_market_data: ^0.0.9
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

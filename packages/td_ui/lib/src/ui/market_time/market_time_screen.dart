@@ -84,7 +84,7 @@ class _MarketTimeWidgetState extends State<MarketTimeWidget> {
           Table(
             border: TableBorder.all(),
             children: [
-              TableRow(
+              const TableRow(
                 children: [
                   Center(child: Text('')),
                   Center(child: Text('NY Time')),
@@ -93,21 +93,21 @@ class _MarketTimeWidgetState extends State<MarketTimeWidget> {
               ),
               TableRow(
                 children: [
-                  Center(child: Text('Open')),
-                  Center(child: Text('09:30 AM')),
+                  const Center(child: Text('Open')),
+                  const Center(child: Text('09:30 AM')),
                   Center(child: Text(localTimeFormat.format(localOpenTime))),
                 ],
               ),
               TableRow(
                 children: [
-                  Center(child: Text('Close')),
-                  Center(child: Text('04:00 PM')),
+                  const Center(child: Text('Close')),
+                  const Center(child: Text('04:00 PM')),
                   Center(child: Text(localTimeFormat.format(localCloseTime))),
                 ],
               ),
               TableRow(
                 children: [
-                  Center(child: Text('Now')),
+                  const Center(child: Text('Now')),
                   Center(child: Text(currentTime)),
                   Center(child: Text(DateFormat('hh:mm:ss a').format(DateTime.now()))),
                 ],

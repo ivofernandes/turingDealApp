@@ -1,5 +1,6 @@
 import 'package:app_dependencies/app_dependencies.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_edgar_sec/flutter_edgar_sec.dart';
 import 'package:ticker_details/src/ui/analysis/turing_deal_analysis.dart';
 import 'package:ticker_details/src/ui/chart/turing_deal_chart.dart';
 import 'package:ticker_details/src/ui/details/list_prices_text_ui.dart';
@@ -62,8 +63,14 @@ class _TickerTabsState extends State<TickerTabs> {
       ),
     ];
 
+    final String titleDescription = TickerResolve.getTickerDescription(widget.ticker);
     return Scaffold(
-      appBar: AppBar(title: Text(TickerResolve.getTickerDescription(widget.ticker))),
+      appBar: AppBar(
+        title: Text(
+          titleDescription,
+        ),
+        actions: actions(),
+      ),
       body: Container(
         padding: const EdgeInsets.all(20),
         child: PageView(
@@ -106,5 +113,36 @@ class _TickerTabsState extends State<TickerTabs> {
       },
     );
     print(index.toString());
+  }
+
+  List<Widget> actions() {
+    switch (_selectedIndex) {
+      case 1:
+        return [
+          IconButton(
+            onPressed: () {
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) => Scaffold(
+                    appBar: AppBar(
+                      title: Text(
+                        TickerResolve.getTickerDescription(widget.ticker) + ' Fundamentals',
+                      ),
+                    ),
+                    body: SingleChildScrollView(
+                      child: CompanyChartUI(
+                        symbol: widget.ticker.symbol,
+                      ),
+                    ),
+                  ),
+                ),
+              );
+            },
+            icon: Icon(Icons.show_chart_outlined),
+          ),
+        ];
+      default:
+        return [];
+    }
   }
 }
