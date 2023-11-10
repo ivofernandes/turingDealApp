@@ -17,6 +17,17 @@ class HomeScreen extends StatefulWidget {
     super.key,
   });
 
+  static List<TickerSuggestion> suggestions = [
+    TickerSuggestion(const Icon(Icons.view_headline), 'Main'.t, TickersList.main),
+    TickerSuggestion(const Icon(Icons.business_sharp), 'Companies'.t, TickersList.companies),
+    TickerSuggestion(const Icon(Icons.precision_manufacturing_outlined), 'Sectors'.t, TickersList.sectors),
+    TickerSuggestion(const Icon(Icons.workspaces_outline), 'Futures'.t, TickersList.futures),
+    TickerSuggestion(const Icon(Icons.computer), 'Cryptos'.t, TickersList.cryptoCurrencies),
+    TickerSuggestion(const Icon(Icons.language), 'Countries'.t, TickersList.countries),
+    TickerSuggestion(const Icon(Icons.account_balance_outlined), 'Bonds', TickersList.bonds),
+    TickerSuggestion(const Icon(Icons.architecture_sharp), 'Sizes'.t, TickersList.sizes),
+  ];
+
   @override
   State<HomeScreen> createState() => _HomeScreenState();
 }
@@ -62,7 +73,10 @@ class _HomeScreenState extends State<HomeScreen> {
               onPressed: () async {
                 final List<StockTicker>? tickers = await showSearch(
                   context: context,
-                  delegate: TickerSearch(searchFieldLabel: 'Search'.t),
+                  delegate: TickerSearch(
+                    searchFieldLabel: 'Search'.t,
+                    suggestions: HomeScreen.suggestions,
+                  ),
                 );
 
                 appState.search(tickers);

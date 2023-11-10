@@ -6,13 +6,18 @@ import 'package:stock_market_data/stock_market_data.dart';
 import 'package:td_ui/td_ui.dart';
 import 'package:ticker_search/ticker_search.dart';
 import 'package:turing_deal/big_picture/state/big_picture_state_provider.dart';
+import 'package:turing_deal/home/home_screen.dart';
 
 class StrategyResumeHeader extends StatelessWidget {
   final StockTicker ticker;
   final BuyAndHoldStrategyResult? strategy;
   final double cardWidth;
 
-  const StrategyResumeHeader(this.ticker, this.strategy, this.cardWidth);
+  const StrategyResumeHeader(
+    this.ticker,
+    this.strategy,
+    this.cardWidth,
+  );
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +27,7 @@ class StrategyResumeHeader extends StatelessWidget {
 
     final String ticketDescription = TickerResolve.getTickerDescription(ticker);
 
-    final TickerSearch tickerSearch = TickerSearch(searchFieldLabel: 'Add'.t);
+    final TickerSearch tickerSearch = TickerSearch(searchFieldLabel: 'Add'.t, suggestions: HomeScreen.suggestions);
 
     return Stack(
       alignment: Alignment.topCenter,
