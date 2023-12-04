@@ -7,7 +7,7 @@ class Web {
     final Uri uri = Uri.parse(url);
 
     if (await canLaunchUrl(uri)) {
-      await launchUrl(uri);
+      await launchUrl(uri, mode: LaunchMode.externalApplication);
     } else {
       UIUtils.snackBarError('Error on trying to open url');
     }

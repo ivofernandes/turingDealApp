@@ -7,7 +7,7 @@ class ChartLegend extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Container(
-        height: 65,
+        height: 75,
         width: 100,
         padding: const EdgeInsets.symmetric(horizontal: 7, vertical: 3),
         color: Colors.black.withOpacity(0.5),
