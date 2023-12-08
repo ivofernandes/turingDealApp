@@ -17,16 +17,9 @@ class BigPictureResumeList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final BigPictureStateProvider bigPictureState = Provider.of<BigPictureStateProvider>(context, listen: false);
-
     final List<StockTicker> tickers = data.keys.toList();
-
     final double width = MediaQuery.of(context).size.width;
-    int columns = (width / StrategyResume.resumeWidth).floor();
-    columns = columns <= 0 ? 1 : columns;
-
-    if (bigPictureState.isCompactView()) {
-      columns *= 3;
-    }
+    final int columns = _calculateColumns(width, bigPictureState.isCompactView());
     final int lines = (tickers.length / columns).ceil();
 
     return Container(
@@ -58,5 +51,14 @@ class BigPictureResumeList extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  int _calculateColumns(double width, bool isCompactView) {
+    int columns = (width / StrategyResume.resumeWidth).floor();
+    columns = columns <= 0 ? 1 : columns;
+    if (isCompactView) {
+      columns *= 3;
+    }
+    return columns;
   }
 }

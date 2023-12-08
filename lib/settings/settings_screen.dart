@@ -14,27 +14,34 @@ class SettingsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final AppStateProvider appState = Provider.of<AppStateProvider>(context);
     return SafeArea(
-      child: Scaffold(
-        appBar: AppBar(
-          leading: IconButton(
-            onPressed: () => Navigator.of(context).pop(),
-            icon: const Icon(Icons.arrow_back_ios),
-          ),
-          title: Text('Settings'.t),
-          actions: [
+      child: MyScaffold(
+        nav: Row(
+          children: [
+            IconButton(
+              onPressed: () => Navigator.of(context).pop(),
+              icon: const Icon(Icons.arrow_back_ios),
+            ),
+            Expanded(
+              child: Text(
+                'Settings'.t,
+                textAlign: TextAlign.center,
+              ),
+            ),
             appState.isDark()
                 ? IconButton(
                     onPressed: () async {
                       await appState.setIsDark(false);
                       appState.refresh();
                     },
-                    icon: const Icon(Icons.brightness_5))
+                    icon: const Icon(Icons.brightness_5),
+                  )
                 : IconButton(
                     onPressed: () async {
                       await appState.setIsDark(true);
                       appState.refresh();
                     },
-                    icon: const Icon(Icons.dark_mode))
+                    icon: const Icon(Icons.dark_mode),
+                  )
           ],
         ),
         body: SingleChildScrollView(

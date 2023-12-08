@@ -238,6 +238,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.3.5"
+  flutter_sim_country_code:
+    dependency: transitive
+    description:
+      name: flutter_sim_country_code
+      sha256: fd6233ad01b811f5d2845c5b1c18120488417f2882a84df602daa65324e8371e
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.1.2"
   flutter_test:
     dependency: "direct dev"
     description: flutter
@@ -308,10 +316,10 @@ packages:
     dependency: transitive
     description:
       name: interactive_i18n
-      sha256: c39b22787db3bf487ea0717c73dd6c8cb68c0c9485ce10f5b9b4e216c64ca323
+      sha256: cedbcb6420f31b53774e8671247255547697584229b557eca111d1a457e11901
       url: "https://pub.dev"
     source: hosted
-    version: "1.0.5"
+    version: "1.0.6"
   intl:
     dependency: transitive
     description:
@@ -678,10 +686,10 @@ packages:
     dependency: "direct main"
     description:
       name: ticker_search
-      sha256: "04b76a5a04c3d5f8d85d81ea25e8798e923dc4a21ee319822037189196eb900e"
+      sha256: "3a39f78f75594b0083d4d998c7b5fcacf4ccc7e1b6e890f006fe436ca7995ff4"
       url: "https://pub.dev"
     source: hosted
-    version: "0.0.1"
+    version: "0.0.2"
   top_snackbar_flutter:
     dependency: transitive
     description:

@@ -14,7 +14,11 @@ class BigPictureScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final AppStateProvider appState = Provider.of<AppStateProvider>(context, listen: false);
 
-    return Consumer<BigPictureStateProvider>(builder: (context, bigPictureState, child) {
+    return Consumer<BigPictureStateProvider>(builder: (
+      context,
+      bigPictureState,
+      child,
+    ) {
       // Manage the transition of a search from the app state to a big picture screen state
       final List<StockTicker>? searchingTickers = appState.getSearching();
 
