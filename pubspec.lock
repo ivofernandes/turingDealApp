@@ -686,10 +686,10 @@ packages:
     dependency: "direct main"
     description:
       name: ticker_search
-      sha256: "3a39f78f75594b0083d4d998c7b5fcacf4ccc7e1b6e890f006fe436ca7995ff4"
+      sha256: "841927b87dd1085bea22a2a5bd963b426b9ba5910461d48d4c836abe587f2fce"
       url: "https://pub.dev"
     source: hosted
-    version: "0.0.2"
+    version: "0.0.4"
   top_snackbar_flutter:
     dependency: transitive
     description:

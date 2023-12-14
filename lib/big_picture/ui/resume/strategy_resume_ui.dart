@@ -9,15 +9,20 @@ import 'package:turing_deal/big_picture/state/big_picture_state_provider.dart';
 import 'package:turing_deal/big_picture/ui/resume/strategy_resume_details_ui.dart';
 import 'package:turing_deal/big_picture/ui/resume/strategy_resume_header_ui.dart';
 
+/// StrategyResume is a StatelessWidget that displays the resume of a stock trading strategy.
+/// It shows a card with details of the strategy's performance for a given stock ticker.
 class StrategyResume extends StatelessWidget {
+  // Constants for layout configuration
   static const double resumeWidth = 320;
   static const double resumeLeftColumn = 140 - 15;
   static const double resumeRightColumn = resumeWidth - resumeLeftColumn - 30;
 
+  // Variables to hold ticker and strategy information
   final StockTicker ticker;
   final BuyAndHoldStrategyResult strategy;
   final double width;
 
+  /// Constructor for StrategyResume
   const StrategyResume(
     this.ticker,
     this.strategy,
@@ -27,22 +32,24 @@ class StrategyResume extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Accessing the state provider
     final BigPictureStateProvider bigPictureState = Provider.of<BigPictureStateProvider>(context, listen: false);
 
+    // Calculating screen width and card width
     final double screenWidth = window.physicalSize.width / window.devicePixelRatio;
     final int columns = (screenWidth / resumeWidth).floor();
     double cardWidth = resumeWidth + (screenWidth % resumeWidth / columns);
 
+    // Adjusting card width for compact view
     if (bigPictureState.isCompactView()) {
       cardWidth /= 3;
       cardWidth -= 5;
       print('card width: $cardWidth');
     }
 
+    // Main widget structure
     return Dismissible(
       key: GlobalKey(),
-      // Provide a function that tells the app
-      // what to do after an item has been swiped away.
       onDismissed: (direction) => bigPictureState.removeTicker(ticker),
       background: const ColoredBox(
         color: Colors.red,
@@ -63,8 +70,31 @@ class StrategyResume extends StatelessWidget {
               }
             },
             child: PinchZoomReleaseUnzoomWidget(
-              child: Card(
+              child: Container(
+                margin: const EdgeInsets.only(top: 5),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(20),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Theme.of(context).colorScheme.primary,
+                      blurRadius: 2,
+                      offset: const Offset(2, 2), // Adjust the offset to control the shadow direction
+                    ),
+                  ],
+                ),
                 child: Container(
+                  decoration: BoxDecoration(
+                    color: Theme.of(context).cardColor,
+                    borderRadius: BorderRadius.circular(20),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Theme.of(context).cardColor,
+                        blurRadius: 2,
+                        offset: const Offset(2, 2), // Adjust the offset to control the shadow direction
+                      ),
+                    ],
+                  ),
+                  margin: const EdgeInsets.all(5),
                   padding: const EdgeInsets.all(10),
                   child: strategy.progress > 0
                       ? Column(
@@ -74,10 +104,12 @@ class StrategyResume extends StatelessWidget {
                             strategy.progress < 100 ? const CircularProgressIndicator() : Container()
                           ],
                         )
-                      : Column(
-                          children: const [
-                            CircularProgressIndicator(),
-                          ],
+                      : const Center(
+                          child: SizedBox(
+                            width: 25,
+                            height: 25,
+                            child: CircularProgressIndicator(),
+                          ),
                         ),
                 ),
               ),

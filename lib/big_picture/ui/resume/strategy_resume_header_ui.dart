@@ -55,7 +55,10 @@ class StrategyResumeHeader extends StatelessWidget {
                       ))
             ],
           ),
-          Divider(height: 5, color: theme.textTheme.bodyLarge!.color),
+          Divider(
+            height: 5,
+            color: theme.textTheme.bodyLarge!.color,
+          ),
           bigPictureState.isCompactView() ? Container() : const SizedBox(height: 10),
           bigPictureState.isCompactView()
               ? Container()
@@ -71,7 +74,7 @@ class StrategyResumeHeader extends StatelessWidget {
                 ),
           bigPictureState.isCompactView() ? Container() : const SizedBox(height: 10)
         ]),
-        bigPictureState.isCompactView() || ticker.symbol.contains(',')
+        bigPictureState.isCompactView()
             ? Container()
             : InkWell(
                 child: Container(
