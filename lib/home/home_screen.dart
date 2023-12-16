@@ -60,63 +60,66 @@ class _HomeScreenState extends State<HomeScreen> {
 
     MyAppContext.context = context;
 
-    return MyScaffold(
-      nav: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          IconButton(
-            onPressed: () => Navigator.of(context).pushNamed(SettingsScreen.route),
-            icon: const Icon(Icons.menu),
-          ),
-          IconButton(
-            onPressed: () {
-              onItemSelected(0);
-            },
-            icon: const Icon(
-              Icons.show_chart,
+    return GestureDetector(
+      onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
+      child: MyScaffold(
+        nav: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            IconButton(
+              onPressed: () => Navigator.of(context).pushNamed(SettingsScreen.route),
+              icon: const Icon(Icons.menu),
             ),
-          ),
-          if (Environment.hasPortfolio)
             IconButton(
               onPressed: () {
-                onItemSelected(1);
+                onItemSelected(0);
               },
               icon: const Icon(
-                Icons.work,
+                Icons.show_chart,
               ),
             ),
-          IconButton(
-            icon: const Icon(Icons.search),
-            onPressed: () async {
-              final List<StockTicker>? tickers = await showSearch(
-                context: context,
-                delegate: TickerSearch(
-                  searchFieldLabel: 'Search'.t,
-                  suggestions: HomeScreen.suggestions,
+            if (Environment.hasPortfolio)
+              IconButton(
+                onPressed: () {
+                  onItemSelected(1);
+                },
+                icon: const Icon(
+                  Icons.work,
                 ),
-              );
+              ),
+            IconButton(
+              icon: const Icon(Icons.search),
+              onPressed: () async {
+                final List<StockTicker>? tickers = await showSearch(
+                  context: context,
+                  delegate: TickerSearch(
+                    searchFieldLabel: 'Search'.t,
+                    suggestions: HomeScreen.suggestions,
+                  ),
+                );
 
-              appState.search(tickers);
-            },
-          ),
-        ],
-      ),
-      body: PageView(
-        physics: const NeverScrollableScrollPhysics(),
-        controller: _pageViewController,
-        children: [
-          Center(
-            child: BigPictureScreen(
-              key: UniqueKey(),
+                appState.search(tickers);
+              },
             ),
-          ),
-          if (Environment.hasPortfolio)
+          ],
+        ),
+        body: PageView(
+          physics: const NeverScrollableScrollPhysics(),
+          controller: _pageViewController,
+          children: [
             Center(
-              child: PortfolioScreen(
-                stocks: bigPictureState.getBigPictureData(),
+              child: BigPictureScreen(
+                key: UniqueKey(),
               ),
             ),
-        ],
+            if (Environment.hasPortfolio)
+              Center(
+                child: PortfolioScreen(
+                  stocks: bigPictureState.getBigPictureData(),
+                ),
+              ),
+          ],
+        ),
       ),
     );
   }

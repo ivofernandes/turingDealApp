@@ -1,95 +1,140 @@
+import 'package:app_dependencies/app_dependencies.dart';
 import 'package:flutter/material.dart';
-import 'package:interactive_i18n/interactive_i18n.dart';
-import 'package:intl/intl.dart';
-import 'package:provider/provider.dart';
-import 'package:stock_market_data/stock_market_data.dart';
 import 'package:td_ui/td_ui.dart';
 import 'package:ticker_search/ticker_search.dart';
 import 'package:turing_deal/big_picture/state/big_picture_state_provider.dart';
 import 'package:turing_deal/home/home_screen.dart';
 
+/// A widget to display the header information for a strategy resume.
+///
+/// This includes the stock ticker information, strategy results, and an option
+/// to add more details or change the current selection.
 class StrategyResumeHeader extends StatelessWidget {
   final StockTicker ticker;
-  final BuyAndHoldStrategyResult? strategy;
+  final BuyAndHoldStrategyResult strategy;
   final double cardWidth;
 
-  const StrategyResumeHeader(
-    this.ticker,
-    this.strategy,
-    this.cardWidth,
-  );
+  final double variation;
+
+  final Color color;
+
+  /// Constructs a [StrategyResumeHeader] widget.
+  ///
+  /// Takes in [ticker] for stock information, [strategy] for strategy results,
+  /// and [cardWidth] to determine the width of the card.
+  const StrategyResumeHeader({
+    required this.ticker,
+    required this.strategy,
+    required this.cardWidth,
+    required this.variation,
+    required this.color,
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
     final BigPictureStateProvider bigPictureState = Provider.of<BigPictureStateProvider>(context, listen: false);
-
     final ThemeData theme = Theme.of(context);
+    final String tickerDescription = TickerResolve.getTickerDescription(ticker);
 
-    final String ticketDescription = TickerResolve.getTickerDescription(ticker);
+    final double titleWidth = bigPictureState.isCompactView() ? cardWidth - 30 : cardWidth / 2 - 20;
 
-    final TickerSearch tickerSearch = TickerSearch(searchFieldLabel: 'Add'.t, suggestions: HomeScreen.suggestions);
+    final PriceVariationChip priceVariationChip = PriceVariationChip(
+      value: variation,
+      minColor: theme.colorScheme.error,
+      maxColor: theme.colorScheme.primary,
+      minValue: -2.5,
+      maxValue: 2.5,
+    );
 
     return Stack(
       alignment: Alignment.topCenter,
       children: [
-        Column(children: [
-          Row(
-            mainAxisAlignment:
-                bigPictureState.isCompactView() ? MainAxisAlignment.center : MainAxisAlignment.spaceBetween,
-            children: [
-              SizedBox(
-                width: bigPictureState.isCompactView() ? cardWidth - 30 : cardWidth / 2 - 20,
-                child: Text(
-                  ticker.symbol,
-                  style: theme.textTheme.titleLarge,
-                  textAlign: bigPictureState.isCompactView() ? TextAlign.center : TextAlign.start,
-                ),
-              ),
-              bigPictureState.isCompactView()
-                  ? Container()
-                  : SizedBox(
-                      width: cardWidth / 2 - 20,
-                      child: Align(
-                        alignment: Alignment.centerRight,
-                        child: Text(ticketDescription, style: theme.textTheme.bodyLarge),
-                      ))
-            ],
-          ),
-          Divider(
-            height: 5,
-            color: theme.textTheme.bodyLarge!.color,
-          ),
-          bigPictureState.isCompactView() ? Container() : const SizedBox(height: 10),
-          bigPictureState.isCompactView()
-              ? Container()
-              : Row(
+        Column(
+          children: [
+            if (!bigPictureState.isCompactView())
+              Container(
+                margin: EdgeInsets.symmetric(horizontal: 5),
+                child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text('${strategy!.tradingYears.ceil()}y${(strategy!.tradingYears % 1 * 12).ceil()}m'),
-                    strategy!.startDate != null && strategy!.endDate != null
-                        ? Text(
-                            '${DateFormat.yMd().format(strategy!.startDate!)} to ${DateFormat.yMd().format(strategy!.endDate!)}')
-                        : Container()
+                    _buildTickerTitle(titleWidth, theme, TextAlign.start),
+                    SizedBox(
+                      width: cardWidth / 2 - 30,
+                      child: Align(
+                        alignment: Alignment.centerRight,
+                        child: Text(tickerDescription, style: theme.textTheme.bodyLarge),
+                      ),
+                    ),
                   ],
                 ),
-          bigPictureState.isCompactView() ? Container() : const SizedBox(height: 10)
-        ]),
-        bigPictureState.isCompactView()
-            ? Container()
-            : InkWell(
-                child: Container(
-                    color: Colors.lightBlue.withOpacity(0),
-                    padding: EdgeInsets.only(left: 40, right: 40, bottom: AppTheme.isDesktopWeb() ? 0 : 30),
-                    child: const Icon(
-                      Icons.add,
-                    )),
-                onTap: () async {
-                  final List<StockTicker>? tickers = await showSearch(context: context, delegate: tickerSearch);
-                  await bigPictureState.joinTicker(ticker, tickers);
-                  await bigPictureState.persistTickers();
-                },
               ),
+            if (bigPictureState.isCompactView()) _buildTickerTitle(titleWidth, theme, TextAlign.center),
+            if (bigPictureState.isCompactView()) priceVariationChip,
+            if (!bigPictureState.isCompactView())
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text('\$${strategy.endPrice.toStringAsFixed(2)}'),
+                  priceVariationChip,
+                ],
+              ),
+            Divider(height: 5, color: theme.textTheme.bodyLarge?.color),
+            if (!bigPictureState.isCompactView())
+              Column(
+                children: [
+                  const SizedBox(height: 10),
+                  _buildDateRow(),
+                  const SizedBox(height: 10),
+                ],
+              ),
+          ],
+        ),
+        if (!bigPictureState.isCompactView()) _buildAddButton(bigPictureState, context),
       ],
     );
   }
+
+  /// Ticker symbol
+  Widget _buildTickerTitle(double width, ThemeData theme, TextAlign textAlign) => Center(
+        child: SizedBox(
+          width: width,
+          child: Text(
+            ticker.symbol,
+            style: theme.textTheme.titleLarge,
+            textAlign: textAlign,
+          ),
+        ),
+      );
+
+  /// Builds the row displaying the strategy duration.
+  ///
+  /// Visible only in the expanded view mode.
+  Widget _buildDateRow() => Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text('${strategy!.tradingYears.ceil()}y${(strategy!.tradingYears % 1 * 12).ceil()}m'),
+          if (strategy?.startDate != null && strategy?.endDate != null)
+            Text('${DateFormat.yMd().format(strategy!.startDate!)} to ${DateFormat.yMd().format(strategy!.endDate!)}'),
+        ],
+      );
+
+  /// Builds the add button for adding more details to the strategy.
+  ///
+  /// Visible only in the expanded view mode.
+  Widget _buildAddButton(BigPictureStateProvider bigPictureState, BuildContext context) => InkWell(
+        child: Container(
+          color: Colors.lightBlue.withOpacity(0),
+          padding: EdgeInsets.only(left: 40, right: 40, bottom: AppTheme.isDesktopWeb() ? 0 : 30),
+          child: const Icon(Icons.add),
+        ),
+        onTap: () async {
+          final List<StockTicker>? tickers = await showSearch(
+              context: context, delegate: TickerSearch(searchFieldLabel: 'Add'.t, suggestions: HomeScreen.suggestions));
+          if (tickers != null) {
+            await bigPictureState.joinTicker(ticker, tickers);
+            await bigPictureState.persistTickers();
+          }
+        },
+      );
 }

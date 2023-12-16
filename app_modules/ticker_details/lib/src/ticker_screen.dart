@@ -13,30 +13,33 @@ class TickerScreen extends StatelessWidget {
   });
 
   @override
-  Widget build(BuildContext context) => FutureBuilder<dynamic>(
-        future: YahooFinanceService().getTickerData(ticker.symbol),
-        builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
-          if (snapshot.data == null) {
-            return const Center(
-              child: CircularProgressIndicator(),
+  Widget build(BuildContext context) => GestureDetector(
+        onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
+        child: FutureBuilder<dynamic>(
+          future: YahooFinanceService().getTickerData(ticker.symbol),
+          builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
+            if (snapshot.data == null) {
+              return const Center(
+                child: CircularProgressIndicator(),
+              );
+            }
+
+            return ChangeNotifierProvider(
+              create: (context) => TickerStateProvider(),
+              child: Consumer<TickerStateProvider>(
+                builder: (context, tickerState, child) {
+                  tickerState.startAnalysis(snapshot.data as List<YahooFinanceCandleData>);
+
+                  return SafeArea(
+                    child: TickerTabs(
+                      ticker,
+                      snapshot.data as List<YahooFinanceCandleData>,
+                    ),
+                  );
+                },
+              ),
             );
-          }
-
-          return ChangeNotifierProvider(
-            create: (context) => TickerStateProvider(),
-            child: Consumer<TickerStateProvider>(
-              builder: (context, tickerState, child) {
-                tickerState.startAnalysis(snapshot.data as List<YahooFinanceCandleData>);
-
-                return SafeArea(
-                  child: TickerTabs(
-                    ticker,
-                    snapshot.data as List<YahooFinanceCandleData>,
-                  ),
-                );
-              },
-            ),
-          );
-        },
+          },
+        ),
       );
 }

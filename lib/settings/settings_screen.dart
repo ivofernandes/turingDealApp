@@ -33,7 +33,7 @@ class SettingsScreen extends StatelessWidget {
                       await appState.setIsDark(false);
                       appState.refresh();
                     },
-                    icon: const Icon(Icons.brightness_5),
+                    icon: const Icon(Icons.light_mode),
                   )
                 : IconButton(
                     onPressed: () async {

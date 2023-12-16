@@ -17,14 +17,14 @@ dependencies:
   sembast_web: ^2.2.0
   cupertino_icons: ^1.0.5
   intl: ^0.17.0
-  url_launcher: ^6.2.1
+  url_launcher: ^6.2.2
   connectivity_plus: ^5.0.2
   interactive_chart: ^0.3.4
   shared_preferences: ^2.2.2
   country_icons: ^2.0.2
   stats: ^2.1.0
   pinch_zoom_release_unzoom: ^1.0.1
-  stock_market_data: ^0.0.9
+  stock_market_data: ^0.0.12
   yahoo_finance_data_reader: ^1.0.8
   color_scale: ^0.0.4
   anchor_tabs: ^0.0.9

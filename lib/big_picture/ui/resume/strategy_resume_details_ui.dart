@@ -22,12 +22,35 @@ class StrategyResumeDetails extends StatelessWidget {
     final double sma20sma50 = (strategy.movingAverages[20]! / strategy.movingAverages[50]! - 1) * 100;
     final double sma50sma200 = (strategy.movingAverages[50]! / strategy.movingAverages[200]! - 1) * 100;
 
+    String prefixVar20 = '';
+    String prefixVar50 = '';
+    String prefixVar200 = '';
+
+    if (!bigPictureState.isCompactView()) {
+      prefixVar20 = 'price/sma20';
+      prefixVar50 = 'sma20/sma50';
+      prefixVar200 = 'sma50/sma200';
+    }
+
+    final priceVarChip20 = PriceVariationChip(
+      prefix: prefixVar20,
+      value: pricesma20,
+    );
+    final priceVarChip50 = PriceVariationChip(
+      prefix: prefixVar50,
+      value: sma20sma50,
+    );
+    final priceVarChip200 = PriceVariationChip(
+      prefix: prefixVar200,
+      value: sma50sma200,
+    );
+
     return bigPictureState.isCompactView()
         ? Column(
             children: [
-              PriceVariationChip(null, pricesma20),
-              PriceVariationChip(null, sma20sma50),
-              PriceVariationChip(null, sma50sma200)
+              priceVarChip20,
+              priceVarChip50,
+              priceVarChip200,
             ],
           )
         : Row(
@@ -73,9 +96,9 @@ class StrategyResumeDetails extends StatelessWidget {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
-                  PriceVariationChip('price/sma20', pricesma20),
-                  PriceVariationChip('sma20/sma50', sma20sma50),
-                  PriceVariationChip('sma50/sma200', sma50sma200)
+                  priceVarChip20,
+                  priceVarChip50,
+                  priceVarChip200,
                 ],
               )
             ],

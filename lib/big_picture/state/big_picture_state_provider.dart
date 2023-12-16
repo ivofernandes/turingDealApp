@@ -68,6 +68,11 @@ class BigPictureStateProvider with ChangeNotifier, ConnectivityState {
   }
 
   Future<void> addTicker(StockTicker ticker) async {
+    // Treat multiple strategies
+    ticker = ticker.copyWith(
+      symbol: ticker.symbol.split(' ').map((String s) => s.trim()).toList().join(', '),
+    );
+
     _bigPictureData[ticker] = BuyAndHoldStrategyResult();
 
     //  Get data from yahoo finance

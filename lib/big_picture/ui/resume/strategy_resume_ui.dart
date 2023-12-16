@@ -1,9 +1,7 @@
 import 'dart:ui';
 
+import 'package:app_dependencies/app_dependencies.dart';
 import 'package:flutter/material.dart';
-import 'package:pinch_zoom_release_unzoom/pinch_zoom_release_unzoom.dart';
-import 'package:provider/provider.dart';
-import 'package:stock_market_data/stock_market_data.dart';
 import 'package:ticker_details/ticker_details.dart';
 import 'package:turing_deal/big_picture/state/big_picture_state_provider.dart';
 import 'package:turing_deal/big_picture/ui/resume/strategy_resume_details_ui.dart';
@@ -44,8 +42,17 @@ class StrategyResume extends StatelessWidget {
     if (bigPictureState.isCompactView()) {
       cardWidth /= 3;
       cardWidth -= 5;
-      print('card width: $cardWidth');
     }
+
+    final double variation = (strategy.endPrice / strategy.yesterdayPrice - 1) * 100;
+    final ColorScaleWidget colorScaleWidget = ColorScaleWidget(
+      value: variation,
+      minColor: Theme.of(context).colorScheme.error,
+      maxColor: Theme.of(context).colorScheme.primary,
+      minValue: -2.5,
+      maxValue: 2.5,
+    );
+    final Color color = colorScaleWidget.getColorForValue(variation);
 
     // Main widget structure
     return Dismissible(
@@ -76,7 +83,7 @@ class StrategyResume extends StatelessWidget {
                   borderRadius: BorderRadius.circular(20),
                   boxShadow: [
                     BoxShadow(
-                      color: Theme.of(context).colorScheme.primary,
+                      color: color,
                       blurRadius: 2,
                       offset: const Offset(2, 2), // Adjust the offset to control the shadow direction
                     ),
@@ -99,7 +106,13 @@ class StrategyResume extends StatelessWidget {
                   child: strategy.progress > 0
                       ? Column(
                           children: [
-                            StrategyResumeHeader(ticker, strategy, cardWidth),
+                            StrategyResumeHeader(
+                              ticker: ticker,
+                              strategy: strategy,
+                              cardWidth: cardWidth,
+                              variation: variation,
+                              color: color,
+                            ),
                             StrategyResumeDetails(strategy),
                             strategy.progress < 100 ? const CircularProgressIndicator() : Container()
                           ],
