@@ -34,6 +34,7 @@ class BigPictureResumeList extends StatelessWidget {
               : Container(),
           Expanded(
             child: ListView.builder(
+                controller: bigPictureState.scrollController,
                 itemCount: lines,
                 itemBuilder: (BuildContext context, int index) {
                   final List<Widget> resumes = [];

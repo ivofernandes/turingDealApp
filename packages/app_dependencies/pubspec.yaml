@@ -24,7 +24,7 @@ dependencies:
   country_icons: ^2.0.2
   stats: ^2.1.0
   pinch_zoom_release_unzoom: ^1.0.1
-  stock_market_data: ^0.0.12
+  stock_market_data: ^0.1.1
   yahoo_finance_data_reader: ^1.0.8
   color_scale: ^0.0.4
   anchor_tabs: ^0.0.9

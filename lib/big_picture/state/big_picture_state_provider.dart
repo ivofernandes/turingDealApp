@@ -1,7 +1,8 @@
-import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:stock_market_data/stock_market_data.dart';
 import 'package:td_ui/td_ui.dart';
+import 'package:turing_deal/big_picture/state/ticker_utils.dart';
 import 'package:turing_deal/home/state/mixins/connectivity_state.dart';
 
 class BigPictureStateProvider with ChangeNotifier, ConnectivityState {
@@ -9,6 +10,8 @@ class BigPictureStateProvider with ChangeNotifier, ConnectivityState {
   final bool _isMocked = false;
   final Map<StockTicker, BuyAndHoldStrategyResult> _bigPictureData = {};
   String _error = '';
+
+  ScrollController scrollController = ScrollController();
 
   BigPictureStateProvider() {
     loadData();
@@ -70,7 +73,7 @@ class BigPictureStateProvider with ChangeNotifier, ConnectivityState {
   Future<void> addTicker(StockTicker ticker) async {
     // Treat multiple strategies
     ticker = ticker.copyWith(
-      symbol: ticker.symbol.split(' ').map((String s) => s.trim()).toList().join(', '),
+      symbol: TickerUtils.processSymbol(ticker.symbol),
     );
 
     _bigPictureData[ticker] = BuyAndHoldStrategyResult();
@@ -87,6 +90,14 @@ class BigPictureStateProvider with ChangeNotifier, ConnectivityState {
     _bigPictureData[ticker] = strategy;
 
     refresh();
+    // Scroll to the end
+    /*
+    scrollController.animateTo(
+      scrollController.position.maxScrollExtent,
+      duration: const Duration(milliseconds: 500),
+      curve: Curves.easeOut,
+    );
+    */
   }
 
   Future<void> joinTicker(StockTicker tickerParam, List<StockTicker>? tickers) async {

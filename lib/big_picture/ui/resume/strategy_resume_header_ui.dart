@@ -47,14 +47,16 @@ class StrategyResumeHeader extends StatelessWidget {
       maxValue: 2.5,
     );
 
+    final bool validTickerDescription = ticker.symbol != tickerDescription && !bigPictureState.isCompactView();
+
     return Stack(
       alignment: Alignment.topCenter,
       children: [
         Column(
           children: [
-            if (!bigPictureState.isCompactView())
+            if (validTickerDescription)
               Container(
-                margin: EdgeInsets.symmetric(horizontal: 5),
+                margin: const EdgeInsets.symmetric(horizontal: 5),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -69,7 +71,7 @@ class StrategyResumeHeader extends StatelessWidget {
                   ],
                 ),
               ),
-            if (bigPictureState.isCompactView()) _buildTickerTitle(titleWidth, theme, TextAlign.center),
+            if (!validTickerDescription) _buildTickerTitle(titleWidth, theme, TextAlign.center),
             if (bigPictureState.isCompactView()) priceVariationChip,
             if (!bigPictureState.isCompactView())
               Row(
@@ -90,7 +92,7 @@ class StrategyResumeHeader extends StatelessWidget {
               ),
           ],
         ),
-        if (!bigPictureState.isCompactView()) _buildAddButton(bigPictureState, context),
+        if (!bigPictureState.isCompactView()) _buildAddButton(bigPictureState, context, validTickerDescription),
       ],
     );
   }
@@ -122,11 +124,15 @@ class StrategyResumeHeader extends StatelessWidget {
   /// Builds the add button for adding more details to the strategy.
   ///
   /// Visible only in the expanded view mode.
-  Widget _buildAddButton(BigPictureStateProvider bigPictureState, BuildContext context) => InkWell(
-        child: Container(
-          color: Colors.lightBlue.withOpacity(0),
-          padding: EdgeInsets.only(left: 40, right: 40, bottom: AppTheme.isDesktopWeb() ? 0 : 30),
-          child: const Icon(Icons.add),
+  Widget _buildAddButton(BigPictureStateProvider bigPictureState, BuildContext context, bool validTickerDescription) =>
+      InkWell(
+        child: Align(
+          alignment: validTickerDescription ? Alignment.topCenter : Alignment.topRight,
+          child: Container(
+            color: Colors.lightBlue.withOpacity(0),
+            padding: EdgeInsets.only(left: 40, right: 40, bottom: AppTheme.isDesktopWeb() ? 0 : 30),
+            child: const Icon(Icons.add),
+          ),
         ),
         onTap: () async {
           final List<StockTicker>? tickers = await showSearch(

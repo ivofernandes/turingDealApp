@@ -44,7 +44,7 @@ class StrategyResume extends StatelessWidget {
       cardWidth -= 5;
     }
 
-    final double variation = (strategy.endPrice / strategy.yesterdayPrice - 1) * 100;
+    final double variation = (strategy.endPrice / strategy.previousClosePrice - 1) * 100;
     final ColorScaleWidget colorScaleWidget = ColorScaleWidget(
       value: variation,
       minColor: Theme.of(context).colorScheme.error,
