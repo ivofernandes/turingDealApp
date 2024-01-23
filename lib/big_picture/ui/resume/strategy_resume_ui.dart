@@ -52,7 +52,15 @@ class StrategyResume extends StatelessWidget {
       minValue: -2.5,
       maxValue: 2.5,
     );
-    final Color color = colorScaleWidget.getColorForValue(variation);
+    final Color color = ColorCalculation.getColorForValue(
+      variation,
+      <double, Color>{
+        -2.5: Theme.of(context).colorScheme.error,
+        0.0: Theme.of(context).colorScheme.onBackground,
+        2.5: Theme.of(context).colorScheme.primary
+      },
+      ColorScaleTypeEnum.hsluv,
+    );
 
     // Main widget structure
     return Dismissible(

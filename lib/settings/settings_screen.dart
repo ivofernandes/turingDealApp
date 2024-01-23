@@ -58,16 +58,20 @@ class SettingsScreen extends StatelessWidget {
                       },
                     ),
                   ),
-                  MaterialButton(
-                    color: Theme.of(context).colorScheme.primary,
-                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-                    elevation: 10,
-                    child: Text('Market time'.t),
-                    onPressed: () => Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (context) => MarketTimeScreen(),
+                  Row(
+                    children: [
+                      MaterialButton(
+                        color: Theme.of(context).colorScheme.primary,
+                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                        elevation: 10,
+                        child: Text('Market time'.t),
+                        onPressed: () => Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (context) => MarketTimeScreen(),
+                          ),
+                        ),
                       ),
-                    ),
+                    ],
                   ),
                   Padding(
                     padding: const EdgeInsets.all(8),

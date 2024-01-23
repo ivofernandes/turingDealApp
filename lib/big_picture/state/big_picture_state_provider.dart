@@ -142,4 +142,14 @@ class BigPictureStateProvider with ChangeNotifier, ConnectivityState {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     await prefs.setStringList('symbols', symbols);
   }
+
+  Future<void> removeAll() async {
+    final List<StockTicker> tickers = _bigPictureData.keys.toList();
+
+    for (final StockTicker ticker in tickers) {
+      await removeTicker(ticker);
+    }
+
+    refresh();
+  }
 }

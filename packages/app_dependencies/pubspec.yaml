@@ -11,22 +11,22 @@ dependencies:
   flutter:
     sdk: flutter
   http: ^0.13.6
-  path_provider: ^2.1.1
+  path_provider: ^2.1.2
   provider: ^6.1.1
   sembast: ^3.5.0+1
   sembast_web: ^2.2.0
   cupertino_icons: ^1.0.5
   intl: ^0.17.0
-  url_launcher: ^6.2.2
+  url_launcher: ^6.2.3
   connectivity_plus: ^5.0.2
   interactive_chart: ^0.3.4
   shared_preferences: ^2.2.2
   country_icons: ^2.0.2
   stats: ^2.1.0
-  pinch_zoom_release_unzoom: ^1.0.1
-  stock_market_data: ^0.1.1
+  pinch_zoom_release_unzoom: ^1.0.2
+  stock_market_data: ^0.1.2
   yahoo_finance_data_reader: ^1.0.8
-  color_scale: ^0.0.4
+  color_scale: ^0.0.6
   anchor_tabs: ^0.0.9
   interactive_i18n: ^1.0.6
   top_snackbar_flutter: ^3.1.0
