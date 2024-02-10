@@ -26,7 +26,7 @@ dependencies:
   pinch_zoom_release_unzoom: ^1.0.2
   stock_market_data: ^0.1.2
   yahoo_finance_data_reader: ^1.0.8
-  color_scale: ^0.0.6
+  color_scale: ^0.0.7
   anchor_tabs: ^0.0.9
   interactive_i18n: ^1.0.6
   top_snackbar_flutter: ^3.1.0
