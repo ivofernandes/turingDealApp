@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:app_dependencies/app_dependencies.dart';
 import 'package:flutter/material.dart';
+import 'package:td_ui/td_ui.dart';
 import 'package:ticker_details/ticker_details.dart';
 import 'package:turing_deal/big_picture/state/big_picture_state_provider.dart';
 import 'package:turing_deal/big_picture/ui/resume/strategy_resume_details_ui.dart';
@@ -45,20 +46,10 @@ class StrategyResume extends StatelessWidget {
     }
 
     final double variation = (strategy.endPrice / strategy.previousClosePrice - 1) * 100;
-    final ColorScaleWidget colorScaleWidget = ColorScaleWidget(
-      value: variation,
-      minColor: Theme.of(context).colorScheme.error,
-      maxColor: Theme.of(context).colorScheme.primary,
-      minValue: -2.5,
-      maxValue: 2.5,
-    );
+
     final Color color = ColorCalculation.getColorForValue(
       variation,
-      <double, Color>{
-        -2.5: Theme.of(context).colorScheme.error,
-        0.0: Theme.of(context).colorScheme.onBackground,
-        2.5: Theme.of(context).colorScheme.primary
-      },
+      PriceVariationChip.defaultPriceColors,
       ColorScaleTypeEnum.hsluv,
     );
 

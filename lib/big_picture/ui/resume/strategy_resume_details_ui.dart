@@ -35,14 +35,17 @@ class StrategyResumeDetails extends StatelessWidget {
     final priceVarChip20 = PriceVariationChip(
       prefix: prefixVar20,
       value: pricesma20,
+      stops: {-2: Theme.of(context).colorScheme.error, 0.0: Colors.grey, 2: Theme.of(context).colorScheme.primary},
     );
     final priceVarChip50 = PriceVariationChip(
       prefix: prefixVar50,
       value: sma20sma50,
+      stops: {-5: Theme.of(context).colorScheme.error, 0.0: Colors.grey, 5: Theme.of(context).colorScheme.primary},
     );
     final priceVarChip200 = PriceVariationChip(
       prefix: prefixVar200,
       value: sma50sma200,
+      stops: {-10: Theme.of(context).colorScheme.error, 0.0: Colors.grey, 10: Theme.of(context).colorScheme.primary},
     );
 
     return bigPictureState.isCompactView()
@@ -63,33 +66,56 @@ class StrategyResumeDetails extends StatelessWidget {
                   children: [
                     StrategyResumeItem(
                       title: 'CAGR',
-                      value: '${strategy.cagr.toStringAsFixed(2)}%',
+                      text: '${strategy.cagr.toStringAsFixed(2)}%',
+                      value: strategy.cagr,
+                      stops: {
+                        0: Theme.of(context).colorScheme.error,
+                        10: Theme.of(context).colorScheme.primary,
+                      },
                       onTap: () => UIUtils.bottomSheet(
                         ExplainCagr(),
                         contextParam: context,
                       ),
                     ),
                     StrategyResumeItem(
-                        title: '% from top',
-                        value: '${strategy.currentDrawdown.toStringAsFixed(2)}%',
-                        onTap: () => UIUtils.bottomSheet(
-                              ExplainDrawdown(),
-                              contextParam: context,
-                            )),
+                      title: '% from top',
+                      text: '${strategy.currentDrawdown.toStringAsFixed(2)}%',
+                      value: strategy.currentDrawdown,
+                      stops: {
+                        0: Theme.of(context).colorScheme.error,
+                        35: Theme.of(context).colorScheme.primary,
+                      },
+                      onTap: () => UIUtils.bottomSheet(
+                        ExplainDrawdown(),
+                        contextParam: context,
+                      ),
+                    ),
                     StrategyResumeItem(
-                        title: 'Drawdown',
-                        value: '${strategy.maxDrawdown.toStringAsFixed(2)}%',
-                        onTap: () => UIUtils.bottomSheet(
-                              ExplainDrawdown(),
-                              contextParam: context,
-                            )),
+                      title: 'Drawdown',
+                      text: '${strategy.maxDrawdown.toStringAsFixed(2)}%',
+                      value: strategy.maxDrawdown,
+                      stops: {
+                        10: Theme.of(context).colorScheme.primary,
+                        70: Theme.of(context).colorScheme.error,
+                      },
+                      onTap: () => UIUtils.bottomSheet(
+                        ExplainDrawdown(),
+                        contextParam: context,
+                      ),
+                    ),
                     StrategyResumeItem(
-                        title: 'MAR',
-                        value: strategy.mar.toStringAsFixed(2),
-                        onTap: () => UIUtils.bottomSheet(
-                              ExplainMAR(),
-                              contextParam: context,
-                            )),
+                      title: 'MAR',
+                      text: strategy.mar.toStringAsFixed(2),
+                      value: strategy.mar,
+                      stops: {
+                        0.1: Theme.of(context).colorScheme.error,
+                        0.4: Theme.of(context).colorScheme.primary,
+                      },
+                      onTap: () => UIUtils.bottomSheet(
+                        ExplainMAR(),
+                        contextParam: context,
+                      ),
+                    ),
                   ],
                 ),
               ),

@@ -41,10 +41,6 @@ class StrategyResumeHeader extends StatelessWidget {
 
     final PriceVariationChip priceVariationChip = PriceVariationChip(
       value: variation,
-      minColor: theme.colorScheme.error,
-      maxColor: theme.colorScheme.primary,
-      minValue: -2.5,
-      maxValue: 2.5,
     );
 
     final bool validTickerDescription = ticker.symbol != tickerDescription && !bigPictureState.isCompactView();
@@ -115,9 +111,9 @@ class StrategyResumeHeader extends StatelessWidget {
   Widget _buildDateRow() => Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text('${strategy!.tradingYears.ceil()}y${(strategy!.tradingYears % 1 * 12).ceil()}m'),
-          if (strategy?.startDate != null && strategy?.endDate != null)
-            Text('${DateFormat.yMd().format(strategy!.startDate!)} to ${DateFormat.yMd().format(strategy!.endDate!)}'),
+          Text('${strategy.tradingYears.ceil()}y${(strategy.tradingYears % 1 * 12).ceil()}m'),
+          if (strategy.startDate != null && strategy.endDate != null)
+            Text('${DateFormat.yMd().format(strategy.startDate!)} to ${DateFormat.yMd().format(strategy!.endDate!)}'),
         ],
       );
 
