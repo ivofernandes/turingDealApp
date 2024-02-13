@@ -4,7 +4,9 @@ import 'package:interactive_i18n/interactive_i18n.dart';
 import 'package:provider/provider.dart';
 import 'package:td_ui/src/ui/apps_banner.dart';
 import 'package:td_ui/td_ui.dart';
+import 'package:turing_deal/big_picture/state/big_picture_state_provider.dart';
 import 'package:turing_deal/home/state/app_state_provider.dart';
+import 'package:turing_deal/settings/ui/clear_data_button.dart';
 import 'package:turing_deal/shared/environment.dart';
 
 class SettingsScreen extends StatelessWidget {
@@ -13,6 +15,7 @@ class SettingsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final AppStateProvider appState = Provider.of<AppStateProvider>(context);
+    final BigPictureStateProvider bigPictureState = Provider.of<BigPictureStateProvider>(context);
     return SafeArea(
       child: MyScaffold(
         nav: Row(
@@ -71,6 +74,10 @@ class SettingsScreen extends StatelessWidget {
                           ),
                         ),
                       ),
+                      SizedBox(
+                        width: 10,
+                      ),
+                      ClearDataButton(),
                     ],
                   ),
                   Padding(
