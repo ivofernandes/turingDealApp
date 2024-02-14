@@ -44,7 +44,7 @@ class StrategyResumeItem extends StatelessWidget {
               margin: const EdgeInsets.all(2),
               child: ColorScaleStopsWidget(
                 borderRadius: BorderRadius.circular(20),
-                padding: const EdgeInsets.all(2),
+                padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 2),
                 value: value,
                 colorStops: stops,
                 child: Text(text,

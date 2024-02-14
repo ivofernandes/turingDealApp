@@ -52,9 +52,7 @@ class BigPictureScreen extends StatelessWidget {
         });
       }
 
-      return BigPictureScaffold(
-        key: UniqueKey(),
-      );
+      return BigPictureScaffold();
     });
   }
 }

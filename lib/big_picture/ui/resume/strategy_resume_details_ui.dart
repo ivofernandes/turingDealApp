@@ -78,7 +78,7 @@ class StrategyResumeDetails extends StatelessWidget {
                       ),
                     ),
                     StrategyResumeItem(
-                      title: '% from top',
+                      title: '% to top',
                       text: '${strategy.currentDrawdown.toStringAsFixed(2)}%',
                       value: strategy.currentDrawdown,
                       stops: {

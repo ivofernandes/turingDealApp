@@ -23,7 +23,7 @@ dependencies:
   shared_preferences: ^2.2.2
   country_icons: ^2.0.2
   stats: ^2.1.0
-  pinch_zoom_release_unzoom: ^1.0.2
+  pinch_zoom_release_unzoom: ^1.0.3
   stock_market_data: ^0.1.2
   yahoo_finance_data_reader: ^1.0.8
   color_scale: ^0.0.7

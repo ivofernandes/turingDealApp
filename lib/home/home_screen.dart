@@ -70,21 +70,16 @@ class _HomeScreenState extends State<HomeScreen> {
               onPressed: () => Navigator.of(context).pushNamed(SettingsScreen.route),
               icon: const Icon(Icons.menu),
             ),
-            IconButton(
-              onPressed: () {
-                onItemSelected(0);
-              },
-              icon: const Icon(
-                Icons.show_chart,
-              ),
-            ),
-            if (Environment.hasPortfolio)
+            if (bigPictureState.isNormalizing()) const CircularProgressIndicator(),
+            if (!bigPictureState.isNormalizing())
               IconButton(
-                onPressed: () {
-                  onItemSelected(1);
-                },
+                onPressed: bigPictureState.isNormalized()
+                    ? null
+                    : () {
+                        bigPictureState.normalizePeriod(bigPictureState);
+                      },
                 icon: const Icon(
-                  Icons.work,
+                  Icons.show_chart,
                 ),
               ),
             IconButton(

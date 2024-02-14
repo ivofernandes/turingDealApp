@@ -2,10 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:stock_market_data/stock_market_data.dart';
 import 'package:td_ui/td_ui.dart';
+import 'package:turing_deal/big_picture/state/big_picture_normalize_period_state.dart';
 import 'package:turing_deal/big_picture/state/ticker_utils.dart';
 import 'package:turing_deal/home/state/mixins/connectivity_state.dart';
 
-class BigPictureStateProvider with ChangeNotifier, ConnectivityState {
+class BigPictureStateProvider with ChangeNotifier, ConnectivityState, BigPictureNormalizePeriodState {
   bool _compactView = false;
   final bool _isMocked = false;
   final Map<StockTicker, BuyAndHoldStrategyResult> _bigPictureData = {};
@@ -70,10 +71,13 @@ class BigPictureStateProvider with ChangeNotifier, ConnectivityState {
     }
   }
 
-  Future<void> addTicker(StockTicker ticker) async {
+  Future<void> addTicker(
+    StockTicker tickerParam, {
+    DateTime? startDate,
+  }) async {
     // Treat multiple strategies
-    ticker = ticker.copyWith(
-      symbol: TickerUtils.processSymbol(ticker.symbol),
+    StockTicker ticker = tickerParam.copyWith(
+      symbol: TickerUtils.processSymbol(tickerParam.symbol),
     );
 
     _bigPictureData[ticker] = BuyAndHoldStrategyResult();
@@ -82,6 +86,7 @@ class BigPictureStateProvider with ChangeNotifier, ConnectivityState {
     final List<YahooFinanceCandleData> prices = await YahooFinanceService().getTickerData(
       ticker.symbol,
       adjust: true,
+      startDate: startDate,
     );
 
     // Execute the backtest
@@ -91,13 +96,11 @@ class BigPictureStateProvider with ChangeNotifier, ConnectivityState {
 
     refresh();
     // Scroll to the end
-    /*
-    scrollController.animateTo(
+    await scrollController.animateTo(
       scrollController.position.maxScrollExtent,
       duration: const Duration(milliseconds: 500),
       curve: Curves.easeOut,
     );
-    */
   }
 
   Future<void> joinTicker(StockTicker tickerParam, List<StockTicker>? tickers) async {
