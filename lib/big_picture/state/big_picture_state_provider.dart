@@ -94,6 +94,7 @@ class BigPictureStateProvider with ChangeNotifier, ConnectivityState, BigPicture
 
     _bigPictureData[ticker] = strategy;
 
+    resetNormalize();
     refresh();
     // Scroll to the end
     await scrollController.animateTo(

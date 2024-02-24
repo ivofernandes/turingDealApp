@@ -9,6 +9,11 @@ mixin BigPictureNormalizePeriodState {
 
   bool isNormalized() => _normalized;
 
+  void resetNormalize() {
+    _normalizing = false;
+    _normalized = false;
+  }
+
   Future<void> normalizePeriod(BigPictureStateProvider bigPictureState) async {
     _normalizing = true;
     bigPictureState.refresh();

@@ -39,7 +39,10 @@ class _AddIndicatorWidgetState extends State<AddIndicatorWidget> {
                     _selectedIndicator = newValue;
                   });
                 },
-                hint: Text('Indicator'.t),
+                hint: Text(
+                  'Indicator'.t,
+                  style: TextStyle(fontSize: 14),
+                ),
                 value: _selectedIndicator,
               ),
             ),

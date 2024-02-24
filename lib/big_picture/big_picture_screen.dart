@@ -43,16 +43,22 @@ class BigPictureScreen extends StatelessWidget {
       }
 
       if (searchingTickers != null && searchingTickers.isNotEmpty) {
-        final StockTicker ticker = searchingTickers.removeAt(0);
-        bigPictureState
-            .addTicker(ticker)
-            .then((value) => bigPictureState.persistTickers())
-            .onError((error, stackTrace) {
-          CheckError.checkErrorState("Can't add the ticker ${ticker.symbol}, because of $error", context);
-        });
+        performSearch(context, bigPictureState, appState, searchingTickers);
       }
 
       return BigPictureScaffold();
     });
+  }
+
+  Future<void> performSearch(BuildContext context, BigPictureStateProvider bigPictureState, AppStateProvider appState,
+      List<StockTicker> searchingTickers) async {
+    final StockTicker ticker = searchingTickers.removeAt(0);
+    try {
+      await bigPictureState.addTicker(ticker);
+      appState.refresh();
+      await bigPictureState.persistTickers();
+    } catch (error) {
+      CheckError.checkErrorState("Can't add the ticker ${ticker.symbol}, because of $error", context);
+    }
   }
 }

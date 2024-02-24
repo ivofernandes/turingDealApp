@@ -62,6 +62,7 @@ class SettingsScreen extends StatelessWidget {
                     ),
                   ),
                   Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       MaterialButton(
                         color: Theme.of(context).colorScheme.primary,
