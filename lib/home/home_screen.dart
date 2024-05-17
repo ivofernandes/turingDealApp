@@ -72,14 +72,17 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
             if (bigPictureState.isNormalizing()) const CircularProgressIndicator(),
             if (!bigPictureState.isNormalizing())
-              IconButton(
-                onPressed: bigPictureState.isNormalized()
-                    ? null
-                    : () {
-                        bigPictureState.normalizePeriod(bigPictureState);
-                      },
-                icon: const Icon(
-                  Icons.show_chart,
+              Tooltip(
+                message: 'Adjust dates'.t,
+                child: IconButton(
+                  onPressed: bigPictureState.isNormalized()
+                      ? null
+                      : () {
+                          bigPictureState.normalizePeriod(bigPictureState);
+                        },
+                  icon: const Icon(
+                    Icons.show_chart,
+                  ),
                 ),
               ),
             IconButton(
