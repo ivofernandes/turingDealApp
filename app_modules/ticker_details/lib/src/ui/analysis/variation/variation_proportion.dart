@@ -42,7 +42,7 @@ class VariationProportion extends StatelessWidget {
           child: Center(
             child: Text(
               delta == 1 ? 'Variations of 1 day' : 'Variations of $delta days',
-              style: Theme.of(context).textTheme.headline6,
+              style: Theme.of(context).textTheme.titleSmall,
             ),
           ),
         ),

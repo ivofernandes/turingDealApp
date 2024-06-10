@@ -13,7 +13,7 @@ class ExplainDrawdown extends StatelessWidget {
               ),
               Text(
                 'Maximum Drawdown',
-                style: Theme.of(context).textTheme.headline6,
+                style: Theme.of(context).textTheme.titleMedium,
                 textAlign: TextAlign.center,
               ),
               const SizedBox(
@@ -26,9 +26,9 @@ class ExplainDrawdown extends StatelessWidget {
                 height: 20,
               ),
               MaterialButton(
-                  color: Theme.of(context).textTheme.bodyText1!.color,
+                  color: Theme.of(context).textTheme.bodyMedium!.color,
                   child: Text('More about Drawdown',
-                      style: Theme.of(context).textTheme.bodyText1!.copyWith(color: Theme.of(context).backgroundColor)),
+                      style: Theme.of(context).textTheme.bodyMedium!.copyWith(color: Theme.of(context).colorScheme.surface)),
                   onPressed: () {
                     Web.launchLink(context, 'https://www.investopedia.com/terms/m/maximum-drawdown-mdd.asp');
                   })

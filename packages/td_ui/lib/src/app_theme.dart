@@ -51,50 +51,43 @@ class AppTheme {
     borderRadius: BorderRadius.circular(10),
   ));
 
-  static TextTheme textTheme = const TextTheme(
-      headline6: TextStyle(fontSize: 18), headline5: TextStyle(fontSize: 22), headline4: TextStyle(fontSize: 28));
+  static TextTheme textTheme = const TextTheme();
 
   static ThemeData darkTheme() => ThemeData.dark().copyWith(
         cardTheme: cardTheme,
         primaryIconTheme: IconThemeData(color: brand),
-        errorColor: error,
         colorScheme: const ColorScheme.dark().copyWith(
           primary: brand,
           secondary: secondary,
           error: error,
+          surface: backgroundDracula,
         ),
-        toggleableActiveColor: brand,
         floatingActionButtonTheme: FloatingActionButtonThemeData(
           splashColor: focusDracula,
           backgroundColor: brand,
         ),
-        backgroundColor: backgroundDracula,
         textTheme: textTheme.copyWith(
-            bodyText1: TextStyle(
+            bodyMedium: TextStyle(
               color: foregroundDracula,
             ),
-            bodyText2: TextStyle(
-              color: foregroundDracula,
-            ),
-            headline6: TextStyle(
+            titleSmall: TextStyle(
               color: foregroundDracula,
             )),
       );
 
   static ThemeData lightTheme() => ThemeData.light().copyWith(
-      cardTheme: cardTheme,
-      primaryColor: Colors.white,
-      primaryIconTheme: IconThemeData(color: brand),
-      colorScheme: const ColorScheme.light().copyWith(
-        primary: brand,
-        secondary: secondary,
-        error: error,
-      ),
-      floatingActionButtonTheme: FloatingActionButtonThemeData(
-        backgroundColor: brand,
-      ),
-      errorColor: error,
-      toggleableActiveColor: brand);
+        cardTheme: cardTheme,
+        primaryColor: Colors.white,
+        primaryIconTheme: IconThemeData(color: brand),
+        colorScheme: const ColorScheme.light().copyWith(
+          primary: brand,
+          secondary: secondary,
+          error: error,
+        ),
+        floatingActionButtonTheme: FloatingActionButtonThemeData(
+          backgroundColor: brand,
+        ),
+      );
 
   static bool isDesktopWeb() =>
       kIsWeb && (defaultTargetPlatform != TargetPlatform.iOS && defaultTargetPlatform != TargetPlatform.android);

@@ -52,7 +52,7 @@ class TickerDetailsCell extends StatelessWidget {
       child: FittedBox(
         child: SelectableText(text!,
             style:
-                Theme.of(context).textTheme.bodyText1!.copyWith(fontSize: 9)),
+                Theme.of(context).textTheme.bodyMedium!.copyWith(fontSize: 9)),
       ),
     ));
 }

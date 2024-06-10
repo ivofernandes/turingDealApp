@@ -13,7 +13,7 @@ class ExplainMAR extends StatelessWidget {
               ),
               Text(
                 'MAR ratio',
-                style: Theme.of(context).textTheme.headline6,
+                style: Theme.of(context).textTheme.titleSmall,
                 textAlign: TextAlign.center,
               ),
               const SizedBox(
@@ -31,7 +31,7 @@ class ExplainMAR extends StatelessWidget {
                 height: 20,
               ),
               MaterialButton(
-                color: Theme.of(context).textTheme.bodyText1!.color,
+                color: Theme.of(context).textTheme.bodyMedium!.color,
                 child: Text('More about MAR',
                     style: Theme.of(context)
                         .textTheme

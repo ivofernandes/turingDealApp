@@ -23,7 +23,7 @@ class PriceVariationChip extends StatelessWidget {
           prefix != null
               ? Text(
                   '${prefix!}: ',
-                  style: Theme.of(context).textTheme.bodyText2!.copyWith(fontSize: 10),
+                  style: Theme.of(context).textTheme.bodyMedium!.copyWith(fontSize: 10),
                 )
               : Container(),
           Center(
