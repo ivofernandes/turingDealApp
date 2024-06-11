@@ -1,6 +1,6 @@
 import 'dart:core';
 
-import 'package:charts_flutter/flutter.dart' as charts;
+import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:stock_market_data/stock_market_data.dart';
 
@@ -13,54 +13,87 @@ class VariationProportionChart extends StatelessWidget {
   });
 
   @override
-  Widget build(BuildContext context) => charts.BarChart(
-        _getData(),
-        animate: false,
-        vertical: false,
-        // Left labels
-        barRendererDecorator: charts.BarLabelDecorator<String>(
-          insideLabelStyleSpec: const charts.TextStyleSpec(
-            fontSize: 12,
-            color: charts.MaterialPalette.white,
-          ),
-          outsideLabelStyleSpec: const charts.TextStyleSpec(
-            fontSize: 12,
-            color: charts.MaterialPalette.white,
-          ),
-        ),
-        domainAxis: const charts.OrdinalAxisSpec(
-          renderSpec: charts.SmallTickRendererSpec(
-            labelStyle: charts.TextStyleSpec(
-              fontSize: 12,
-              color: charts.MaterialPalette.white,
-            ),
-            lineStyle: charts.LineStyleSpec(
-              color: charts.MaterialPalette.white,
+  Widget build(BuildContext context) {
+    return BarChart(
+      BarChartData(
+        alignment: BarChartAlignment.spaceAround,
+        maxY: _getMaxY(),
+        barGroups: _getBarGroups(),
+        titlesData: FlTitlesData(
+          leftTitles: AxisTitles(
+            sideTitles: SideTitles(
+              showTitles: true,
+              getTitlesWidget: (value, meta) => Text(
+                value.toString(),
+                style: const TextStyle(
+                  color: Colors.white,
+                  fontSize: 12,
+                ),
+              ),
+              reservedSize: 30,
             ),
           ),
-        ),
-        // Top labels
-        secondaryMeasureAxis: const charts.NumericAxisSpec(
-          renderSpec: charts.GridlineRendererSpec(
-            labelStyle: charts.TextStyleSpec(
-                fontSize: 12, color: charts.MaterialPalette.white),
-            lineStyle:
-                charts.LineStyleSpec(color: charts.MaterialPalette.white),
+          bottomTitles: AxisTitles(
+            sideTitles: SideTitles(
+              showTitles: true,
+              getTitlesWidget: (value, meta) {
+                return Text(
+                  countByInterval[value.toInt()].intervalDescription,
+                  style: const TextStyle(
+                    color: Colors.white,
+                    fontSize: 12,
+                  ),
+                );
+              },
+              reservedSize: 30,
+            ),
           ),
         ),
-      );
+        borderData: FlBorderData(
+          show: true,
+          border: Border.all(
+            color: Colors.white,
+            width: 1,
+          ),
+        ),
+        barTouchData: BarTouchData(
+          touchTooltipData: BarTouchTooltipData(
+            getTooltipItem: (group, groupIndex, rod, rodIndex) {
+              return BarTooltipItem(
+                rod.toY.round().toString(),
+                TextStyle(color: Colors.white),
+              );
+            },
+          ),
+        ),
+      ),
+    );
+  }
 
-  List<charts.Series<VariationCount, String>> _getData() => [
-        charts.Series<VariationCount, String>(
-            id: 'Data',
-            domainFn: (VariationCount variationCount, _) =>
-                variationCount.intervalDescription,
-            measureFn: (VariationCount variationCount, _) =>
-                variationCount.count,
-            data: countByInterval,
-            labelAccessorFn: (VariationCount variationCount, _) =>
-                '${variationCount.count}')
-          // Set series to use the secondary measure axis.
-          ..setAttribute(charts.measureAxisIdKey, 'secondaryMeasureAxisId'),
-      ];
+  double _getMaxY() {
+    double max = 0;
+    for (VariationCount stat in countByInterval) {
+      if (stat.count > max) max = stat.count.toDouble();
+    }
+    return max;
+  }
+
+  List<BarChartGroupData> _getBarGroups() {
+    return countByInterval.asMap().entries.map((entry) {
+      int index = entry.key;
+      VariationCount variationCount = entry.value;
+      return BarChartGroupData(
+        x: index,
+        barRods: [
+          BarChartRodData(
+            toY: variationCount.count.toDouble(),
+            color: Colors.blue,
+            width: 15,
+            borderRadius: BorderRadius.circular(0),
+          ),
+        ],
+        showingTooltipIndicators: [0],
+      );
+    }).toList();
+  }
 }

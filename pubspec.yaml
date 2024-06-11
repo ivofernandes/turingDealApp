@@ -55,7 +55,6 @@ flutter:
   assets:
     - assets/locales/
     - assets/images/stores/
-    - assets/market_data/
     - assets/svg/
   #   - images/a_dot_ham.jpeg
 

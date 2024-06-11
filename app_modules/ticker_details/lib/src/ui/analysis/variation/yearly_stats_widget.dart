@@ -1,5 +1,5 @@
 import 'package:app_dependencies/app_dependencies.dart';
-import 'package:charts_flutter/flutter.dart' as charts;
+import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:td_ui/td_ui.dart';
 import 'package:ticker_details/src/state/ticker_state_provider.dart';
@@ -24,83 +24,124 @@ class YearlyStatsWidget extends StatelessWidget {
         ),
         TouchInteractiveViewer(
           child: SizedBox(
-              height: tickerState.getYearlyStats().length * 40,
-              width: MediaQuery.of(context).size.width - 100,
-              child: charts.BarChart(
-                _getData(tickerState.getYearlyStats()),
-                animate: false,
-                vertical: false,
-                barGroupingType: charts.BarGroupingType.grouped,
-                barRendererDecorator: charts.BarLabelDecorator<String>(
-                  insideLabelStyleSpec: const charts.TextStyleSpec(
-                    fontSize: 12,
-                    color: charts.MaterialPalette.white,
-                  ),
-                  outsideLabelStyleSpec: const charts.TextStyleSpec(
-                    fontSize: 12,
-                    color: charts.MaterialPalette.white,
-                  ),
-                ),
-                // Left labels
-                domainAxis: charts.OrdinalAxisSpec(
-                  renderSpec: charts.SmallTickRendererSpec(
-                    labelStyle: charts.TextStyleSpec(
-                      fontSize: 12,
-                      color: charts.MaterialPalette.blue.shadeDefault,
-                    ),
-                    lineStyle: charts.LineStyleSpec(
-                      color: charts.MaterialPalette.blue.shadeDefault,
+            height: tickerState.getYearlyStats().length * 40,
+            width: MediaQuery.of(context).size.width - 100,
+            child: BarChart(
+              BarChartData(
+                alignment: BarChartAlignment.spaceAround,
+                maxY: _getMaxY(tickerState.getYearlyStats()),
+                barGroups: _getBarGroups(tickerState.getYearlyStats()),
+                titlesData: FlTitlesData(
+                  leftTitles: AxisTitles(
+                    sideTitles: SideTitles(
+                      showTitles: true,
+                      getTitlesWidget: (value, meta) => Text(
+                        value.toInt().toString(),
+                        style: const TextStyle(
+                          color: Colors.blue,
+                          fontSize: 12,
+                        ),
+                      ),
+                      reservedSize: 40,
                     ),
                   ),
-                ),
-                // Top labels
-                secondaryMeasureAxis: charts.NumericAxisSpec(
-                  renderSpec: charts.GridlineRendererSpec(
-                    labelStyle: charts.TextStyleSpec(
-                      fontSize: 12,
-                      color: charts.MaterialPalette.blue.shadeDefault,
-                    ),
-                    lineStyle: charts.LineStyleSpec(
-                      color: charts.MaterialPalette.blue.shadeDefault,
+                  bottomTitles: AxisTitles(
+                    sideTitles: SideTitles(
+                      showTitles: true,
+                      getTitlesWidget: (value, meta) {
+                        return Text(
+                          tickerState.getYearlyStats()[value.toInt()].year.toString(),
+                          style: const TextStyle(
+                            color: Colors.blue,
+                            fontSize: 12,
+                          ),
+                        );
+                      },
+                      reservedSize: 40,
                     ),
                   ),
                 ),
-              )),
+                borderData: FlBorderData(
+                  show: true,
+                  border: Border.all(
+                    color: Colors.blue,
+                    width: 1,
+                  ),
+                ),
+                gridData: FlGridData(
+                  show: true,
+                  drawVerticalLine: true,
+                  getDrawingVerticalLine: (value) {
+                    return FlLine(
+                      color: Colors.blue.withOpacity(0.1),
+                      strokeWidth: 1,
+                    );
+                  },
+                  drawHorizontalLine: true,
+                  getDrawingHorizontalLine: (value) {
+                    return FlLine(
+                      color: Colors.blue.withOpacity(0.1),
+                      strokeWidth: 1,
+                    );
+                  },
+                ),
+                barTouchData: BarTouchData(
+                  touchTooltipData: BarTouchTooltipData(
+                    getTooltipItem: (group, groupIndex, rod, rodIndex) {
+                      return BarTooltipItem(
+                        '${rod.toY.round()}',
+                        TextStyle(color: Colors.white),
+                      );
+                    },
+                  ),
+                ),
+              ),
+            ),
+          ),
         ),
       ],
     );
   }
 
-  List<charts.Series<YearlyStats, String>> _getData(List<YearlyStats> yearlyStats) => [
-        charts.Series<YearlyStats, String>(
-            id: 'CAGR',
-            displayName: 'CAGR',
-            domainFn: (YearlyStats yearlyStat, _) => yearlyStat.year.toString(),
-            measureFn: (YearlyStats yearlyStat, _) => yearlyStat.variation,
-            data: yearlyStats,
-            fillColorFn: (_, __) => charts.MaterialPalette.green.shadeDefault,
-            labelAccessorFn: (YearlyStats yearlyStat, _) => '${yearlyStat.variation.toStringAsFixed(0)} %')
-          ..setAttribute(charts.measureAxisIdKey, 'secondaryMeasureAxisId'),
-        charts.Series<YearlyStats, String>(
-          id: 'Drawdown',
-          domainFn: (YearlyStats yearlyStat, _) => yearlyStat.year.toString(),
-          measureFn: (YearlyStats yearlyStat, _) => yearlyStat.drawdown,
-          data: yearlyStats,
-          insideLabelStyleAccessorFn: (YearlyStats yearlyStat, _) => charts.TextStyleSpec(
-            fontSize: 12,
-            color: charts.Color.fromHex(
-              code: '#000000',
+  double _getMaxY(List<YearlyStats> yearlyStats) {
+    double max = 0;
+    for (var stat in yearlyStats) {
+      if (stat.variation > max) max = stat.variation;
+      if (stat.drawdown > max) max = stat.drawdown;
+    }
+    return max;
+  }
+
+  List<BarChartGroupData> _getBarGroups(List<YearlyStats> yearlyStats) {
+    return yearlyStats.asMap().entries.map((entry) {
+      int index = entry.key;
+      YearlyStats yearlyStat = entry.value;
+      return BarChartGroupData(
+        x: index,
+        barRods: [
+          BarChartRodData(
+            toY: yearlyStat.variation,
+            gradient: LinearGradient(
+              colors: [Colors.green, Colors.lightGreenAccent],
+              begin: Alignment.bottomCenter,
+              end: Alignment.topCenter,
             ),
+            width: 15,
+            borderRadius: BorderRadius.circular(6),
           ),
-          outsideLabelStyleAccessorFn: (YearlyStats yearlyStat, _) => charts.TextStyleSpec(
-            fontSize: 12,
-            color: charts.MaterialPalette.red.shadeDefault.lighter,
+          BarChartRodData(
+            toY: yearlyStat.drawdown,
+            gradient: LinearGradient(
+              colors: [Colors.red, Colors.orangeAccent],
+              begin: Alignment.bottomCenter,
+              end: Alignment.topCenter,
+            ),
+            width: 15,
+            borderRadius: BorderRadius.circular(6),
           ),
-          labelAccessorFn: (YearlyStats yearlyStat, _) => '${yearlyStat.drawdown.toStringAsFixed(0)} %',
-          fillColorFn: (_, __) => charts.MaterialPalette.red.shadeDefault.lighter,
-        )..setAttribute(
-            charts.measureAxisIdKey,
-            'secondaryMeasureAxisId',
-          ),
-      ];
+        ],
+        showingTooltipIndicators: [0, 1],
+      );
+    }).toList();
+  }
 }
