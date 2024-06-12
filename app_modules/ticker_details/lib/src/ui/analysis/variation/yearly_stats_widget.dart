@@ -24,24 +24,38 @@ class YearlyStatsWidget extends StatelessWidget {
         ),
         TouchInteractiveViewer(
           child: SizedBox(
-            height: tickerState.getYearlyStats().length * 40,
-            width: MediaQuery.of(context).size.width - 100,
-            child: BarChart(
-              BarChartData(
-                alignment: BarChartAlignment.spaceAround,
-                maxY: _getMaxY(tickerState.getYearlyStats()),
-                barGroups: _getBarGroups(tickerState.getYearlyStats()),
+            height: 400,
+            width: MediaQuery.of(context).size.width - 50,
+            child: LineChart(
+              LineChartData(
+                lineBarsData: _getLineBarsData(tickerState.getYearlyStats()),
                 titlesData: FlTitlesData(
+                  rightTitles: const AxisTitles(
+                    sideTitles: SideTitles(
+                      showTitles: false,
+                    ),
+                  ),
+                  topTitles: AxisTitles(
+                    sideTitles: SideTitles(
+                      showTitles: false,
+                    ),
+                  ),
                   leftTitles: AxisTitles(
                     sideTitles: SideTitles(
                       showTitles: true,
-                      getTitlesWidget: (value, meta) => Text(
-                        value.toInt().toString(),
-                        style: const TextStyle(
-                          color: Colors.blue,
-                          fontSize: 12,
-                        ),
-                      ),
+                      interval: 10,
+                      getTitlesWidget: (value, meta) {
+                        if (value % 10 == 0) {
+                          return Text(
+                            value.toInt().toString(),
+                            style: const TextStyle(
+                              color: Colors.blue,
+                              fontSize: 12,
+                            ),
+                          );
+                        }
+                        return Container();
+                      },
                       reservedSize: 40,
                     ),
                   ),
@@ -49,13 +63,18 @@ class YearlyStatsWidget extends StatelessWidget {
                     sideTitles: SideTitles(
                       showTitles: true,
                       getTitlesWidget: (value, meta) {
-                        return Text(
-                          tickerState.getYearlyStats()[value.toInt()].year.toString(),
-                          style: const TextStyle(
-                            color: Colors.blue,
-                            fontSize: 12,
-                          ),
-                        );
+                        final year = tickerState.getYearlyStats()[value.toInt()].year;
+                        if (year % 10 == 0) {
+                          return Text(
+                            year.toString(),
+                            style: const TextStyle(
+                              color: Colors.blue,
+                              fontSize: 12,
+                            ),
+                          );
+                        } else {
+                          return Container();
+                        }
                       },
                       reservedSize: 40,
                     ),
@@ -71,27 +90,32 @@ class YearlyStatsWidget extends StatelessWidget {
                 gridData: FlGridData(
                   show: true,
                   drawVerticalLine: true,
-                  getDrawingVerticalLine: (value) {
-                    return FlLine(
-                      color: Colors.blue.withOpacity(0.1),
-                      strokeWidth: 1,
-                    );
-                  },
+                  getDrawingVerticalLine: (value) => FlLine(
+                    color: Colors.blue.withOpacity(0.1),
+                    strokeWidth: 1,
+                  ),
                   drawHorizontalLine: true,
-                  getDrawingHorizontalLine: (value) {
-                    return FlLine(
-                      color: Colors.blue.withOpacity(0.1),
-                      strokeWidth: 1,
-                    );
-                  },
+                  getDrawingHorizontalLine: (value) => FlLine(
+                    color: Colors.blue.withOpacity(0.1),
+                    strokeWidth: 1,
+                  ),
                 ),
-                barTouchData: BarTouchData(
-                  touchTooltipData: BarTouchTooltipData(
-                    getTooltipItem: (group, groupIndex, rod, rodIndex) {
-                      return BarTooltipItem(
-                        '${rod.toY.round()}',
-                        TextStyle(color: Colors.white),
-                      );
+                lineTouchData: LineTouchData(
+                  touchTooltipData: LineTouchTooltipData(
+                    fitInsideHorizontally: true,
+                    fitInsideVertically: true,
+                    getTooltipItems: (touchedSpots) {
+                      final year = tickerState.getYearlyStats()[touchedSpots[0].x.toInt()].year;
+                      final cagr = touchedSpots[0].y;
+                      final drawdown = touchedSpots[1].y;
+                      return [
+                        LineTooltipItem(
+                          'Year: $year\nCAGR: ${cagr.toStringAsFixed(2)}%',
+                          const TextStyle(color: Colors.white),
+                        ),
+                        LineTooltipItem(
+                            'Drawdown: ${drawdown.toStringAsFixed(2)}%', const TextStyle(color: Colors.white)),
+                      ];
                     },
                   ),
                 ),
@@ -103,45 +127,30 @@ class YearlyStatsWidget extends StatelessWidget {
     );
   }
 
-  double _getMaxY(List<YearlyStats> yearlyStats) {
-    double max = 0;
-    for (var stat in yearlyStats) {
-      if (stat.variation > max) max = stat.variation;
-      if (stat.drawdown > max) max = stat.drawdown;
-    }
-    return max;
-  }
+  List<LineChartBarData> _getLineBarsData(List<YearlyStats> yearlyStats) {
+    final List<FlSpot> cagrSpots = [];
+    final List<FlSpot> drawdownSpots = [];
 
-  List<BarChartGroupData> _getBarGroups(List<YearlyStats> yearlyStats) {
-    return yearlyStats.asMap().entries.map((entry) {
-      int index = entry.key;
-      YearlyStats yearlyStat = entry.value;
-      return BarChartGroupData(
-        x: index,
-        barRods: [
-          BarChartRodData(
-            toY: yearlyStat.variation,
-            gradient: LinearGradient(
-              colors: [Colors.green, Colors.lightGreenAccent],
-              begin: Alignment.bottomCenter,
-              end: Alignment.topCenter,
-            ),
-            width: 15,
-            borderRadius: BorderRadius.circular(6),
-          ),
-          BarChartRodData(
-            toY: yearlyStat.drawdown,
-            gradient: LinearGradient(
-              colors: [Colors.red, Colors.orangeAccent],
-              begin: Alignment.bottomCenter,
-              end: Alignment.topCenter,
-            ),
-            width: 15,
-            borderRadius: BorderRadius.circular(6),
-          ),
-        ],
-        showingTooltipIndicators: [0, 1],
-      );
-    }).toList();
+    for (int i = 0; i < yearlyStats.length; i++) {
+      cagrSpots.add(FlSpot(i.toDouble(), yearlyStats[i].variation));
+      drawdownSpots.add(FlSpot(i.toDouble(), yearlyStats[i].drawdown));
+    }
+
+    return [
+      LineChartBarData(
+        spots: cagrSpots,
+        isCurved: true,
+        color: AppTheme.brand,
+        barWidth: 4,
+        belowBarData: BarAreaData(show: false),
+      ),
+      LineChartBarData(
+        spots: drawdownSpots,
+        isCurved: true,
+        color: AppTheme.error,
+        barWidth: 4,
+        belowBarData: BarAreaData(show: false),
+      ),
+    ];
   }
 }
