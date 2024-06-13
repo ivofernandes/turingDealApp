@@ -13,62 +13,79 @@ class VariationProportionChart extends StatelessWidget {
   });
 
   @override
-  Widget build(BuildContext context) {
-    return BarChart(
-      BarChartData(
-        alignment: BarChartAlignment.spaceAround,
-        maxY: _getMaxY(),
-        barGroups: _getBarGroups(),
-        titlesData: FlTitlesData(
-          leftTitles: AxisTitles(
-            sideTitles: SideTitles(
-              showTitles: true,
-              getTitlesWidget: (value, meta) => Text(
-                value.toString(),
-                style: const TextStyle(
-                  color: Colors.white,
-                  fontSize: 12,
-                ),
-              ),
-              reservedSize: 30,
-            ),
-          ),
-          bottomTitles: AxisTitles(
-            sideTitles: SideTitles(
-              showTitles: true,
-              getTitlesWidget: (value, meta) {
-                return Text(
-                  countByInterval[value.toInt()].intervalDescription,
+  Widget build(BuildContext context) => LineChart(
+        LineChartData(
+          lineBarsData: _getLineBarsData(),
+          titlesData: FlTitlesData(
+            rightTitles: const AxisTitles(),
+            topTitles: const AxisTitles(),
+            leftTitles: AxisTitles(
+              sideTitles: SideTitles(
+                showTitles: true,
+                interval: _getInterval(),
+                getTitlesWidget: (value, meta) => Text(
+                  value.toStringAsFixed(0),
                   style: const TextStyle(
                     color: Colors.white,
                     fontSize: 12,
                   ),
+                ),
+                reservedSize: 30,
+              ),
+            ),
+            bottomTitles: AxisTitles(
+              sideTitles: SideTitles(
+                showTitles: true,
+                interval: 1,
+                getTitlesWidget: (value, meta) {
+                  final showValue = value == meta.min || value == meta.max || value == (meta.max / 2).round();
+                  if (!showValue) return Container();
+                  final interval = countByInterval[value.toInt()];
+                  return Text(
+                    interval.intervalDescription,
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontSize: 12,
+                    ),
+                  );
+                },
+                reservedSize: 30,
+              ),
+            ),
+          ),
+          borderData: FlBorderData(
+            show: true,
+            border: Border.all(
+              color: Colors.white,
+            ),
+          ),
+          gridData: FlGridData(
+            show: true,
+            getDrawingVerticalLine: (value) => FlLine(
+              color: Colors.white.withOpacity(0.1),
+              strokeWidth: 1,
+            ),
+            getDrawingHorizontalLine: (value) => FlLine(
+              color: Colors.white.withOpacity(0.1),
+              strokeWidth: 1,
+            ),
+          ),
+          lineTouchData: LineTouchData(
+            touchTooltipData: LineTouchTooltipData(
+              fitInsideHorizontally: true,
+              fitInsideVertically: true,
+              getTooltipItems: (touchedSpots) => touchedSpots.map((touchedSpot) {
+                final interval = countByInterval[touchedSpot.x.toInt()];
+                final String description = interval.intervalDescription;
+                return LineTooltipItem(
+                  '$description happened ${touchedSpot.y.toStringAsFixed(0)} times',
+                  const TextStyle(color: Colors.white),
                 );
-              },
-              reservedSize: 30,
+              }).toList(),
             ),
           ),
         ),
-        borderData: FlBorderData(
-          show: true,
-          border: Border.all(
-            color: Colors.white,
-            width: 1,
-          ),
-        ),
-        barTouchData: BarTouchData(
-          touchTooltipData: BarTouchTooltipData(
-            getTooltipItem: (group, groupIndex, rod, rodIndex) {
-              return BarTooltipItem(
-                rod.toY.round().toString(),
-                TextStyle(color: Colors.white),
-              );
-            },
-          ),
-        ),
-      ),
-    );
-  }
+      );
 
   double _getMaxY() {
     double max = 0;
@@ -78,22 +95,26 @@ class VariationProportionChart extends StatelessWidget {
     return max;
   }
 
-  List<BarChartGroupData> _getBarGroups() {
-    return countByInterval.asMap().entries.map((entry) {
-      int index = entry.key;
-      VariationCount variationCount = entry.value;
-      return BarChartGroupData(
-        x: index,
-        barRods: [
-          BarChartRodData(
-            toY: variationCount.count.toDouble(),
-            color: Colors.blue,
-            width: 15,
-            borderRadius: BorderRadius.circular(0),
-          ),
-        ],
-        showingTooltipIndicators: [0],
-      );
-    }).toList();
+  double _getInterval() {
+    double maxY = _getMaxY();
+    return (maxY / 5).ceilToDouble();
+  }
+
+  List<LineChartBarData> _getLineBarsData() {
+    List<FlSpot> spots = [];
+
+    for (int i = 0; i < countByInterval.length; i++) {
+      spots.add(FlSpot(i.toDouble(), countByInterval[i].count.toDouble()));
+    }
+
+    return [
+      LineChartBarData(
+        spots: spots,
+        isCurved: true,
+        color: Colors.blue,
+        barWidth: 4,
+        belowBarData: BarAreaData(),
+      ),
+    ];
   }
 }
