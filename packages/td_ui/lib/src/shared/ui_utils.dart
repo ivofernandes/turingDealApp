@@ -58,4 +58,14 @@ class UIUtils {
       displayDuration: duration,
     );
   }
+
+  static void showMessage(String t, BuildContext context) {
+    show(
+      context: context,
+      content: Text(
+        t,
+        style: Theme.of(context).textTheme.bodyLarge,
+      ),
+    );
+  }
 }

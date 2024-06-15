@@ -4,7 +4,6 @@ export 'package:anchor_tabs/anchor_tabs.dart';
 export 'package:color_scale/color_scale.dart';
 export 'package:connectivity_plus/connectivity_plus.dart';
 export 'package:country_icons/country_icons.dart';
-export 'package:http/http.dart';
 export 'package:interactive_chart/interactive_chart.dart';
 export 'package:interactive_i18n/interactive_i18n.dart';
 export 'package:intl/intl.dart';

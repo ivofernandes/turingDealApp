@@ -85,6 +85,18 @@ class SettingsScreen extends StatelessWidget {
                     padding: const EdgeInsets.all(8),
                     child: Text('The objective of this project is to help people to make investment decisions'.t),
                   ),
+                  MaterialButton(
+                    child: Text('Adjust dates'.t),
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                    elevation: 10,
+                    color: Theme.of(context).colorScheme.primary,
+                    onPressed: () {
+                      if (!bigPictureState.isNormalized()) {
+                        bigPictureState.normalizePeriod(bigPictureState);
+                      }
+                      UIUtils.showMessage('Dates of all strategies adjusted to match'.t, context);
+                    },
+                  ),
                   const SizedBox(
                     height: 10,
                   ),
