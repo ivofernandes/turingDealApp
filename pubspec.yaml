@@ -25,7 +25,7 @@ dependencies:
     sdk: flutter
   app_dependencies:
     path: packages/app_dependencies
-  ticker_search: ^0.0.6
+  ticker_search: ^0.0.7
   td_ui:
     path: packages/td_ui
   stocks_portfolio:

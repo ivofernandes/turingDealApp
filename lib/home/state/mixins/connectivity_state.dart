@@ -10,9 +10,9 @@ mixin ConnectivityState {
   Future<void> initConnectivity() async {
     // Platform messages may fail, so we use a try/catch PlatformException.
     try {
-      List<ConnectivityResult> result = await Connectivity().checkConnectivity();
-      for (var item in result) {
-        _updateConnectionStatus(item);
+      final List<ConnectivityResult> result = await Connectivity().checkConnectivity();
+      for (final ConnectivityResult item in result) {
+        await _updateConnectionStatus(item);
       }
     } on PlatformException catch (e) {
       debugPrint(e.toString());

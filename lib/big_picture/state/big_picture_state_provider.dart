@@ -96,12 +96,14 @@ class BigPictureStateProvider with ChangeNotifier, ConnectivityState, BigPicture
 
     resetNormalize();
     refresh();
-    // Scroll to the end
-    await scrollController.animateTo(
-      scrollController.position.maxScrollExtent,
-      duration: const Duration(milliseconds: 500),
-      curve: Curves.easeOut,
-    );
+    if (scrollController.hasClients) {
+      // Scroll to the end
+      await scrollController.animateTo(
+        scrollController.position.maxScrollExtent,
+        duration: const Duration(milliseconds: 500),
+        curve: Curves.easeOut,
+      );
+    }
   }
 
   Future<void> joinTicker(StockTicker tickerParam, List<StockTicker>? tickers) async {
