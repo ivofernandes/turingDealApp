@@ -30,16 +30,8 @@ class YearlyStatsWidget extends StatelessWidget {
               LineChartData(
                 lineBarsData: _getLineBarsData(tickerState.getYearlyStats()),
                 titlesData: FlTitlesData(
-                  rightTitles: const AxisTitles(
-                    sideTitles: SideTitles(
-                      showTitles: false,
-                    ),
-                  ),
-                  topTitles: AxisTitles(
-                    sideTitles: SideTitles(
-                      showTitles: false,
-                    ),
-                  ),
+                  rightTitles: const AxisTitles(),
+                  topTitles: const AxisTitles(),
                   leftTitles: AxisTitles(
                     sideTitles: SideTitles(
                       showTitles: true,
@@ -84,17 +76,13 @@ class YearlyStatsWidget extends StatelessWidget {
                   show: true,
                   border: Border.all(
                     color: Colors.blue,
-                    width: 1,
                   ),
                 ),
                 gridData: FlGridData(
-                  show: true,
-                  drawVerticalLine: true,
                   getDrawingVerticalLine: (value) => FlLine(
                     color: Colors.blue.withOpacity(0.1),
                     strokeWidth: 1,
                   ),
-                  drawHorizontalLine: true,
                   getDrawingHorizontalLine: (value) => FlLine(
                     color: Colors.blue.withOpacity(0.1),
                     strokeWidth: 1,
@@ -142,14 +130,14 @@ class YearlyStatsWidget extends StatelessWidget {
         isCurved: true,
         color: AppTheme.brand,
         barWidth: 4,
-        belowBarData: BarAreaData(show: false),
+        belowBarData: BarAreaData(),
       ),
       LineChartBarData(
         spots: drawdownSpots,
         isCurved: true,
         color: AppTheme.error,
         barWidth: 4,
-        belowBarData: BarAreaData(show: false),
+        belowBarData: BarAreaData(),
       ),
     ];
   }

@@ -125,9 +125,15 @@ class StrategyResumeHeader extends StatelessWidget {
         child: Align(
           alignment: validTickerDescription ? Alignment.topCenter : Alignment.topRight,
           child: Container(
-            color: Colors.lightBlue.withOpacity(0),
+            color: Theme.of(context).colorScheme.surface.withOpacity(0),
             padding: EdgeInsets.only(left: 40, right: 40, bottom: AppTheme.isDesktopWeb() ? 0 : 30),
-            child: const Icon(Icons.add),
+            child: Container(
+              decoration: BoxDecoration(
+                color: Theme.of(context).colorScheme.surface.withOpacity(0.25),
+                shape: BoxShape.circle,
+              ),
+              child: const Icon(Icons.add),
+            ),
           ),
         ),
         onTap: () async {
