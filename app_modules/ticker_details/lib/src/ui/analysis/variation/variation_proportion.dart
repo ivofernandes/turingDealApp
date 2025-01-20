@@ -52,8 +52,8 @@ class VariationProportion extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text('Average: ${statistics.average}'),
-              Text('Min: ${statistics.max}'),
-              Text('Max: ${statistics.min}'),
+              Text('Min: ${statistics.min}'),
+              Text('Max: ${statistics.max}'),
               Text('Median: ${statistics.median}'),
               Text('Stddev: ${statistics.standardDeviation}'),
             ],
