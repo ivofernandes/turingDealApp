@@ -76,7 +76,7 @@ class BigPictureStateProvider with ChangeNotifier, ConnectivityState, BigPicture
     DateTime? startDate,
   }) async {
     // Treat multiple strategies
-    StockTicker ticker = tickerParam.copyWith(
+    final StockTicker ticker = tickerParam.copyWith(
       symbol: TickerUtils.processSymbol(tickerParam.symbol),
     );
 

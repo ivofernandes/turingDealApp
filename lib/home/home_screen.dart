@@ -19,6 +19,7 @@ class HomeScreen extends StatefulWidget {
 
   static List<TickerSuggestion> suggestions = [
     TickerSuggestion(const Icon(Icons.view_headline), 'Main'.t, TickersList.main),
+    TickerSuggestion(const Icon(Icons.euro), 'Euro ETFs', TickersList.europeanEtfs),
     TickerSuggestion(const Icon(Icons.business_sharp), 'Companies'.t, TickersList.companies),
     TickerSuggestion(const Icon(Icons.precision_manufacturing_outlined), 'Sectors'.t, TickersList.sectors),
     TickerSuggestion(const Icon(Icons.workspaces_outline), 'Futures'.t, TickersList.futures),
