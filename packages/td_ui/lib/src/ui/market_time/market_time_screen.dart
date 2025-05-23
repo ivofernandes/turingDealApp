@@ -50,7 +50,6 @@ class _MarketTimeWidgetState extends State<MarketTimeWidget> {
 
       localOpenTime = openTime.add(const Duration(hours: 4)).toLocal();
       localCloseTime = closeTime.add(const Duration(hours: 4)).toLocal();
-      final localTimeFormat = DateFormat('hh:mm a');
 
       if (now.isBefore(openTime)) {
         timeToOpen = _formatDuration(openTime.difference(now));

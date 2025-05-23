@@ -26,14 +26,17 @@ class ExplainCagr extends StatelessWidget {
                 height: 20,
               ),
               const Text('The CAGR forumla is: CAGR ='),
-              const Text('(Starting value / Ending value) ^ (1 / number of years) - 1'),
+              const Text('(Ending value / Starting value) ^ (1 / number of years) - 1'),
               const SizedBox(
                 height: 20,
               ),
               MaterialButton(
                   color: Theme.of(context).textTheme.bodyMedium!.color,
                   child: Text('More about CAGR',
-                      style: Theme.of(context).textTheme.bodyMedium!.copyWith(color: Theme.of(context).colorScheme.surface)),
+                      style: Theme.of(context)
+                          .textTheme
+                          .bodyMedium!
+                          .copyWith(color: Theme.of(context).colorScheme.surface)),
                   onPressed: () {
                     Web.launchLink(context, 'https://www.investopedia.com/terms/c/cagr.asp');
                   })

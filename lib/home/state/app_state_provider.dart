@@ -7,7 +7,7 @@ class AppStateProvider with ChangeNotifier, ConnectivityState, ThemeState {
   List<StockTicker>? searching = [];
 
   AppStateProvider() {
-    final Future futureTheme = loadTheme();
+    final futureTheme = loadTheme();
 
     Future.wait([futureTheme]).then((value) => refresh());
   }

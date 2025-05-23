@@ -16,7 +16,7 @@ class TickerStateProvider with ChangeNotifier {
   List<YahooFinanceCandleData> data = [];
 
   TickerStateProvider() {
-    print('New ticker state provider');
+    debugPrint('New ticker state provider');
   }
 
   void startAnalysis(List<YahooFinanceCandleData> data) {
@@ -30,7 +30,7 @@ class TickerStateProvider with ChangeNotifier {
     final List<int> variations = [];
 
     for (final String key in data.last.indicators.keys) {
-      print(key);
+      debugPrint(key);
     }
 
     return variations;

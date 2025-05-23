@@ -70,7 +70,7 @@ class _YearlyStatsWidgetState extends State<YearlyStatsWidget> {
       LineChartBarData(
         spots: cagrMA,
         isCurved: true,
-        color: AppTheme.brand.withOpacity(0.6),
+        color: AppTheme.brand.withAlpha(153),
         barWidth: 2,
         dashArray: [8, 4],
       ),
@@ -78,7 +78,7 @@ class _YearlyStatsWidgetState extends State<YearlyStatsWidget> {
       LineChartBarData(
         spots: drawdownMA,
         isCurved: true,
-        color: AppTheme.error.withOpacity(0.6),
+        color: AppTheme.error.withAlpha(153),
         barWidth: 2,
         dashArray: [8, 4],
       ),
@@ -120,7 +120,7 @@ class _YearlyStatsWidgetState extends State<YearlyStatsWidget> {
                   InkWell(
                     onTap: _cycleWindow,
                     child: ChartLegendItem(
-                      AppTheme.brand.withOpacity(0.6),
+                      AppTheme.brand.withAlpha(153),
                       'CAGR $maLabel',
                     ),
                   ),
@@ -128,7 +128,7 @@ class _YearlyStatsWidgetState extends State<YearlyStatsWidget> {
                   InkWell(
                     onTap: _cycleWindow,
                     child: ChartLegendItem(
-                      AppTheme.error.withOpacity(0.6),
+                      AppTheme.error.withAlpha(153),
                       'Drawdown $maLabel',
                     ),
                   ),

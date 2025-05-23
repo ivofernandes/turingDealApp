@@ -18,8 +18,6 @@ class VariationProportion extends StatelessWidget {
 
     final List<YahooFinanceCandleData> data = tickerState.getCandlesData();
 
-    bool needToCalculate = data.first.indicators.containsKey('var_$delta');
-
     final List<double> vars = Variations.extractList(data, delta);
     if (vars.isEmpty) {
       return const Center(child: CircularProgressIndicator());
