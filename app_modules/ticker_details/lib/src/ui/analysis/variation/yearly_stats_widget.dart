@@ -196,7 +196,9 @@ class _YearlyStatsWidgetState extends State<YearlyStatsWidget> {
                       fitInsideHorizontally: true,
                       fitInsideVertically: true,
                       getTooltipItems: (touchedSpots) {
-                        if (touchedSpots.isEmpty) return [];
+                        if (touchedSpots.isEmpty) {
+                          return [];
+                        }
                         final year = touchedSpots[0].x.round();
                         return touchedSpots.asMap().entries.map((entry) {
                           final i = entry.key;
@@ -267,9 +269,15 @@ class _YearlyStatsWidgetState extends State<YearlyStatsWidget> {
   double _autoComputeYearInterval(double xMin, double xMax) {
     final totalYears = (xMax - xMin).abs();
     // For example, if totalYears < 20, show every year; else show every 5 years, etc.
-    if (totalYears < 20) return 1;
-    if (totalYears < 40) return 2;
-    if (totalYears < 80) return 5;
+    if (totalYears < 20) {
+      return 1;
+    }
+    if (totalYears < 40) {
+      return 2;
+    }
+    if (totalYears < 80) {
+      return 5;
+    }
     return 10;
   }
 }

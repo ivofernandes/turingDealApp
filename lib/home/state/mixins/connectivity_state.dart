@@ -4,7 +4,6 @@ import 'package:flutter/services.dart';
 
 mixin ConnectivityState {
   String _connectionStatus = 'Unknown';
-  final Connectivity _connectivity = Connectivity();
 
   // Platform messages are asynchronous, so we initialize in an async method.
   Future<void> initConnectivity() async {
@@ -26,8 +25,20 @@ mixin ConnectivityState {
       case ConnectivityResult.none:
         _connectionStatus = result.toString();
         break;
-      default:
-        _connectionStatus = 'Failed to get connectivity.';
+      case ConnectivityResult.bluetooth:
+        // TODO: Handle this case.
+        break;
+      case ConnectivityResult.ethernet:
+        // TODO: Handle this case.
+        break;
+      case ConnectivityResult.vpn:
+        // TODO: Handle this case.
+        break;
+      case ConnectivityResult.other:
+        // TODO: Handle this case.
+        break;
+      case null:
+        // TODO: Handle this case.
         break;
     }
   }

@@ -70,12 +70,12 @@ class SettingsScreen extends StatelessWidget {
                         elevation: 10,
                         child: Text('Market time'.t),
                         onPressed: () => Navigator.of(context).push(
-                          MaterialPageRoute(
+                          MaterialPageRoute<Widget>(
                             builder: (context) => MarketTimeScreen(),
                           ),
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         width: 10,
                       ),
                       ClearDataButton(),
@@ -86,7 +86,6 @@ class SettingsScreen extends StatelessWidget {
                     child: Text('The objective of this project is to help people to make investment decisions'.t),
                   ),
                   MaterialButton(
-                    child: Text('Adjust dates'.t),
                     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
                     elevation: 10,
                     color: Theme.of(context).colorScheme.primary,
@@ -96,6 +95,7 @@ class SettingsScreen extends StatelessWidget {
                       }
                       UIUtils.showMessage('Dates of all strategies adjusted to match'.t, context);
                     },
+                    child: Text('Adjust dates'.t),
                   ),
                   const SizedBox(
                     height: 10,

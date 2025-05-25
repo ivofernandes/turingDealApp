@@ -69,7 +69,7 @@ class StrategyResume extends StatelessWidget {
             onTap: () {
               if (!bigPictureState.isMockedData()) {
                 Navigator.of(context).push(
-                  MaterialPageRoute(
+                  MaterialPageRoute<Widget>(
                     builder: (context) => TickerScreen(ticker),
                   ),
                 );

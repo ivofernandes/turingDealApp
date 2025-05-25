@@ -122,11 +122,11 @@ class _TickerTabsState extends State<TickerTabs> {
           IconButton(
             onPressed: () {
               Navigator.of(context).push(
-                MaterialPageRoute(
+                MaterialPageRoute<Widget>(
                   builder: (context) => Scaffold(
                     appBar: AppBar(
                       title: Text(
-                        TickerResolve.getTickerDescription(widget.ticker) + ' Fundamentals',
+                        '${TickerResolve.getTickerDescription(widget.ticker)} Fundamentals',
                       ),
                     ),
                     body: SingleChildScrollView(
@@ -138,7 +138,7 @@ class _TickerTabsState extends State<TickerTabs> {
                 ),
               );
             },
-            icon: Icon(Icons.show_chart_outlined),
+            icon: const Icon(Icons.show_chart_outlined),
           ),
         ];
       default:

@@ -13,7 +13,7 @@ class ClearDataButton extends StatelessWidget {
       child: Text('Clear data'.t),
       onPressed: () {
         // Show confirmation dialog
-        showDialog(
+        showDialog<Widget>(
           context: context,
           builder: (BuildContext dialogContext) => AlertDialog(
             title: Text('Confirm'.t),

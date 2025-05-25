@@ -69,9 +69,9 @@ class _TuringDealTechnicalsWidgetState extends State<TuringDealTechnicalsWidget>
                   }
 
                   return Dismissible(
-                    background: Container(
+                    background: const ColoredBox(
                       color: Colors.red,
-                      child: const Icon(Icons.delete),
+                      child: Icon(Icons.delete),
                     ),
                     key: Key(indicator),
                     onDismissed: (direction) {

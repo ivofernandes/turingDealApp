@@ -1,4 +1,3 @@
-import 'package:app_dependencies/app_dependencies.dart';
 import 'package:flutter/material.dart';
 
 class AddIndicatorWidget extends StatefulWidget {
@@ -65,7 +64,7 @@ class _AddIndicatorWidgetState extends State<AddIndicatorWidget> {
                     widget.onAddIndicator(_selectedIndicator!, int.parse(_periodController.text));
                   }
                 },
-                icon: Icon(Icons.add),
+                icon: const Icon(Icons.add),
               ),
             ),
           ),

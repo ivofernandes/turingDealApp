@@ -39,7 +39,9 @@ class VariationProportionChart extends StatelessWidget {
                 interval: 1,
                 getTitlesWidget: (value, meta) {
                   final showValue = value == meta.min || value == meta.max || value == (meta.max / 2).round();
-                  if (!showValue) return Container();
+                  if (!showValue) {
+                    return Container();
+                  }
                   final interval = countByInterval[value.toInt()];
                   return Text(
                     interval.intervalDescription,
@@ -90,18 +92,20 @@ class VariationProportionChart extends StatelessWidget {
   double _getMaxY() {
     double max = 0;
     for (VariationCount stat in countByInterval) {
-      if (stat.count > max) max = stat.count.toDouble();
+      if (stat.count > max) {
+        max = stat.count.toDouble();
+      }
     }
     return max;
   }
 
   double _getInterval() {
-    double maxY = _getMaxY();
+    final double maxY = _getMaxY();
     return (maxY / 5).ceilToDouble();
   }
 
   List<LineChartBarData> _getLineBarsData() {
-    List<FlSpot> spots = [];
+    final List<FlSpot> spots = [];
 
     for (int i = 0; i < countByInterval.length; i++) {
       spots.add(FlSpot(i.toDouble(), countByInterval[i].count.toDouble()));
