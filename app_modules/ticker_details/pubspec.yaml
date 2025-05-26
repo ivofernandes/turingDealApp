@@ -18,7 +18,6 @@ dependencies:
   flutter_edgar_sec:
     git:
       url: https://github.com/ivofernandes/flutter_edgar_sec.git
-      ref: 47d8e9d05bbc96eeeed438c5f313175242cb6a3b
   fl_chart: ^0.68.0
 
 dev_dependencies:

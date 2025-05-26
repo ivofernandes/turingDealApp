@@ -28,7 +28,7 @@ class TuringDealApp extends StatelessWidget {
             appState.loadData();
             return InteractiveLocalization(
               availableLanguages: const ['en', 'pt'],
-              languageUpdated: () => appState.refresh(),
+              languageUpdated: (language) => appState.refresh(),
               child: MaterialApp(
                 navigatorKey: MyAppContext.globalNavigatorKey,
                 theme: appState.isDark() ? AppTheme.darkTheme() : AppTheme.lightTheme(),

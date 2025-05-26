@@ -80,11 +80,11 @@ class _PortfolioWidgetState extends State<PortfolioWidget> {
     allocations[ticker]!.percentageOfPortfolio = value;
 
     double totalPercentage = 0;
-    for (var ticker in allocations.keys) {
+    for (final ticker in allocations.keys) {
       totalPercentage += allocations[ticker]!.percentageOfPortfolio;
     }
 
-    for (var ticker in allocations.keys) {
+    for (final ticker in allocations.keys) {
       allocations[ticker]!.percentageOfPortfolio = allocations[ticker]!.percentageOfPortfolio / totalPercentage * 100;
     }
 

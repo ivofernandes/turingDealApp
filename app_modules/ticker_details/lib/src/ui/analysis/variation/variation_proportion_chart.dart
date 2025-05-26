@@ -91,7 +91,7 @@ class VariationProportionChart extends StatelessWidget {
 
   double _getMaxY() {
     double max = 0;
-    for (VariationCount stat in countByInterval) {
+    for (final VariationCount stat in countByInterval) {
       if (stat.count > max) {
         max = stat.count.toDouble();
       }

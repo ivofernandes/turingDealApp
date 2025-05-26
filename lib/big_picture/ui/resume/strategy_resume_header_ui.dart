@@ -113,7 +113,7 @@ class StrategyResumeHeader extends StatelessWidget {
         children: [
           Text('${strategy.tradingYears.ceil()}y${(strategy.tradingYears % 1 * 12).ceil()}m'),
           if (strategy.startDate != null && strategy.endDate != null)
-            Text('${DateFormat.yMd().format(strategy.startDate!)} to ${DateFormat.yMd().format(strategy!.endDate!)}'),
+            Text('${DateFormat.yMd().format(strategy.startDate!)} to ${DateFormat.yMd().format(strategy.endDate!)}'),
         ],
       );
 
@@ -125,11 +125,11 @@ class StrategyResumeHeader extends StatelessWidget {
         child: Align(
           alignment: validTickerDescription ? Alignment.topCenter : Alignment.topRight,
           child: Container(
-            color: Theme.of(context).colorScheme.surface.withOpacity(0),
+            color: Colors.transparent,
             padding: EdgeInsets.only(left: 40, right: 40, bottom: AppTheme.isDesktopWeb() ? 0 : 30),
-            child: Container(
+            child: DecoratedBox(
               decoration: BoxDecoration(
-                color: Theme.of(context).colorScheme.surface.withOpacity(0.25),
+                color: Theme.of(context).colorScheme.surface.withAlpha((255 * 0.25).toInt()),
                 shape: BoxShape.circle,
               ),
               child: const Icon(Icons.add),

@@ -61,7 +61,7 @@ class _TuringDealTechnicalsWidgetState extends State<TuringDealTechnicalsWidget>
               child: Column(children: [
                 ListTile(
                   title: Text('Current Price'.t),
-                  trailing: Text(candleData.adjClose!.toStringAsFixed(2)),
+                  trailing: Text(candleData.adjClose.toStringAsFixed(2)),
                 ),
                 ...indicatorsCalculated.map((indicator) {
                   if (!prices.containsKey(indicator)) {
@@ -80,7 +80,7 @@ class _TuringDealTechnicalsWidgetState extends State<TuringDealTechnicalsWidget>
                     child: PresentIndicatorWidget(
                       indicator: indicator,
                       value: getValueForIndicator(indicator, prices),
-                      currentPrice: candleData.adjClose!,
+                      currentPrice: candleData.adjClose,
                     ),
                   );
                 }).toList(),

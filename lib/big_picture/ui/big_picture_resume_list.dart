@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:stock_market_data/stock_market_data.dart';
+import 'package:td_ui/td_ui.dart';
 import 'package:turing_deal/big_picture/state/big_picture_state_provider.dart';
 import 'package:turing_deal/big_picture/ui/resume/strategy_resume_ui.dart';
 import 'package:turing_deal/shared/environment.dart';

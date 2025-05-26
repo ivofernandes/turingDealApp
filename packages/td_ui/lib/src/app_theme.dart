@@ -29,6 +29,7 @@ http://paletton.com/#uid=32V0u0ksHn-iOuBomrKwbjjHje4
    shade 4 = #5E002B = rgb( 94,  0, 43) = rgba( 94,  0, 43,1) = rgb0(0.369,0,0.169)
 
 */
+
 class AppTheme {
   static Color aux = const Color(0xff212121);
   static Color brand = const Color(0xff0E8B34);
@@ -46,10 +47,11 @@ class AppTheme {
   static Color ma50 = const Color(0xff0099ff);
   static Color ma200 = const Color(0xff0000ff);
 
-  static CardTheme cardTheme = CardTheme(
-      shape: RoundedRectangleBorder(
-    borderRadius: BorderRadius.circular(10),
-  ));
+  static CardThemeData cardTheme = CardThemeData(
+    shape: RoundedRectangleBorder(
+      borderRadius: BorderRadius.circular(10),
+    ),
+  );
 
   static TextTheme textTheme = const TextTheme();
 
@@ -67,12 +69,13 @@ class AppTheme {
           backgroundColor: brand,
         ),
         textTheme: textTheme.copyWith(
-            bodyMedium: TextStyle(
-              color: foregroundDracula,
-            ),
-            titleSmall: TextStyle(
-              color: foregroundDracula,
-            )),
+          bodyMedium: TextStyle(
+            color: foregroundDracula,
+          ),
+          titleSmall: TextStyle(
+            color: foregroundDracula,
+          ),
+        ),
       );
 
   static ThemeData lightTheme() => ThemeData.light().copyWith(

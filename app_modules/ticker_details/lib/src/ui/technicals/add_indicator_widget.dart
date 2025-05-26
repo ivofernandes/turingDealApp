@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:app_dependencies/app_dependencies.dart';
 
 class AddIndicatorWidget extends StatefulWidget {
   final List<String> indicatorsList;
