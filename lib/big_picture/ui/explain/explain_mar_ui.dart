@@ -32,11 +32,10 @@ class ExplainMAR extends StatelessWidget {
               ),
               MaterialButton(
                 color: Theme.of(context).textTheme.bodyMedium!.color,
-                child: Text('More about MAR',
-                    style: Theme.of(context)
-                        .textTheme
-                        .bodyMedium!
-                        .copyWith(color: Theme.of(context).colorScheme.background)),
+                child: Text(
+                  'More about MAR',
+                  style: Theme.of(context).textTheme.bodyMedium!.copyWith(color: Theme.of(context).colorScheme.surface),
+                ),
                 onPressed: () {
                   Web.launchLink(context, 'https://www.investopedia.com/terms/m/mar-ratio.asp');
                 },

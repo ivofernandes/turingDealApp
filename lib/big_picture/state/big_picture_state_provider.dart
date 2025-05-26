@@ -107,6 +107,10 @@ class BigPictureStateProvider with ChangeNotifier, ConnectivityState, BigPicture
   }
 
   Future<void> joinTicker(StockTicker tickerParam, List<StockTicker>? tickers) async {
+    if (tickers == null || tickers.isEmpty) {
+      return;
+    }
+
     final StockTicker ticker = tickerParam.copyWith(
       symbol: '${tickerParam.symbol}, ${tickers!.first.symbol}',
       description: '',

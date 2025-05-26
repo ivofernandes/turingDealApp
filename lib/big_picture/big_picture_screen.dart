@@ -5,11 +5,16 @@ import 'package:turing_deal/big_picture/state/big_picture_state_provider.dart';
 import 'package:turing_deal/big_picture/ui/big_picture_scafold.dart';
 import 'package:turing_deal/home/state/app_state_provider.dart';
 
-class BigPictureScreen extends StatelessWidget {
+class BigPictureScreen extends StatefulWidget {
   const BigPictureScreen({
     super.key,
   });
 
+  @override
+  State<BigPictureScreen> createState() => _BigPictureScreenState();
+}
+
+class _BigPictureScreenState extends State<BigPictureScreen> {
   @override
   Widget build(BuildContext context) {
     final AppStateProvider appState = Provider.of<AppStateProvider>(context, listen: false);
@@ -58,8 +63,10 @@ class BigPictureScreen extends StatelessWidget {
       appState.refresh();
       await bigPictureState.persistTickers();
     } catch (error, st) {
-      CheckError.checkErrorState("Can't add the ticker ${ticker.symbol}, because of $error", context);
-      debugPrint('Error: $error, StackTrace: $st');
+      if (mounted) {
+        CheckError.checkErrorState("Can't add the ticker ${ticker.symbol}, because of $error", context);
+        debugPrint('Error: $error, StackTrace: $st');
+      }
     }
   }
 }

@@ -14,13 +14,19 @@ class StrategyResumeDetails extends StatelessWidget {
 
   const StrategyResumeDetails(this.strategy);
 
+  double get pricesma20 => (strategy.endPrice / strategy.movingAverages[20]! - 1) * 100;
+
+  double get sma20sma50 => (strategy.movingAverages[20]! / strategy.movingAverages[50]! - 1) * 100;
+
+  double get sma50sma200 => (strategy.movingAverages[50]! / strategy.movingAverages[200]! - 1) * 100;
+
+  double get tradingYears => strategy.tradingYears;
+
+  double normalized(double value, double factor) => value / (tradingYears / factor);
+
   @override
   Widget build(BuildContext context) {
     final BigPictureStateProvider bigPictureState = Provider.of<BigPictureStateProvider>(context, listen: false);
-
-    final double pricesma20 = (strategy.endPrice / strategy.movingAverages[20]! - 1) * 100;
-    final double sma20sma50 = (strategy.movingAverages[20]! / strategy.movingAverages[50]! - 1) * 100;
-    final double sma50sma200 = (strategy.movingAverages[50]! / strategy.movingAverages[200]! - 1) * 100;
 
     String prefixVar20 = '';
     String prefixVar50 = '';
@@ -70,7 +76,7 @@ class StrategyResumeDetails extends StatelessWidget {
                       value: strategy.cagr,
                       stops: {
                         0: Theme.of(context).colorScheme.error,
-                        10: Theme.of(context).colorScheme.primary,
+                        15: Theme.of(context).colorScheme.primary,
                       },
                       onTap: () => UIUtils.bottomSheet(
                         ExplainCagr(),
@@ -83,7 +89,7 @@ class StrategyResumeDetails extends StatelessWidget {
                       value: strategy.currentDrawdown,
                       stops: {
                         0: Theme.of(context).colorScheme.error,
-                        35: Theme.of(context).colorScheme.primary,
+                        25: Theme.of(context).colorScheme.primary,
                       },
                       onTap: () => UIUtils.bottomSheet(
                         ExplainDrawdown(),
@@ -93,9 +99,9 @@ class StrategyResumeDetails extends StatelessWidget {
                     StrategyResumeItem(
                       title: 'Drawdown',
                       text: '${strategy.maxDrawdown.toStringAsFixed(2)}%',
-                      value: strategy.maxDrawdown,
+                      value: strategy.maxDrawdown.abs(),
                       stops: {
-                        10: Theme.of(context).colorScheme.primary,
+                        20: Theme.of(context).colorScheme.primary,
                         70: Theme.of(context).colorScheme.error,
                       },
                       onTap: () => UIUtils.bottomSheet(
@@ -109,7 +115,7 @@ class StrategyResumeDetails extends StatelessWidget {
                       value: strategy.mar,
                       stops: {
                         0.1: Theme.of(context).colorScheme.error,
-                        0.4: Theme.of(context).colorScheme.primary,
+                        0.2: Theme.of(context).colorScheme.primary,
                       },
                       onTap: () => UIUtils.bottomSheet(
                         ExplainMAR(),

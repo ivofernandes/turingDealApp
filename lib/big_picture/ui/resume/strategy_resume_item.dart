@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 class StrategyResumeItem extends StatelessWidget {
   final String title;
   final String text;
-  final Function onTap;
+  final VoidCallback onTap;
 
   final double value;
 
@@ -21,7 +21,7 @@ class StrategyResumeItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => InkWell(
-        onTap: () => onTap.call(),
+        onTap: onTap.call,
         child: Row(
           children: [
             Text(
