@@ -82,7 +82,7 @@ class ExplainCagr extends StatelessWidget {
         title: 'Compound Annual Growth Rate – CAGR',
         icon: Icons.trending_up,
         description: 'CAGR is the annualized percentage of return of an investment.',
-        formula: [
+        formula: const [
           'The CAGR formula is:',
           '(Ending value / Starting value) ^ (1 / number of years) - 1',
         ],
@@ -110,7 +110,7 @@ class ExplainMAR extends StatelessWidget {
         title: 'MAR Ratio',
         icon: Icons.balance,
         description: 'The MAR ratio is a risk-adjusted performance metric used to compare investment strategies.',
-        formula: [
+        formula: const [
           'The MAR formula is:',
           'CAGR / Max drawdown',
         ],

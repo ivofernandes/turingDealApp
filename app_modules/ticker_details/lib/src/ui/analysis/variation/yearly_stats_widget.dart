@@ -6,16 +6,17 @@ import 'package:ticker_details/src/state/ticker_state_provider.dart';
 import 'package:ticker_details/src/ui/chart/chart_legend_item.dart';
 
 class YearlyStatsWidget extends StatefulWidget {
-  const YearlyStatsWidget({Key? key}) : super(key: key);
+  const YearlyStatsWidget({super.key});
 
   @override
   _YearlyStatsWidgetState createState() => _YearlyStatsWidgetState();
 }
 
 class _YearlyStatsWidgetState extends State<YearlyStatsWidget> {
-  /// We allow toggling among 2, 4, and 8-year moving averages
-  final List<int> possibleWindows = [2, 4, 8];
-  int currentWindowIndex = 1; // default to "4-year"
+  final List<int> possibleWindows = [2, 4, 8, 16, 32];
+  int currentWindowIndex = 1;
+  bool showCagr = true;
+  bool showDrawdown = true;
 
   @override
   Widget build(BuildContext context) {
@@ -26,14 +27,12 @@ class _YearlyStatsWidgetState extends State<YearlyStatsWidget> {
       return const Center(child: Text('No data'));
     }
 
-    // EXAMPLE: filter to only show last 40 years if you want
-    final cutoffYear = DateTime.now().year - 40; // last 40 years
+    final cutoffYear = DateTime.now().year - 40;
     final filteredStats = yearlyStats.where((s) => s.year >= cutoffYear).toList();
     if (filteredStats.isEmpty) {
       return Text('No data after year $cutoffYear');
     }
 
-    // 1) Prepare raw spots (CAGR and Drawdown)
     final cagrSpots = <FlSpot>[];
     final drawdownSpots = <FlSpot>[];
 
@@ -43,30 +42,27 @@ class _YearlyStatsWidgetState extends State<YearlyStatsWidget> {
       drawdownSpots.add(FlSpot(yearDouble, stat.drawdown));
     }
 
-    // 2) Compute partial MAs for the chosen window
     final windowSize = possibleWindows[currentWindowIndex];
     final cagrMA = _computeMovingAveragePartial(cagrSpots, windowSize);
     final drawdownMA = _computeMovingAveragePartial(drawdownSpots, windowSize);
 
-    // 3) Build line series
-    final lineBarsData = [
-      // Raw CAGR
-      LineChartBarData(
-        spots: cagrSpots,
-        isCurved: true,
-        color: AppTheme.brand,
-        barWidth: 3,
-        belowBarData: BarAreaData(show: true),
-      ),
-      // Raw Drawdown
-      LineChartBarData(
-        spots: drawdownSpots,
-        isCurved: true,
-        color: AppTheme.error,
-        barWidth: 3,
-        belowBarData: BarAreaData(show: true),
-      ),
-      // CAGR MA
+    final lineBarsData = <LineChartBarData>[
+      if (showCagr)
+        LineChartBarData(
+          spots: cagrSpots,
+          isCurved: true,
+          color: AppTheme.brand,
+          barWidth: 3,
+          belowBarData: BarAreaData(show: true),
+        ),
+      if (showDrawdown)
+        LineChartBarData(
+          spots: drawdownSpots,
+          isCurved: true,
+          color: AppTheme.error,
+          barWidth: 3,
+          belowBarData: BarAreaData(show: true),
+        ),
       LineChartBarData(
         spots: cagrMA,
         isCurved: true,
@@ -74,7 +70,6 @@ class _YearlyStatsWidgetState extends State<YearlyStatsWidget> {
         barWidth: 2,
         dashArray: [8, 4],
       ),
-      // Drawdown MA
       LineChartBarData(
         spots: drawdownMA,
         isCurved: true,
@@ -84,11 +79,8 @@ class _YearlyStatsWidgetState extends State<YearlyStatsWidget> {
       ),
     ];
 
-    // 4) min/max X and Y
     final xMin = cagrSpots.first.x;
     final xMax = cagrSpots.last.x;
-
-    // for Y:
     final allY = [
       ...cagrSpots.map((e) => e.y),
       ...drawdownSpots.map((e) => e.y),
@@ -97,15 +89,12 @@ class _YearlyStatsWidgetState extends State<YearlyStatsWidget> {
     final yMax = allY.reduce((a, b) => a > b ? a : b);
     final range = (yMax - yMin).abs();
     final step = range == 0 ? 1 : range / 5;
-
-    // legend label e.g. "MA(4yr)"
     final maLabel = 'MA(${windowSize}yr)';
 
     return SizedBox(
-      height: 300, // fixed height for the chart area
+      height: 300,
       child: Column(
         children: [
-          // Legend row
           SingleChildScrollView(
             scrollDirection: Axis.horizontal,
             child: Padding(
@@ -113,9 +102,25 @@ class _YearlyStatsWidgetState extends State<YearlyStatsWidget> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  ChartLegendItem(AppTheme.brand, 'CAGR'),
+                  InkWell(
+                    onTap: () {
+                      setState(() => showCagr = !showCagr);
+                    },
+                    child: ChartLegendItem(
+                      AppTheme.brand.withOpacity(showCagr ? 1.0 : 0.3),
+                      'CAGR',
+                    ),
+                  ),
                   const SizedBox(width: 15),
-                  ChartLegendItem(AppTheme.error, 'Drawdown'),
+                  InkWell(
+                    onTap: () {
+                      setState(() => showDrawdown = !showDrawdown);
+                    },
+                    child: ChartLegendItem(
+                      AppTheme.error.withOpacity(showDrawdown ? 1.0 : 0.3),
+                      'Drawdown',
+                    ),
+                  ),
                   const SizedBox(width: 15),
                   InkWell(
                     onTap: _cycleWindow,
@@ -152,9 +157,9 @@ class _YearlyStatsWidgetState extends State<YearlyStatsWidget> {
                         showTitles: true,
                         interval: step.toDouble(),
                         reservedSize: 48,
-                        getTitlesWidget: (value, meta) {
+                        getTitlesWidget: (value, _) {
                           return Text(
-                            value.toStringAsFixed(2), // fewer decimals
+                            value.toStringAsFixed(2),
                             style: const TextStyle(fontSize: 12, color: Colors.blue),
                           );
                         },
@@ -163,10 +168,9 @@ class _YearlyStatsWidgetState extends State<YearlyStatsWidget> {
                     bottomTitles: AxisTitles(
                       sideTitles: SideTitles(
                         showTitles: true,
-                        // We compute an interval based on how many years we have
                         interval: _autoComputeYearInterval(xMin, xMax),
                         reservedSize: 40,
-                        getTitlesWidget: (value, meta) {
+                        getTitlesWidget: (value, _) {
                           final yearInt = value.round();
                           return Text(
                             '$yearInt',
@@ -180,11 +184,11 @@ class _YearlyStatsWidgetState extends State<YearlyStatsWidget> {
                   ),
                   borderData: FlBorderData(show: true),
                   gridData: FlGridData(
-                    getDrawingVerticalLine: (val) => FlLine(
+                    getDrawingVerticalLine: (_) => FlLine(
                       color: Colors.blue.withOpacity(0.1),
                       strokeWidth: 1,
                     ),
-                    getDrawingHorizontalLine: (val) => FlLine(
+                    getDrawingHorizontalLine: (_) => FlLine(
                       color: Colors.blue.withOpacity(0.1),
                       strokeWidth: 1,
                     ),
@@ -196,15 +200,12 @@ class _YearlyStatsWidgetState extends State<YearlyStatsWidget> {
                       fitInsideHorizontally: true,
                       fitInsideVertically: true,
                       getTooltipItems: (touchedSpots) {
-                        if (touchedSpots.isEmpty) {
-                          return [];
-                        }
+                        if (touchedSpots.isEmpty) return [];
                         final year = touchedSpots[0].x.round();
                         return touchedSpots.asMap().entries.map((entry) {
                           final i = entry.key;
                           final spot = entry.value;
                           final barIndex = spot.barIndex;
-
                           String seriesLabel;
                           switch (barIndex) {
                             case 0:
@@ -244,7 +245,6 @@ class _YearlyStatsWidgetState extends State<YearlyStatsWidget> {
     });
   }
 
-  /// Partial moving average, e.g. 4-year, with the last point's X
   List<FlSpot> _computeMovingAveragePartial(List<FlSpot> spots, int windowSize) {
     final result = <FlSpot>[];
     for (int i = 0; i < spots.length; i++) {
@@ -258,26 +258,16 @@ class _YearlyStatsWidgetState extends State<YearlyStatsWidget> {
       final lastIndex = i + count - 1;
       final xVal = spots[lastIndex].x;
       result.add(FlSpot(xVal, avg));
-      if (i + windowSize - 1 >= spots.length - 1) {
-        break;
-      }
+      if (i + windowSize - 1 >= spots.length - 1) break;
     }
     return result;
   }
 
-  /// Compute a decent interval for the bottom axis, based on how many years in [xMin, xMax].
   double _autoComputeYearInterval(double xMin, double xMax) {
     final totalYears = (xMax - xMin).abs();
-    // For example, if totalYears < 20, show every year; else show every 5 years, etc.
-    if (totalYears < 20) {
-      return 1;
-    }
-    if (totalYears < 40) {
-      return 2;
-    }
-    if (totalYears < 80) {
-      return 5;
-    }
+    if (totalYears < 20) return 1;
+    if (totalYears < 40) return 2;
+    if (totalYears < 80) return 5;
     return 10;
   }
 }
