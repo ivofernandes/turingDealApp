@@ -15,6 +15,7 @@ export 'package:sembast_web/sembast_web.dart';
 export 'package:shared_preferences/shared_preferences.dart';
 export 'package:stats/stats.dart';
 export 'package:stock_market_data/stock_market_data.dart';
+export 'package:ticker_search/ticker_search.dart';
 export 'package:top_snackbar_flutter/top_snack_bar.dart';
 export 'package:url_launcher/url_launcher.dart';
 export 'package:yahoo_finance_data_reader/yahoo_finance_data_reader.dart';

@@ -68,10 +68,10 @@ packages:
     dependency: transitive
     description:
       name: checked_yaml
-      sha256: feb6bed21949061731a7a75fc5d2aa727cf160b91af9a3e464c5e3a32e28b5ff
+      sha256: "959525d3162f249993882720d52b7e0c833978df229be20702b33d48d91de70f"
       url: "https://pub.dev"
     source: hosted
-    version: "2.0.3"
+    version: "2.0.4"
   cli_util:
     dependency: transitive
     description:
@@ -324,10 +324,10 @@ packages:
     dependency: transitive
     description:
       name: interactive_chart
-      sha256: "6237d938e57205034b6f3e96158954d876bf86467d76495d93ef393c883753b8"
+      sha256: fe72d3b3bf0482978d7aa483e0e78cab605217ffcabd0b0b0d530f3cb673d324
       url: "https://pub.dev"
     source: hosted
-    version: "0.3.5"
+    version: "0.3.6"
   interactive_i18n:
     dependency: transitive
     description:
@@ -641,18 +641,18 @@ packages:
     dependency: transitive
     description:
       name: stats
-      sha256: a64d41328dc1332a02ce4acc8830e240e10ac14b19c9bb256466737b792f22aa
+      sha256: "35dba13a465ac4f788d2f21211bb4736902f49ef02471ba39337d56c4644290c"
       url: "https://pub.dev"
     source: hosted
-    version: "2.1.0"
+    version: "2.2.0"
   stock_market_data:
     dependency: transitive
     description:
       name: stock_market_data
-      sha256: "8f71da114e2774cf9d2e912a4d49491da17ed08aec9643b0a8941edbdb1b2d9e"
+      sha256: f786c61e7bd50282fa1d2e21d4cdd4ba9a854e03295339d3a9ae3ea50d8d42ca
       url: "https://pub.dev"
     source: hosted
-    version: "0.1.3"
+    version: "0.1.4"
   stocks_portfolio:
     dependency: "direct main"
     description:
@@ -715,13 +715,13 @@ packages:
     source: path
     version: "0.0.1"
   ticker_search:
-    dependency: "direct main"
+    dependency: transitive
     description:
       name: ticker_search
-      sha256: "55bbea486a7fa87b5bcd60946b64fbb98aa89f44df73c0a9c3774893037cca8e"
+      sha256: "8ba281b2aefc470a2129441eb73a80db53c793915e45c1ad484432d1c704fb6f"
       url: "https://pub.dev"
     source: hosted
-    version: "0.0.8"
+    version: "0.0.10"
   top_snackbar_flutter:
     dependency: transitive
     description:
@@ -814,10 +814,10 @@ packages:
     dependency: transitive
     description:
       name: vector_graphics
-      sha256: "44cc7104ff32563122a929e4620cf3efd584194eec6d1d913eb5ba593dbcf6de"
+      sha256: a4f059dc26fc8295b5921376600a194c4ec7d55e72f2fe4c7d2831e103d461e6
       url: "https://pub.dev"
     source: hosted
-    version: "1.1.18"
+    version: "1.1.19"
   vector_graphics_codec:
     dependency: transitive
     description:
@@ -899,5 +899,5 @@ packages:
     source: hosted
     version: "3.1.3"
 sdks:
-  dart: ">=3.7.0 <4.0.0"
+  dart: ">=3.8.0 <4.0.0"
   flutter: ">=3.27.0"
