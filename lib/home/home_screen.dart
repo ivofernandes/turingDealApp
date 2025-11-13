@@ -89,14 +89,18 @@ class _HomeScreenState extends State<HomeScreen> {
             IconButton(
               icon: const Icon(Icons.search),
               onPressed: () async {
-                final List<StockTicker>? tickers = await showSearch(
-                  context: context,
-                  delegate: TickerSearch(
-                    searchFieldLabel: 'Search'.t,
-                    suggestions: HomeScreen.suggestions,
+                final SearchResult? result = await Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => TickerSearchPage(
+                      suggestions: HomeScreen.suggestions,
+                    ),
                   ),
                 );
-
+                if (result == null) {
+                  return;
+                }
+                final List<StockTicker> tickers = result.tickers;
                 appState.search(tickers);
               },
             ),

@@ -15,7 +15,7 @@ dependencies:
   sembast: ^3.5.0+1
   sembast_web: ^2.2.0
   cupertino_icons: ^1.0.5
-  intl: ^0.18.0
+  intl: ^0.20.2
   url_launcher: ^6.2.4
   connectivity_plus: ^6.0.3
   interactive_chart: ^0.3.4
@@ -28,7 +28,7 @@ dependencies:
   anchor_tabs: ^0.0.9
   interactive_i18n: ^2.0.0
   top_snackbar_flutter: ^3.1.0
-  ticker_search: ^0.0.10
+  ticker_search: ^1.0.0
 
 dev_dependencies:
   flutter_test:

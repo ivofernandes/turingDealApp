@@ -2,7 +2,6 @@ import 'package:app_dependencies/app_dependencies.dart';
 import 'package:flutter/material.dart';
 import 'package:td_ui/td_ui.dart';
 import 'package:turing_deal/big_picture/state/big_picture_state_provider.dart';
-import 'package:turing_deal/home/home_screen.dart';
 
 class AddTickerButton extends StatelessWidget {
   final BigPictureStateProvider bigPictureState;
@@ -33,10 +32,16 @@ class AddTickerButton extends StatelessWidget {
           ),
         ),
         onTap: () async {
-          final List<StockTicker>? tickers = await showSearch(
-              context: context, delegate: TickerSearch(searchFieldLabel: 'Add'.t, suggestions: HomeScreen.suggestions));
-          if (tickers != null) {
-            await bigPictureState.joinTicker(ticker, tickers);
+          final SearchResult? result = await Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => const TickerSearchPage(),
+            ),
+          );
+          if (result != null) {
+            final tickers = result.tickers.where((t) => t != currentTicker).toList();
+
+            await bigPictureState.joinTicker(currentTicker, tickers);
             await bigPictureState.persistTickers();
           }
         },
