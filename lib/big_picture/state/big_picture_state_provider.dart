@@ -110,9 +110,32 @@ class BigPictureStateProvider with ChangeNotifier, ConnectivityState, BigPicture
     if (tickers == null || tickers.isEmpty) {
       return;
     }
+    String newSymbol = tickers.first.symbol;
+    String oldSymbol = tickerParam.symbol;
+
+    // TODO if the old symbol is weighted, we need to extract the weights and apply them to the new symbol
+    if (TickerUtils.isWeightedSymbol(oldSymbol)) {
+      final Map<String, double> oldWeights = TickerUtils.extractWeights(oldSymbol);
+      final Map<String, double> newWeights = TickerUtils.extractWeights(newSymbol);
+
+      final Map<String, double> combinedWeights = {};
+
+      // Add old weights
+      oldWeights.forEach((key, value) {
+        combinedWeights[key] = (combinedWeights[key] ?? 0) + value;
+      });
+
+      // Add new weights
+      newWeights.forEach((key, value) {
+        combinedWeights[key] = (combinedWeights[key] ?? 0) + value;
+      });
+
+      // Build the new symbol string
+      newSymbol = combinedWeights.entries.map((entry) => '${entry.key}-${entry.value}').join(', ');
+    }
 
     final StockTicker ticker = tickerParam.copyWith(
-      symbol: '${tickerParam.symbol}, ${tickers!.first.symbol}',
+      symbol: '$oldSymbol, $newSymbol',
       description: '',
     );
 
@@ -161,5 +184,26 @@ class BigPictureStateProvider with ChangeNotifier, ConnectivityState, BigPicture
     }
 
     refresh();
+  }
+
+  Future<void> updateTickerProportion({
+    required StockTicker oldTicker,
+    required String newSymbol, // e.g. "ES=F-0.5, GC=F-0.5"
+    DateTime? startDate,
+  }) async {
+    // 1) Fully remove the old ticker (map + prefs + DB)
+    await removeTicker(oldTicker);
+
+    // 2) Create a new ticker with the updated symbol
+    final StockTicker newTicker = oldTicker.copyWith(
+      symbol: newSymbol,
+      description: oldTicker.description,
+    );
+
+    // 3) Reuse the existing addTicker logic to get data + backtest + scroll
+    await addTicker(newTicker, startDate: startDate);
+
+    // 4) Persist the new list of tickers (so it survives app restarts)
+    await persistTickers();
   }
 }

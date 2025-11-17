@@ -16,9 +16,9 @@ class AddTickerButton extends StatelessWidget {
   });
 
   @override
-  Widget build(BuildContext context) => InkWell(
-        child: Align(
-          alignment: validTickerDescription ? Alignment.topCenter : Alignment.topRight,
+  Widget build(BuildContext context) => Align(
+        alignment: validTickerDescription ? Alignment.topCenter : Alignment.topRight,
+        child: InkWell(
           child: Container(
             color: Colors.transparent,
             padding: EdgeInsets.only(left: 40, right: 40, bottom: AppTheme.isDesktopWeb() ? 0 : 30),
@@ -30,20 +30,20 @@ class AddTickerButton extends StatelessWidget {
               child: const Icon(Icons.add),
             ),
           ),
-        ),
-        onTap: () async {
-          final SearchResult? result = await Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => const TickerSearchPage(),
-            ),
-          );
-          if (result != null) {
-            final tickers = result.tickers.where((t) => t != currentTicker).toList();
+          onTap: () async {
+            final SearchResult? result = await Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const TickerSearchPage(),
+              ),
+            );
+            if (result != null) {
+              final tickers = result.tickers.where((t) => t != currentTicker).toList();
 
-            await bigPictureState.joinTicker(currentTicker, tickers);
-            await bigPictureState.persistTickers();
-          }
-        },
+              await bigPictureState.joinTicker(currentTicker, tickers);
+              await bigPictureState.persistTickers();
+            }
+          },
+        ),
       );
 }
